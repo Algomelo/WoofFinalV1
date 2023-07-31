@@ -19,7 +19,7 @@
   --blue: #5e72e4;
   --indigo: #5603ad;
   --purple: #8965e0;
-  --pink: #f3a4b5;
+  --pink: #f3a4b527;
   --red: #f5365c;
   --orange: #fb6340;
   --yellow: #ffd600;
@@ -6830,8 +6830,12 @@ button.bg-primary:focus {
   background-color: #324cdd !important;
 }
 
+
+/* COLOR REGISTRO LOGUIN */
+
+
 .bg-secondary {
-  background-color: #f7fafc !important;
+  background-color: #FEB336 !important;
 }
 
 a.bg-secondary:hover,
@@ -13763,12 +13767,16 @@ button.section-darker:focus {
   background-color: black !important;
 }
 
+
+
+
+
 .bg-gradient-primary {
-  background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%) !important;
+  background: linear-gradient(87deg, #F2761D  0, #F2761D  100%) !important;
 }
 
 .bg-gradient-secondary {
-  background: linear-gradient(87deg, #f7fafc 0, #f7f8fc 100%) !important;
+  background: linear-gradient(87deg, #F2761D 0, #F2761D 100%) !important;
 }
 
 .bg-gradient-success {
@@ -13820,7 +13828,7 @@ button.section-darker:focus {
 }
 
 .fill-secondary {
-  fill: #f7fafc;
+  fill: #F2761D;
 }
 
 .stroke-secondary {

@@ -52,4 +52,8 @@ class User extends Authenticatable
 
         return $query->where('role','user');
     }
+    public function isAdmin()
+    {
+    return $this->role === 'admin';
+    }
 }

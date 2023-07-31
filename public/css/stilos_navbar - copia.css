@@ -1,0 +1,83 @@
+/*----Estilos del navbar ---*/
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap');
+
+
+
+
+.header_ .container .navbar .container-fluid .navbar-brand{
+    cursor: pointer;
+}
+
+
+
+.header_ .container .navbar .container-fluid .navbar-brand img:hover{
+    transform: scale(1.2);
+}
+
+
+
+.header_ .container .navbar .container-fluid .collapse .navbar-nav li{
+    display: inline-block;
+    padding: 0 25px; 
+    vertical-align: bottom;                                                                                                                                                                                                                                 
+}
+
+
+
+
+.header_ .container .navbar .container-fluid .collapse .navbar-nav li:hover{
+    transform: scale(1.1);
+}
+
+.header_ .container .navbar-nav a{
+    font-size: 700;
+    color: white;
+    text-decoration: none;    
+}
+
+.btn-primary {
+    background-color: #F2761D;
+   border-color: #F2761D;
+        }
+
+        
+.header_ .navbar-nav .nav-item a:hover{
+    color: #ffbc0e;
+}
+
+.header_ .container .navbar .container-fluid .navbar-toggler button{
+    font-weight: 700;
+    color: #015351;
+    padding: 9px 25px;
+    background: #eceff1;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.header_ .container .navbar .container-fluid .navbar-toggler button:hover{
+    background-color: #e2f1f8;
+    color: #ffbc0e;
+    transform: scale(1.1);
+}
+
+
+.dropdown-menu {
+    background-color: #015351;
+}
+.dropdown-item {
+    color: white;
+}
+.dropdown-item:hover {
+    background-color: #02a184;
+    color: #015351; /* Cambia el color de texto al hacer hover */
+}
+.dropdown-item:focus {
+    background-color: #015351;
+    color: #015351; /* Conserva el color de texto cuando se hace clic */
+}
+
+.encabezado{
+    margin-bottom: 120px; /* Ajusta este valor según tus necesidades */
+  }

@@ -1,0 +1,174 @@
+
+      /* Estilos personalizados  LOGUIN */
+            /* Estilos personalizados  LOGUIN */
+                  /* Estilos personalizados  LOGUIN */
+
+                  .form-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                }
+            
+                /* Estilos personalizados para la tarjeta (card) */
+                .card {
+                    max-width: 400px; /* Ancho máximo de la tarjeta para evitar que se estire demasiado */
+                    width: 100%;
+                    padding: 20px;
+                    background-color: #F2761D;
+                    color: #fff;
+                    border-radius: 8px;
+                }
+            
+                /* Estilos personalizados para los campos del formulario */
+                .form-group {
+                    margin-bottom: 20px;
+                    text-align: center; /* Centrar horizontalmente los elementos dentro de .form-group */
+                }
+            
+                .input-group.input-group-alternative {
+                    display: inline-flex; /* Utilizar flexbox para alinear horizontalmente los elementos */
+                    align-items: center;
+                }
+            
+                .input-group.input-group-alternative .input-group-prepend {
+                    margin-right: 10px;
+                }
+            
+                .input-group.input-group-alternative .input-group-text {
+                    background-color: #013337;
+                    border-color: #013337;
+                    color: #fff;
+                }
+            
+                /* Estilos personalizados para el botón del formulario */
+                .text-center {
+                    text-align: center;
+                }
+            
+                .btn-primary {
+                    background-color: #015351;
+                    border-color: #015351;
+                }
+            
+                .btn-primary:hover {
+                    background-color: #013337;
+                    border-color: #013337;
+                }
+            
+                /* Estilos personalizados para los enlaces */
+                .row .col-6,
+                .row .col-6.text-right {
+                    text-align: center;
+                }
+            
+                /* Fin de estilos personalizados */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                /* Estilos personalizados para el botón del formulario */
+                .text-center {
+                    text-align: center;
+                }
+            
+                .btn-primary {
+                    background-color: #015351;
+                    border-color: #015351;
+                }
+            
+                .btn-primary:hover {
+                    background-color: #013337;
+                    border-color: #013337;
+                }
+                .form-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                }            
+
+
+
+
+
+
+
+
+                  body {
+                      background-color: #015351;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      height: 100vh;
+                      margin: 0;
+                  }
+              
+                  .logo {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      margin-bottom: -40px;
+                  }
+              
+                  .logo img {
+                      width: 400px; /* Ajusta el tamaño del logo según tus necesidades */
+                  }
+                  
+              
+                  .btn-primary {
+                      background-color: #015351;
+                      border-color: #015351;
+                  }
+              
+                  .btn-primary:hover {
+                      background-color: #013337;
+                      border-color: #013337;
+                  }
+              
+                  .text-light {
+                      color: #fff;
+                  }
+              
+                  .input-group-text {
+                      background-color: #013337;
+                      border-color: #013337;
+                      color: #fff;
+                  }
+              
+                  .custom-control-input:checked ~ .custom-control-label::before {
+                      border-color: #015351;
+                      background-color: #015351;
+                  }
+
+
+
+                  .custom-control.custom-checkbox {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 20px;
+                }
+            
+                .custom-control.custom-checkbox .custom-control-label {
+                    margin: 0;
+                }
+              
+                  /* Fin de estilos personalizados */
+      
+
+      /* FIN Estilos personalizados  LOGUIN */
+            /* FIN Estilos personalizados  LOGUIN */
+                  /* FIN Estilos personalizados  LOGUIN */
