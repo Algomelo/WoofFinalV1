@@ -43,7 +43,7 @@
                       {{$user->name}}
                     </th>
                     <td>
-                        {{$user->identification}}
+                        {{$user->cedula}}
                     </td>
                     <td>
                         {{$user->email}}
@@ -72,6 +72,9 @@
               
             </tbody>
           </table>
+        </div>
+        <div class="card-body">
+              {{$users->links() }}
         </div>
       </div>
  

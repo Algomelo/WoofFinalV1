@@ -106,7 +106,14 @@
                   <img alt="Image placeholder" src="{{asset('img/theme/team-4-800x800.jpg')}}">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">{{auth()->user()->name}}</span>
+            
+                  @if(auth()->check() && auth()->user()->name)
+                     <span class="mb-0 text-sm font-weight-bold">{{ auth()->user()->name }}</span>
+                  @else
+                    @auth
+                      {{ Auth::logout() }}
+                    @endauth
+                  @endif
                 </div>
               </div>
             </a>
