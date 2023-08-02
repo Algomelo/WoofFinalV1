@@ -1,3 +1,6 @@
+<?php
+use Illuminate\Support\Str; 
+?>
 @extends('layouts.panel')
 
 @section('content')
@@ -33,8 +36,8 @@
                     <input type="text" name="name" class="form-control" value="{{old('name')}}" required>
                 </div>
                 <div class="form-group">
-                    <label for="identification">Identification Card</label>
-                    <input type="text" name="identification" class="form-control" value="{{old('identification')}}">
+                    <label for="cedula">Identification Card</label>
+                    <input type="number" name="cedula" class="form-control" value="{{old('cedula')}}">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -48,6 +51,10 @@
                     <label for="address">Address</label>
                     <input type="text" name="address" class="form-control" value="{{old('address')}}">
                 </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="text" name="password" class="form-control" value="{{old('password', Str::random(8))}}">
+              </div>
                 <button type="submit" class="btn btn-sm btn-primary">Create Walker</button>
 
             </form>

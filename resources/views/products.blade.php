@@ -1,4 +1,4 @@
-<?php require('layouts/header.php') ?>
+@extends('layouts.app')
   <body>
 
     <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
@@ -166,7 +166,8 @@
     	</div>
     </section>
 
-	<?php require('layouts/footer.php') ?>
+	@extends('layouts.footer')
+
     
   
 

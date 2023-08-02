@@ -16,27 +16,20 @@
    <link rel="stylesheet" href="css/magnific-popup.css">
 
 
+
    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
    <link rel="stylesheet" href="css/jquery.timepicker.css">
 
    <link rel="stylesheet" href="css/flaticon.css">
-   <link rel="stylesheet" href="css/style.css">
+
+   <link rel="stylesheet" href="css/style.css">     <!-- ESTOS ESTILOS CONTIENEN DIFERENTES ESTILOS DE DIFERENTES PAGINAS  -->
+
+
    <link rel="stylesheet" href="css/stilos_navbar.css">
-
-
-
  
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/brands.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
-    <script src="https://kit.fontawesome.com/fc42b657b4.js" crossorigin="anonymous"></script>
-
-
-
-
 
    
  </head>

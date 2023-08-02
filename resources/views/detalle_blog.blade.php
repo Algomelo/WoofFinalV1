@@ -10,5 +10,18 @@
     <div>
         {!! $blog->contenido !!}
     </div>
+<!-- detalle_blog.blade.php -->
+
+@if ($blog->image_path)
+    <img src="{{ asset('storage/' . $blog->image_path) }}" alt="Blog Image">
+@else
+    <p>No hay imagen disponible</p>
+@endif
+
+
+
+
+
+
 </body>
 </html>

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->dateTime('fecha_publicacion');
             $table->string('autor');
             $table->timestamps();
+            $table->string('image_path')->nullable(); // Campo para almacenar la ruta de la imagen (puedes cambiar el tipo según tus necesidades)
+            $table->text('image_description')->nullable(); // Campo para almacenar la descripción de la imagen (puedes cambiar el tipo según tus necesidades)
         });
     }
 
@@ -27,5 +29,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('blogs');
+        $table->dropColumn('image_path');
+        $table->dropColumn('image_description');
     }
 };

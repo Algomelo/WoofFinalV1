@@ -18,8 +18,7 @@
 
 .header_ .container .navbar .container-fluid .collapse .navbar-nav li{
     display: inline-block;
-    padding: 0 25px; 
-    vertical-align: bottom;                                                                                                                                                                                                                                 
+    padding: 0 25px;                                                                                                                                                                                                                             
 }
 
 
@@ -30,9 +29,11 @@
 }
 
 .header_ .container .navbar-nav a{
-    font-size: 700;
+    font-size: 20px;
     color: white;
-    text-decoration: none;    
+    text-decoration: none;  
+    padding-bottom: 0px;
+      
 }
 
 .btn-primary {

@@ -7,10 +7,10 @@
         <div class="card-header border-0">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">Walkers</h3>
+              <h3 class="mb-0"> Blogs</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('walkers/create')}}" class="btn btn-sm btn-primary">New Walker</a>
+              <a href="{{ url('blogs/create')}}" class="btn btn-sm btn-primary">New Blog</a>
             </div>
           </div>
         </div>
@@ -28,38 +28,34 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Identication Card</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Address</th>
+                <th scope="col">Id</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Fecha Publicacion</th>
                 <th scope="col">Options</th>
               </tr>
             </thead>
             <tbody>
-                @foreach ($walkers as $walker)
+                @foreach ($blog as $blog)
                 <tr>
                     <th scope="row">
-                      {{$walker->name}}
+                      {{$blog->id}}
                     </th>
                     <td>
-                        {{$walker->cedula}}
+                        {{$blog->titulo}}
                     </td>
                     <td>
-                        {{$walker->email}}
+                        {{$blog->autor}}
                     </td>
                     <td>
-                        {{$walker->phone}}
-                    </td>
-                    <td>
-                        {{$walker->address}}
+                        {{$blog->fecha_publicacion}}
                     </td>
                     <td>
                         
-                         <form action="{{url('/walkers/'.$walker->id)}}" method="POST">
+                         <form action="{{url('/blogs/'.$blog->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a href="{{url('/walkers/'.$walker->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="{{url('/blogs/'.$blog->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>
                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
 
                          </form>
@@ -72,9 +68,6 @@
               
             </tbody>
           </table>
-        </div>
-        <div>
-          {{ $walkers -> links() }}
         </div>
       </div>
  

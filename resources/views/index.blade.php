@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php require('layouts/header.php') ?>
+
+@extends('layouts.app')
   <body>
-
-
 
 
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
@@ -55,8 +52,6 @@
   </button>
 </div>
 </div>
-
-
 
 
     
@@ -315,7 +310,7 @@
 
 
 
-    <?php require('layouts/footer.php') ?>
+    @extends('layouts.footer')
   
   
 
@@ -339,8 +334,13 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-  
+
   <script src="js/carousel.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <script src="https://kit.fontawesome.com/fc42b657b4.js" crossorigin="anonymous"></script>
+
 
 
     
