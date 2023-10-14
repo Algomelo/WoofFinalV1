@@ -5063,13 +5063,13 @@ a.close.disabled {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  width: 15%;
+  width: 10%;
   color: #fff;
   text-align: center;
-  opacity: 0.5;
-  -webkit-transition: opacity 0.15s ease;
-  -o-transition: opacity 0.15s ease;
-  transition: opacity 0.15s ease; }
+  opacity: 0;
+  -webkit-transition: opacity 0.10s ease;
+  -o-transition: opacity 0.10s ease;
+  transition: opacity 0.4s ease; }
   @media screen and (prefers-reduced-motion: reduce) {
     .carousel-control-prev,
     .carousel-control-next {
@@ -5082,7 +5082,7 @@ a.close.disabled {
     color: #fff;
     text-decoration: none;
     outline: 0;
-    opacity: 0.9; }
+    opacity: 0.3; }
 
 .carousel-control-prev {
   left: 0; }
@@ -5095,7 +5095,7 @@ a.close.disabled {
   display: inline-block;
   width: 20px;
   height: 20px;
-  background: transparent no-repeat center center;
+  background: #015351;
   background-size: 100% 100%; }
 
 .carousel-control-prev-icon {

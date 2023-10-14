@@ -1,0 +1,44 @@
+.header {
+    color: #ffffff;
+    font-size: 27px;
+    padding: 10px;
+}
+
+.bigicon {
+    font-size: 35px;
+    color: #F2761D;
+}
+
+    
+
+        .well {
+            background-image: url("/imagess/banner_huellas_azul");
+            border: 2px solid #015351;
+        }
+        
+        .well legend {
+            color: white;
+        }
+        
+        .well label {
+            color: #F2761D;
+        }
+        
+        .well textarea:focus,
+        .well input:focus {
+            border-color: #F2761D;
+            box-shadow: none;
+        }
+        
+        .well textarea,
+        .well input[type="text"] {
+            border: 2px solid #015351;
+            color: #015351;
+        }
+
+        .btn{
+            margin-top: 7px;
+            border-radius: 30px;
+            color:white;
+            background:#F2761D ;
+        }

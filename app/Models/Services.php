@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Services extends Model
 {
     use HasFactory;
-    public function package()
-   {
-       return $this->belongsTo(Package::class);
-   }
+   public function packages()
+{
+    return $this->belongsToMany(Package::class)->withPivot('quantity');
+}
 }

@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Preahvihear&display=swap');
+.btn-primary {
+  /* Agrega las propiedades necesarias para el estilo del botón */
+  padding: 10px 20px;
+
+  color: #F2761D;
+  background-color: transparent; /* Hacer el fondo transparente */
+  border-color: transparent;
+  transition: transform 0.3s ease; /* Agrega una transición suave para el efecto */
+  font-family: 'Preahvihear', sans-serif;
+
+}
+.btn-primary:hover {
+  border: dashed 3px;
+  border-radius: 300px;
+  transform: scale(1.2); /* Aplica una escala del 110% cuando el mouse está encima */
+  border-color: #F2761D;
+  font-family: 'Preahvihear', sans-serif;
+  background-color: #F2761D;
+  font-size: medium;
+
+}
+
+.titulo{
+  color: white !important;
+  font-family: 'Preahvihear', sans-serif;
+}
+
+
+
+body{
+  background-image: url('/img/banner_huellas_azul.png');
+  margin: 0;
+  padding: 0;
+  color: white;
+  }
+
+
+  .h2,h3,h4,p{
+    color: white;
+  }
+
+  .titulo-con-borde{
+    color: white !important;
+    font-family: 'Preahvihear', sans-serif;
+
+
+  }
+
+  .titulo-con-borde:hover{
+
+    color: #F2761D !important;
+    font-family: 'Preahvihear', sans-serif;
+
+  }
+
+
+  .linkshuellas{
+    color: transparent;
+  }
+  
+  .linkshuellas:hover{
+    color: transparent;
+  }
+
+  h1,h2,h3,h4,h5,h6,p,span,small{
+
+    font-family: 'Preahvihear', sans-serif;
+  }
+  

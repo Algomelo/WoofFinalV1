@@ -6,6 +6,7 @@
 
     <!-- CSRF Token -->
 
+
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/stilos_navbar.css') }}">
 

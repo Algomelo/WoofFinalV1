@@ -11,7 +11,7 @@
   @if(auth()->check() && auth()->user()->role == 'admin')
     
     <li class="nav-item">
-      <a class="nav-link " href="{{ url('/services')}}">
+      <a class="nav-link " href="{{ url('/servicesaut')}}">
         <i class="fas fa-briefcase text-blue"></i>Services
       </a>
     </li>

@@ -1,0 +1,248 @@
+.sectionprueba{
+    background-color: blueviolet;
+}
+    .service-section {
+        margin-top: 15px;
+        margin-bottom: 30px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .service-container {
+        display: inline-block;
+        flex-wrap: wrap;
+        align-items: center; /* Centrar verticalmente */
+        justify-content: space-around;
+        text-align: center;
+    }
+
+    @media (max-width: 767px) {
+        .service-container {
+            flex-direction: column;
+        }
+    }
+
+    .service-images {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        width: 100%; /* Ajustar el ancho del contenedor */
+        max-width: 600px; /* Limitar el ancho máximo */
+        height: 300px; /* Ajustar la altura del contenedor */
+        margin-bottom: 20px;
+    }
+
+    /* ... Otros estilos ... */
+
+    @media (max-width: 767px) {
+        .service-images {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    .service-slider img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .service-details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .service-content {
+        text-align: center;
+        margin-bottom: auto; /* Empujar el contenido hacia arriba */
+    }
+
+    .service-description {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+
+    .btn-more-info {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1rem;
+        background-color: #FEB336;
+        color: #fff;
+        border: none;
+        border-radius: 20px; /* Añade bordes redondeados */
+        cursor: pointer;
+        transition: background-color 0.3s; /* Agrega una transición de color al hacer hover */
+    }
+    
+    .btn-more-info:hover {
+        background-color: #ff9900; /* Cambia el color de fondo al hacer hover */
+        color: #fff;
+    }
+    .service-slider .slick-dots { /* Agregado */
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .service-slider .slick-dots li {
+        margin: 0 5px;
+    }
+
+    .service-slider .slick-dots button::before{
+        content:'=';
+        width: 8px;
+        height: 8px;
+        border-radius: 15px;
+        text-align: center;
+        line-height: 2.4rem!important;
+        font-size:.7em;
+        background:#fff ;
+        color: #3c69e7;;
+
+
+    }
+    /* price */
+
+.price{
+    text-align: center;
+}
+
+.price__table{
+    padding-top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5em;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.price__element1{
+    background-color: #FEB336;
+    text-align: center;
+    border-radius: 10px;
+    width: 300px;
+    padding: 40px;
+    --color-plan: #696871;
+    --color-price: #1D293F;
+    --bg-cta: #fff;
+    --color-cta: #5454D4;
+    --color-items: #696871;
+}
+
+.price__element{
+    background-color: #FEB336;
+    text-align: center;
+    border-radius: 10px;
+    width: 300px;
+    padding: 40px;
+    --color-plan: #696871;
+    --color-price: #1D293F;
+    --bg-cta: #fff;
+    --color-cta: #5454D4;
+    --color-items: #696871;
+}
+
+.price__element--best{
+    width: 360px;
+    padding: 60px 40px;
+    background-color: #FF7143;
+    --color-plan: rgb(255 255 255 / 75%);
+    --color-price: #fff;
+    --bg-cta: #9F3919;
+    --color-cta: #FFF;
+    --color-items: #fff;
+}
+
+
+.price__name{
+    color: var(--color-plan);
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.price__price{
+    font-size: 2.5rem;
+    color: var(--color-price);
+}
+
+.price__items{
+    margin-top: 35px;
+    display: grid;
+    gap: 1em;
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+    color: var(--color-items);
+}
+
+.price__cta{
+    display: block;
+    padding: 20px 0;
+    border-radius: 10px;
+    text-decoration: none;
+    background-color: var(--bg-cta);
+    font-weight: 600;
+    color: var(--color-cta);
+    box-shadow: 0 0 1px rgba(0, 0, 0, .5);
+}
+    
+
+/* Estilos generales para el cuerpo de la página */
+/* CTA */
+
+/* Estilos para la sección */
+.hero {
+    position: relative;
+    height: 50vh; /* Toma el 100% de la altura de la ventana */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Evita que el contenido desborde */
+}
+
+/* Estilos para el fondo de imagen desvanecida */
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Agrega la ruta de la imagen */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5; /* Aplica el efecto desvanecido */
+    z-index: -1; /* Coloca el fondo detrás del contenido */
+}
+
+/* Estilos para el contenido del centro */
+.content {
+    text-align: center;
+    color: white;
+}
+
+/* Estilos para el título */
+.title {
+    font-size: 3rem; /* Ajusta el tamaño del título */
+    margin-bottom: 10px;
+}
+
+/* Estilos para la descripción */
+.description {
+    font-size: 1.2rem; /* Ajusta el tamaño de la descripción */
+}

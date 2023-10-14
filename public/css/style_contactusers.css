@@ -1,0 +1,31 @@
+.img, .blog-img, .user-img {
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.d-flex {
+    display: flex!important;
+}
+.ftco-appointment {
+    background-position: center center !important;
+    position: relative;
+    background-attachment: fixed;
+}
+.ftco-no-pb {
+    padding-bottom: 0 !important;
+}
+.ftco-no-pt {
+    padding-top: 0 !important;
+}
+.ftco-section {
+    padding: 7em 0;
+    position: relative;
+}
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}

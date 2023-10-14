@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+     
 
+    ];
     public function services()
-   {
-       return $this->hasMany(Service::class);
-   }
+    {
+        return $this->belongsToMany(Services::class)->withPivot('quantity');
+    }
 }

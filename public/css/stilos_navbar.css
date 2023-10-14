@@ -2,7 +2,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap');
 
 
+.navbar{
+    margin-top: 0;
+  
+    color:#fff;
+    z-index: 1;
+    background-image: url('/img/banner_huellas_azul.png');
+}
 
+
+        
+  .navbar-nav .nav-item .nav-link {
+        font-size: 15px; /* Tamaño de fuente para los títulos */
+        color:#fff;
+        margin-right: 10px; /* Espacio entre el icono y el texto */
+        font-family: 'Preahvihear', sans-serif;
+        }
+
+  .navbar-nav .nav-item .nav-link i {
+        font-size: 15px; /* Tamaño de fuente para los iconos */
+        margin-left: 12px; /* Espacio entre el icono y el texto */
+        
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            font-size: 15px; /* Tamaño de fuente para los títulos */
+            color:#F2761D            ;
+            margin-right: 10px; /* Espacio entre el icono y el texto */
+            font-family: 'Preahvihear', sans-serif;
+            }
+    
+      .navbar-nav .nav-item .nav-link i:hover {
+            font-size: 15px; /* Tamaño de fuente para los iconos */
+            margin-right: 0; /* Espacio entre el icono y el texto */
+            color:#F2761D 
+            
+            }
+
+        
+  .navbar-brand {
+          padding: 0;
+          margin-left: -70px; /* Mover hacia la izquierda */
+          }
+          
+  .navbar-brand .img_style{
+          margin-bottom: -60px; /* Margen en la parte inferior */
+          margin-top: -60px;
+          max-width: 350px;
+          height: auto;
+          transition: max-width 0.3s;
+          }
+          
+  .navbar-brand:hover .img_style {
+          max-width: 380px; /* Tamaño máximo al expandirse en el hover */
+  }
+  
+  .img_style2{
+    margin-bottom: -60px; /* Margen en la parte inferior */
+    margin-top: -60px;
+    max-width: 550px;
+    height: auto;
+    transition: max-width 0.3s;
+    }
+  
+    .footer{
+      margin-top: 150px;
+      margin-bottom: 150px;
+    }
 
 .header_ .container .navbar .container-fluid .navbar-brand{
     cursor: pointer;
@@ -18,7 +84,8 @@
 
 .header_ .container .navbar .container-fluid .collapse .navbar-nav li{
     display: inline-block;
-    padding: 0 25px;                                                                                                                                                                                                                             
+    padding: 0 25px; 
+    vertical-align: bottom;                                                                                                                                                                                                                                 
 }
 
 
@@ -29,26 +96,19 @@
 }
 
 .header_ .container .navbar-nav a{
-    font-size: 20px;
+    font-size: 700;
     color: white;
-    text-decoration: none;  
-    padding-bottom: 0px;
-      
+    text-decoration: none;    
 }
 
-.btn-primary {
-    background-color: #F2761D;
-   border-color: #F2761D;
-        }
-
+.listanavbar{
+    margin-left: 0!important;
+}
         
-.header_ .navbar-nav .nav-item a:hover{
-    color: #ffbc0e;
-}
 
 .header_ .container .navbar .container-fluid .navbar-toggler button{
     font-weight: 700;
-    color: #015351;
+    color: #1b3039;
     padding: 9px 25px;
     background: #eceff1;
     border: none;
@@ -57,11 +117,7 @@
     transition: all 0.3s ease 0s;
 }
 
-.header_ .container .navbar .container-fluid .navbar-toggler button:hover{
-    background-color: #e2f1f8;
-    color: #ffbc0e;
-    transform: scale(1.1);
-}
+
 
 
 .dropdown-menu {
@@ -72,13 +128,40 @@
 }
 .dropdown-item:hover {
     background-color: #02a184;
-    color: #015351; /* Cambia el color de texto al hacer hover */
+    color: white; /* Cambia el color de texto al hacer hover */
 }
 .dropdown-item:focus {
     background-color: #015351;
-    color: #015351; /* Conserva el color de texto cuando se hace clic */
+    color: white; /* Conserva el color de texto cuando se hace clic */
 }
 
 .encabezado{
-    margin-bottom: 120px; /* Ajusta este valor según tus necesidades */
+    margin-bottom: 140px; /* Ajusta este valor según tus necesidades */
   }
+
+
+  @media (max-width: 767px) {
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar-brand {
+        margin-top: 0;    }
+
+    .navbar-collapse {
+        margin-top: 0;
+    }
+
+    .listanavbar {
+        margin-top: 0;    }
+
+        .navbar-brand {
+            padding: 0;
+            margin-left: -100px; /* Mover hacia la izquierda */
+            }
+            
+}
