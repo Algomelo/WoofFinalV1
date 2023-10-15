@@ -8,7 +8,45 @@
 <link rel="stylesheet" href="css/services.css" media="screen">
 <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
 <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
+<style>
+  /* Estilos para la ventana modal */
+  .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+  }
 
+  .modal-content {
+      background-color: #fff;
+      width: 300px;
+      margin: 20% auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-title {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+  }
+
+  .modal-buttons {
+      text-align: center;
+  }
+
+  /* Estilos para el botón de cerrar */
+  .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+  }
+</style>
     
 </head>
 
@@ -378,13 +416,14 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
         <h4 class="u-align-justify u-text u-text-3">Let the festivities begin with our spectacular dog parties! From themed decor to interactive games, socialization, a​nd supervised play, your pup will have a tail-wagging time. Capture unforgettable moments at our dog-friendly photo booths, all within a safe <span style="font-weight: 700;"></span>and controlled environment. Reserve your spot now for a celebration your furry friend won't forget!
         </h4>
       
-        <button type="button" class="u-btn-1" data-toggle="modal" data-target="#myModal" data-service="Dog Parties">
+        <button  type="button" class="u-btn-1" data-toggle="modal" data-target="#myModal" data-service="Dog Parties">
           Book Now
         </button>
         
       </div>
       
     </section>
+  
     <script>
       function scrollToSection(event) {
         event.preventDefault();
@@ -396,6 +435,28 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
             });
         }
     }
+
+    // Obtener referencias a los elementos
+    var openModalBtn = document.getElementById("openModalBtn");
+    var closeModalBtn = document.getElementById("closeModalBtn");
+    var modal = document.getElementById("myModal");
+
+    // Abrir la ventana modal al hacer clic en el botón
+    openModalBtn.addEventListener("click", function () {
+        modal.style.display = "block";
+    });
+
+    // Cerrar la ventana modal al hacer clic en el botón de cerrar
+    closeModalBtn.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // Cerrar la ventana modal si se hace clic fuera de ella
+    window.addEventListener("click", function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
     </script>
   @include('partials.modal2')
 </body>
