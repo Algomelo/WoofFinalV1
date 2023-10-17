@@ -6,7 +6,7 @@
 
 <div class="logo">
 
-<img src="{{ asset('img/brand/blue.png') }}" alt="Logo de tu empresa">
+<img src="{{ asset('/imagess/Negativelogo.png') }}" alt="Logo de tu empresa">
 
 </div>
 
@@ -53,7 +53,7 @@
             <a href="{{ route('password.request') }}" class="text-light"><small>Forgot password?</small></a>
         </div>
         <div class="col-6 text-right">
-            <a href="{{ route('register') }}" class="text-light"><small>Create new account</small></a>
+            <a href="{{ route('register') }}" class="text-light"><small>Create neeew account</small></a>
         </div>
     </div>
 </div>

@@ -29,7 +29,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('blogs');
-        $table->dropColumn('image_path');
-        $table->dropColumn('image_description');
+        
+
+       
     }
 };

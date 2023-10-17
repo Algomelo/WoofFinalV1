@@ -15,7 +15,7 @@
                     max-width: 400px; /* Ancho máximo de la tarjeta para evitar que se estire demasiado */
                     width: 100%;
                     padding: 20px;
-                    background-color: #F2761D;
+                    background-color: black;
                     color: #fff;
                     border-radius: 8px;
                 }
@@ -108,7 +108,8 @@
 
 
                   body {
-                      background-color: #015351;
+                      background-image: url('/imagess/banner_huellas.png');
+                      
                       display: flex;
                       justify-content: center;
                       align-items: center;
@@ -124,7 +125,9 @@
                   }
               
                   .logo img {
-                      width: 400px; /* Ajusta el tamaño del logo según tus necesidades */
+                     
+                    width: 400px; /* Ajusta el tamaño del logo según tus necesidades */
+                    margin-left: 20px;
                   }
                   
               
