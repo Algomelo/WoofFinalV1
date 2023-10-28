@@ -28,40 +28,63 @@ class PackageController extends Controller
 
  // Almacenar un nuevo paquete en la base de datos
  public function store(Request $request)
- {
-     // Validar los datos ingresados en el formulario
-     $request->validate([
-         'name' => 'required|string|max:255',
-         'description' => 'nullable|string|max:255',
-         'price' => 'required|numeric|min:0',
-         'services' => 'required|array', // Cambio de 'selected_services' a 'services'
-         'services.*' => 'required|integer', // Cambio de 'selected_services.*' a 'services.*'
-         'quantities' => 'required|array',
-         'quantities.*' => 'required|integer|min:1',
-     ]);
- 
-     // Crear un nuevo paquete con los datos proporcionados
-     $package = new Package([
-         'name' => $request->input('name'),
-         'description' => $request->input('description'),
-         'price' => $request->input('price'),
-     ]);
-     $package->save();
- 
-     // Obtener los IDs de los servicios y las cantidades desde el formulario
-     $serviceIds = $request->input('services'); // Cambio de 'selected_services' a 'services'
-     $quantities = $request->input('quantities');
- 
-     // Asociar los servicios al paquete con sus respectivas cantidades
-     foreach ($serviceIds as $index => $serviceId) {
-         $quantity = $quantities[$index];
-         $package->services()->attach($serviceId, ['quantity' => $quantity]);
-     }
- 
-     // Redirigir a la página de listado de paquetes con un mensaje de éxito
-     return redirect('/packages')->with('success', 'Package created successfully.');
- }
- 
+{
+    // Validar los datos ingresados en el formulario
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string|max:255',
+        'services' => 'required|array',
+        'services.*' => 'required|integer',
+        'quantities' => 'required|array',
+        'quantities.*' => 'required|integer|min:1',
+    ]);
+
+    // Crear un nuevo paquete con los datos proporcionados
+    $package = new Package([
+        'name' => $request->input('name'),
+        'description' => $request->input('description'),
+    ]);
+
+    // Calcula el precio total del paquete llamando a la función updateTotalPrice
+    $totalPrice = $this->updateTotalPrice($request);
+
+    // Establece el precio total en el paquete
+    $package->price = $totalPrice;
+
+    $package->save();
+
+    // Obtener los IDs de los servicios y las cantidades desde el formulario
+    $serviceIds = $request->input('services');
+    $quantities = $request->input('quantities');
+
+    // Asociar los servicios al paquete con sus respectivas cantidades
+    foreach ($serviceIds as $index => $serviceId) {
+        $quantity = $quantities[$index];
+        $package->services()->attach($serviceId, ['quantity' => $quantity]);
+    }
+
+    // Redirigir a la página de listado de paquetes con un mensaje de éxito
+    return redirect('/packages')->with('success', 'Package created successfully.');
+}
+
+private function updateTotalPrice(Request $request)
+{
+    $totalPrice = $request->input('price');
+    $serviceIds = $request->input('services');
+    $quantities = $request->input('quantities');
+
+    // Suma de precios de servicios seleccionados
+    foreach ($serviceIds as $index => $serviceId) {
+        $quantity = $quantities[$index];
+        $service = Services::find($serviceId);
+        if ($service) {
+            $totalPrice += $service->price * $quantity;
+        }
+    }
+
+    return $totalPrice;
+}
+
 
     /**
      * Display the specified resource.

@@ -12,27 +12,6 @@ use App\Mail\AppointmentMail;
 use App\Mail\LandignMail;
 use App\Mail\Enviarcorreo;
 use App\Mail\EnviarcorreoJob;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-
-
-// Rutas protegidas para adiminsitrador solo acceso admin
-
-Route::middleware('admin')->group(function () {
-    Route::get('/blogs/create', [BlogController::class, 'showForm']); // Mostrar formulario de creación de blog
-    Route::post('/agregar_blog', [BlogController::class, 'store'])->name('blog.store'); // Almacenar el nuevo blog
-    Route::get('/blogs/{id}/edit', [BlogController::class, 'showEditForm']); // Mostrar formulario de edición
-    Route::put('/blogs/{id}', [BlogController::class, 'update']); // Actualizar el blog existente
-});
 
 //Rutas Envio Correo
 
@@ -83,9 +62,9 @@ Route::get('/contactjob', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // Ruta de Servicios
     Route::get('/servicesaut', [App\Http\Controllers\admin\ServicesController::class, 'index']);
@@ -104,17 +83,22 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/packages/{package}', [App\Http\Controllers\admin\PackageController::class, 'destroy']);
     Route::delete('/packages/{package}/remove-service', [App\Http\Controllers\admin\PackageController::class, 'removeService']);
 
-//Ruta Paseadores
-Route::resource('walkers','App\Http\Controllers\admin\WalkerController');
+    //Ruta Paseadores admin
+    Route::resource('walkers','App\Http\Controllers\admin\WalkerController');
+    // Ruta Usuarios admin
+    Route::resource('users','App\Http\Controllers\admin\UserController');
+    Route::resource('blogs','App\Http\Controllers\BlogController');
+    Route::get('/blogs/create', [BlogController::class, 'showForm']); // Mostrar formulario de creación de blog
+    Route::post('/agregar_blog', [BlogController::class, 'store'])->name('blog.store'); // Almacenar el nuevo blog
+    Route::get('/blogs/{ide}/dit', [BlogController::class, 'showEditForm']); // Mostrar formulario de edición
+    Route::put('/blogs/{id}', [BlogController::class, 'update']); // Actualizar el blog existente
 
-// Ruta Usuarios
 
-Route::resource('users','App\Http\Controllers\admin\UserController');
-
-Route::resource('blogs','App\Http\Controllers\BlogController');
-
-
+    Route::get('/index', function () {
+        return view('index');
+    });
 });
+
 
 
 

@@ -30,7 +30,7 @@
               <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
-                <th scope="col">Price</th>
+                <th scope="col">totalprice</th>
                 <th scope="col">Services</th>
                 <th scope="col">Options</th>
               </tr>
