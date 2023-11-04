@@ -79,7 +79,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/packages/create', [App\Http\Controllers\admin\PackageController::class, 'create']);
     Route::get('/packages/{package}/edit', [App\Http\Controllers\admin\PackageController::class, 'edit']);
     Route::post('/packages', [App\Http\Controllers\admin\PackageController::class, 'store']);
-    Route::put('/packages/{package}', [App\Http\Controllers\admin\PackageController::class, 'update']);
+    Route::put('/packages//{id}', [App\Http\Controllers\admin\PackageController::class, 'update']);
+
     Route::delete('/packages/{package}', [App\Http\Controllers\admin\PackageController::class, 'destroy']);
     Route::delete('/packages/{package}/remove-service', [App\Http\Controllers\admin\PackageController::class, 'removeService']);
 

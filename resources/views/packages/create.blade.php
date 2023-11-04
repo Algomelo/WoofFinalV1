@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <input type="number" name="price" class="form-control" value="{{ old('price') }}" id="price-input">
+                <input type="number" name="price" class="form-control" value="" id="price-input">
             </div>
             <div class="form-group">
                 <h4>Select Services:</h4>
@@ -44,7 +44,7 @@
                     <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}" class="service-checkbox">
                     {{ $service->name }}
                 </label>
-                <input type="number" name="quantities[]" placeholder="Quantity" class="quantity-input">
+                <input type="number" name="quantities[]" placeholder="Quantity" value="0" class="quantity-input">
                 <span class="service-price" style="display:none;">{{ $service->price }}</span>
                 @endforeach
             </div>
@@ -76,9 +76,14 @@
     });
 
     function updateTotalPrice() {
-        let totalPrice = 0;
+    let totalPrice = 0;
 
-        // Suma de precios de servicios seleccionados
+    // Verifica si price-input tiene un valor válido.
+    const enteredPrice = parseFloat(priceInput.value);
+    if (!isNaN(enteredPrice)) {
+        totalPrice = enteredPrice; // Utiliza el valor ingresado en price-input.
+    } else {
+        // Suma los precios de los servicios multiplicados por sus cantidades si no se ingresó un valor en price-input.
         serviceCheckboxes.forEach((checkbox, index) => {
             if (checkbox.checked) {
                 const quantity = parseInt(quantityInputs[index].value, 10);
@@ -87,16 +92,13 @@
                 }
             }
         });
-
-        // Suma del precio del campo "Price"
-        const price = parseFloat(priceInput.value);
-        if (!isNaN(price)) {
-            totalPrice += price;
-        }
-
-        totalPriceElement.style.display = 'block';
-        totalPriceElement.innerHTML = `<strong>Total Price: $${totalPrice.toFixed(2)}</strong>`;
     }
+
+    totalPriceElement.style.display = 'block';
+    totalPriceElement.innerHTML = `<strong>Total Price: $${totalPrice.toFixed(2)}</strong>`;
+}
+
+
 </script>
 
 @endsection

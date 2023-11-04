@@ -36,7 +36,7 @@ class PackageController extends Controller
         'services' => 'required|array',
         'services.*' => 'required|integer',
         'quantities' => 'required|array',
-        'quantities.*' => 'required|integer|min:1',
+        'quantities.*' => 'required|integer|min:0',
     ]);
 
     // Crear un nuevo paquete con los datos proporcionados
@@ -72,15 +72,18 @@ private function updateTotalPrice(Request $request)
     $totalPrice = $request->input('price');
     $serviceIds = $request->input('services');
     $quantities = $request->input('quantities');
-
-    // Suma de precios de servicios seleccionados
-    foreach ($serviceIds as $index => $serviceId) {
-        $quantity = $quantities[$index];
-        $service = Services::find($serviceId);
-        if ($service) {
-            $totalPrice += $service->price * $quantity;
-        }
+    if($totalPrice !== 0){
+            // Suma de precios de servicios seleccionados
+            foreach ($serviceIds as $index => $serviceId) {
+                $quantity = $quantities[$index];
+                $service = Services::find($serviceId);
+                if ($service) {
+                    $totalPrice += $service->price * $quantity;
+                }
+            }
     }
+
+
 
     return $totalPrice;
 }
@@ -99,10 +102,18 @@ private function updateTotalPrice(Request $request)
      */
     public function edit(string $id)
     {
-        $package = Package::findOrFail($id);
-        $services = Services::all(); // Obtener todos los servicios para mostrar en el formulario
+
+        $package = Package::find($id);
+        $services = $package->services;
         
-    return view('packages.edit', compact('package', 'services'));
+        // Calcular la cantidad de servicios actuales
+        $currentServiceCount = $services->count();
+    
+        // Calcular el valor actual del paquete
+        $currentPackagePrice = $package->price;
+        return view('packages.edit', compact('package', 'services', 'currentServiceCount', 'currentPackagePrice'));
+
+
     }
 
     /**
@@ -116,11 +127,12 @@ private function updateTotalPrice(Request $request)
     $request->validate([
         'name' => 'required|string|max:255',
         'description' => 'nullable|string|max:255',
+        'price' => 'required|integer',
 
         'services' => 'required|array', // Cambio de 'selected_services' a 'services'
         'services.*' => 'required|integer', // Cambio de 'selected_services.*' a 'services.*'
         'quantities' => 'required|array',
-        'quantities.*' => 'required|integer|min:1',
+        'quantities.*' => 'required|integer|min:0',
     ]);
 
     // Obtener el paquete a editar
@@ -133,9 +145,19 @@ private function updateTotalPrice(Request $request)
         'price' => $request->input('price'),
     ]);
 
+
+
     // Obtener los IDs de los servicios y las cantidades desde el formulario
     $serviceIds = $request->input('services'); // Cambio de 'selected_services' a 'services'
     $quantities = $request->input('quantities');
+    $price = $request->input('price');
+    // Calcula el precio total del paquete llamando a la función updateTotalPrice
+    $totalPrice = $this->updateTotalPrice($request);
+
+    // Establece el precio total en el paquete
+    $package->price = $totalPrice;
+
+    $package->save();
 
     // Sincronizar los servicios asociados con el paquete y sus cantidades
     $package->services()->detach();

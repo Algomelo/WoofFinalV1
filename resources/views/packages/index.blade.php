@@ -50,7 +50,11 @@
                     <td>
                         <ul>
                             @foreach($package->services as $service)
-                            <li>{{ $service->name }} - Quantity: {{ $service->pivot->quantity }}</li>
+                            <li>{{ $service->name }} </li>
+                            Unit Price: {{$service->price}}  <br>
+                            Quantity: {{ $service->pivot->quantity }}<br>
+        
+                            <hr>
                             @endforeach
                         </ul>
                     </td>
