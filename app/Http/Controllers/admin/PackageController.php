@@ -36,7 +36,7 @@ class PackageController extends Controller
         'services' => 'required|array',
         'services.*' => 'required|integer',
         'quantities' => 'required|array',
-        'quantities.*' => 'required|integer|min:0',
+        'quantities.*' => 'min:0',
     ]);
 
     // Crear un nuevo paquete con los datos proporcionados
@@ -54,39 +54,59 @@ class PackageController extends Controller
     $package->save();
 
     // Obtener los IDs de los servicios y las cantidades desde el formulario
-    $serviceIds = $request->input('services');
-    $quantities = $request->input('quantities');
+ // Obtener los IDs de los servicios seleccionados
+// Obtener los IDs de los servicios seleccionados
+$selectedServices = $request->input('services');
 
-    // Asociar los servicios al paquete con sus respectivas cantidades
-    foreach ($serviceIds as $index => $serviceId) {
-        $quantity = $quantities[$index];
-        $package->services()->attach($serviceId, ['quantity' => $quantity]);
-    }
+// Obtener todas las cantidades de servicio del formulario
+$quantities = $request->input('quantities');
 
-    // Redirigir a la página de listado de paquetes con un mensaje de éxito
-    return redirect('/packages')->with('success', 'Package created successfully.');
+// Crear un array para almacenar los datos de servicios y cantidades
+$serviceData = [];
+
+// Recorrer los servicios seleccionados
+foreach ($selectedServices as $serviceId) {
+    // Verificar si el servicio tiene una cantidad válida
+    $quantity = isset($quantities[$serviceId]) ? $quantities[$serviceId] : 0;
+
+    // Agregar el servicio y cantidad al array de datos
+    $serviceData[$serviceId] = ['quantity' => $quantity];
 }
+
+// Asociar los servicios al paquete con sus respectivas cantidades
+$package->services()->sync($serviceData);
+
+
+// Redirigir a la página de listado de paquetes con un mensaje de éxito
+return redirect('/packages')->with('success', 'Package created successfully.');
+}
+
+
 
 private function updateTotalPrice(Request $request)
 {
     $totalPrice = $request->input('price');
     $serviceIds = $request->input('services');
     $quantities = $request->input('quantities');
-    if($totalPrice !== 0){
-            // Suma de precios de servicios seleccionados
-            foreach ($serviceIds as $index => $serviceId) {
-                $quantity = $quantities[$index];
+
+    if ($totalPrice === null || $totalPrice === 0) {
+        // Suma de precios de servicios seleccionados si el precio es nulo o 0
+        foreach ($serviceIds as $index => $serviceId) {
+            if (isset($quantities[$serviceId]) && $quantities[$serviceId] > 0) {
+                $quantity = $quantities[$serviceId];
                 $service = Services::find($serviceId);
                 if ($service) {
                     $totalPrice += $service->price * $quantity;
                 }
             }
+        }
     }
-
-
 
     return $totalPrice;
 }
+
+
+
 
 
     /**

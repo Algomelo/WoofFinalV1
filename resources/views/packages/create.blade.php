@@ -40,13 +40,14 @@
             <div class="form-group">
                 <h4>Select Services:</h4>
                 @foreach($services as $service)
-                <label for="service_{{ $service->id }}">
-                    <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}" class="service-checkbox">
-                    {{ $service->name }}
-                </label>
-                <input type="number" name="quantities[]" placeholder="Quantity" value="0" class="quantity-input">
-                <span class="service-price" style="display:none;">{{ $service->price }}</span>
+                    <label for="service_{{ $service->id }}">
+                        <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}" class="service-checkbox">
+                        {{ $service->name }}
+                    </label>
+                    <input type="number" name="quantities[{{ $service->id }}]" placeholder="Quantity" value="" class="quantity-input">
+                    <span class="service-price" style="display:none;">{{ $service->price }}</span>
                 @endforeach
+
             </div>
             <button type="submit" class="btn btn-sm btn-primary">Create Package</button>
             <div id="total-price"><strong>Total Price: $0</strong></div>
@@ -90,6 +91,9 @@
                 if (!isNaN(quantity)) {
                     totalPrice += parseFloat(servicePrices[index].textContent) * quantity;
                 }
+            }else{
+
+                
             }
         });
     }
