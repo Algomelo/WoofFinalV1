@@ -54,31 +54,30 @@ class PackageController extends Controller
     $package->save();
 
     // Obtener los IDs de los servicios y las cantidades desde el formulario
- // Obtener los IDs de los servicios seleccionados
-// Obtener los IDs de los servicios seleccionados
-$selectedServices = $request->input('services');
+    // Obtener los IDs de los servicios seleccionados
+    // Obtener los IDs de los servicios seleccionados
+    $selectedServices = $request->input('services');
 
-// Obtener todas las cantidades de servicio del formulario
-$quantities = $request->input('quantities');
+    // Obtener todas las cantidades de servicio del formulario
+    $quantities = $request->input('quantities');
 
-// Crear un array para almacenar los datos de servicios y cantidades
-$serviceData = [];
+    // Crear un array para almacenar los datos de servicios y cantidades
+    $serviceData = [];
 
-// Recorrer los servicios seleccionados
-foreach ($selectedServices as $serviceId) {
-    // Verificar si el servicio tiene una cantidad válida
-    $quantity = isset($quantities[$serviceId]) ? $quantities[$serviceId] : 0;
+    // Recorrer los servicios seleccionados
+    foreach ($selectedServices as $serviceId) {
+        // Verificar si el servicio tiene una cantidad válida
+        $quantity = isset($quantities[$serviceId]) ? $quantities[$serviceId] : 0;
 
-    // Agregar el servicio y cantidad al array de datos
-    $serviceData[$serviceId] = ['quantity' => $quantity];
-}
+        // Agregar el servicio y cantidad al array de datos
+        $serviceData[$serviceId] = ['quantity' => $quantity];
+    }
 
-// Asociar los servicios al paquete con sus respectivas cantidades
-$package->services()->sync($serviceData);
+    // Asociar los servicios al paquete con sus respectivas cantidades
+    $package->services()->sync($serviceData);
 
-
-// Redirigir a la página de listado de paquetes con un mensaje de éxito
-return redirect('/packages')->with('success', 'Package created successfully.');
+    // Redirigir a la página de listado de paquetes con un mensaje de éxito
+    return redirect('/packages')->with('success', 'Package created successfully.');
 }
 
 
@@ -152,7 +151,7 @@ private function updateTotalPrice(Request $request)
         'services' => 'required|array', // Cambio de 'selected_services' a 'services'
         'services.*' => 'required|integer', // Cambio de 'selected_services.*' a 'services.*'
         'quantities' => 'required|array',
-        'quantities.*' => 'required|integer|min:0',
+        'quantities.*' => 'min:0',
     ]);
 
     // Obtener el paquete a editar
@@ -162,7 +161,6 @@ private function updateTotalPrice(Request $request)
     $package->update([
         'name' => $request->input('name'),
         'description' => $request->input('description'),
-        'price' => $request->input('price'),
     ]);
 
 
