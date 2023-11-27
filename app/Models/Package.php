@@ -12,6 +12,7 @@ class Package extends Model
         'name',
         'description',
         'price',
+        'custom_price'
      
 
     ];

@@ -22,7 +22,9 @@
         </div>
         @endforeach
         @endif
+        @if(session('status'))
 
+        @endif
         <form action="{{ url('/packages') }}" method="POST">
             @csrf
             <div class="form-group">
@@ -34,9 +36,18 @@
                 <input type="text" name="description" class="form-control" value="{{ old('description') }}">
             </div>
             <div class="form-group">
-                <label for="price">Price</label>
-                <input type="number" name="price" class="form-control" value="" id="price-input">
+                <label for="custom_price">Enable Custom Price</label>
+                <input type="checkbox" name="custom_price" id="custom_price" onchange="toggleCustomPrice()">
             </div>
+
+
+
+            <div class="form-group">
+                <label for="price">Custom Price</label>
+                <input type="number" name="price" class="form-control" value="" id="price-input" disabled>
+            </div>
+
+
             <div class="form-group">
                 <h4>Select Services:</h4>
                 @foreach($services as $service)
@@ -52,56 +63,72 @@
             <button type="submit" class="btn btn-sm btn-primary">Create Package</button>
             <div id="total-price"><strong>Total Price: $0</strong></div>
         </form>
+
     </div>
 </div>
 
 <script>
-    const serviceCheckboxes = document.querySelectorAll('.service-checkbox');
+
+
+const serviceCheckboxes = document.querySelectorAll('.service-checkbox');
     const quantityInputs = document.querySelectorAll('.quantity-input');
     const servicePrices = document.querySelectorAll('.service-price');
     const totalPriceElement = document.getElementById('total-price');
     const priceInput = document.getElementById('price-input');
+    const enableCustomPriceCheckbox = document.getElementById('custom_price');
 
-    serviceCheckboxes.forEach((checkbox, index) => {
-        checkbox.addEventListener('change', () => {
-            updateTotalPrice();
-        });
+    function toggleCustomPrice() {
+        // Habilitar o deshabilitar el campo "Custom Price" según el estado del checkbox
+        priceInput.disabled = !enableCustomPriceCheckbox.checked;
 
-        quantityInputs[index].addEventListener('input', () => {
-            updateTotalPrice();
-        });
-    });
-
-    priceInput.addEventListener('input', () => {
-        updateTotalPrice();
-    });
-
-    function updateTotalPrice() {
-    let totalPrice = 0;
-
-    // Verifica si price-input tiene un valor válido.
-    const enteredPrice = parseFloat(priceInput.value);
-    if (!isNaN(enteredPrice)) {
-        totalPrice = enteredPrice; // Utiliza el valor ingresado en price-input.
-    } else {
-        // Suma los precios de los servicios multiplicados por sus cantidades si no se ingresó un valor en price-input.
+        // Limpiar los event listeners para evitar la duplicación
         serviceCheckboxes.forEach((checkbox, index) => {
-            if (checkbox.checked) {
-                const quantity = parseInt(quantityInputs[index].value, 10);
-                if (!isNaN(quantity)) {
-                    totalPrice += parseFloat(servicePrices[index].textContent) * quantity;
-                }
-            }else{
-
-                
-            }
+            checkbox.removeEventListener('change', updateTotalPrice);
+            quantityInputs[index].removeEventListener('input', updateTotalPrice);
         });
+
+        // Añadir event listeners dependiendo del estado del checkbox
+        if (!enableCustomPriceCheckbox.checked) {
+            serviceCheckboxes.forEach((checkbox, index) => {
+                checkbox.addEventListener('change', updateTotalPrice);
+                quantityInputs[index].addEventListener('input', updateTotalPrice);
+            });
+        } else {
+            priceInput.addEventListener('input', updateTotalPrice);
+        }
     }
 
-    totalPriceElement.style.display = 'block';
-    totalPriceElement.innerHTML = `<strong>Total Price: $${totalPrice.toFixed(2)}</strong>`;
-}
+    serviceCheckboxes.forEach((checkbox, index) => {
+        checkbox.addEventListener('change', updateTotalPrice);
+        quantityInputs[index].addEventListener('input', updateTotalPrice);
+    });
 
+    priceInput.addEventListener('input', updateTotalPrice);
+
+    function updateTotalPrice() {
+        let totalPrice = 0;
+
+        // Verifica si price-input tiene un valor válido.
+        const enteredPrice = parseFloat(priceInput.value);
+        if (!isNaN(enteredPrice)) {
+            totalPrice = enteredPrice; // Utiliza el valor ingresado en price-input.
+        } else {
+            priceInput.value = null;  // o puedes asignar null: priceInput.value = null;
+
+            // Suma los precios de los servicios multiplicados por sus cantidades si no se ingresó un valor en price-input.
+            serviceCheckboxes.forEach((checkbox, index) => {
+                if (checkbox.checked) {
+                    const quantity = parseInt(quantityInputs[index].value, 10);
+                    if (!isNaN(quantity)) {
+                        totalPrice += parseFloat(servicePrices[index].textContent) * quantity;
+                    }
+                }
+            });
+        }
+
+        totalPriceElement.style.display = 'block';
+        totalPriceElement.innerHTML = `<strong>Total Price: $${totalPrice.toFixed(2)}</strong>`;
+    }
 
 </script>
 

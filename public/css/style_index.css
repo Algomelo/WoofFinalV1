@@ -8,7 +8,10 @@
     color: white;
   }
  
+  .zoom:hover{
+    transform: scale(1.1);
 
+}
 
     @media (min-width: 992px) {
       .ftco-intro .services {

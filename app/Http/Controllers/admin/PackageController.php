@@ -37,12 +37,15 @@ class PackageController extends Controller
         'services.*' => 'required|integer',
         'quantities' => 'required|array',
         'quantities.*' => 'min:0',
+ 
     ]);
 
     // Crear un nuevo paquete con los datos proporcionados
     $package = new Package([
         'name' => $request->input('name'),
         'description' => $request->input('description'),
+        'custom_price' => $request->input('custom_price') === 'on', // Ajusta aquí para interpretar correctamente el valor
+
     ]);
 
     // Calcula el precio total del paquete llamando a la función updateTotalPrice
@@ -77,7 +80,10 @@ class PackageController extends Controller
     $package->services()->sync($serviceData);
 
     // Redirigir a la página de listado de paquetes con un mensaje de éxito
-    return redirect('/packages')->with('success', 'Package created successfully.');
+    $notification = 'the package has been created successfully';
+
+    return redirect('/packages')->with(compact('notification'));
+
 }
 
 
@@ -87,6 +93,7 @@ private function updateTotalPrice(Request $request)
     $totalPrice = $request->input('price');
     $serviceIds = $request->input('services');
     $quantities = $request->input('quantities');
+    $customPrice = $request->has('enable_custom_price');
 
     if ($totalPrice === null || $totalPrice === 0) {
         // Suma de precios de servicios seleccionados si el precio es nulo o 0
@@ -103,7 +110,6 @@ private function updateTotalPrice(Request $request)
 
     return $totalPrice;
 }
-
 
 
 
@@ -130,7 +136,15 @@ private function updateTotalPrice(Request $request)
     
         // Calcular el valor actual del paquete
         $currentPackagePrice = $package->price;
-        return view('packages.edit', compact('package', 'services', 'currentServiceCount', 'currentPackagePrice'));
+        $custom_price = $package->custom_price;
+
+
+        $allServices = Services::all();
+        $isChecked = $custom_price ? 'checked' : '';
+
+
+        
+        return view('packages.edit', compact('package', 'services', 'allServices', 'currentServiceCount', 'currentPackagePrice' ,'custom_price', 'isChecked'));
 
 
     }
@@ -162,8 +176,6 @@ private function updateTotalPrice(Request $request)
         'name' => $request->input('name'),
         'description' => $request->input('description'),
     ]);
-
-
 
     // Obtener los IDs de los servicios y las cantidades desde el formulario
     $serviceIds = $request->input('services'); // Cambio de 'selected_services' a 'services'

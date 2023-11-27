@@ -42,8 +42,8 @@
     
     <!-- Barra de Navegación -->
 
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="container ">
             <a class="navbar-brand" href="index">
                 <img class="img_style" src="/img/positive_logo.png" alt="Logo">
             </a>
@@ -98,6 +98,7 @@
             </div>
         </div>
     </nav>
+    
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -108,5 +109,19 @@
     <script src="jquery/jquery-3.3.1.min.js"></script>
     <script src="popper/popper.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>      
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+<script>
+    // Inicializar ScrollReveal
+    ScrollReveal().reveal('.elemento', {
+      delay: 300, // Retraso antes de mostrar el elemento
+      distance: '20px', // Distancia desde la que se muestra el elemento
+      origin: 'bottom', // Dirección desde la que aparece el elemento
+      duration: 1000, // Duración de la animación
+      easing: 'cubic-bezier(0.5, 0, 0, 1)', // Tipo de animación
+      reset: true // Permitir que se revele en cada desplazamiento
+    });
+  </script>
+
 </body>
 </html>

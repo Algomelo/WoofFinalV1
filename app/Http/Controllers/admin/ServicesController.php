@@ -42,7 +42,7 @@ class ServicesController extends Controller
         $service->price =$request->input('price');
         $service->save();
         $notification = 'the service has been created successfully';
-        return redirect('/services')->with(compact('notification'));
+        return redirect('/servicesaut')->with(compact('notification'));
     }
 
  
@@ -71,7 +71,7 @@ class ServicesController extends Controller
         $service->price =$request->input('price');
         $service->save();
         $notification = 'the service has been successfully modified';
-        return redirect('/services')->with(compact('notification'));
+        return redirect('/servicesaut')->with(compact('notification'));
     }
 
     public function destroy(Services $service){
@@ -81,7 +81,7 @@ class ServicesController extends Controller
         $notification = 'The'.$deleteName. 'service has been successfully removed.';
 
 
-        return redirect('/services')->with(compact('notification'));
+        return redirect('/servicesaut')->with(compact('notification'));
 
 
     }

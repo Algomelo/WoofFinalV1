@@ -6,6 +6,7 @@
 
 <link rel="stylesheet" href="css/style_index.css">
 
+
 </head>
 <body>
 
@@ -14,9 +15,10 @@
   
 <!-- CARROUSEL -->
 
+ 
 
-<div id="carouselExampleCaptions" class="carousel slide carrousel" data-bs-ride="carousel" >
-  <div class="carousel-inner">
+<div id="carouselExampleCaptions" class="carousel slide carrousel elemento" data-bs-ride="carousel" >
+  <div class="carousel-inner ">
     <div class="carousel-item  active image-container">
       <img src="img/carrusel_1.jpg" class="d-block w-100 image-opacity" alt="...">
         <div class="carousel-caption d-flex align-items-center justify-content-center" style="height: 100%;">
@@ -64,7 +66,7 @@
 
 <!-- SECTION  -->
 <!-- SECTION  -->
-<section class="d-flex justify-content-center botonservicios" >
+<section class="d-flex justify-content-center botonservicios elemento"   style="transform: translateY(20px);      transition: opacity 1s, transform 1s;">
 <div class="heading-section pt-md-5">
 	            <h2 class="mb-4 titulo" style="margin-top:0px;" >Our Services</h2>
     				</div>
@@ -75,13 +77,13 @@
 <!-- SECTION  -->
 <!-- SECTION  -->
 
-    <section class="ftco-section  ftco-no-pt ftco-intro" style="margin-top: 100px;">
+    <section class="ftco-section  ftco-no-pt ftco-intro " style="margin-top: 100px;">
       
    
     	<div class="container">
     		<div class="row justify-content-center">
-          <div class="col-md-5 d-flex align-self-stretch px-4 ftco-animate">
-            <div class="d-block services  dogtrip text-center">
+          <div class="col-md-5 d-flex align-self-stretch px-4 ftco-animate elemento "  style="transform: translateY(20px);      transition: opacity 1s, transform 1s;">
+            <div class="d-block services  dogtrip text-center  zoom">
               <div class="icon d-flex align-items-center justify-content-center">
             		<span class="flaticon-blind"></span>
               </div>
@@ -92,8 +94,8 @@
               </div>
             </div>      
           </div>
-          <div class="col-md-5 d-flex align-self-stretch px-4 ftco-animate">
-            <div class="d-block services dogdaycare text-center">
+          <div class="col-md-5 d-flex align-self-stretch px-4 ftco-animate elemento"  style="transform: translateY(20px);      transition: opacity 1s, transform 1s;">
+            <div class="d-block services dogdaycare text-center zoom">
               <div class="icon d-flex align-items-center justify-content-center">
             		<span class="flaticon-dog-eating"></span>
               </div>
@@ -107,8 +109,8 @@
 
 		  <div class="container" style="margin-top: 150px;">
     		<div class="row justify-content-center" >
-          <div class="col-md-5 d-flex align-self-stretch px-4 ftco-animate">
-            <div class="d-block services  text-center" >
+          <div class="col-md-5 d-flex align-self-stretch px-4 ftco-animate elemento"  style="transform: translateY(20px);      transition: opacity 1s, transform 1s;">
+            <div class="d-block services  text-center zoom" >
               <div class="icon d-flex align-items-center justify-content-center">
             		<span class="flaticon-blind"></span>
               </div>
@@ -119,8 +121,8 @@
               </div>
             </div>      
           </div>
-          <div class="col-md-5 d-flex align-self-stretch px-4 ftco-animate">
-            <div class="d-block services dogboarding text-center">
+          <div class="col-md-5 d-flex align-self-stretch px-4 ftco-animate elemento" style="transform: translateY(20px);      transition: opacity 1s, transform 1s;">
+            <div class="d-block services dogboarding text-center zoom">
               <div class="icon d-flex align-items-center justify-content-center">
             		<span class="flaticon-dog-eating"></span>
               </div>
@@ -141,7 +143,7 @@
 <!-- SECTION  -->
 
 
-<section class="ftco-section ftco-no-pt ftco-no-pb" style="  background-image: url('/img/banner_huellas.png');     padding-bottom: 0 !important; ">
+<section class="ftco-section ftco-no-pt ftco-no-pb elemento" style="  background-image: url('/img/banner_huellas.png');     padding-bottom: 0 !important; transform: translateY(20px);      transition: opacity 1s, transform 1s;">
     	<div class="container">
     		<div class="row d-flex no-gutters">
     			<div class="col-md-5 d-flex">
@@ -149,7 +151,7 @@
     			</div>
     			<div class="col-md-7 pl-md-5 py-md-5">
     				<div class="heading-section pt-md-5">
-	            <h2 class="mb-4">Why Choose Us?</h2>
+	            <h2 class="mb-4"  style="transform: translateY(20px);      transition: opacity 1s, transform 1s;">Why Choose Us?</h2>
     				</div>
     				<div class="row">
 	    				<div class="col-md-6 services-2 w-100 d-flex">
@@ -191,8 +193,8 @@
 
 
 
-<section id="testimonials" class="container-fluid" >
-  <h2 class="titulo-contenedor" style="margin-bottom: 6%; margin-top: 7%;  text-align: center;">What Our Clients Say</h2>
+<section id="testimonials" class="container-fluid elemento"   style="transform: translateY(20px);      transition: opacity 1s, transform 1s;" >
+  <h2 class="titulo-contenedor " style="margin-bottom: 6%; margin-top: 7%;  text-align: center; ">What Our Clients Say</h2>
     <div class="row testimonios">
         <div class="col-md-4">
             <div class="card carta">
@@ -233,7 +235,19 @@
 </section>
 
 </main> 
+<script src="https://unpkg.com/scrollreveal"></script>
 
+<script>
+    // Inicializar ScrollReveal
+    ScrollReveal().reveal('.elemento', {
+      delay: 300, // Retraso antes de mostrar el elemento
+      distance: '20px', // Distancia desde la que se muestra el elemento
+      origin: 'bottom', // Dirección desde la que aparece el elemento
+      duration: 1000, // Duración de la animación
+      easing: 'cubic-bezier(0.5, 0, 0, 1)', // Tipo de animación
+      reset: true // Permitir que se revele en cada desplazamiento
+    });
+  </script>
 
 
 </body>
