@@ -52,38 +52,50 @@
     <div class="form-group">
     <h4>Added Services:</h4>
     @foreach ($services as $service)
-    <label for="service_{{ $service->id }}">
-        <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}"
-            class="service-checkbox" checked>
-        {{ $service->name }}
-    </label>
-    <input type="number" name="quantities[]" placeholder="Quantity" value="{{ $service->pivot->quantity }}"
-        class="quantity-input">
-    <span class="service-price" style="display: none;">{{ $service->price }}</span>
+        <label for="service_{{ $service->id }}">
+            <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}"
+                class="service-checkbox" checked>
+            {{ $service->name }}
+        </label>
+        <input type="number" name="quantities[]" placeholder="Quantity" value="{{ $service->pivot->quantity }}"
+            class="quantity-input">
+        <span class="service-price" style="display: none;">{{ $service->price }}</span>
     @endforeach
 </div>
 
 <div class="form-group">
     <h4>Add Services:</h4>
     @foreach($allServices as $service)
-    <label for="service_{{ $service->id }}">
-        <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}"
-            class="service-checkbox">
-        {{ $service->name }}
-    </label>
-    <input type="number" name="quantities[{{ $service->id }}]" placeholder="Quantity" value=""
-        class="quantity-input">
-    <span class="service-price" style="display:none;">{{ $service->price }}</span>
+        @php
+            $serviceExistsInPackage = false;
+            foreach ($services as $existingService) {
+                if ($service->id === $existingService->id) {
+                    $serviceExistsInPackage = true;
+                    break;
+                }
+            }
+        @endphp
+
+        @if (!$serviceExistsInPackage)
+            <label for="service_{{ $service->id }}">
+                <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}"
+                    class="service-checkbox">
+                {{ $service->name }}
+            </label>
+            <input type="number" name="quantities[{{ $service->id }}]" placeholder="Quantity" value=""
+                class="quantity-input">
+            <span class="service-price" style="display:none;">{{ $service->price }}</span>
+        @endif
     @endforeach
 </div>
 
-    <button type="submit" class="btn btn-sm btn-primary">Update Package</button>
+
+
+
+    <button type="submit" class="btn btn-sm btn-primary">Update Package</button> <br>
     <div id="total-price"><strong>Total Price: ${{ $currentPackagePrice }}</strong></div>
-    <p>Current Service Count: {{ $currentServiceCount }}</p>
 </form>
-                            @foreach($package->services as $service)
-                            <li>{{ $service->name }} - Quantity: {{ $service->pivot->quantity }}</li>
-                            @endforeach
+                   
             
            </div>     
       </div>

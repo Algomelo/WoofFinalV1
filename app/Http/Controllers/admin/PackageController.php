@@ -176,6 +176,13 @@ private function updateTotalPrice(Request $request)
         'name' => $request->input('name'),
         'description' => $request->input('description'),
     ]);
+    $newServiceIds = array_diff($request->input('services'), $package->services->pluck('id')->toArray());
+
+    // Agregar servicios no agregados al paquete
+    foreach ($newServiceIds as $serviceId) {
+        $quantity = $request->input("quantities.$serviceId", 0);
+        $package->services()->attach($serviceId, ['quantity' => $quantity]);
+    }
 
     // Obtener los IDs de los servicios y las cantidades desde el formulario
     $serviceIds = $request->input('services'); // Cambio de 'selected_services' a 'services'
@@ -191,10 +198,14 @@ private function updateTotalPrice(Request $request)
 
     // Sincronizar los servicios asociados con el paquete y sus cantidades
     $package->services()->detach();
+
     foreach ($serviceIds as $index => $serviceId) {
-        $quantity = $quantities[$index];
+        // Verificar si la clave $index existe en $quantities
+        $quantity = isset($quantities[$index]) ? $quantities[$index] : 0;
         $package->services()->attach($serviceId, ['quantity' => $quantity]);
     }
+    
+
 
     return redirect('/packages')->with('success', '¡El paquete ha sido actualizado exitosamente!');
 }
