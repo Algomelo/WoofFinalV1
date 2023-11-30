@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->decimal('price');
+            $table->tinyInteger('custom_price')->default(0); // Cambiado a tinyInteger y agregado default
             $table->timestamps();
         });
     }

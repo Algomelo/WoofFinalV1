@@ -211,19 +211,20 @@ private function updateTotalPrice(Request $request)
 }
     
 
-    public function removeService(Request $request, $id)
-    {
+public function removeService(Request $request, $id)
+{
     try {
         $package = Package::findOrFail($id);
-        $serviceName = $request->input('service');
+        $serviceId = $request->input('service');
 
-        $package->services()->detach(Services::where('name', $serviceName)->first());
+        $package->services()->detach([$serviceId]);
 
         return response()->json(['message' => 'Service removed successfully'], 200);
-     } catch (\Exception $e) {
+    } catch (\Exception $e) {
         return response()->json(['message' => 'An error occurred while removing the service'], 500);
-     }
     }
+}
+
     public function destroy(string $id)
     {
         $package = Package::findOrFail($id);
