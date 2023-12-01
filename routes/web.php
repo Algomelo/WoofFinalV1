@@ -89,6 +89,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Ruta Usuarios admin
     Route::resource('users','App\Http\Controllers\admin\UserController');
     Route::resource('blogs','App\Http\Controllers\BlogController');
+
     Route::get('/blogs/create', [BlogController::class, 'showForm']); // Mostrar formulario de creación de blog
     Route::post('/agregar_blog', [BlogController::class, 'store'])->name('blog.store'); // Almacenar el nuevo blog
     Route::get('/blogs/{ide}/dit', [BlogController::class, 'showEditForm']); // Mostrar formulario de edición
