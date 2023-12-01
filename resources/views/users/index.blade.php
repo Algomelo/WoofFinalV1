@@ -37,37 +37,41 @@
               </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
-                <tr>
-                    <th scope="row">
-                      {{$user->name}}
-                    </th>
-                    <td>
-                        {{$user->cedula}}
-                    </td>
-                    <td>
-                        {{$user->email}}
-                    </td>
-                    <td>
-                        {{$user->phone}}
-                    </td>
-                    <td>
-                        {{$user->address}}
-                    </td>
-                    <td>
-                        
-                         <form action="{{url('/users/'.$user->id)}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <a href="{{url('/users/'.$user->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            @foreach ($users as $user)
+    <tr>
+        <th scope="row">
+            {{$user->name}}
+        </th>
+        <td>
+            {{$user->cedula}}
+        </td>
+        <td>
+            {{$user->email}}
+        </td>
+        <td>
+            {{$user->phone}}
+        </td>
+        <td>
+            {{$user->address}}
+        </td>
+        <td>
+            <form action="{{url('/users/'.$user->id)}}" >
+                @csrf
+                @method('DELETE')
+                <a href="{{url('/users/'.$user->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>
+                @if ($user->packages->isNotEmpty())
+                    @php
+                        $firstPackage = $user->packages->first();
+                    @endphp
 
-                         </form>
-                   
-                      </td>
-                    
-                  </tr>  
-                @endforeach
+                    <a href="{{ route('users.assignPackagesForm', ['userId' => $user->id]) }}" class="btn btn-sm btn-primary">Management Services</a>
+                @endif
+                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+        </td>
+    </tr>
+@endforeach
+
               
               
             </tbody>

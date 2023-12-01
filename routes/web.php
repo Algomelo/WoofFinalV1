@@ -95,12 +95,23 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/blogs/{id}', [BlogController::class, 'update']); // Actualizar el blog existente
 
 
+    Route::post('/users/{userId}/assign-packages', [App\Http\Controllers\admin\UserController::class, 'assignPackages'])->name('users.assign-packages');
+
+
+
+    Route::get('/userservices/{userId}/{packageId}', 'App\Http\Controllers\admin\UserController@showPackagesById')
+        ->name('users.userservices');
+
+ 
+
+    Route::post('/users/{userId}/assign-packages', 'App\Http\Controllers\admin\UserController@assignPackages')
+        ->name('users.assignPackages');
+
+    // vista servicios usuario
+    Route::get('/users/{userId}/assign-packages-form', 'App\Http\Controllers\admin\UserController@assignPackagesForm')
+    ->name('users.assignPackagesForm');
+
     Route::get('/index', function () {
         return view('index');
     });
 });
-
-
-
-
-

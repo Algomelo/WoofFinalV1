@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+
 use Illuminate\Http\Request;
 use App\Models\Package;
 use App\Models\Services;
+use App\Models\Users;
 use App\Http\Controllers\Controller;
 
 class PackageController extends Controller
@@ -211,20 +213,19 @@ private function updateTotalPrice(Request $request)
 }
     
 
-public function removeService(Request $request, $id)
-{
+    public function removeService(Request $request, $id)
+    {
     try {
         $package = Package::findOrFail($id);
-        $serviceId = $request->input('service');
+        $serviceName = $request->input('service');
 
-        $package->services()->detach([$serviceId]);
+        $package->services()->detach(Services::where('name', $serviceName)->first());
 
         return response()->json(['message' => 'Service removed successfully'], 200);
-    } catch (\Exception $e) {
+     } catch (\Exception $e) {
         return response()->json(['message' => 'An error occurred while removing the service'], 500);
+     }
     }
-}
-
     public function destroy(string $id)
     {
         $package = Package::findOrFail($id);
@@ -232,5 +233,32 @@ public function removeService(Request $request, $id)
     
         return redirect('/packages')->with('success', 'El paquete ha sido eliminado exitosamente.');
     }
-}
+
+    public function assignPackageToUser(Request $request, $userId, $packageId)
+    {
+        // Verificar si el usuario tiene el rol de administrador
+        if (!auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        // Obtener el usuario y el paquete
+        $user = User::findOrFail($userId);
+        $package = Package::findOrFail($packageId);
+
+        // Realizar la lógica de asignación aquí
+        // ...
+
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('users.show', $userId)
+            ->with('success', 'Package assigned successfully.');
+    }
+
+    // Resto del código...
+    }
+
+
+
+
+
+
 
