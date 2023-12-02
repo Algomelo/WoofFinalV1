@@ -12,4 +12,9 @@ class Services extends Model
 {
     return $this->belongsToMany(Package::class)->withPivot('quantity');
 }
+
+public function users()
+{
+    return $this->belongsToMany(User::class, 'user_services')->withPivot('quantity');
+}
 }

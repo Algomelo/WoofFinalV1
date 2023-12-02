@@ -14,8 +14,8 @@ class usersTableSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'Santiago',
-            'email' => 'prueba@gmail.com',
+            'name' => 'usuario',
+            'email' => 'usuario1@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('123456789'), // password
             'cedula' => '1020844764',
@@ -25,7 +25,27 @@ class usersTableSeeder extends Seeder
         ]);
         User::create([
             'name' => 'Santiago',
-            'email' => 'prueba2@gmail.com',
+            'email' => 'admin1@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('123456789'), // password
+            'cedula' => '1020844764',
+            'address' => 'av chile',
+            'phone' => '+573057202110',
+            'role' => 'admin',
+        ]);
+        User::create([
+            'name' => 'Santiago',
+            'email' => 'usuario2@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('123456789'), // password
+            'cedula' => '1020844764',
+            'address' => 'av chile',
+            'phone' => '+573057202110',
+            'role' => 'user',
+        ]);
+        User::create([
+            'name' => 'Santiago',
+            'email' => 'admin2@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('123456789'), // password
             'cedula' => '1020844764',
@@ -34,9 +54,12 @@ class usersTableSeeder extends Seeder
             'role' => 'admin',
         ]);
         
-        User::factory()
-        ->count(50)
+            /**
+   *User::factory()
+    *    ->count(50)
         
-        ->create();
+     *   ->create();
+     */
+
     }
 }
