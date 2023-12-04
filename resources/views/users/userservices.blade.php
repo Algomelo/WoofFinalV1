@@ -31,13 +31,18 @@ use Illuminate\Support\Str;
 
 
                 <div class="form-group">
-                    <label for="name">User</label>
+                    <label for="name">User:</label>
                   {{old('name',$user->name)}}
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Phone</label>
+                    <label for="Phone">Phone:</label>
                     {{old('phone',$user->phone)}}
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Address:</label>
+                    {{old('address',$user->address)}}
                 </div>
                 <div href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#assignPackageModal">Section packages</div>
                 <div href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#assignServiceModal">Section Services</div>
@@ -48,12 +53,12 @@ use Illuminate\Support\Str;
       </div>
 
 
-<!-- Modal -->
+<!-- Modal Section packages -->
 <div class="modal fade" id="assignPackageModal" tabindex="-1" role="dialog" aria-labelledby="assignPackageModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h1>Asignar paquetes a {{ $user->name }}</h1>
+            <h1>Assign Packages{{ $user->name }}</h1>
 
 
             </div>
@@ -71,7 +76,10 @@ use Illuminate\Support\Str;
                                             <input type="checkbox" name="selected_packages[]" value="{{ $package->id }}"
                                                 {{ $userPackages->contains($package->id) ? 'checked' : '' }}>
                                             {{ $package->name }}
+                                            {{ $package->price }}
+
                                         </label><br>
+                                        
                                     @endforeach
 
                                     <button type="submit" class="btn btn-sm btn-primary">Asignar Paquetes</button>
@@ -90,6 +98,7 @@ use Illuminate\Support\Str;
 </div>
 
 
+<!-- Modal Section packages -->
 
 <div class="modal fade" id="assignRequestModal" tabindex="-1" role="dialog" aria-labelledby="assignRequestModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -103,14 +112,13 @@ use Illuminate\Support\Str;
             </div>
             <div class="modal-body">
                 <div class="container">
-                    Comment<br>
-                    <input type="text" value="Hola, necesito tres paquetes premiun y adicionarle dos viajes de eprro" style="width:100%;">
+                    <input type="text" value="Hola, necesito tres paquetes premiun y adicionarle dos" style="width:100%;">
                 </div>
                 <br>
                 <div class="container d-flex" style="justify-content: space-evenly;">
                             @if (count($allPackages) > 0)
                             <br>
-                                <form action="{{ route('users.assignRequest', $user->id) }}" method="POST">
+                                <form action="{{ route('users.assignRequest', $user->id), $serviceRequestId-> }}" method="POST">
                                     @csrf
                                     <h3>Included Packages</h3>
 
@@ -121,7 +129,8 @@ use Illuminate\Support\Str;
                                                 {{ $userPackages->contains($package->id) ? 'checked' : '' }}>
                                             {{ $package->name }}
                                             {{ $package->price }}
-
+                                            <input type="number" name="quantities[{{ $package->id }}]" placeholder="Quantity" value="" class="quantity-input">
+                                            <span class="service-price" style="display:none;">{{ $package->price }}</span>
                                         </label><br>
                                     @endforeach
 
@@ -130,12 +139,11 @@ use Illuminate\Support\Str;
                             @else
                                 <p>No hay paquetes disponibles.</p>
                             @endif
-
                             @if (count($allPackages) > 0)
                             <br>
                                 <form action="{{ route('users.assignRequest', $user->id) }}" method="POST">
                                     @csrf
-                                    <h3>Included Packages</h3>
+                                    <h3>Included Services</h3>
 
 
                                     @foreach ($allPackages as $package)
@@ -153,6 +161,7 @@ use Illuminate\Support\Str;
                             @else
                                 <p>No hay paquetes disponibles.</p>
                             @endif
+
 
 
                

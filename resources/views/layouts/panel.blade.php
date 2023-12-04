@@ -27,7 +27,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./index.html">
+      <a class="navbar-brand pt-0" href="./index">
         <img src="{{asset('img/brand/blue3.png')}}" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->

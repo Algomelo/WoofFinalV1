@@ -112,25 +112,22 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/users/{userId}/assign-packages', 'App\Http\Controllers\admin\UserController@assignPackages')
         ->name('users.assignPackages');
 
-    // vista servicios usuario
+    // vista administracion usuario
     Route::get('/users/{userId}/assign-packages-form', 'App\Http\Controllers\admin\UserController@assignPackagesForm')
     ->name('users.assignPackagesForm');
 
 
     Route::post('/delete-selected-users', 'App\Http\Controllers\admin\UserController@deleteSelectedUsers');
 
-    Route::get('', 'App\Http\Controllers\admin\UserController@assignRequest')
+
+
+   
+    Route::get('users/{userId}/{serviceRequestId}', 'App\Http\Controllers\admin\UserController@assignRequest')
     ->name('users.assignRequest');
+ 
 
 
-    Route::get('/request', function () {
-        return view('requestadmin');
-    });
+    
 
-
-
-    Route::get('/index', function () {
-        return view('index');
-    });
 });
 

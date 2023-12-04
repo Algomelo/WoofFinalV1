@@ -3,21 +3,28 @@
 namespace App\Http\Controllers\admin;
 use App\Http\Controllers\admin\PackageController;
 use App\Http\Controllers\admin\ServicesController;
+use App\Http\Controllers\admin\UserController;
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Models\Package;  // Asegúrate de que estás importando la clase Package
 use App\Models\Services;
-
+use App\Models\User;
+use App\Models\RequestService;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::users()->paginate(100);
+        $requestService = User::users()->paginate(100);
         $services = Services::all();
         $packages = Package::all();
-        return view('users.index', compact('users', 'packages'));
+        return view('users.index', compact('users', 'packages',$services));
+
+    }
+
+
+    public function assignRequest(){
+        $serviceRequestId = RequestService::findOrFail($RequestServiceId);
 
     }
 
@@ -35,6 +42,7 @@ class UserController extends Controller
 
         return view('users.userservices', compact('user', 'allPackages', 'userPackages'));
     }
+
     public function assignPackages(Request $request, $userId)
     {
         // Obtener el usuario

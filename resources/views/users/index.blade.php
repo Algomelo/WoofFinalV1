@@ -82,6 +82,7 @@
             @method('DELETE')
             <a href="{{ url('/users/'.$user->id.'/edit') }}" class="btn btn-sm btn-primary">See More Info / Edit Info</a>
             <a href="{{ route('users.assignPackagesForm', ['userId' => $user->id]) }}" class="btn btn-sm btn-primary">Management Services</a>
+
             <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#confirmDeleteModal{{ $user->id }}">
                 Delete
             </button>

@@ -57,6 +57,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Services::class, 'user_services', 'user_id', 'package_id');
     }
+    public function serviceRequests()
+    {
+        return $this->hasMany(ServiceRequest::class);
+    }
     public function scopeWalkers($query){
 
         return $query->where('role','walker');

@@ -17,4 +17,9 @@ public function users()
 {
     return $this->belongsToMany(User::class, 'user_services')->withPivot('quantity');
 }
+
+public function serviceRequests()
+{
+    return $this->hasMany(ServiceRequest::class);
+}
 }
