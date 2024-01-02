@@ -7,6 +7,12 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ContactForm;
 use App\Http\Controllers\ContactJobController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\ServicesController;
+use App\Http\Controllers\admin\ServiceRequestController;
+use App\Http\Controllers\admin\PackageController;
+use App\Http\Controllers\user\UserServiceRequestController;
+
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentMail;
 use App\Mail\LandignMail;
@@ -23,111 +29,107 @@ Route::post('/confirm-contacjob', [ContactJobController::class, 'EnviarContactJo
 
 // Ruta para mostrar los detalles del blog
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+Route::view('/landing','landing')->name('landing');
+Route::view('/','index')->name('index');;
+Route::view('/services','services2')->name('services') ;
+Route::view('/gallery','gallery')->name('gallery');
+Route::view('/aboutus','aboutus')->name('about');
+Route::view('/contactusers','contactusers')->name('contactusers');
+Route::view('/contactjob','contactjob') ->name('contactjob');
 
-Route::get('/landing', function () {
-    return view('landing');
-});
-
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('/home', function () {
-    return view('index');
-});
-Route::get('/index', function () {
-    return view('index');
-});
-Route::get('/services', function () {
-    return view('services2');
-});
-
-Route::get('/gallery', function () {
-    return view('gallery');
-});
-
-Route::get('/aboutus', function () {
-    return view('aboutus');
-});
-
-
-Route::get('/contactusers', function () {
-    return view('contactusers');
-});
-
-
-Route::get('/contactjob', function () {
-    return view('contactjob');
-});
-Route::middleware(['auth', 'user'])->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-});
 
 Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// ... otras rutas
+
+
+Auth::routes();
+Route::middleware(['auth', 'user'])->group(function () {
+
+    Route::get('/user/{userId}/send-request-form', [UserServiceRequestController::class, 'showRequestForm'])
+        ->name('user.sendRequestForm');
+
+    // Ruta para procesar el formulario
+    Route::post('/user/{userId}/send-request', [UserServiceRequestController::class, 'store'])
+        ->name('user.sendRequest');
+
+    Route::get('/users/{userId}/showIndexRequest', [UserServiceRequestController::class, 'showIndexRequest'])
+        ->name('user.showIndexRequest');
+
+    Route::delete('/user/{userId}/service-request/{serviceRequestId}', [UserServiceRequestController::class, 'destroy'])
+    ->name('user.deleteServiceRequest');
+
+    Route::get('/user/{userId}/service-request/{serviceRequestId}/edit', [UserServiceRequestController::class, 'edit'])
+    ->name('user.editServiceRequest');
+    
+    Route::put('/user/{userId}/service-request/{serviceRequestId}', [UserServiceRequestController::class, 'update'])
+    ->name('user.updateServiceRequest');
+
+
+
+
+
+
+});
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // Ruta de Servicios
-    Route::get('/servicesaut', [App\Http\Controllers\admin\ServicesController::class, 'index']);
-    Route::get('/services/create', [App\Http\Controllers\admin\ServicesController::class, 'create']);
-    Route::get('/services/{service}/edit', [App\Http\Controllers\admin\ServicesController::class, 'edit']);
-    Route::post('/services', [App\Http\Controllers\admin\ServicesController::class, 'sendData']);
-    Route::put('/services/{service}', [App\Http\Controllers\admin\ServicesController::class, 'update']);
-    Route::delete('/services/{service}', [App\Http\Controllers\admin\ServicesController::class, 'destroy']);
-
+    Route::get('/servicesaut', [ServicesController::class, 'index']);
+    Route::get('/services/create', [ServicesController::class, 'create']);
+    Route::get('/services/{service}/edit', [ServicesController::class, 'edit']);
+    Route::post('/services', [ServicesController::class, 'sendData']);
+    Route::put('/services/{service}', [ServicesController::class, 'update']);
+    Route::delete('/services/{service}', [ServicesController::class, 'destroy']);
     // Ruta de Paquetes
-    Route::get('/packages', [App\Http\Controllers\admin\PackageController::class, 'index']);
-    Route::get('/packages/create', [App\Http\Controllers\admin\PackageController::class, 'create']);
-    Route::get('/packages/{package}/edit', [App\Http\Controllers\admin\PackageController::class, 'edit']);
-    Route::post('/packages', [App\Http\Controllers\admin\PackageController::class, 'store']);
-    Route::put('/packages//{id}', [App\Http\Controllers\admin\PackageController::class, 'update']);
-
-    Route::delete('/packages/{package}', [App\Http\Controllers\admin\PackageController::class, 'destroy']);
-    Route::delete('/packages/{package}/remove-service', [App\Http\Controllers\admin\PackageController::class, 'removeService']);
-
+    Route::get('/packages', [PackageController::class, 'index']);
+    Route::get('/packages/create', [PackageController::class, 'create']);
+    Route::get('/packages/{package}/edit', [PackageController::class, 'edit']);
+    Route::post('/packages', [PackageController::class, 'store']);
+    Route::put('/packages//{id}', [PackageController::class, 'update']);
+    Route::delete('/packages/{package}', [PackageController::class, 'destroy']);
     //Ruta Paseadores admin
     Route::resource('walkers','App\Http\Controllers\admin\WalkerController');
     // Ruta Usuarios admin
     Route::resource('users','App\Http\Controllers\admin\UserController');
     Route::resource('blogs','App\Http\Controllers\BlogController');
-
+    // Ruta blog admin
     Route::get('/blogs/create', [BlogController::class, 'showForm']); // Mostrar formulario de creación de blog
     Route::post('/agregar_blog', [BlogController::class, 'store'])->name('blog.store'); // Almacenar el nuevo blog
     Route::get('/blogs/{ide}/dit', [BlogController::class, 'showEditForm']); // Mostrar formulario de edición
     Route::put('/blogs/{id}', [BlogController::class, 'update']); // Actualizar el blog existente
-
-
-    Route::post('/users/{userId}/assign-packages', [App\Http\Controllers\admin\UserController::class, 'assignPackages'])->name('users.assign-packages');
-
-
-
-    Route::get('/userservices/{userId}/{packageId}', 'App\Http\Controllers\admin\UserController@showPackagesById')
+    // Ruta solicitud de servicios admin
+    Route::post('/users/{userId}/assign-packages', [UserController::class, 'assignPackages'])->name('users.assign-packages');
+    Route::get('/userservices/{userId}/{packageId}', [UserController::class,'showPackagesById'])
         ->name('users.userservices');
-
- 
-
-    Route::post('/users/{userId}/assign-packages', 'App\Http\Controllers\admin\UserController@assignPackages')
-        ->name('users.assignPackages');
-
+    Route::post('/users/{userId}/assignPackages', [UserController::class,'assignPackagesForm'])
+        ->name('users.assignPackagesForm');
     // vista administracion usuario
-    Route::get('/users/{userId}/assign-packages-form', 'App\Http\Controllers\admin\UserController@assignPackagesForm')
-    ->name('users.assignPackagesForm');
-
+    Route::get('/users/{userId}/assign-request-form', [UserController::class,'assignRequestForm'])
+    ->name('admin.assignPackagesForm');
+    Route::post('/users/{userId}/assign-request-form', [ServiceRequestController::class,'assignRequest'])
+    ->name('admin.assignRequestForm');
 
     Route::post('/delete-selected-users', 'App\Http\Controllers\admin\UserController@deleteSelectedUsers');
 
-
-
-   
-    Route::get('users/{userId}/{serviceRequestId}', 'App\Http\Controllers\admin\UserController@assignRequest')
-    ->name('users.assignRequest');
- 
-
-
+    // Ruta para solicitudes de servicio
     
+    Route::post('/service-requests', [ServiceRequestController::class, 'store'])
+        ->name('admin.storeRequest');
 
+
+    Route::get('/admin/service-requests', [ServiceRequestController::class, 'showIndexRequest'])->name('admin.showIndexRequest');
+
+    Route::get('/admin/service-requests/{userId}/{serviceRequestId}/edit', [ServiceRequestController::class, 'edit'])->name('admin.editServiceRequest');
+
+    Route::put('/admin/update-service-request/{userId}/{serviceRequestId}', [ServiceRequestController::class, 'updateServiceRequest'])->name('admin.updateServiceRequest');
+    Route::delete('/admin/delete-service-request/{serviceRequestId}', [ServiceRequestController::class, 'destroy'])->name('admin.deleteServiceRequest');
+
+    Route::get('/service-requests/create', [ServiceRequestController::class, 'create'])
+    ->name('serviceRequests.create');
+
+    Route::post('/admin/calculate-total-price', [ServiceRequestController::class, 'calculateTotalPrice'])->name('admin.calculateTotalPrice');
+    Route::post('/admin/attach-services-packages', [ServiceRequestController::class, 'attachServicesAndPackages'])->name('admin.attachServicesAndPackages');
 });
 

@@ -9,251 +9,251 @@ use App\Http\Controllers\Controller;
 use App\Models\Package;  // Asegúrate de que estás importando la clase Package
 use App\Models\Services;
 use App\Models\User;
-use App\Models\RequestService;
+use App\Models\ServiceRequest;
+use Illuminate\Support\Facades\View;
 
-class UserController extends Controller
+
+class ServiceRequestController extends Controller
 {
-    public function index()
+
+    public function edit($userId, $serviceRequestId)
     {
-        $requestService = User::users()->paginate(100);
-        $services = Services::all();
-        $packages = Package::all();
-        return view('users.index', compact('users', 'packages',$services));
-
-    }
-
-
-    public function assignRequest(){
-        $serviceRequestId = RequestService::findOrFail($RequestServiceId);
-
-    }
-
-
-    public function assignPackagesForm($userId)
-    {
-        // Obtener el usuario
-        $user = User::findOrFail($userId);
-
-        // Obtener todos los paquetes disponibles
+        $serviceRequest = ServiceRequest::findOrFail($serviceRequestId);
+        $uniqueNumbers = $serviceRequest->pluck('unique_number');
+        $allServices = Services::all();
         $allPackages = Package::all();
 
-        // Obtener los paquetes asignados al usuario
-        $userPackages = $user->packages;
-
-        return view('users.userservices', compact('user', 'allPackages', 'userPackages'));
-    }
-
-    public function assignPackages(Request $request, $userId)
-    {
-        // Obtener el usuario
-        $user = User::findOrFail($userId);
-    
-        // Obtener los paquetes seleccionados
-        $selectedPackages = $request->input('selected_packages', []);
-    
-        // Verificar si hay paquetes seleccionados
-        if (empty($selectedPackages)) {
-            return redirect()->back()->with('error', 'Debes seleccionar al menos un paquete.');
-        }
-    
-        // Asignar los paquetes al usuario
-        $user->packages()->sync($selectedPackages);
-    
-        // Redirigir con un mensaje de éxito
-        return redirect()->route('users.assignPackagesForm', $userId)->with('success', 'Paquetes asignados exitosamente.');
-    }
-    
-    public function assignServicesForm($userId)
-    {
-        // Obtener el usuario
-        $user = User::findOrFail($userId);
-
-        // Obtener todos los paquetes disponibles
-        $allServices = Services::all();
-
-        // Obtener los paquetes asignados al usuario
-        $userServices = $user->services;
-
-        return view('users.userservices', compact('user', 'allServices', 'userServices'));
-    }
-    public function assignServices(Request $request, $userId)
-    {
-        // Obtener el usuario
-        $user = User::findOrFail($userId);
-    
-        // Obtener los paquetes seleccionados
-        $selectedServices = $request->input('selected_Services', []);
-    
-        // Verificar si hay paquetes seleccionados
-        if (empty($selectedServices)) {
-            return redirect()->back()->with('error', 'Debes seleccionar al menos un paquete.');
-        }
-    
-        // Asignar los paquetes al usuario
-        $user->services()->sync($selectedServices);
-    
-        // Redirigir con un mensaje de éxito
-        return redirect()->route('users.assignServiceForm', $userId)->with('success', 'Paquetes asignados exitosamente.');
-    }
-
-        public function showPackagesById($userId, $packageId)
-    {
-        // Obtener el usuario
-        $user = User::findOrFail($userId);
-
-        // Obtener el paquete específico asignado al usuario
-        $package = $user->packages()->find($packageId);
-
-        // Verificar si el paquete existe para el usuario
-        if (!$package) {
-            return redirect()->route('users.show', $userId)->with('error', 'El paquete no está asignado a este usuario.');
-        }
-
-        // Obtener todos los paquetes asignados al usuario
-        $userPackages = $user->packages;
-
-        // Puedes pasar la información del usuario, el paquete específico y todos los paquetes al usuario a la vista
-        return view('users.userservices', ['user' => $user, 'package' => $package, 'userPackages' => $userPackages]);
+        return view('admin.AdminRequestServiceEdit', compact('serviceRequest', 'userId', 'uniqueNumbers', 'allServices' ,'allPackages'));
 
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('users.create');
+        // Obtener la lista de todos los usuarios disponibles
+        $allUsers = User::all(); // Ajusta según tus necesidades
+
+        // Obtener la lista de todos los servicios y paquetes disponibles
+        $allServices = Services::all(); // Ajusta según tus necesidades
+        $allPackages = Package::all(); // Ajusta según tus necesidades
+
+        return view('admin.AdminRequestServiceCreate', compact('allUsers', 'allServices', 'allPackages'));
+
+    }
+        public function showIndexRequest()
+    {
+
+        $serviceRequests = ServiceRequest::all()->sortByDesc('created_at');
+        $uniqueNumbers = $serviceRequests->pluck('unique_number');
+
+
+        return view('admin.AdminRequestServiceIndex', compact('serviceRequests', 'uniqueNumbers')); 
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $rules = [
-            'name' => 'required|min:3',
-            'email' => 'required|email|unique:users,email',
-            'cedula' => 'required|digits_between:6,10',
-            'address' => 'required|min:6',
-            'phone' => 'required',
-        ];
+    $validatedData = $request->validate([
+        'comment' => 'required',
+        'state' => 'required',
+        'services' => 'array',
+        'packages' => 'array',
+        'assigned_user' => 'required|exists:users,id',
+    ]);
 
-        $messages = [
+    // Generar un número único aleatorio  //
+    $uniqueNumber = mt_rand(100000, 999999);
+    $validatedData['unique_number'] = $uniqueNumber;
 
-            'name.required' => 'El nombre del usuario es obligatorio',
-            'name.min' => 'El nombre del usuario debe tener mas de tres caracteres',
-            'email.required'  => 'Debe ingresar un correo electronico valido',
-            'email.unique'    => 'Este email ya esta registrado en el sistema',
-            'cedula.required'   => 'La cedula  es obligatoria',
-            'cedula.numeric'     =>'solo se permiten numeros para la cedula',
-            'cedula.digits_between'      => 'la longitud  de la cedula debe tener entre 6 y 10 digitos',
-            'address.required'       => 'La direccion del paseador es requerida',
-            'address.min'        => 'La dirección debe contener al menos 6 digitos',
-            'phone.required'         => 'El numero telefonico es obligatorio',
+    // Obtener el usuario asignado //
+    $assignedUserId = $validatedData['assigned_user'];
 
-        ];
+    // Crear una nueva instancia del modelo ServiceRequest con los datos validados //
+    $serviceRequest = ServiceRequest::create([
+        'comment' => $validatedData['comment'],
+        'state' => $validatedData['state'],
+        'unique_number' => $validatedData['unique_number'],
+        'user_id' => $assignedUserId,
+    ]);
 
-        $this->validate($request,$rules,$messages);
+    // Obtén el precio de la solicitud desde la solicitud // Actualizar precio con funcion UpdateTotalPrice
+    $totalPrice = $request->input('price');
+    
+    $totalPrice = $this->updateTotalPrice($request);
+    // Verifica que el precio no sea nulo antes de actualizar la base de datos
+    if ($totalPrice !== null) {
+        // Establece el precio total en la solicitud
+        $serviceRequest->price = $totalPrice;
+        // Guarda la solicitud en la base de datos
+        $serviceRequest->save();
+    } else{
 
-        User::create(
-            $request->only('name','email','cedula','address','phone')
-            +[
-                'role' => 'user',
-                'password' => bcrypt($request->input('password'))
-            ]
-        );
-        $notification = 'El usuario se ha registrado correctamente.';
-        return redirect('/users')->with(compact('notification'));
+
+    }
+ 
+    // Obtener los IDs de los servicios seleccionados //
+    $selectedServices = $request->input('services');
+    // Obtener todas las cantidades de servicio del formulario
+    $service_quantity = $request->input('service_quantity');
+    // Crear un array para almacenar los datos de servicios y cantidades
+    $serviceData = [];
+    // Recorrer los servicios seleccionados
+    if (!empty($selectedServices)) {
+
+    foreach ($selectedServices as $serviceId) {
+        // Verificar si el servicio tiene una cantidad válida
+        $quantity = isset($service_quantity[$serviceId]) ? $service_quantity[$serviceId] : 0;
+        // Agregar el servicio y cantidad al array de datos
+        $serviceData[$serviceId] = ['service_quantity' => $quantity];
+        }
+    }
+    // Asociar servicios y cantidades a la solicitud a través de la relación many-to-many
+    $serviceRequest->services()->attach($serviceData);
+
+    $selectedPackages = $request->input('packages');
+    // Obtener todas las cantidades de servicio del formulario
+    $package_quantity = $request->input('package_quantity');
+    // Crear un array para almacenar los datos de servicios y cantidades
+    $packageData = [];
+    // Recorrer los servicios seleccionados
+    if (!empty($selectedPackages)) {
+        foreach ($selectedPackages as $packageId) {
+            // Verificar si el servicio tiene una cantidad válida y asignar 0 si no está presente
+            $quantity = $package_quantity[$packageId] ?? 0;
+            // Agregar el servicio y cantidad al array de datos
+            $packageData[$packageId] = ['package_quantity' => $quantity];
+        }
+    }
+    // Asociar paquetes y cantidades a la solicitud a través de la relación many-to-many
+
+    
+    $serviceRequest->packages()->attach($packageData);
+
+
+    
+    return redirect()->route('admin.showIndexRequest');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+
+    public function updateServiceRequest(Request $request, $userId, $serviceRequestId)
     {
-        //
-    }
+        $validatedData = $request->validate([
+            'comment' => 'required',
+            'state' => 'required',
+            'services' => 'array',
+            'packages' => 'array',
+        ]);
+        $totalPrice = $request->input('price');
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+        $totalPrice = $this->updateTotalPrice($request);
+        $totalPrice = $this->updateTotalPrice($request);
+
+        // Obtener la solicitud de servicio por ID
+        $serviceRequest = ServiceRequest::findOrFail($serviceRequestId);
+    
+        // Actualizar los campos básicos de la solicitud
+        $serviceRequest->update([
+            'comment' => $validatedData['comment'],
+            'state' => $validatedData['state'],
+            'price' => 0, // Actualizar el precio
+        ]);
+
+
+
+        // Actualizar las cantidades para los servicios
+        foreach ($request->input('quantities', []) as $serviceId => $quantity) {
+            $serviceRequest->services()->updateExistingPivot($serviceId, ['service_quantity' => $quantity]);
+        }
+
+        // Actualizar las cantidades para los paquetes
+        foreach ($request->input('quantities', []) as $packageId => $quantity) {
+            $serviceRequest->packages()->updateExistingPivot($packageId, ['package_quantity' => $quantity]);
+        }
+    
+        // Actualizar servicios asociados
+        $selectedServices = $request->input('services');
+        $service_quantity = $request->input('service_quantity');
+        $serviceData = [];
+    
+        foreach ($selectedServices as $serviceId) {
+            $quantity = isset($service_quantity[$serviceId]) ? $service_quantity[$serviceId] : 0;
+            $serviceData[$serviceId] = ['service_quantity' => $quantity];
+        }
+        dd($serviceData);
+    
+        $serviceRequest->services()->sync($serviceData);
+    
+        // Actualizar paquetes asociados
+        $selectedPackages = $request->input('packages');
+        $package_quantity = $request->input('package_quantity');
+        $packageData = [];
+    
+        foreach ($selectedPackages as $packageId) {
+            $quantity = isset($package_quantity[$packageId]) ? $package_quantity[$packageId] : 0;
+            $packageData[$packageId] = ['package_quantity' => $quantity];
+        }
+    
+        $serviceRequest->packages()->sync($packageData);
+    
+        return redirect()->route('admin.showIndexRequest');
+    }
+    
+
+
+    private function updateTotalPrice(Request $request)
     {
-        $user = User::users()->findOrFail($id);
-        return view('users.edit', compact('user'));
+        $totalPrice = $request->input('price');
+        $serviceIds = $request->input('services');
+
+
+        $quantities = $request->input('service_quantity');
+        $packageIds = $request->input('packages');
+    
+        $packageQuantities = $request->input('package_quantity');
+        $customPrice = $request->has('enable_custom_price');
+
+        if ($totalPrice === null || $totalPrice === 0) {
+
+            if(!empty($serviceIds)){
+            // Suma de precios de servicios seleccionados si el precio es nulo o 0
+            foreach ($serviceIds as $index => $serviceId) {
+                if (isset($quantities[$serviceId]) && $quantities[$serviceId] > 0) {
+                    $quantity = $quantities[$serviceId];
+                    $service = Services::find($serviceId);
+                    if ($service) {
+                        $totalPrice += $service->price * $quantity;
+                    }
+                }
+            }
+            }
+
+            if (!empty($packageIds)) {
+                foreach ($packageIds as $index => $packageId) {
+                    if (isset($packageQuantities[$packageId]) && $packageQuantities[$packageId] > 0) {
+                        $packageQuantity = $packageQuantities[$packageId];
+                        $package = Package::find($packageId);
+                        if ($package) {
+                            $totalPrice += $package->price * $packageQuantity;
+                        }
+                    }
+                }
+            }
+            // Suma de precios de paquetes seleccionados
+
+        }
+
+        return $totalPrice;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy( $serviceRequestId)
     {
-        $rules = [
-            'name' => 'required|min:3',
-            'email' => 'required|email', 
-            'cedula' => 'required|min:6',
-            'address' => 'required|min:6',
-            'phone' => 'required',
-        ];
+        $serviceRequest = ServiceRequest::findOrFail($serviceRequestId);
+        $serviceRequest->delete();
 
-        $messages = [
-
-            'name.required' => 'El nombre del usuario es obligatorio',
-            'name.min' => 'El nombre del usuario debe tener mas de tres caracteres',
-            'email.required'  => 'Debe ingresar un correo electronico valido',
-            'email.unique'    => 'Este email ya esta registrado en el sistema',
-            'cedula.required'   => 'La cedula del paseador es obligatoria',
-            'cedula.numeric'     =>'solo se permiten numeros para la cedula',
-            'cedula.digits_between'      => 'la longitud minima de la cedula son de 6 digitos',
-            'address.required'       => 'La direccion del usuario es requerida',
-            'address.min'        => 'La dirección debe contener al menos 6 digitos',
-            'phone.required'         => 'El numero telefonico es obligatorio',
-
-        ];
-
-        $this->validate($request,$rules,$messages);
-        $user = User::users()->findOrFail($id);
-
-        $data = $request->only('name','email','cedula','address','phone');
-        $password =$request->input('password');
-
-        if($password)
-        $data['password'] = bcrypt($password);
-        $user->fill($data)->save();
-
-
-
-        $notification = 'La informacion del usuario se ha registrado correctamente.';
-        return redirect('/users')->with(compact('notification'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $user = User::users()->findOrFail($id);
-        $userName = $user->name;
-        $user->delete();
-
-        $notification = 'el paseador'.$userName. 'se elimino correctamente';
-        
-        return redirect('/users')->with(compact('notification'));
-
+        // Redireccionar o hacer lo que sea necesario después de la eliminación
+        return redirect()->route('admin.showIndexRequest');
     }
 
 
 
-    public function deleteSelectedUsers(Request $request)
-{
-    $ids = $request->input('ids');
 
-    // Realiza la lógica para eliminar los usuarios con los IDs proporcionados
-    User::whereIn('id', $ids)->delete();
 
-    return response()->json(['message' => 'Usuarios eliminados correctamente.']);
 }
-
-}
-
-

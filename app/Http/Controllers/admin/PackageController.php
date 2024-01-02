@@ -89,41 +89,6 @@ class PackageController extends Controller
 }
 
 
-
-private function updateTotalPrice(Request $request)
-{
-    $totalPrice = $request->input('price');
-    $serviceIds = $request->input('services');
-    $quantities = $request->input('quantities');
-    $customPrice = $request->has('enable_custom_price');
-
-    if ($totalPrice === null || $totalPrice === 0) {
-        // Suma de precios de servicios seleccionados si el precio es nulo o 0
-        foreach ($serviceIds as $index => $serviceId) {
-            if (isset($quantities[$serviceId]) && $quantities[$serviceId] > 0) {
-                $quantity = $quantities[$serviceId];
-                $service = Services::find($serviceId);
-                if ($service) {
-                    $totalPrice += $service->price * $quantity;
-                }
-            }
-        }
-    }
-
-    return $totalPrice;
-}
-
-
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -157,60 +122,68 @@ private function updateTotalPrice(Request $request)
     // PackageController.php
  
 
-   public function update(Request $request, $id)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string|max:255',
-        'price' => 'required|integer',
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'price' => 'required|integer',
+            'services' => 'required|array',
+            'services.*' => 'required|integer',
+            'quantities' => 'required|array',
+            'quantities.*' => 'min:0',
+        ]);
+    
+        // Obtener el paquete a editar
+        $package = Package::findOrFail($id);
+    
+        // Actualizar los datos del paquete
+        $package->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+        ]);
+    
+        // Obtener los IDs de los servicios y las cantidades desde el formulario
+        $serviceIds = $request->input('services');
+        $quantities = $request->input('quantities');
 
-        'services' => 'required|array', // Cambio de 'selected_services' a 'services'
-        'services.*' => 'required|integer', // Cambio de 'selected_services.*' a 'services.*'
-        'quantities' => 'required|array',
-        'quantities.*' => 'min:0',
-    ]);
+        // Eliminar servicios no seleccionados y sus cantidades
+        $servicesToRemove = $package->services->pluck('id')->diff($serviceIds);
+        
+        $package->services()->detach($servicesToRemove);
 
-    // Obtener el paquete a editar
-    $package = Package::findOrFail($id);
+        // Actualizar las cantidades de los servicios seleccionados y agregar nuevos servicios
+        foreach ($serviceIds as $index => $serviceId) {
+            $quantity = isset($quantities[$index]) ? $quantities[$index] : 0;
 
-    // Actualizar los datos del paquete
-    $package->update([
-        'name' => $request->input('name'),
-        'description' => $request->input('description'),
-    ]);
-    $newServiceIds = array_diff($request->input('services'), $package->services->pluck('id')->toArray());
+            // Actualizar o agregar la relación en la tabla intermedia
+            $package->services()->syncWithoutDetaching([$serviceId => ['quantity' => $quantity]]);
+        }
 
-    // Agregar servicios no agregados al paquete
-    foreach ($newServiceIds as $serviceId) {
-        $quantity = $request->input("quantities.$serviceId", 0);
-        $package->services()->attach($serviceId, ['quantity' => $quantity]);
-    }
+        // Identificar nuevos servicios a agregar
+        $newServicesToAdd = array_diff($serviceIds, $package->services->pluck('id')->toArray());
 
-    // Obtener los IDs de los servicios y las cantidades desde el formulario
-    $serviceIds = $request->input('services'); // Cambio de 'selected_services' a 'services'
-    $quantities = $request->input('quantities');
-    $price = $request->input('price');
-    // Calcula el precio total del paquete llamando a la función updateTotalPrice
-    $totalPrice = $this->updateTotalPrice($request);
-
-    // Establece el precio total en el paquete
-    $package->price = $totalPrice;
-
-    $package->save();
-
-    // Sincronizar los servicios asociados con el paquete y sus cantidades
-    $package->services()->detach();
-
-    foreach ($serviceIds as $index => $serviceId) {
-        // Verificar si la clave $index existe en $quantities
-        $quantity = isset($quantities[$index]) ? $quantities[$index] : 0;
-        $package->services()->attach($serviceId, ['quantity' => $quantity]);
+        // Agregar nuevos servicios con cantidades
+        foreach ($newServicesToAdd as $newServiceId) {
+            $quantity = isset($quantities[$newServiceId]) ? $quantities[$newServiceId] : 0;
+            $package->services()->attach($newServiceId, ['quantity' => $quantity]);
+            $count = 0;
+            $suma =+ $count + 1;
+            dd($newServiceId, $suma);
+}
+    
+        // Actualizar el precio total del paquete
+        $totalPrice = $this->updateTotalPrice($request);
+    
+        // Establecer el precio total en el paquete
+        $package->price = $totalPrice;
+    
+        // Guardar el paquete
+        $package->save();
+    
+        return redirect('/packages')->with('success', '¡El paquete ha sido actualizado exitosamente!');
     }
     
-
-
-    return redirect('/packages')->with('success', '¡El paquete ha sido actualizado exitosamente!');
-}
     
 
     public function removeService(Request $request, $id)
@@ -234,23 +207,27 @@ private function updateTotalPrice(Request $request)
         return redirect('/packages')->with('success', 'El paquete ha sido eliminado exitosamente.');
     }
 
-    public function assignPackageToUser(Request $request, $userId, $packageId)
+    private function updateTotalPrice(Request $request)
     {
-        // Verificar si el usuario tiene el rol de administrador
-        if (!auth()->user()->isAdmin()) {
-            abort(403, 'Unauthorized action.');
+        $totalPrice = $request->input('price');
+        $serviceIds = $request->input('services');
+        $quantities = $request->input('quantities');
+        $customPrice = $request->has('enable_custom_price');
+    
+        if ($totalPrice === null || $totalPrice === 0) {
+            // Suma de precios de servicios seleccionados si el precio es nulo o 0
+            foreach ($serviceIds as $index => $serviceId) {
+                if (isset($quantities[$serviceId]) && $quantities[$serviceId] > 0) {
+                    $quantity = $quantities[$serviceId];
+                    $service = Services::find($serviceId);
+                    if ($service) {
+                        $totalPrice += $service->price * $quantity;
+                    }
+                }
+            }
         }
-
-        // Obtener el usuario y el paquete
-        $user = User::findOrFail($userId);
-        $package = Package::findOrFail($packageId);
-
-        // Realizar la lógica de asignación aquí
-        // ...
-
-        // Redirigir con un mensaje de éxito
-        return redirect()->route('users.show', $userId)
-            ->with('success', 'Package assigned successfully.');
+    
+        return $totalPrice;
     }
 
     // Resto del código...

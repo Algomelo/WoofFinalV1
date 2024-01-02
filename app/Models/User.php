@@ -50,13 +50,16 @@ class User extends Authenticatable
 
     public function packages()
     {
-        return $this->belongsToMany(Package::class, 'user_packages', 'user_id', 'package_id');
+        return $this->belongsToMany(Package::class, 'service_requests', 'user_id', 'package_id');
     }
-
     public function services()
     {
-        return $this->belongsToMany(Services::class, 'user_services', 'user_id', 'package_id');
+        return $this->belongsToMany(Services::class, 'service_requests', 'user_id', 'service_id');
     }
+
+
+   
+    
     public function serviceRequests()
     {
         return $this->hasMany(ServiceRequest::class);

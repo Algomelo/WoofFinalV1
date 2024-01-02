@@ -44,7 +44,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container ">
-            <a class="navbar-brand" href="index">
+            <a class="navbar-brand" href="{{ route('index')}}">
                 <img class="img_style" src="/img/positive_logo.png" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -53,7 +53,7 @@
             <div class="collapse navbar-collapse" id="navbarNav" style="flex-grow:0">
                 <ul class="navbar-nav ml-auto listanavbar text-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="index">Home</a>
+                        <a class="nav-link" href="{{ route('index')}}">Home</a>
                     </li>
                    
                     <li class="nav-item">
@@ -80,7 +80,7 @@
                     <div class="container d-flex" style="justify-content:right; width:auto; padding:0; margin:0;">
                             <ul class="navbar-nav ml-auto listanavbar text-center">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="login" style="border:solid 3px; border-color: #F2761D; background-color:#F2761D; border-radius:50px; margin: 0px 28px; padding:5px 43px;">Login</a>
+                                    <a class="nav-link botonlogin" href="login">Log In</a>
                                 </li>
 
                                 <li class="nav-item">

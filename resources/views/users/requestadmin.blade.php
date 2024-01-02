@@ -80,6 +80,8 @@ use Illuminate\Support\Str;
                                 <p>No hay paquetes disponibles.</p>
                             @endif
 
+                        
+
                        
             </div>
             <div class="modal-footer">

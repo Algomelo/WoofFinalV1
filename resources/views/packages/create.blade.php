@@ -53,10 +53,13 @@
                 @foreach($services as $service)
                     <label for="service_{{ $service->id }}">
                         <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}" class="service-checkbox">
-                        {{ $service->name }}
+                        {{ $service->name }} -
+                         Service Price : ${{ $service->price }} (xUnit)
                     </label>
-                    <input type="number" name="quantities[{{ $service->id }}]" placeholder="Quantity" value="" class="quantity-input">
-                    <span class="service-price" style="display:none;">{{ $service->price }}</span>
+                    
+                    <input type="number" name="quantities[{{ $service->id }}]" placeholder="Quantity" value="" class="quantity-input"> <br>
+                    <span class="service-price" style="display:none;">{{ $service->price }}  </span>
+                    
                 @endforeach
 
             </div>

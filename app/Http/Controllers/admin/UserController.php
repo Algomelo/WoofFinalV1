@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Models\Package;  // Asegúrate de que estás importando la clase Package
 use App\Models\Services;
+use App\Models\ServiceRequest;
 
 
 class UserController extends Controller
@@ -22,92 +23,60 @@ class UserController extends Controller
     }
 
 
-    public function assignPackagesForm($userId)
+
+    public function assignRequestForm($userId)
     {
         // Obtener el usuario
         $user = User::findOrFail($userId);
 
         // Obtener todos los paquetes disponibles
         $allPackages = Package::all();
-
-        // Obtener los paquetes asignados al usuario
-        $userPackages = $user->packages;
-
-        return view('users.userservices', compact('user', 'allPackages', 'userPackages'));
-    }
-    public function assignPackages(Request $request, $userId)
-    {
-        // Obtener el usuario
-        $user = User::findOrFail($userId);
-    
-        // Obtener los paquetes seleccionados
-        $selectedPackages = $request->input('selected_packages', []);
-    
-        // Verificar si hay paquetes seleccionados
-        if (empty($selectedPackages)) {
-            return redirect()->back()->with('error', 'Debes seleccionar al menos un paquete.');
-        }
-    
-        // Asignar los paquetes al usuario
-        $user->packages()->sync($selectedPackages);
-    
-        // Redirigir con un mensaje de éxito
-        return redirect()->route('users.assignPackagesForm', $userId)->with('success', 'Paquetes asignados exitosamente.');
-    }
-    
-    public function assignServicesForm($userId)
-    {
-        // Obtener el usuario
-        $user = User::findOrFail($userId);
-
-        // Obtener todos los paquetes disponibles
         $allServices = Services::all();
 
         // Obtener los paquetes asignados al usuario
-        $userServices = $user->services;
+        $userPackages = $user->packages;
+        $userServices= $user->services;
 
-        return view('users.userservices', compact('user', 'allServices', 'userServices'));
+
+        return view('users.userservices', compact('user', 'allPackages', 'userPackages', 'allServices', 'userServices'));
     }
+   
     public function assignServices(Request $request, $userId)
     {
         // Obtener el usuario
         $user = User::findOrFail($userId);
     
         // Obtener los paquetes seleccionados
-        $selectedServices = $request->input('selected_Services', []);
-    
+
+        $selectedServices = $request->input('services');
+        $selectedPackages = $request->input('packages');
+
+
         // Verificar si hay paquetes seleccionados
-        if (empty($selectedServices)) {
-            return redirect()->back()->with('error', 'Debes seleccionar al menos un paquete.');
+        // Verificar si hay paquetes seleccionados
+        if (empty($selectedPackages)) {
+            return redirect()->back()->with('error', 'Debes seleccionar al menos un servicio.');
         }
+
+        // Agrega esta línea para verificar los paquetes seleccionados
+        //  dd($selectedPackages);
+
+        foreach ($selectedPackages as $packageId) {
+            // Verificar si el servicio tiene una cantidad válida
+            $quantity = isset($quantities[$packageId]) ? $quantities[$packageId] : 0;
     
+            // Agregar el servicio y cantidad al array de datos
+            $serviceData[$packageId] = ['quantity' => $quantity];
+        }
+
         // Asignar los paquetes al usuario
-        $user->services()->sync($selectedServices);
-    
+        $user->packages()->sync($selectedPackages);
+
         // Redirigir con un mensaje de éxito
-        return redirect()->route('users.assignServiceForm', $userId)->with('success', 'Paquetes asignados exitosamente.');
-    }
-
-        public function showPackagesById($userId, $packageId)
-    {
-        // Obtener el usuario
-        $user = User::findOrFail($userId);
-
-        // Obtener el paquete específico asignado al usuario
-        $package = $user->packages()->find($packageId);
-
-        // Verificar si el paquete existe para el usuario
-        if (!$package) {
-            return redirect()->route('users.show', $userId)->with('error', 'El paquete no está asignado a este usuario.');
-        }
-
-        // Obtener todos los paquetes asignados al usuario
-        $userPackages = $user->packages;
-
-        // Puedes pasar la información del usuario, el paquete específico y todos los paquetes al usuario a la vista
-        return view('users.userservices', ['user' => $user, 'package' => $package, 'userPackages' => $userPackages]);
+        return redirect()->route('users.assignRequestForm', $userId)->with('success', 'Paquetes asignados exitosamente.');
 
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -158,17 +127,7 @@ class UserController extends Controller
         return redirect('/users')->with(compact('notification'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $user = User::users()->findOrFail($id);

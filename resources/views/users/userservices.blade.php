@@ -53,49 +53,6 @@ use Illuminate\Support\Str;
       </div>
 
 
-<!-- Modal Section packages -->
-<div class="modal fade" id="assignPackageModal" tabindex="-1" role="dialog" aria-labelledby="assignPackageModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1>Assign Packages{{ $user->name }}</h1>
-
-
-            </div>
-            <div class="modal-body">
-    
-                            @if (count($allPackages) > 0)
-                            
-                                <form action="{{ route('users.assignPackages', $user->id) }}" method="POST">
-                                    @csrf
-                                    <h3>Paquetes Asignados:</h3>
-
-
-                                    @foreach ($allPackages as $package)
-                                        <label>
-                                            <input type="checkbox" name="selected_packages[]" value="{{ $package->id }}"
-                                                {{ $userPackages->contains($package->id) ? 'checked' : '' }}>
-                                            {{ $package->name }}
-                                            {{ $package->price }}
-
-                                        </label><br>
-                                        
-                                    @endforeach
-
-                                    <button type="submit" class="btn btn-sm btn-primary">Asignar Paquetes</button>
-                                </form>
-                            @else
-                                <p>No hay paquetes disponibles.</p>
-                            @endif
-
-                       
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <!-- Modal Section packages -->
@@ -112,57 +69,55 @@ use Illuminate\Support\Str;
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <input type="text" value="Hola, necesito tres paquetes premiun y adicionarle dos" style="width:100%;">
+                    <input type="text" value="Hola, necesito tres paquetes premiun y adicionarle dos" style="width:100%; height 15vh; border-radius:3px; padding:30px">
                 </div>
                 <br>
                 <div class="container d-flex" style="justify-content: space-evenly;">
                             @if (count($allPackages) > 0)
                             <br>
-                                <form action="{{ route('users.assignRequest', $user->id), $serviceRequestId-> }}" method="POST">
+                                 <div class="form-group">
+
+                                <form action="{{ route('admin.assignRequestForm', $user->id) }}" method="POST">
                                     @csrf
                                     <h3>Included Packages</h3>
 
 
                                     @foreach ($allPackages as $package)
+                                    <label for="package_{{ $package->id }}">
+                                        <input type="checkbox" name="packages[]" value="{{ $package->id }}" id="package_{{ $package->id }}"
+                                            {{ $userPackages->contains($package->id) ? 'checked' : '' }}>
+                                        {{ $package->name }}
+                                        {{ $package->price }}
+                                        <input type="number" name="quantities[{{ $package->id }}]" placeholder="Quantity" value="" class="quantity-input">
+                                        <span class="service-price" style="display:none;">{{ $package->price }}</span>
+                                    </label><br>
+
+                                    @endforeach
+                                </div>
+
+                                <div class="form-group">
+
+                                    <h3>Included Services </h3>
+
+
+                                    @foreach ($allServices as $service)
                                         <label>
-                                            <input type="checkbox" name="selected_packages[]" value="{{ $package->id }}"
-                                                {{ $userPackages->contains($package->id) ? 'checked' : '' }}>
-                                            {{ $package->name }}
-                                            {{ $package->price }}
-                                            <input type="number" name="quantities[{{ $package->id }}]" placeholder="Quantity" value="" class="quantity-input">
-                                            <span class="service-price" style="display:none;">{{ $package->price }}</span>
+                                            <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}"
+                                                {{ $userServices->contains($service->id) ? 'checked' : '' }}>
+                                            {{ $service->name }}
+                                            {{ $service->price }}
+                                            <input type="number" name="quantities[{{ $service->id }}]" placeholder="Quantity" value="" class="quantity-input">
                                         </label><br>
                                     @endforeach
 
-                                    <button type="submit" class="btn btn-sm btn-primary">Asignar Paquetes</button>
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-primary">Asignar Paquetes</button>
+
                                 </form>
                             @else
                                 <p>No hay paquetes disponibles.</p>
                             @endif
-                            @if (count($allPackages) > 0)
-                            <br>
-                                <form action="{{ route('users.assignRequest', $user->id) }}" method="POST">
-                                    @csrf
-                                    <h3>Included Services</h3>
-
-
-                                    @foreach ($allPackages as $package)
-                                        <label>
-                                            <input type="checkbox" name="selected_packages[]" value="{{ $package->id }}"
-                                                {{ $userPackages->contains($package->id) ? 'checked' : '' }}>
-                                            {{ $package->name }}
-                                            {{ $package->price }}
-
-                                        </label><br>
-                                    @endforeach
-
-                                    <button type="submit" class="btn btn-sm btn-primary">Asignar Paquetes</button>
-                                </form>
-                            @else
-                                <p>No hay paquetes disponibles.</p>
-                            @endif
-
-
+   
 
                
                 </div>

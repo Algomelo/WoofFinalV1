@@ -12,7 +12,6 @@
 
 <div class="card">
 
-
     <form role="form" method="POST" action="{{ route('login') }}">
         @csrf
 

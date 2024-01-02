@@ -31,7 +31,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link " href="./examples/profile.html">
+    <a class="nav-link" href="{{ route('admin.showIndexRequest') }}">
         <i class="fas fa-clipboard-list"></i>Service Request
       </a>
     </li>
@@ -50,8 +50,8 @@
     
 
     <li class="nav-item">
-      <a class="nav-link " href="./examples/tables.html">
-        <i class="ni ni-bullet-list-67 text-red"></i>Request Services
+      <a class="nav-link" href="{{ route('user.showIndexRequest', ['userId' => Auth::id()]) }}">
+        <i class="ni ni-bullet-list-67 text-red"></i>Request Service
       </a>
     </li>
     <li class="nav-item">
@@ -59,14 +59,15 @@
         <i class="ni ni-bullet-list-67 text-red"></i>My Services
       </a>
     </li>
+
     <li class="nav-item">
       <a class="nav-link " href="./examples/tables.html">
-        <i class="ni ni-bullet-list-67 text-red"></i>My Pets
+        <i class="ni ni-bullet-list-67 text-red"></i>Scheduled Services
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link " href="./examples/tables.html">
-        <i class="ni ni-bullet-list-67 text-red"></i>Scheduled Services
+        <i class="ni ni-bullet-list-67 text-red"></i>My Pets
       </a>
     </li>
     <li class="nav-item">
@@ -77,7 +78,7 @@
     @else
     <li class="nav-item">
       <a class="nav-link " href="./examples/tables.html">
-        <i class="ni ni-bullet-list-67 text-red"></i>Assigned clients
+        <i class="ni ni-bullet-list-67 text-red"></i>Service Request
       </a>
     </li>
     <li class="nav-item">

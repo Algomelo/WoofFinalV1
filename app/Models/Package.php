@@ -29,10 +29,9 @@ class Package extends Model
         return $this->belongsToMany(User::class, 'user_packages')->withPivot('quantity');
     }
 
-
     public function serviceRequests()
     {
-        return $this->hasMany(ServiceRequest::class);
+        return $this->hasMany(ServiceRequest::class, 'package_id');
     }
 
     
