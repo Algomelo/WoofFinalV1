@@ -1,0 +1,22 @@
+.boton{
+
+    background-image: url('/img/banner_huellas.png') !important;
+    color: white;
+    padding: 4px 10px;
+    /* margin: 0px; */
+    height: 29px;
+    border-radius: 12px;
+    
+}
+
+.boton-eliminar{
+
+    background: red;
+    color: white;
+    padding: 0px 10px;
+
+    height: 29px;
+    border-radius: 12px;
+    border-color: transparent !important;
+}
+

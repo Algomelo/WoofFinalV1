@@ -16,7 +16,7 @@
             @endif
 
             <!-- Formulario de edición -->
-            <form method="POST" action="{{ route('admin.updateServiceRequest', ['userId' => $userId, 'serviceRequestId' => $serviceRequest->id]) }}">
+            <form method="POST" action="{{ route('admin.updateServiceRequest', [ 'serviceRequestId' => $serviceRequest->id]) }}">
                 @csrf
                 @method('PUT')
 
@@ -40,8 +40,8 @@
                     <select name="state" class="form-control" placeholder= >
                         <option value="{{ $serviceRequest->state }}"> {{ $serviceRequest->state }} </option>
                         <option value="pending">Pending</option>
-                        <option value="approved">Approved</option>
-                        <option value="cancel">Cancel</option>
+                        <option value="passed">Passed</option>
+                        <option value="cancelled">Cancelled</option>
                     </select>
                     
                 </div>
@@ -53,46 +53,42 @@
 
 
             <div class="form-group">
-                <h4>Added Services:</h4>
-                <div class="container d-block" >
-                @foreach($serviceRequest->services as $service)
-                    
-                        <label for="service_{{ $service->id }}">
-                            <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}" class="service-checkbox" checked>
-                            Name Service : {{ $service->name }} //
-                        </label>
-                        <label for="service_{{ $service->id }}">
+    <h4>Added Services:</h4>
+    <div class="container d-block">
+        @foreach($serviceRequest->services as $service)
+            <label for="service_{{ $service->id }}">
+                <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}" class="service-checkbox" checked>
+                Service Name: {{ $service->name }}
+            </label>
+            <label for="service_{{ $service->id }}">
+                Service Price: $ {{ $service->price }} (per Unit)
+            </label>
+            <input type="number" name="service_quantity[{{ $service->id }}]" placeholder="Quantity" value="{{ $service->pivot->service_quantity }}" class="quantity-input">
+            <span class="service-price" style="display:none;">{{ $service->price }}</span>
+        @endforeach
+    </div>
+</div>
 
-                            Price Service:  $ {{ $service->price }}  (xUnit)
+<div class="form-group">
+    <h4>Available Services:</h4>
+    <div class="container d-block">
+        @foreach($allServices as $availableService)
+            @if (!$serviceRequest->services->contains($availableService->id))
+                <label for="service_{{ $availableService->id }}">
+                    <input type="checkbox" name="services[]" value="{{ $availableService->id }}"  id="service_{{ $availableService->id }}" class="service-checkbox">
+                    Service Name: {{ $availableService->name }}
+                </label>
+                <label for="service_{{ $availableService->id }}">
+                    Service Price: $ {{ $availableService->price }} (per Unit)
+                </label>
+                <input type="number" name="service_quantity[{{ $availableService->id }}]" value="" class="quantity-input"><br>
+                <span class="service-price" style="display:none;">{{ $availableService->price }}</span>
+            @endif
+        @endforeach
+    </div>
+</div>
 
-                         </label>
-                         <input type="number" name="quantities[{{ $service->id }}]" placeholder="Quantity"  value="{{ $service->pivot->service_quantity }}" class="quantity-input">
-                         <span class="service-price" style="display:none;">{{ $service->price }}</span>
-
-                   
-                @endforeach
-                </div>
-
-            </div>
-
-        <div class="form-group">
-            <h4>Available Services:</h4>
-            <div class="container d-block">
-                @foreach($allServices as $availableService)
-                    @if (!$serviceRequest->services->contains($availableService->id))
-                        <label for="service_{{ $availableService->id }}">
-                            <input type="checkbox" name="services[]" id="service_{{ $availableService->id }}" class="service-checkbox">
-                            Name: {{ $availableService->name }} //
-                        </label>
-                        <label for="service_{{ $availableService->id }}">
-                            Service Price: $ {{ $availableService->price }} (xUnit)
-                        </label>
-                        <input type="number" name="quantities[{{ $availableService->id }}]" value="" class="quantity-input"> <br>
-                        <span class="service-price" style="display:none;">{{ $availableService->price }}</span>
-                    @endif
-                @endforeach
-            </div>
-        </div>
+        
 
 
                 <!-- Added s -->
@@ -104,7 +100,7 @@
                         <input type="checkbox" name="packages[]" value="{{ $package->id }}" id="package_{{ $package->id }}" class="service-checkbox" checked>
                         Name: {{ $package->name }}  //  Price: $ {{ $package->price }} (xUnit)
                     </label>
-                    <input type="number" name="quantities[{{ $package->id }}]" value="{{ $package->pivot->package_quantity }}" class="quantity-input">
+                    <input type="number" name="package_quantity[{{ $package->id }}]" value="{{ $package->pivot->package_quantity }}" class="quantity-input">
                     <span class="service-price" style="display:none;">{{ $package->price }}</span>
                 @endforeach
             </div>
@@ -121,7 +117,7 @@
                             <input type="checkbox" id="package_{{ $availablePackage->id }}" name="packages[{{ $availablePackage->id }}]" class="service-checkbox">
                             Name: {{ $availablePackage->name }} // Package Price: $ {{ $availablePackage->price }} (xUnit)                            
                         </label>
-                        <input type="number" name="quantities[{{ $availablePackage->id }}]" value="" class="quantity-input"> <br>
+                        <input type="number" name="package[{{ $availablePackage->id }}]" value="" class="quantity-input"> <br>
                         <span class="service-price" style="display:none;">{{ $availablePackage->price }}</span>
                     @endif
                 @endforeach

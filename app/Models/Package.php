@@ -21,12 +21,14 @@ class Package extends Model
 
     public function services()
     {
-        return $this->belongsToMany(Services::class)->withPivot('quantity');
+        return $this->belongsToMany(Services::class)
+        ->withPivot('quantity');
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_packages')->withPivot('quantity');
+        return $this->belongsToMany(User::class, 'user_packages')
+        ->withPivot('quantity');
     }
 
     public function serviceRequests()
@@ -34,6 +36,5 @@ class Package extends Model
         return $this->hasMany(ServiceRequest::class, 'package_id');
     }
 
-    
 }
 

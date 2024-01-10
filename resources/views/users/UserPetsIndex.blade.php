@@ -8,14 +8,12 @@
     <div class="card-header border-0">
     <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">Request Services</h3>
+              <h3 class="mb-0">My Pets</h3>
             </div>
-            <a class="boton" href="{{ route('serviceRequests.create') }}">Create New Service Request</a>
+
+            <a  class="boton"  href="{{ route('user.pets.create', ['userId' => $userId]) }}">Add new Pet</a>
+
     </div>        
-
-
-
-                   
                 @if($errors->any())
                 @foreach($errors->all() as $error)
                 <div class="alert alert-danger" role="alert">
@@ -30,62 +28,40 @@
         <table class="table align-items-center table-flush">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col"># Request</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Breed</th>
                     <th scope="col">Comment</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Services</th>
-                    <th scope="col">User</th>
-                    <th scope="col">State</th>
                     <th scope="col">Date Created</th>
                     <th scope="col">Options</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($serviceRequests as $serviceRequest)
+                @foreach($pets as $pet)
                 <tr>
                     <th scope="row">
-                        {{ $uniqueNumbers[$loop->index] }}
+                      {{$pet->name}}
                     </th>
                     <td>
-                        {{$serviceRequest->comment}}
+                        {{$pet->age}}
                     </td>
                     <td>
-                        {{$serviceRequest->price}}
+                        {{$pet->breed}}
                     </td>
 
                     <td>
-                        <p>Services:</p>
-                        <ul>
-                            @foreach($serviceRequest->services as $service)
-                            <li>{{ $service->name }} <br> - Quantity: {{ $service->pivot->service_quantity }}</li>
-                            @endforeach
-                        </ul>
+                        {{$pet->comment}}
+                    </td>
+                    <td>
+                        {{ $pet->created_at}}
+                    </td>
+                    <td>
 
-                        <p>Packages:</p>
-                        <ul>
-                            @foreach($serviceRequest->packages as $package)
-                            <li>{{ $package->name }} <br> - Quantity: {{ $package->pivot->package_quantity }}</li>
-                            @endforeach
-                        </ul>
-                    </td>
-                    <td>
-                    {{ $serviceRequest->user->name}}
+                        <form action="{{ route('user.pets.destroy', ['userId' => $userId, 'petId' => $pet->id]) }}" method="POST" onsubmit="return confirm('¿Estás seguro?')">
 
-                    </td>
-                    <td>
-                        {{ $serviceRequest->state}}
-                    </td>
-                    <td>
-                    {{ $serviceRequest->created_at}}
-
-                    </td>
-                    <td>
-                    @if($serviceRequest->state !== 'passed')
-                        <form action="{{ route('admin.deleteServiceRequest', ['serviceRequestId' => $serviceRequest->id]) }}" method="POST" onsubmit="return confirm('¿Estás seguro?')">
                             @csrf
                             @method('DELETE')
-                            <a href="{{ route('admin.editServiceRequest', ['userId' => $serviceRequest->user_id, 'serviceRequestId' => $serviceRequest->id]) }}" class="btn boton">Edit</a>
-                    @endif
+                            <a href="{{ route('user.pets.edit', ['userId' => $userId, 'petId' => $pet->id]) }}" class="btn boton">Edit</a>
                             <button type="submit" class="btn boton-eliminar">Eliminar</button>
                         </form>
                     </td>

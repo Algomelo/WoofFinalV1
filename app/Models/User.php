@@ -47,7 +47,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-
+/*
     public function packages()
     {
         return $this->belongsToMany(Package::class, 'service_requests', 'user_id', 'package_id');
@@ -58,12 +58,12 @@ class User extends Authenticatable
     }
 
 
-   
-    
+   */
     public function serviceRequests()
     {
         return $this->hasMany(ServiceRequest::class);
     }
+    
     public function scopeWalkers($query){
 
         return $query->where('role','walker');
@@ -76,5 +76,10 @@ class User extends Authenticatable
     public function isAdmin()
     {
     return $this->role === 'admin';
+    }
+
+    public function pets()
+    {
+        return $this->hasMany(Pet::class);
     }
 }

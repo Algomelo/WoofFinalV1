@@ -14,20 +14,10 @@ class usersTableSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'usuario',
-            'email' => 'usuario1@gmail.com',
+            'name' => 'Fabian',
+            'email' => 'admin2@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('123456789'), // password
-            'cedula' => '1020844764',
-            'address' => 'av chile',
-            'phone' => '+573057202110',
-            'role' => 'user',
-        ]);
-        User::create([
-            'name' => 'Santiago',
-            'email' => 'admin1@gmail.com',
-            'email_verified_at' => now(),
-            'password' => bcrypt('123456789'), // password
+            'password' => bcrypt('1234'), // password
             'cedula' => '1020844764',
             'address' => 'av chile',
             'phone' => '+573057202110',
@@ -35,19 +25,29 @@ class usersTableSeeder extends Seeder
         ]);
         User::create([
             'name' => 'Santiago',
-            'email' => 'usuario2@gmail.com',
+            'email' => 'admin1@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('123456789'), // password
+            'password' => bcrypt('1234'), // password
+            'cedula' => '1020844764',
+            'address' => 'av chile',
+            'phone' => '+573057202110',
+            'role' => 'admin',
+        ]);
+        User::create([
+            'name' => 'Fernanda',
+            'email' => 'user1@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('1234'), // password
             'cedula' => '1020844764',
             'address' => 'av chile',
             'phone' => '+573057202110',
             'role' => 'user',
         ]);
         User::create([
-            'name' => 'Santiago',
-            'email' => 'admin2@gmail.com',
+            'name' => 'User2',
+            'email' => 'user2@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('123456789'), // password
+            'password' => bcrypt('1234'), // password
             'cedula' => '1020844764',
             'address' => 'av chile',
             'phone' => '+573057202110',

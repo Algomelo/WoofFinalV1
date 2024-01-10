@@ -133,7 +133,83 @@ class ServiceRequestController extends Controller
     }
 
 
-    public function updateServiceRequest(Request $request, $userId, $serviceRequestId)
+    public function update(Request $request, $serviceRequestId)
+    {
+    $validatedData = $request->validate([
+        'comment' => 'required',
+        'state' => 'required',
+        'services' => 'array',
+        'packages' => 'array',
+    ]);
+
+    // Obtén la solicitud de servicio existente por su ID
+
+
+    $serviceRequest = ServiceRequest::findOrFail($serviceRequestId);
+
+    // Actualiza los campos de la solicitud de servicio
+    $serviceRequest->comment = $validatedData['comment'];
+    $serviceRequest->state = $validatedData['state'];
+
+
+
+    // Actualiza el precio de la solicitud utilizando la función updateTotalPrice
+    $totalPrice = $this->updateTotalPrice($request);
+    if ($totalPrice !== null) {
+        $serviceRequest->price = $totalPrice;
+    }
+
+    // Guarda la solicitud de servicio actualizada en la base de datos
+    $serviceRequest->save();
+
+
+    // Elimina todos los servicios asociados a la solicitud actual
+    $serviceRequest->services()->detach();
+
+    // Obtén los servicios seleccionados y sus cantidades del formulario
+    $selectedServices = $request->input('services');
+
+    $service_quantity = $request->input('service_quantity');
+
+
+    // Asocia los servicios y cantidades a la solicitud a través de la relación many-to-many
+    if (!empty($selectedServices)) {
+        $serviceData = [];
+        
+        foreach ($selectedServices as $serviceId) {
+            $quantity = isset($service_quantity[$serviceId]) ? $service_quantity[$serviceId] : 0;
+            $serviceData[$serviceId] = ['service_quantity' => $quantity];
+        }
+
+        $serviceRequest->services()->attach($serviceData);
+    }
+
+
+    // Elimina todos los paquetes asociados a la solicitud actual
+    $serviceRequest->packages()->detach();
+
+    // Obtén los paquetes seleccionados y sus cantidades del formulario
+    $selectedPackages = $request->input('packages');
+    $package_quantity = $request->input('package_quantity');
+
+    // Asocia los paquetes y cantidades a la solicitud a través de la relación many-to-many
+    if (!empty($selectedPackages)) {
+        $packageData = [];
+        foreach ($selectedPackages as $packageId) {
+            $quantity = $package_quantity[$packageId] ?? 0;
+            $packageData[$packageId] = ['package_quantity' => $quantity];
+        }
+        $serviceRequest->packages()->attach($packageData);
+    }
+
+    // Redirige a la vista deseada después de la actualización
+    return redirect()->route('admin.showIndexRequest');
+}
+
+
+/*
+
+public function updateServiceRequest(Request $request, $userId, $serviceRequestId)
     {
         $validatedData = $request->validate([
             'comment' => 'required',
@@ -158,16 +234,15 @@ class ServiceRequestController extends Controller
 
 
 
-        // Actualizar las cantidades para los servicios
-        foreach ($request->input('quantities', []) as $serviceId => $quantity) {
-            $serviceRequest->services()->updateExistingPivot($serviceId, ['service_quantity' => $quantity]);
-        }
+            // Actualizar las cantidades para los servicios
+    foreach ($request->input('service_quantity', []) as $serviceId => $quantity) {
+        $serviceRequest->services()->updateExistingPivot($serviceId, ['service_quantity' => $quantity]);
+    }
 
-        // Actualizar las cantidades para los paquetes
-        foreach ($request->input('quantities', []) as $packageId => $quantity) {
-            $serviceRequest->packages()->updateExistingPivot($packageId, ['package_quantity' => $quantity]);
-        }
-    
+    // Actualizar las cantidades para los paquetes
+    foreach ($request->input('package_quantity', []) as $packageId => $quantity) {
+        $serviceRequest->packages()->updateExistingPivot($packageId, ['package_quantity' => $quantity]);
+    }
         // Actualizar servicios asociados
         $selectedServices = $request->input('services');
         $service_quantity = $request->input('service_quantity');
@@ -177,7 +252,6 @@ class ServiceRequestController extends Controller
             $quantity = isset($service_quantity[$serviceId]) ? $service_quantity[$serviceId] : 0;
             $serviceData[$serviceId] = ['service_quantity' => $quantity];
         }
-        dd($serviceData);
     
         $serviceRequest->services()->sync($serviceData);
     
@@ -196,7 +270,8 @@ class ServiceRequestController extends Controller
         return redirect()->route('admin.showIndexRequest');
     }
     
-
+*/
+    
 
     private function updateTotalPrice(Request $request)
     {

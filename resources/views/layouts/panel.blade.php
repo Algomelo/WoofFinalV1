@@ -20,7 +20,7 @@
 </head>
 
 <body class="">
-  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light" id="sidenav-main" style="background-image: url(/img/banner_huellas_azul.png) !important;">
     <div class="container-fluid">
       <!-- Toggler -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,18 +85,9 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Dashboard</a>
+        <a class="h2 mb-0  d-lg-inline-block" href="./index.html" style="background:white; border-radius:12px;   padding: 4px 10px;">G'day,  {{ auth()->user()->name }}! Welcome to a ripper Woof experience!</a>
         <!-- Form -->
-        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-          <div class="form-group mb-0">
-            <div class="input-group input-group-alternative">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
-              </div>
-              <input class="form-control" placeholder="Search" type="text">
-            </div>
-          </div>
-        </form>
+
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
           <li class="nav-item dropdown">

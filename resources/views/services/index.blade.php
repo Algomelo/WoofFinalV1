@@ -2,6 +2,9 @@
 
 @section('content')
 
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
+
 
       <div class="card shadow">
         <div class="card-header border-0">
@@ -10,7 +13,7 @@
               <h3 class="mb-0">Services</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('services/create')}}" class="btn btn-sm btn-primary">New Service</a>
+              <a href="{{ url('services/create')}}" class="btn boton">New Service</a>
             </div>
           </div>
         </div>
@@ -51,8 +54,8 @@
                          <form action="{{url('/services/'.$service->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a href="{{url('/services/'.$service->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            <a href="{{url('/services/'.$service->id.'/edit')}}" class="btn boton">Edit</a>
+                            <button type="submit" class="btn boton-eliminar">Delete</button>
 
                          </form>
                    

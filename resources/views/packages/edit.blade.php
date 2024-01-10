@@ -1,4 +1,6 @@
 @extends('layouts.panel')
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
 
 @section('content')
 
@@ -9,7 +11,7 @@
               <h3 class="mb-0">Edit Package</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('packages')}}" class="btn btn-sm btn-success"><i class="fas fa-angle-left"></i>Return</a>
+              <a href="{{ url('packages')}}" class="btn boton">Return</a>
             </div>
           </div>
         </div>
@@ -96,7 +98,7 @@
 
 
 
-    <button type="submit" class="btn btn-sm btn-primary">Update Package</button> <br>
+    <button type="submit" class="btn boton">Update Package</button> <br>
     <div id="total-price"><strong>Total Price: ${{ $currentPackagePrice }}</strong></div>
 </form>
                    

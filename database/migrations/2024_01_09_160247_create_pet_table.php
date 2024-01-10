@@ -9,19 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+// En la migración create_pets_table.php
+
+    public function up()
     {
-        Schema::create('service_request', function (Blueprint $table) {
+        Schema::create('pets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->decimal('price', 8, 2)->default(0);
+            $table->string('name');
+            $table->integer('age');
+            $table->string('breed')->nullable();
             $table->text('comment')->nullable();
-            $table->text('state')->default("sent");
-            $table->unsignedBigInteger('unique_number')->unique()->nullable();
-            // Otros campos necesarios
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
+
 
 
     /**
@@ -29,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('service_request');
+        Schema::dropIfExists('pet');
     }
 };

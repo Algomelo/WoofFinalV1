@@ -1,6 +1,7 @@
 @extends('layouts.panel')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
 
       <div class="card shadow">
@@ -10,7 +11,7 @@
               <h3 class="mb-0">Packages</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('packages/create')}}" class="btn btn-sm btn-primary">New Package</a>
+              <a href="{{ url('packages/create')}}" class="btn boton">New Package</a>
             </div>
           </div>
         </div>
@@ -63,8 +64,8 @@
                          <form action="{{url('/packages/'.$package->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a href="{{url('/packages/'.$package->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            <a href="{{url('/packages/'.$package->id.'/edit')}}" class="btn boton">Edit</a> 
+                            <button type="submit" class="btn boton-eliminar">Delete</button> 
 
                          </form>
                    

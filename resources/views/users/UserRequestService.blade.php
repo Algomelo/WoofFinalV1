@@ -91,23 +91,30 @@ use Illuminate\Support\Str;
                                                                         <h2> {{$package->name}}</h2>
 
                                                                         <br> 
-                                                                        Description:    {{$package->description}} <br>
+                                                                        <strong>Description:</strong>  <br>  {{$package->description}} <br>
                                                                     
-                                                                        <h4>Included Services:</h4>
+                                                                        <strong>Included Services:</strong>
                                                                         <td>
                                                                             <ul>
                                                                             
                                                                                 @foreach($package->services as $service)
                                                                                 {{ $service->name }} -
                                                                                 Quantity: {{ $service->pivot->quantity }}<br>
+                                                                                
                                                             
                                                                             
                                                                                 @endforeach
+
+                                                                               
                                                                             </ul>
                                                                         </td>
                                                                         <td>
-                                                        <input type="number" name="package_quantity[{{ $package->id }}]" placeholder="Quantity" value=""  class="quantity-input">
-                                                        Add Package <input type="checkbox" name="packages[]" value="{{ $package->id }}" id="package_{{ $package->id }}">
+                                                        <input type="number" name="package_quantity[{{ $package->id }}]" placeholder="Quantity" value=""  class="quantity-input"> <br><br>
+
+                                                        <strong>Package price:</strong>  $ {{ $package->price }} (xUnit)<br><br>
+
+                                                        Add Package <input type="checkbox" name="packages[]" value="{{ $package->id }}" id="package_{{ $package->id }}"><br><br>
+
 
 
                                                 </div>
@@ -135,9 +142,12 @@ use Illuminate\Support\Str;
                                             <h2> {{ $service->name }}</h2>
 
                                            
-                                            Description: {{ $service->description }} <br> <br>
-                                            <input type="number" name="service_quantity[{{ $service->id }}]" placeholder="Quantity" value="" class="quantity-input">
-                                            Add Service <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}">
+                                            <strong> Description: </strong> {{ $service->description }} <br> <br>
+                                            <input type="number" name="service_quantity[{{ $service->id }}]" placeholder="Quantity" value="" class="quantity-input"> <br><br>
+
+                                            <strong>Service price:</strong>  $ {{ $service->price }} (xUnit)<br> <br>
+
+                                            Add Service <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}"><br><br>
 
                                     </div>
                                     @endforeach

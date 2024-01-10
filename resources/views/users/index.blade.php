@@ -7,6 +7,7 @@
         display: none;
     }
 </style>
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
 
 
@@ -14,9 +15,9 @@
       <div class="card shadow">
             <div class="card-header border-0">
   
-                <h2 >Users</h2> <br>
-                <div class="col text-right">
-                        <a href="{{ url('users/create')}}" class="btn btn-sm btn-primary">New User</a>
+                <h3 >Users</h3> 
+                <div class=" text-right" style="margin-top:-35px;">
+                        <a href="{{ url('users/create')}}" class="btn boton">New User</a>
                         <button type="button" class="btn btn-sm btn-danger" id="deleteSelected">Delete Select</button>
                 </div>
      
@@ -74,10 +75,9 @@
                                     <form action="{{ url('/users/'.$user->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ url('/users/'.$user->id.'/edit') }}" class="btn btn-sm btn-primary">See More Info / Edit Info</a>
-                                        <a href="{{ route('users.assignPackagesForm', ['userId' => $user->id]) }}" class="btn btn-sm btn-primary">Management Services</a>
+                                        <a href="{{ url('/users/'.$user->id.'/edit') }}" class=" btn boton">See More Info / Edit Info</a>
 
-                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#confirmDeleteModal{{ $user->id }}">
+                                        <button type="button" class="btn boton-eliminar" data-toggle="modal" data-target="#confirmDeleteModal{{ $user->id }}">
                                             Delete
                                         </button>
 

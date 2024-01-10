@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\User;
-use App\Http\Controllers\admin\PackageController;
-use App\Http\Controllers\admin\ServicesController;
-use App\Http\Controllers\admin\UserController;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Package;  // Asegúrate de que estás importando la clase Package
@@ -28,8 +26,8 @@ class UserServiceRequestController extends Controller
     }
     public function showIndexRequest($userId){
         $user = User::findOrFail($userId);
-        $serviceRequests = ServiceRequest::all()->sortByDesc('created_at');
-        
+        $serviceRequests = $user->serviceRequests()->orderByDesc('created_at')->get();
+
         $uniqueNumbers = $serviceRequests->pluck('unique_number');
         // Obtener una colección de los valores únicos de 'unique_number' para cada ServiceRequest
 

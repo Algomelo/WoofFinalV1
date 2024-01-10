@@ -3,6 +3,9 @@
 @section('content')
 
 
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
+
       <div class="card shadow">
         <div class="card-header border-0">
           <div class="row align-items-center">
@@ -10,7 +13,7 @@
               <h3 class="mb-0">Walkers</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('walkers/create')}}" class="btn btn-sm btn-primary">New Walker</a>
+              <a href="{{ url('walkers/create')}}" class="btn boton">New Walker</a>
             </div>
           </div>
         </div>
@@ -59,8 +62,8 @@
                          <form action="{{url('/walkers/'.$walker->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a href="{{url('/walkers/'.$walker->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            <a href="{{url('/walkers/'.$walker->id.'/edit')}}" class=" btn boton">Edit</a>
+                            <button type="submit" class="btn boton-eliminar">Delete</button>
 
                          </form>
                    

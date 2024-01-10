@@ -4842,7 +4842,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.5);
+  color: white;
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
@@ -13772,11 +13772,12 @@ button.section-darker:focus {
 
 
 .bg-gradient-primary {
-  background: linear-gradient(87deg, #F2761D  0, #F2761D  100%) !important;
+  background-image: url('/img/banner_huellas.png') !important;
+
 }
 
 .bg-gradient-secondary {
-  background: linear-gradient(87deg, #F2761D 0, #F2761D 100%) !important;
+  background-image: url('/img/banner_huellas_azul.png') !important;
 }
 
 .bg-gradient-success {

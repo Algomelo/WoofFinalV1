@@ -34,7 +34,8 @@ class ServiceRequest extends Model
 
     public function packages()
     {
-        return $this->belongsToMany(Package::class, 'package_service_request')->withPivot('package_quantity');
+        return $this->belongsToMany(Package::class, 'package_service_request')
+            ->withPivot('package_quantity');
     }
 
     public function services()

@@ -91,8 +91,11 @@ use Illuminate\Support\Str;
             <div class="form-group">
                 <label for="state">State</label>
                 <select name="state" class="form-control">
-                    <option value="pending">pending</option>
-                    <option value="approved">approved</option>
+
+                    <option value="pending">Pending</option>
+
+                    <option value="Passed">Passed</option>
+                    <option value="passed">Cancelled</option>
                 </select>
             </div>
             <div class="form-group">

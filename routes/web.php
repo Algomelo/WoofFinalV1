@@ -12,6 +12,8 @@ use App\Http\Controllers\admin\ServicesController;
 use App\Http\Controllers\admin\ServiceRequestController;
 use App\Http\Controllers\admin\PackageController;
 use App\Http\Controllers\user\UserServiceRequestController;
+use App\Http\Controllers\user\PetController;
+use App\Http\Controllers\user\ScheduledController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentMail;
@@ -51,38 +53,64 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/user/{userId}/send-request-form', [UserServiceRequestController::class, 'showRequestForm'])
         ->name('user.sendRequestForm');
 
-    // Ruta para procesar el formulario
+    // CRUD SERVICE REQUEST USER
     Route::post('/user/{userId}/send-request', [UserServiceRequestController::class, 'store'])
         ->name('user.sendRequest');
-
     Route::get('/users/{userId}/showIndexRequest', [UserServiceRequestController::class, 'showIndexRequest'])
         ->name('user.showIndexRequest');
-
     Route::delete('/user/{userId}/service-request/{serviceRequestId}', [UserServiceRequestController::class, 'destroy'])
     ->name('user.deleteServiceRequest');
-
     Route::get('/user/{userId}/service-request/{serviceRequestId}/edit', [UserServiceRequestController::class, 'edit'])
     ->name('user.editServiceRequest');
-    
     Route::put('/user/{userId}/service-request/{serviceRequestId}', [UserServiceRequestController::class, 'update'])
     ->name('user.updateServiceRequest');
 
+    // CRUD PETS
+    Route::get('/user/pets/{userId}', [PetController::class, 'index'])
+    ->name('user.pets.index');
+    Route::get('/user/pets/{userId}/petscreate', [PetController::class, 'create'])
+    ->name('user.pets.create');
+    Route::post('/user/pets/{userId}/petsstore', [PetController::class, 'store'])
+    ->name('user.pets.store');
+    Route::delete('/user/pets/{userId}/destroy/{petId}', [PetController::class, 'destroy'])
+    ->name('user.pets.destroy');
+    Route::get('/user/pets/{userId}/edit/{petId}', [PetController::class, 'edit'])
+    ->name('user.pets.edit');
+    Route::put('/user/pets/{userId}/update/{petId}', [PetController::class, 'update'])
+        ->name('user.pets.update');
+    // CRUD AGENDAMIENTO
+    Route::get('/user/scheduled/{userId}', [ScheduledController::class, 'index'])
+    ->name('user.scheduled.index');
 
+
+    Route::get('/user/scheduled/{userId}/scheduledcreate', [PetController::class, 'create'])
+    ->name('user.pets.create');
+
+
+    Route::post('/user/pets/{userId}/petsstore', [PetController::class, 'store'])
+    ->name('user.pets.store');
+    Route::delete('/user/pets/{userId}/destroy/{petId}', [PetController::class, 'destroy'])
+    ->name('user.pets.destroy');
+    Route::get('/user/pets/{userId}/edit/{petId}', [PetController::class, 'edit'])
+    ->name('user.pets.edit');
+    Route::put('/user/pets/{userId}/update/{petId}', [PetController::class, 'update'])
+        ->name('user.pets.update');
 
 
 
 
 });
+
 Route::middleware(['auth', 'admin'])->group(function () {
 
-    // Ruta de Servicios
+    // CRUD de Servicios
     Route::get('/servicesaut', [ServicesController::class, 'index']);
     Route::get('/services/create', [ServicesController::class, 'create']);
     Route::get('/services/{service}/edit', [ServicesController::class, 'edit']);
     Route::post('/services', [ServicesController::class, 'sendData']);
     Route::put('/services/{service}', [ServicesController::class, 'update']);
     Route::delete('/services/{service}', [ServicesController::class, 'destroy']);
-    // Ruta de Paquetes
+    // CRUD de Paquetes
     Route::get('/packages', [PackageController::class, 'index']);
     Route::get('/packages/create', [PackageController::class, 'create']);
     Route::get('/packages/{package}/edit', [PackageController::class, 'edit']);
@@ -123,7 +151,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/service-requests/{userId}/{serviceRequestId}/edit', [ServiceRequestController::class, 'edit'])->name('admin.editServiceRequest');
 
-    Route::put('/admin/update-service-request/{userId}/{serviceRequestId}', [ServiceRequestController::class, 'updateServiceRequest'])->name('admin.updateServiceRequest');
+    Route::put('/admin/update-service-request/{serviceRequestId}', [ServiceRequestController::class, 'update'])->name('admin.updateServiceRequest');
     Route::delete('/admin/delete-service-request/{serviceRequestId}', [ServiceRequestController::class, 'destroy'])->name('admin.deleteServiceRequest');
 
     Route::get('/service-requests/create', [ServiceRequestController::class, 'create'])

@@ -20,8 +20,8 @@
         <i class="fas fa-briefcase text-blue"></i>Packages
       </a>
     </li>
-    <li class="nav-item  active ">
-        <a class="nav-link  active " href="{{ url('/users')}}">
+    <li class="nav-item   ">
+        <a class="nav-link  " href="{{ url('/users')}}">
           <i class="ni ni-single-02 text-orange"></i>Users
         </a>
       </li>
@@ -61,12 +61,13 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link " href="./examples/tables.html">
+      <a  class="nav-link "  href="{{ route('user.scheduled.index' , ['userId' => Auth::id()]) }}">
         <i class="ni ni-bullet-list-67 text-red"></i>Scheduled Services
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link " href="./examples/tables.html">
+      <a  class="nav-link "  href="{{ route('user.pets.index' , ['userId' => Auth::id()]) }}">
+
         <i class="ni ni-bullet-list-67 text-red"></i>My Pets
       </a>
     </li>

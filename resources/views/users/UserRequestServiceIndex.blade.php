@@ -6,14 +6,16 @@ use Illuminate\Support\Str;
 
 @section('content')
 
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
 
 
 
 <div class="card shadow">
 
         <div class="card-body d-flex justify-content-between">
-           <h1> Request Services</h1> 
-           <a href="{{ route('user.sendRequestForm', ['userId' => $userId]) }}">Send  New Request Service</a>
+        <h2> Request Services</h2> <br>
+           <a href="{{ route('user.sendRequestForm', ['userId' => $userId]) }}" class="btn boton ">Sent  New Request Service</a>
 
             @if($errors->any())
             @foreach($errors ->all() as $error)
@@ -46,24 +48,24 @@ use Illuminate\Support\Str;
                 <th scope="row">{{ $uniqueNumbers[$loop->index] }}</th>
                 <td>{{ $serviceRequest->comment }}</td>
                 
-                @if($serviceRequest->state === 'approved')
-                    <td>{{ $serviceRequest->price }}</td>
+                @if($serviceRequest->state === 'passed')
+                    <td>$ {{ $serviceRequest->price }}</td>
                 @else
                     <td>-</td>
                 @endif
 
-                <td>
+                <td >
                     <p>Services:</p>
-                    <ul>
+                    <ul >
                         @foreach($serviceRequest->services as $service)
-                            <li>{{ $service->name }} - Quantity: {{ $service->pivot->service_quantity }}</li>
+                            <li>{{ $service->name }}  <br> Quantity: {{ $service->pivot->service_quantity }}</li>
                         @endforeach
                     </ul>
 
                     <p>Packages:</p>
                     <ul>
                         @foreach($serviceRequest->packages as $package)
-                            <li>{{ $package->name }} - Quantity: {{ $package->pivot->package_quantity }}</li>
+                            <li>{{ $package->name }}  <br>  Quantity: {{ $package->pivot->package_quantity }}</li>
                         @endforeach
                     </ul>
                 </td>
@@ -71,15 +73,14 @@ use Illuminate\Support\Str;
                 <td>{{ $serviceRequest->created_at}}</td>
 
                 <td>
-                    @if($serviceRequest->state !== 'approved')
-                        <a href="{{ route('user.editServiceRequest',['userId' => $userId, 'serviceRequestId' => $serviceRequest->id]) }}" class="btn btn-sm btn-primary">Edit</a>
-                    @endif
-
+                    @if($serviceRequest->state !== 'passed')
                     
+                        <a href="{{ route('user.editServiceRequest',['userId' => $userId, 'serviceRequestId' => $serviceRequest->id]) }}" class="btn boton">Edit</a><br><br>
+                    @endif
                     <form action="{{ route('user.deleteServiceRequest', ['userId' => $userId, 'serviceRequestId' => $serviceRequest->id]) }}" method="POST" onsubmit="return confirm('¿Estás seguro?')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                        <button type="submit" class="btn boton-eliminar ">Eliminar</button>
                     </form>
                 </td>
             </tr>

@@ -19,8 +19,7 @@ class PackageController extends Controller
         $packages = Package::all();
         return view('packages.index', compact('packages'));
     }
-
-   
+    
     // Mostrar el formulario para crear un nuevo paquete
     public function create()
     {
@@ -28,65 +27,65 @@ class PackageController extends Controller
         return view('packages.create', compact('services'));
     }
 
- // Almacenar un nuevo paquete en la base de datos
- public function store(Request $request)
-{
-    // Validar los datos ingresados en el formulario
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string|max:255',
-        'services' => 'required|array',
-        'services.*' => 'required|integer',
-        'quantities' => 'required|array',
-        'quantities.*' => 'min:0',
- 
-    ]);
+    // Almacenar un nuevo paquete en la base de datos
+    public function store(Request $request)
+    {
+        // Validar los datos ingresados en el formulario
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'services' => 'required|array',
+            'services.*' => 'required|integer',
+            'quantities' => 'required|array',
+            'quantities.*' => 'min:0',
+    
+        ]);
 
-    // Crear un nuevo paquete con los datos proporcionados
-    $package = new Package([
-        'name' => $request->input('name'),
-        'description' => $request->input('description'),
-        'custom_price' => $request->input('custom_price') === 'on', // Ajusta aquí para interpretar correctamente el valor
+        // Crear un nuevo paquete con los datos proporcionados
+        $package = new Package([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'custom_price' => $request->input('custom_price') === 'on', // Ajusta aquí para interpretar correctamente el valor
 
-    ]);
+        ]);
 
-    // Calcula el precio total del paquete llamando a la función updateTotalPrice
-    $totalPrice = $this->updateTotalPrice($request);
+        // Calcula el precio total del paquete llamando a la función updateTotalPrice
+        $totalPrice = $this->updateTotalPrice($request);
 
-    // Establece el precio total en el paquete
-    $package->price = $totalPrice;
+        // Establece el precio total en el paquete
+        $package->price = $totalPrice;
 
-    $package->save();
+        $package->save();
 
-    // Obtener los IDs de los servicios y las cantidades desde el formulario
-    // Obtener los IDs de los servicios seleccionados
-    // Obtener los IDs de los servicios seleccionados
-    $selectedServices = $request->input('services');
+        // Obtener los IDs de los servicios y las cantidades desde el formulario
+        // Obtener los IDs de los servicios seleccionados
+        // Obtener los IDs de los servicios seleccionados
+        $selectedServices = $request->input('services');
 
-    // Obtener todas las cantidades de servicio del formulario
-    $quantities = $request->input('quantities');
+        // Obtener todas las cantidades de servicio del formulario
+        $quantities = $request->input('quantities');
 
-    // Crear un array para almacenar los datos de servicios y cantidades
-    $serviceData = [];
+        // Crear un array para almacenar los datos de servicios y cantidades
+        $serviceData = [];
 
-    // Recorrer los servicios seleccionados
-    foreach ($selectedServices as $serviceId) {
-        // Verificar si el servicio tiene una cantidad válida
-        $quantity = isset($quantities[$serviceId]) ? $quantities[$serviceId] : 0;
+        // Recorrer los servicios seleccionados
+        foreach ($selectedServices as $serviceId) {
+            // Verificar si el servicio tiene una cantidad válida
+            $quantity = isset($quantities[$serviceId]) ? $quantities[$serviceId] : 0;
 
-        // Agregar el servicio y cantidad al array de datos
-        $serviceData[$serviceId] = ['quantity' => $quantity];
+            // Agregar el servicio y cantidad al array de datos
+            $serviceData[$serviceId] = ['quantity' => $quantity];
+        }
+
+        // Asociar los servicios al paquete con sus respectivas cantidades
+        $package->services()->sync($serviceData);
+
+        // Redirigir a la página de listado de paquetes con un mensaje de éxito
+        $notification = 'the package has been created successfully';
+
+        return redirect('/packages')->with(compact('notification'));
+
     }
-
-    // Asociar los servicios al paquete con sus respectivas cantidades
-    $package->services()->sync($serviceData);
-
-    // Redirigir a la página de listado de paquetes con un mensaje de éxito
-    $notification = 'the package has been created successfully';
-
-    return redirect('/packages')->with(compact('notification'));
-
-}
 
 
     /**
@@ -161,16 +160,7 @@ class PackageController extends Controller
         }
 
         // Identificar nuevos servicios a agregar
-        $newServicesToAdd = array_diff($serviceIds, $package->services->pluck('id')->toArray());
 
-        // Agregar nuevos servicios con cantidades
-        foreach ($newServicesToAdd as $newServiceId) {
-            $quantity = isset($quantities[$newServiceId]) ? $quantities[$newServiceId] : 0;
-            $package->services()->attach($newServiceId, ['quantity' => $quantity]);
-            $count = 0;
-            $suma =+ $count + 1;
-            dd($newServiceId, $suma);
-}
     
         // Actualizar el precio total del paquete
         $totalPrice = $this->updateTotalPrice($request);
@@ -186,19 +176,6 @@ class PackageController extends Controller
     
     
 
-    public function removeService(Request $request, $id)
-    {
-    try {
-        $package = Package::findOrFail($id);
-        $serviceName = $request->input('service');
-
-        $package->services()->detach(Services::where('name', $serviceName)->first());
-
-        return response()->json(['message' => 'Service removed successfully'], 200);
-     } catch (\Exception $e) {
-        return response()->json(['message' => 'An error occurred while removing the service'], 500);
-     }
-    }
     public function destroy(string $id)
     {
         $package = Package::findOrFail($id);
