@@ -127,6 +127,7 @@ class ServiceRequestController extends Controller
     
     $serviceRequest->packages()->attach($packageData);
 
+    $serviceRequest->approveAndRedeem();
 
     
     return redirect()->route('admin.showIndexRequest');
@@ -201,6 +202,7 @@ class ServiceRequestController extends Controller
         }
         $serviceRequest->packages()->attach($packageData);
     }
+    $serviceRequest->approveAndRedeem();
 
     // Redirige a la vista deseada después de la actualización
     return redirect()->route('admin.showIndexRequest');

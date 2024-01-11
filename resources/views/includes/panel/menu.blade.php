@@ -61,8 +61,9 @@
     </li>
 
     <li class="nav-item">
-      <a  class="nav-link "  href="{{ route('user.scheduled.index' , ['userId' => Auth::id()]) }}">
+      <a  class="nav-link "  href="{{ route('user.RedemptionController.index' , ['userId' => Auth::id()]) }}">
         <i class="ni ni-bullet-list-67 text-red"></i>Scheduled Services
+        
       </a>
     </li>
     <li class="nav-item">

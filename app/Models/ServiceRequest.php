@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Services;
 use App\Models\Package;
+use App\Models\RedeemedPackage;
+use App\Models\RedeemedService;
 
 class ServiceRequest extends Model
 {
@@ -43,6 +45,56 @@ class ServiceRequest extends Model
         return $this->belongsToMany(Services::class, 'service_service_request', 'service_request_id', 'service_id')
             ->withPivot('service_quantity');
     }
+
+        // En tu modelo ServiceRequest
+    public function approveAndRedeem()
+    {
+        // Verifica si el estado es aprobado
+        if ($this->state === 'passed') {
+
+
+            // Obtiene todos los servicios y paquetes asociados a la solicitud
+            $services = $this->services;
+            $packages = $this->packages;
+            // Itera sobre los servicios y guarda la redención en la nueva tabla
+
+            foreach ($services as $service) {
+
+                RedeemedService::create([
+                    'user_id' => $this->user_id,
+                    'service_id' => $service->id,
+                    'quantity' => $service->pivot->service_quantity,
+                    'state' => 'available ', // Establecer el estado a "disponible"
+
+                ]);
+            }
+
+            // Itera sobre los paquetes y guarda la redención en la nueva tabla
+      
+
+            foreach ($packages as $package) {
+                RedeemedPackage::create([
+                    'user_id' => $this->user_id,
+                    'package_id' => $package->id,
+                    'quantity' => $package->pivot->package_quantity,
+                    'state' => 'available ', // Establecer el estado a "disponible"
+
+                ]);
+                // Además, para cada paquete, redime también los servicios asociados al paquete
+                foreach ($package->services as $service) {
+
+                    RedeemedService::create([
+                        'user_id' => $this->user_id,
+                        'service_id' => $service->id,
+                        'quantity' => $service->pivot->quantity,
+                        'state' => 'available ', // Establecer el estado a "disponible"
+
+                    ]);
+                }
+            }
+        }
+}
+
 
 
 }

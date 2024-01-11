@@ -13,7 +13,7 @@ use App\Http\Controllers\admin\ServiceRequestController;
 use App\Http\Controllers\admin\PackageController;
 use App\Http\Controllers\user\UserServiceRequestController;
 use App\Http\Controllers\user\PetController;
-use App\Http\Controllers\user\ScheduledController;
+use App\Http\Controllers\user\UserRedemptionController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentMail;
@@ -79,8 +79,10 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::put('/user/pets/{userId}/update/{petId}', [PetController::class, 'update'])
         ->name('user.pets.update');
     // CRUD AGENDAMIENTO
-    Route::get('/user/scheduled/{userId}', [ScheduledController::class, 'index'])
-    ->name('user.scheduled.index');
+    Route::get('/user/UserRedemptionController/{userId}', [UserRedemptionController::class, 'index'])
+    ->name('user.RedemptionController.index');
+
+
 
 
     Route::get('/user/scheduled/{userId}/scheduledcreate', [PetController::class, 'create'])

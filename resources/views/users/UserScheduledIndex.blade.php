@@ -33,29 +33,20 @@ use Illuminate\Support\Str;
             <tr>
                 <th scope="col">Service Name</th>
                 <th scope="col">Fecha de creacion</th>
+                <th scope="col">Cantidad</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Options</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($passedservices as $passedservice)
-            <tr>    
-                <td>
-                @foreach($passedservice->Services as $service)
-                {{ $service->name }}
-                <td>
-                {{ $service->description }}
+        @foreach ($redeemedServices as $redeemedService)
+                <tr>
+                    <td>{{ $redeemedService->service->name }}</td>
+                    <td>{{ $redeemedService->service->created_at}}</td>
+                    <td>{{ $redeemedService->quantity }}</td>
+                    <td>{{ $redeemedService->state }}</td> 
 
-                </td>
-
-                @endforeach
-                </td>
-
-
-
-                <td>
-                </td>
-            </tr>
+                </tr>
             @endforeach
         </tbody>
     </table>
