@@ -72,8 +72,10 @@ use Illuminate\Support\Str;
                                  <a href="javascript:void(0);" onclick="showSection('includePackagesSection')" class="texto_paquete" style="margin:30px 30px; color:black;">Include Packages  (Select Created Packages) </a> 
                                  <a href="javascript:void(0);" onclick="showSection('includeServicesSection')" class="texto_servicio"style="margin:30px 30px; color:black;">Include Services (Create Custom Package) </a> 
 
-                                 <form action="{{ route('user.sendRequest', $userId) }}" method="post">
-                                    @csrf
+                                 <form action="{{ route('user.updateServiceRequest', ['serviceRequestId' => $serviceRequest->id]) }}" method="post">
+
+                                        @csrf
+                                        @method('PUT')
                                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
 
@@ -82,7 +84,7 @@ use Illuminate\Support\Str;
 
 
 
-                                        @foreach ($allPackages as $package)
+                                      @foreach($serviceRequest->packages as $package)
                                             <div id="PackagesSection" class="container PackagesSection" style="padding:30px;" >                                          <br> 
                                             <br> 
                                                 
@@ -106,21 +108,42 @@ use Illuminate\Support\Str;
                                                                             </ul>
                                                                         </td>
                                                                         <td>
-                                                        <input type="number" name="package_quantity[{{ $package->id }}]" placeholder="Quantity" value=""  class="quantity-input">
-                                                        Add Package <input type="checkbox" name="packages[]" value="{{ $package->id }}" id="package_{{ $package->id }}">
+                                                        <input type="number" name="package_quantity[{{ $package->id }}]" placeholder="Quantity" value="{{ $package->pivot->package_quantity }}"  class="quantity-input d-none">
+                                                        Add Package <input type="checkbox" name="packages[]" value="{{ $package->id }}" id="package_{{ $package->id }}" checked>
+                                                </div>
+                                            <hr>                                            
+                                        @endforeach                                    
+                                @else
+                                 <p>No hay paquetes disponibles.</p>
+                                 @endif
+                                 @foreach($allPackages as $availablePackage)
+                                            @if (!$serviceRequest->packages->contains($availablePackage->id))
+                                                <div id="PackagesSection" class="container PackagesSection" style="padding:30px;" >                                          <br> 
+                                                <h2>{{ $availablePackage->name }} //</h2><br>
+                                                Description: {{ $availablePackage->description }} <br> <br>
+                                                <h4>Included Services:</h4>
+                                                                        <td>
+                                                                            <ul>
+                                                                            
+                                                                                @foreach($availablePackage->services as $service)
+                                                                                {{ $service->name }} -
+                                                                                Quantity: {{ $service->pivot->quantity }}<br>
+                                                            
+                                                                            
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        </td>
+                                                <input type="number" name="package_quantity[{{ $availablePackage->id }}]" placeholder="Quantity" value="" class="quantity-input  d-none">
+                                                Add Service <input type="checkbox" name="packages[]" value="{{ $availablePackage->id }}" id="package_{{ $availablePackage->id }}">
 
 
                                                 </div>
+                                            @else
+                                            @endif
+                                         @endforeach
+</div>
 
 
-                                            <hr>
-                                            
-                                        @endforeach
-                                    </div>
-                                @else
-
-                                 <p>No hay paquetes disponibles.</p>
-                                 @endif
                     </div>
                     <div id="includeServicesSection" class="form-group" style="text-align:center;">
                                                  
@@ -134,6 +157,7 @@ use Illuminate\Support\Str;
 
                                            
                                             Description: {{ $service->description }} <br> <br>
+                                            
                                             <input type="number" name="service_quantity[{{ $service->id }}]" placeholder="Quantity" value="{{ $service->pivot->service_quantity }}"  class="quantity-input">
                                             Add Service <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}" checked>
 
@@ -151,8 +175,9 @@ use Illuminate\Support\Str;
 
                                            
                                             Description: {{ $availableService->description }} <br> <br>
-                                            <input type="number" name="service_quantity[{{ $service->id }}]" placeholder="Quantity" value="" class="quantity-input">
-                                            Add Service <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_checkbox_{{ $availableService->id }}">
+                                            <input type="number" name="service_quantity[{{ $availableService->id }}]"  placeholder="Quantity" value="" class="quantity-input"><br>
+
+                                            Add Service <input type="checkbox" name="services[]" value="{{ $availableService->id }}"  id="service_{{ $availableService->id }}" class="service-checkbox">
 
                                     </div>
 
@@ -206,12 +231,20 @@ use Illuminate\Support\Str;
             }
         }
 </script>
+<script>
+    $(document).ready(function () {
+        $('input[type="checkbox"][name^="packages"]').change(function () {
+            var packageId = $(this).attr('id').split('_')[1];
+            var quantityInput = $('input[name="package_quantity[' + packageId + ']"]');
+
+            if ($(this).prop('checked')) {
+                quantityInput.val(1);
+            } else {
+                quantityInput.val('');
+            }
+        });
+    });
+    
+</script>
+
 @endsection
-
-
-
-
-
-
-
-

@@ -85,8 +85,9 @@
                             @csrf
                             @method('DELETE')
                             <a href="{{ route('admin.editServiceRequest', ['userId' => $serviceRequest->user_id, 'serviceRequestId' => $serviceRequest->id]) }}" class="btn boton">Edit</a>
-                    @endif
                             <button type="submit" class="btn boton-eliminar">Eliminar</button>
+
+                    @endif
                         </form>
                     </td>
                 </tr>

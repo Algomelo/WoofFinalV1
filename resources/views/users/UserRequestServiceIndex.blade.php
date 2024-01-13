@@ -75,13 +75,14 @@ use Illuminate\Support\Str;
                 <td>
                     @if($serviceRequest->state !== 'passed')
                     
-                        <a href="{{ route('user.editServiceRequest',['userId' => $userId, 'serviceRequestId' => $serviceRequest->id]) }}" class="btn boton">Edit</a><br><br>
-                    @endif
+                    <a href="{{ route('user.editServiceRequest',['userId' => $userId, 'serviceRequestId' => $serviceRequest->id]) }}" class="btn boton">Edit</a><br><br>
                     <form action="{{ route('user.deleteServiceRequest', ['userId' => $userId, 'serviceRequestId' => $serviceRequest->id]) }}" method="POST" onsubmit="return confirm('¿Estás seguro?')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn boton-eliminar ">Eliminar</button>
                     </form>
+                    @endif
+
                 </td>
             </tr>
             @endforeach

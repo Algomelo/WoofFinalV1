@@ -109,11 +109,11 @@ use Illuminate\Support\Str;
                                                                             </ul>
                                                                         </td>
                                                                         <td>
-                                                        <input type="number" name="package_quantity[{{ $package->id }}]" placeholder="Quantity" value=""  class="quantity-input"> <br><br>
+                                                        <input type="number" name="package_quantity[{{ $package->id }}]" placeholder="Quantity" value=""  class="quantity-input d-none"> <br><br>
 
                                                         <strong>Package price:</strong>  $ {{ $package->price }} (xUnit)<br><br>
 
-                                                        Add Package <input type="checkbox" name="packages[]" value="{{ $package->id }}" id="package_{{ $package->id }}"><br><br>
+                                                        Add Package <input type="checkbox" name="packages[]" value="{{ $package->id }}" id="package_{{ $package->id }}" ><br><br>
 
 
 
@@ -203,6 +203,20 @@ use Illuminate\Support\Str;
                 textoPaquete.style.color = 'black'; // Cambia el color del otro enlace
             }
         }
+</script>
+<script>
+    $(document).ready(function () {
+        $('input[type="checkbox"][name^="packages"]').change(function () {
+            var packageId = $(this).attr('id').split('_')[1];
+            var quantityInput = $('input[name="package_quantity[' + packageId + ']"]');
+
+            if ($(this).prop('checked')) {
+                quantityInput.val(1);
+            } else {
+                quantityInput.val('');
+            }
+        });
+    });
 </script>
 @endsection
 

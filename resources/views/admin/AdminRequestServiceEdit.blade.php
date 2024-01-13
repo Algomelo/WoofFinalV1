@@ -100,7 +100,8 @@
                         <input type="checkbox" name="packages[]" value="{{ $package->id }}" id="package_{{ $package->id }}" class="service-checkbox" checked>
                         Name: {{ $package->name }}  //  Price: $ {{ $package->price }} (xUnit)
                     </label>
-                    <input type="number" name="package_quantity[{{ $package->id }}]" value="{{ $package->pivot->package_quantity }}" class="quantity-input">
+                    <input type="number" name="package_quantity[{{ $package->id }}]" value="{{ $package->pivot->package_quantity }}" class="quantity-input d-none ">
+
                     <span class="service-price" style="display:none;">{{ $package->price }}</span>
                 @endforeach
             </div>
@@ -111,16 +112,18 @@
                 <div class="form-group">
                 <hr>Available s: <br>
                 <div class="container d-block" >
-                @foreach($allPackages as $availablePackage)
-                    @if (!$serviceRequest->packages->contains($availablePackage->id))
-                        <label for="package_{{ $availablePackage->id }}">
-                            <input type="checkbox" id="package_{{ $availablePackage->id }}" name="packages[{{ $availablePackage->id }}]" class="service-checkbox">
-                            Name: {{ $availablePackage->name }} // Package Price: $ {{ $availablePackage->price }} (xUnit)                            
-                        </label>
-                        <input type="number" name="package[{{ $availablePackage->id }}]" value="" class="quantity-input"> <br>
-                        <span class="service-price" style="display:none;">{{ $availablePackage->price }}</span>
-                    @endif
-                @endforeach
+                    @foreach($allPackages as $availablePackage)
+                        @if (!$serviceRequest->packages->contains($availablePackage->id))
+                            <label for="package_{{ $availablePackage->id }}">
+                                <input type="checkbox" name="packages[{{ $availablePackage->id }}]" id="package_{{ $availablePackage->id }}" class="service-checkbox" value="{{ $availablePackage->id }}">
+                                Name: {{ $availablePackage->name }} // Package Price: $ {{ $availablePackage->price }} (xUnit)                            
+                            </label>
+                            <input type="number" name="package_quantity[{{ $availablePackage->id }}]" value="package_quantity[{{ $availablePackage->id }}]" class="quantity-input d-none"> <br>
+
+                            <span class="service-price" style="display:none;">{{ $availablePackage->price }}</span>
+                        @endif
+                    @endforeach
+
 
                 </div>
                 </div>
@@ -145,6 +148,7 @@
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script>
 toggleCustomPrice()
@@ -180,6 +184,19 @@ function showSection(sectionId) {
 
 
 <script>
+    $(document).ready(function () {
+        $('input[type="checkbox"][name^="packages"]').change(function () {
+            var packageId = $(this).attr('id').split('_')[1];
+            var quantityInput = $('input[name="package_quantity[' + packageId + ']"]');
+
+            if ($(this).prop('checked')) {
+                quantityInput.val(1);
+                updateTotalPrice()
+            } else {
+                quantityInput.val('');
+            }
+        });
+    });
 
 const serviceCheckboxes = document.querySelectorAll('.service-checkbox');
     const quantityInputs = document.querySelectorAll('.quantity-input');

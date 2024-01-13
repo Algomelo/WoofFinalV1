@@ -62,7 +62,8 @@ Route::middleware(['auth', 'user'])->group(function () {
     ->name('user.deleteServiceRequest');
     Route::get('/user/{userId}/service-request/{serviceRequestId}/edit', [UserServiceRequestController::class, 'edit'])
     ->name('user.editServiceRequest');
-    Route::put('/user/{userId}/service-request/{serviceRequestId}', [UserServiceRequestController::class, 'update'])
+
+    Route::put('/users/service-requests/{serviceRequestId}', [UserServiceRequestController::class, 'update'])
     ->name('user.updateServiceRequest');
 
     // CRUD PETS

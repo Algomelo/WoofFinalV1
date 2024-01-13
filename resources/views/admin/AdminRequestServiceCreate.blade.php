@@ -139,7 +139,7 @@ use Illuminate\Support\Str;
                     </label>
                     <label for="package_{{ $package->id }}">
                         Price Package:  $ {{ $package->price }}  (xUnit)
-                        <input type="number" name="package_quantity[{{ $package->id }}]" placeholder="Quantity" value="" class="quantity-input">
+                        <input type="number" name="package_quantity[{{ $package->id }}]" placeholder="Quantity" value="" class="quantity-input d-none">
                         <span class="service-price" style="display:none;">{{ $package->price }}</span>
 
                     </label>
@@ -175,7 +175,6 @@ use Illuminate\Support\Str;
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-
 <script>
 
         showSection("includeServicesSection");
@@ -207,10 +206,25 @@ use Illuminate\Support\Str;
         }
 </script>
 
+<script>
+
+</script>
 
 
 <script>
+    $(document).ready(function () {
+        $('input[type="checkbox"][name^="packages"]').change(function () {
+            var packageId = $(this).attr('id').split('_')[1];
+            var quantityInput = $('input[name="package_quantity[' + packageId + ']"]');
 
+            if ($(this).prop('checked')) {
+                quantityInput.val(1);
+                updateTotalPrice()
+            } else {
+                quantityInput.val('');
+            }
+        });
+    });
 
     const serviceCheckboxes = document.querySelectorAll('.service-checkbox');
     const quantityInputs = document.querySelectorAll('.quantity-input');
@@ -273,6 +287,7 @@ use Illuminate\Support\Str;
     }
 
 </script>
+
 @endsection
 
 
