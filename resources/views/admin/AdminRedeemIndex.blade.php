@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 <div class="card shadow">
 
         <div class="card-body d-flex justify-content-between">
-        <h2> Scheduled Services</h2> <br>
+        <h2> Appointment Request</h2> <br>
 
             @if($errors->any())
             @foreach($errors ->all() as $error)
@@ -32,22 +32,27 @@ use Illuminate\Support\Str;
         <thead class="thead-light">
             <tr>
                 <th scope="col">Service Name</th>
+                <th scope="col">User Name</th>
                 <th scope="col">Fecha de creacion</th>
                 <th scope="col">Cantidad</th>
                 <th scope="col">Estado</th>
-                <th scope="col">Options</th>
+                <th scope="col">Name Pets</th>
             </tr>
         </thead>
         <tbody>
-        @foreach ($redeemedServices as $redeemedService)
-                <tr>
-                    <td>{{ $redeemedService->service->name }}</td>
-                    <td>{{ $redeemedService->service->created_at}}</td>
-                    <td>{{ $redeemedService->quantity }}</td>
-                    <td>{{ $redeemedService->state }}</td> 
-
+        @foreach ($scheduled as $scheduleds)
+                <tr>       
+                    <td>{{$scheduleds->service->name}}</td>
+                    <td>{{ $scheduleds->user->name }}</td>
+                    <td>{{ $scheduleds->created_at}}</td>
+                    <td>{{ $scheduleds->quantity }}</td>
+                    <td>{{ $scheduleds->state }}</td>
+                    <td> @foreach ($scheduleds->pets as $pet)
+                                 {{ $pet->name }}<br>
+                         @endforeach
+                    </td> 
                 </tr>
-            @endforeach
+        @endforeach
         </tbody>
     </table>
 </div>

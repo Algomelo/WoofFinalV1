@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
         <div class="card-body d-flex justify-content-between">
         <h2> Request Services</h2> <br>
-           <a href="{{ route('user.sendRequestForm', ['userId' => $userId]) }}" class="btn boton ">Sent  New Request Service</a>
+           <a href="{{ route('user.sendRequestForm', ['userId' => $userId]) }}" class="btn boton ">New service request</a>
 
             @if($errors->any())
             @foreach($errors ->all() as $error)

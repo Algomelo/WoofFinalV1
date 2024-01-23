@@ -13,6 +13,7 @@ use App\Models\ServiceRequest;
 use Illuminate\Support\Facades\View;
 
 
+
 class ServiceRequestController extends Controller
 {
 
@@ -28,8 +29,9 @@ class ServiceRequestController extends Controller
     }
     public function create()
     {
-        // Obtener la lista de todos los usuarios disponibles
-        $allUsers = User::all(); // Ajusta según tus necesidades
+        $allUsers = User::where('role', 'user')->get();
+
+
 
         // Obtener la lista de todos los servicios y paquetes disponibles
         $allServices = Services::all(); // Ajusta según tus necesidades
@@ -128,9 +130,12 @@ class ServiceRequestController extends Controller
     $serviceRequest->packages()->attach($packageData);
 
     $serviceRequest->approveAndRedeem();
+    $notification = 'The Request Service has been successfully created';
 
-    
-    return redirect()->route('admin.showIndexRequest');
+
+
+    return redirect()->route('admin.showIndexRequest')->with(compact('notification'));
+
     }
 
 
@@ -204,8 +209,14 @@ class ServiceRequestController extends Controller
     }
     $serviceRequest->approveAndRedeem();
 
+    $notification = 'The Request Service  has been successfully modified';
+
+
+
+    return redirect()->route('admin.showIndexRequest')->with(compact('notification'));
+    
+
     // Redirige a la vista deseada después de la actualización
-    return redirect()->route('admin.showIndexRequest');
 }
 
 
@@ -326,8 +337,12 @@ public function updateServiceRequest(Request $request, $userId, $serviceRequestI
         $serviceRequest->delete();
 
         // Redireccionar o hacer lo que sea necesario después de la eliminación
-        return redirect()->route('admin.showIndexRequest');
-    }
+        
+        $notification = 'The Request Service has been successfully removed.';
+
+
+
+        return redirect()->route('admin.showIndexRequest')->with(compact('notification'));    }
 
 
 

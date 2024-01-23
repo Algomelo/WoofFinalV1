@@ -36,8 +36,8 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link " href="./examples/profile.html">
-        <i class="fas fa-clipboard-list"></i>Scheduled Services
+    <a class="nav-link" href="{{ route('admin.IndexScheduled') }}">
+        <i class="fas fa-clipboard-list"></i>Appointment Request
       </a>
     </li>
     <li class="nav-item">
@@ -55,13 +55,13 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link " href="./examples/tables.html">
+      <a class="nav-link " href="{{ route('user.RedemptionController.index' , ['userId' => Auth::id()]) }}">
         <i class="ni ni-bullet-list-67 text-red"></i>My Services
       </a>
     </li>
 
     <li class="nav-item">
-      <a  class="nav-link "  href="{{ route('user.RedemptionController.index' , ['userId' => Auth::id()]) }}">
+      <a  class="nav-link "  >
         <i class="ni ni-bullet-list-67 text-red"></i>Scheduled Services
         
       </a>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Services;
 use App\Http\Controllers\Controller;
 
+
 class ServicesController extends Controller
 {
     //
@@ -19,6 +20,7 @@ class ServicesController extends Controller
     }
 
     public function create(){
+        
         return view('services.create');
 
     }
@@ -38,10 +40,11 @@ class ServicesController extends Controller
 
         $service = new Services();
         $service->name =$request->input('name');
+        $serviceName=$service->name;
         $service->description =$request->input('description');
         $service->price =$request->input('price');
         $service->save();
-        $notification = 'the service has been created successfully';
+        $notification = 'The ' . $serviceName. ' service has been created successfully';
         return redirect('/servicesaut')->with(compact('notification'));
     }
 
@@ -65,12 +68,12 @@ class ServicesController extends Controller
         ];
         $this->validate($request,$rules,$message);
 
- 
+        $editName = $service->name;
         $service->name =$request->input('name');
         $service->description =$request->input('description');
         $service->price =$request->input('price');
         $service->save();
-        $notification = 'the service has been successfully modified';
+        $notification = 'The ' .$editName .' service has been successfully modified';
         return redirect('/servicesaut')->with(compact('notification'));
     }
 
@@ -78,7 +81,7 @@ class ServicesController extends Controller
 
         $deleteName = $service->name;
         $service->delete();
-        $notification = 'The'.$deleteName. 'service has been successfully removed.';
+        $notification = 'The '.$deleteName. 'service has been successfully removed.';
 
 
         return redirect('/servicesaut')->with(compact('notification'));

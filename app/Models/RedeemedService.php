@@ -13,6 +13,8 @@ class RedeemedService extends Model
         'service_id',
         'quantity',
         'state',
+        'redemption_id',
+
     ];
 
     public function user()
@@ -20,8 +22,20 @@ class RedeemedService extends Model
         return $this->belongsTo(User::class);
     }
 
+
     public function service()
     {
-        return $this->belongsTo(Services::class);
+        return $this->belongsTo(Services::class, 'service_id');
     }
+    public function redemption()
+    {
+        return $this->hasOne(Redemption::class);
+    }
+    
+
+    public function pets()
+    {
+        return $this->belongsToMany(Pet::class)->withPivot('quantity');
+    }
+
 }

@@ -13,8 +13,9 @@ class Pet extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function solicitudesAgendamiento()
+
+    public function redemptions()
     {
-        return $this->belongsToMany(SolicitudAgendamiento::class);
+        return $this->belongsToMany(Redemption::class)->withPivot('quantity');
     }
 }

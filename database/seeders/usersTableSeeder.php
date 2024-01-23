@@ -15,16 +15,6 @@ class usersTableSeeder extends Seeder
     {
         User::create([
             'name' => 'Fabian',
-            'email' => 'admin2@gmail.com',
-            'email_verified_at' => now(),
-            'password' => bcrypt('1234'), // password
-            'cedula' => '1020844764',
-            'address' => 'av chile',
-            'phone' => '+573057202110',
-            'role' => 'admin',
-        ]);
-        User::create([
-            'name' => 'Santiago',
             'email' => 'admin1@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('1234'), // password
@@ -34,7 +24,27 @@ class usersTableSeeder extends Seeder
             'role' => 'admin',
         ]);
         User::create([
+            'name' => 'Santiago',
+            'email' => 'admin3@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('1234'), // password
+            'cedula' => '1020844764',
+            'address' => 'av chile',
+            'phone' => '+573057202110',
+            'role' => 'admin',
+        ]);
+        User::create([
             'name' => 'Fernanda',
+            'email' => 'admin2@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('1234'), // password
+            'cedula' => '1020844764',
+            'address' => 'av chile',
+            'phone' => '+573057202110',
+            'role' => 'admin',
+        ]);
+        User::create([
+            'name' => 'User1',
             'email' => 'user1@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('1234'), // password
@@ -48,18 +58,18 @@ class usersTableSeeder extends Seeder
             'email' => 'user2@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('1234'), // password
-            'cedula' => '1020844764',
+            'cedula' => '1024844764',
             'address' => 'av chile',
             'phone' => '+573057202110',
-            'role' => 'admin',
+            'role' => 'user',
         ]);
         
-            /**
-   *User::factory()
-    *    ->count(50)
+
+        User::factory()
+        ->count(50)
         
-     *   ->create();
-     */
+       ->create();
+    
 
     }
 }

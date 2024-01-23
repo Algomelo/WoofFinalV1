@@ -14,6 +14,7 @@
                     </div>
                 @endforeach
             @endif
+            
 
             <!-- Formulario de edición -->
             <form method="POST" action="{{ route('admin.updateServiceRequest', [ 'serviceRequestId' => $serviceRequest->id]) }}">

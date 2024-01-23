@@ -14,6 +14,7 @@ use App\Http\Controllers\admin\PackageController;
 use App\Http\Controllers\user\UserServiceRequestController;
 use App\Http\Controllers\user\PetController;
 use App\Http\Controllers\user\UserRedemptionController;
+use App\Http\Controllers\admin\AdminScheduledController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentMail;
@@ -50,10 +51,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 Route::middleware(['auth', 'user'])->group(function () {
 
+    // CRUD SERVICE REQUEST USER
     Route::get('/user/{userId}/send-request-form', [UserServiceRequestController::class, 'showRequestForm'])
         ->name('user.sendRequestForm');
-
-    // CRUD SERVICE REQUEST USER
     Route::post('/user/{userId}/send-request', [UserServiceRequestController::class, 'store'])
         ->name('user.sendRequest');
     Route::get('/users/{userId}/showIndexRequest', [UserServiceRequestController::class, 'showIndexRequest'])
@@ -62,10 +62,9 @@ Route::middleware(['auth', 'user'])->group(function () {
     ->name('user.deleteServiceRequest');
     Route::get('/user/{userId}/service-request/{serviceRequestId}/edit', [UserServiceRequestController::class, 'edit'])
     ->name('user.editServiceRequest');
-
     Route::put('/users/service-requests/{serviceRequestId}', [UserServiceRequestController::class, 'update'])
     ->name('user.updateServiceRequest');
-
+    
     // CRUD PETS
     Route::get('/user/pets/{userId}', [PetController::class, 'index'])
     ->name('user.pets.index');
@@ -79,29 +78,14 @@ Route::middleware(['auth', 'user'])->group(function () {
     ->name('user.pets.edit');
     Route::put('/user/pets/{userId}/update/{petId}', [PetController::class, 'update'])
         ->name('user.pets.update');
+
     // CRUD AGENDAMIENTO
     Route::get('/user/UserRedemptionController/{userId}', [UserRedemptionController::class, 'index'])
     ->name('user.RedemptionController.index');
-
-
-
-
-    Route::get('/user/scheduled/{userId}/scheduledcreate', [PetController::class, 'create'])
-    ->name('user.pets.create');
-
-
-    Route::post('/user/pets/{userId}/petsstore', [PetController::class, 'store'])
-    ->name('user.pets.store');
-    Route::delete('/user/pets/{userId}/destroy/{petId}', [PetController::class, 'destroy'])
-    ->name('user.pets.destroy');
-    Route::get('/user/pets/{userId}/edit/{petId}', [PetController::class, 'edit'])
-    ->name('user.pets.edit');
-    Route::put('/user/pets/{userId}/update/{petId}', [PetController::class, 'update'])
-        ->name('user.pets.update');
-
-
-
-
+    Route::get('/user/UserRedemptionController/{userId}/{redeemedServiceId}/create', [UserRedemptionController::class, 'create'])
+    ->name('user.RedemptionController.create');
+    Route::post('/user/UserRedemptionController/{userId}/{redeemedServiceId}/store', [UserRedemptionController::class, 'store'])
+    ->name('user.RedemptionController.store');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -162,5 +146,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::post('/admin/calculate-total-price', [ServiceRequestController::class, 'calculateTotalPrice'])->name('admin.calculateTotalPrice');
     Route::post('/admin/attach-services-packages', [ServiceRequestController::class, 'attachServicesAndPackages'])->name('admin.attachServicesAndPackages');
+
+
+    // Ruta para vista de agendamientos de servicio
+
+    Route::get('/admin/scheduled/index', [AdminScheduledController::class, 'index'])->name('admin.IndexScheduled');
+
+
 });
 

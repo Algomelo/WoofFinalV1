@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,22 +9,25 @@ use App\Models\Package;  // Asegúrate de que estás importando la clase Package
 use App\Models\Services;
 use App\Models\User;
 use App\Models\ServiceRequest;
-use App\Models\RedeemedService;
-use App\Models\Pet;
 use App\Models\Redemption;
+use App\Models\Scheduled;
+use App\Models\Pet;
 
 
-class UserRedemptionController extends Controller
+class AdminScheduledController extends Controller
 {
-    public function index(Request $request, $userId)
+    public function index(Request $request)
     {
         // Obtén la solicitud de servicio a redimir para el usuario específico
-            // Obtén los servicios redimidos asociados a la solicitud
-            $redeemedServices = RedeemedService::where('user_id', $userId)->get();
-            // Obtén los paquetes redimidos asociados a la solicitud
-            return view('users.UserRedeemIndex', compact( 'redeemedServices'));
-   
+        // Obtén los servicios redimidos asociados a la solicitud
+        $scheduled = Redemption::with( 'user', 'pets', 'service')->orderByDesc('created_at')->get();
+
+    
+        // Obtén los paquetes redimidos asociados a la solicitud
+        return view('admin.AdminRedeemIndex', compact( 'scheduled'));
     }
+
+
 
     public function create(Request $request, $userId, $redeemedServiceId)
     {
@@ -49,17 +52,13 @@ class UserRedemptionController extends Controller
         $request->validate([
             // Validaciones...
         ]);
-
-
-
         $redeemedServices = RedeemedService::findOrFail($redeemedServiceId);
 
-        $idService = $redeemedServices->service_id;
         // Resto de la lógica para redimir el servicio y asociar mascotas
         $redemption = new Redemption();
         $user_id = $request->input('user_id');
         $redemption->user_id = $user_id;
-        $redemption->service_id = $idService;
+        $redemption->service_id = $redeemedServiceId;
         $redemption->quantity = $request->input('quantity');
         $redemption->state = 'Send';
         $redemption->date = $request->input('date');

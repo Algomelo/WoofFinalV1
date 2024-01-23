@@ -79,9 +79,9 @@ class PackageController extends Controller
 
         // Asociar los servicios al paquete con sus respectivas cantidades
         $package->services()->sync($serviceData);
-
+        $namePackage= $request->input('name');
         // Redirigir a la página de listado de paquetes con un mensaje de éxito
-        $notification = 'the package has been created successfully';
+        $notification = 'The ' .$namePackage. ' package has been created successfully';
 
         return redirect('/packages')->with(compact('notification'));
 
@@ -170,8 +170,11 @@ class PackageController extends Controller
     
         // Guardar el paquete
         $package->save();
-    
-        return redirect('/packages')->with('success', '¡El paquete ha sido actualizado exitosamente!');
+        $namePackage= $request->input('name');
+        // Redirigir a la página de listado de paquetes con un mensaje de éxito
+        $notification = 'The ' .$namePackage. ' package has been updated successfully';
+
+        return redirect('/packages')->with(compact('notification'));
     }
     
     
@@ -180,8 +183,10 @@ class PackageController extends Controller
     {
         $package = Package::findOrFail($id);
         $package->delete();
-    
-        return redirect('/packages')->with('success', 'El paquete ha sido eliminado exitosamente.');
+        $namePackage= $package->name;
+        // Redirigir a la página de listado de paquetes con un mensaje de éxito
+        $notification = 'The ' .$namePackage. ' package has been updated successfully';
+        return redirect('/packages')->with(compact('notification'));
     }
 
     private function updateTotalPrice(Request $request)

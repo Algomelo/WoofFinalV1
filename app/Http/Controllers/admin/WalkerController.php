@@ -12,7 +12,7 @@ class WalkerController extends Controller
      */
     public function index()
     {
-        $walkers = User::walkers()->paginate(10);
+        $walkers = User::walkers()->paginate(50);
         return view ('walkers.index', compact('walkers'));
     }
 

@@ -30,9 +30,12 @@ use Illuminate\Support\Str;
             @endif
 
 
-            <form action="{{ route('user.pets.store', ['userId' => $userId]) }}" method="POST">
+            <form action="{{ route('user.pets.update',['userId' => $userId, 'petId' => $pet->id]) }}" method="POST">
+        
 
                 @csrf
+                @method('PUT')
+
                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
 

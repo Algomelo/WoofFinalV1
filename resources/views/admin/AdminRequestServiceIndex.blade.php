@@ -12,10 +12,16 @@
             </div>
             <a class="boton" href="{{ route('serviceRequests.create') }}">Create New Service Request</a>
     </div>        
+    <div class="card-body">
+            @if(session('notification'))
+            <div class="alert alert-success" role="alert">
+                {{session('notification')}}
+            </div>
 
+            @endif
 
+         </div>
 
-                   
                 @if($errors->any())
                 @foreach($errors->all() as $error)
                 <div class="alert alert-danger" role="alert">

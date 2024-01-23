@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\serviceRequests;
+use App\Models\RedeemedService;
+
 
 class Services extends Model
 {
@@ -34,8 +37,9 @@ public function redeemedServices()
     return $this->hasMany(RedeemedService::class);
     
 }
+
 public function redemptions()
 {
-    return $this->hasMany(Redemption::class);
+    return $this->hasMany(Redemption::class, 'service_id');
 }
 }

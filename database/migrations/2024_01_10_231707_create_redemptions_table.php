@@ -15,6 +15,8 @@ return new class extends Migration
         Schema::create('redemptions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('service_id');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
             $table->integer('quantity');
             $table->string('state');
             $table->text('comment')->nullable();
@@ -22,6 +24,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('shift');
             $table->timestamps();
+
         });
     }
 

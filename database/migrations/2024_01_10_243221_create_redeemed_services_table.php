@@ -19,7 +19,8 @@ return new class extends Migration
             $table->integer('quantity');
             $table->timestamps();
             $table->string('state')->default('available');
-
+            $table->unsignedBigInteger('redemption_id')->nullable();
+            $table->foreign('redemption_id')->references('id')->on('redemptions')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
         });

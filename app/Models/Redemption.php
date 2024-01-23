@@ -17,7 +17,23 @@ class Redemption extends Model
         'date',
         'shift',
     ];
+    public function redeemedService()
+    {
+        return $this->belongsTo(RedeemedService::class);
+    }
 
-    // Puedes agregar relaciones aquí si es necesario
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function pets()
+    {
+        return $this->belongsToMany(Pet::class)->withPivot('quantity');
+    }
+    public function service()
+    {
+        return $this->belongsTo(Services::class);
+    }
+    
 }
 
