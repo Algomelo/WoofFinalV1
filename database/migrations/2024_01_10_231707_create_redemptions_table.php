@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('state');
             $table->text('comment')->nullable();
             $table->string('address')->nullable();
-            $table->date('date');
+            $table->string('date');
             $table->string('shift');
             $table->timestamps();
 

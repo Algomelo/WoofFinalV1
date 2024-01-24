@@ -8,7 +8,12 @@ use Illuminate\Support\Str;
 
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
+<style>
+        /* Agrega estilos según tus necesidades */
+        .error {
+            color: red;
+        }
+    </style>
 
       <div class="card shadow">
         <div class="card-header border-0">
@@ -55,21 +60,28 @@ use Illuminate\Support\Str;
                                     {{ $pet->name }} //
                                 </label>
                             @endforeach
+                            <br>
+                            <span id="petsError" class="error"></span>
+
                             <hr>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <label for="date">Estimated Date(s):</label>
-                            <input type="text" name="date" id="date" multiple required>
+                            <input type="text" name="date" id="date"  ><br>
+                            <span id="dateError" class="error"></span>
+
                         </div>
                         <div class="col-6">
                             <label for="shift">Shift:</label>
-                            <select name="shift" id="shift" required>
+                            <select name="shift" id="shift">
                                 <option value="" selected>Pick an option</option>
                                 <option value="morning">Morning Shift</option>
                                 <option value="afternoon">Afternoon Shift</option>
-                            </select>
+                            </select><br>
+                            <span id="shiftError" class="error"></span>
+
                         </div>
                     </div>
                     <hr>
@@ -88,7 +100,7 @@ use Illuminate\Support\Str;
                         <label for="quantity" class="d-none">Quantity:</label>
                         <input type="number" name="quantity" id="quantityForm"  class="d-none">
                     </div>
-                    <button type="submit" class="btn boton">Schedule Service</button>
+                    <button type="submit" class="btn boton" onclick="validateForm()">Schedule Service</button>
                 </form>
             </div>
             
@@ -188,9 +200,11 @@ use Illuminate\Support\Str;
 
             // Resta la cantidad calculada
             quantity -= subtractionAmount;
-
+            var quantityFormInput = document.getElementById('quantityForm');
+            quantityFormInput.value = quantity;
             // Actualiza el valor de la cantidad en el elemento de cantidad
             quantityElement.textContent = quantity;
+
         }
 
     });
@@ -219,6 +233,45 @@ use Illuminate\Support\Str;
             });
         });
     });
+
+        function validateForm() {
+            var dateInput = document.getElementById('date');
+            var dateError = document.getElementById('dateError');
+            var petCheckboxes = document.querySelectorAll('.pet-checkbox');
+            var petsError = document.getElementById('petsError');
+            var shiftSelect = document.getElementById('shift');
+            var shiftError = document.getElementById('shiftError');
+
+            // Validación de la fecha
+            if (dateInput.value.trim() === '') {
+                dateError.innerHTML = 'Please enter a date';
+            } else {
+                dateError.innerHTML = '';
+            }
+
+            // Validación de al menos un checkbox de mascota seleccionado
+            var atLeastOnePetSelected = Array.from(petCheckboxes).some(function(checkbox) {
+                return checkbox.checked;
+            });
+
+            if (!atLeastOnePetSelected) {
+                petsError.innerHTML = 'Please select at least one pet';
+            } else {
+                petsError.innerHTML = '';
+            }
+
+            // Envía el formulario si ambas validaciones son exitosas
+            if (dateError.innerHTML === '' && petsError.innerHTML === '') {
+                document.getElementById('myForm').submit();
+            }
+
+            if (shiftSelect.value === '') {
+                shiftError.innerHTML = 'Please pick a shift';
+            } else {
+                shiftError.innerHTML = '';
+            }
+        }
+
 </script>
 
 
