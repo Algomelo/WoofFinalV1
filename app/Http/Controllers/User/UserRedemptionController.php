@@ -59,7 +59,6 @@ class UserRedemptionController extends Controller
         $redemption->user_id = $user_id;
         $redemption->service_id = $idService;
         $redemption->quantity = $request->input('quantity');
-       
         $redemption->state = 'Send';
         $redemption->date = $request->input('date');
         $redemption->address = $request->input('address');

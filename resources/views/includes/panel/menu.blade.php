@@ -37,7 +37,7 @@
     </li>
     <li class="nav-item">
     <a class="nav-link" href="{{ route('admin.IndexScheduled') }}">
-        <i class="fas fa-clipboard-list"></i>Appointment Request
+        <i class="fas fa-clipboard-list"></i>Booking Request
       </a>
     </li>
     <li class="nav-item">

@@ -47,6 +47,7 @@ use Illuminate\Support\Str;
                         </div>
                         <div class="col-6 text-right">
                             Quantity: <span id="quantity">{{ $quantity }}</span>
+                            <span id="quantityError" class="error"></span>
                         </div>
                     </div>
                     <hr>
@@ -77,6 +78,7 @@ use Illuminate\Support\Str;
                             <label for="shift">Shift:</label>
                             <select name="shift" id="shift">
                                 <option value="" selected>Pick an option</option>
+                                <option value="Any shift">Any shift</option>
                                 <option value="morning">Morning Shift</option>
                                 <option value="afternoon">Afternoon Shift</option>
                             </select><br>
@@ -186,27 +188,32 @@ use Illuminate\Support\Str;
             }
         }
         function updateQuantity() {
-            // Obtén la cantidad inicial desde Blade
-            var quantity = parseInt("{{ $quantity }}");
-
-            // Obtén la cantidad de fechas seleccionadas
-            var selectedDateCount = dateInput.value.split(',').filter(Boolean).length;
-
-            // Obtén la cantidad de mascotas seleccionadas
-            var selectedPetCount = document.querySelectorAll('.pet-checkbox:checked').length;
-
-            // Calcula la cantidad a restar teniendo en cuenta la combinación de fechas y mascotas seleccionadas
-            var subtractionAmount = selectedDateCount * selectedPetCount;
-
-            // Resta la cantidad calculada
-            quantity -= subtractionAmount;
-            var quantityFormInput = document.getElementById('quantityForm');
-            quantityFormInput.value = quantity;
+        // Obtén la cantidad inicial desde Blade
+        var quantity = parseInt("{{ $quantity }}");
+        // Obtén la cantidad de fechas seleccionadas
+        var selectedDateCount = dateInput.value.split(',').filter(Boolean).length;
+        // Obtén la cantidad de mascotas seleccionadas
+        var selectedPetCount = document.querySelectorAll('.pet-checkbox:checked').length;
+        // Calcula la cantidad a restar teniendo en cuenta la combinación de fechas y mascotas seleccionadas
+        var subtractionAmount = selectedDateCount * selectedPetCount;
+        // Calcula el nuevo valor de cantidad
+        var newQuantity = quantity - subtractionAmount;
+        // Validación: Muestra una alerta si la cantidad es 0 o menor
+        if (newQuantity < 0) {
+            alert("Apologies, but the available quantity is insufficient. Please adjust your selection. Note: The selected quantity is calculated based on the combination of selected dates and pets.");
+            if (selectedDateCount > 0) {
+            // Puedes ajustar esta lógica dependiendo de la implementación de tu calendario
+            // Esto podría implicar reiniciar la instancia del calendario o cualquier método específico para deseleccionar días.
+            fp.clear();
+            }
+            // Otras acciones que puedas necesitar, como deshabilitar el botón de envío, etc.
+        } else {
             // Actualiza el valor de la cantidad en el elemento de cantidad
-            quantityElement.textContent = quantity;
-
+            quantityElement.textContent = newQuantity;
+            var quantityFormInput = document.getElementById('quantityForm');
+            quantityFormInput.value = quantity - newQuantity;
         }
-
+    }
     });
 </script>
 
