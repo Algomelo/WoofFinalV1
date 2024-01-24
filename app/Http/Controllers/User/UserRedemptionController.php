@@ -50,8 +50,6 @@ class UserRedemptionController extends Controller
             // Validaciones...
         ]);
 
-
-
         $redeemedServices = RedeemedService::findOrFail($redeemedServiceId);
 
         $idService = $redeemedServices->service_id;
@@ -60,9 +58,12 @@ class UserRedemptionController extends Controller
         $user_id = $request->input('user_id');
         $redemption->user_id = $user_id;
         $redemption->service_id = $idService;
-        $redemption->quantity = $request->input('quantity');
+        dd($redemption->quantity = $request->input('quantity'));
+       
         $redemption->state = 'Send';
         $redemption->date = $request->input('date');
+        $redemption->address = $request->input('address');
+        $redemption->comment = $request->input('comment');
         $redemption->shift = $request->input('shift');
         $redemption->save();
     

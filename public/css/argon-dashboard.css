@@ -4534,7 +4534,6 @@ input[type="button"].btn-block {
 
 .navbar {
   position: relative;
-  display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
@@ -15587,8 +15586,8 @@ a.btn-icon-only {
   width: 100%;
   z-index: 1;
   background-color: transparent;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+
+
 }
 
 @media (min-width: 768px) {

@@ -6,6 +6,9 @@ use Illuminate\Support\Str;
 
 @section('content')
 
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
 
       <div class="card shadow">
         <div class="card-header border-0">
@@ -14,7 +17,7 @@ use Illuminate\Support\Str;
               <h3 class="mb-0">Redeem new service</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('users')}}" class="btn btn-sm btn-success"><i class="fas fa-angle-left"></i>Return</a>
+              <a href="{{ url('users')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
             </div>
           </div>
         </div>
@@ -27,43 +30,67 @@ use Illuminate\Support\Str;
             </div>
             @endforeach
             @endif
-            <form action="{{ route('user.RedemptionController.store', ['userId' => Auth::id(), 'redeemedServiceId' => $redeemedServices->id]) }}" method="post">
-            @csrf
-                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                
-                <div class="form-group">
-                    <label for="name">Service Name:</label>
-                    {{ $serviceName }}
+            <div class="container">
+                <form action="{{ route('user.RedemptionController.store', ['userId' => Auth::id(), 'redeemedServiceId' => $redeemedServices->id]) }}" method="post">
+                @csrf
+                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                    
+                    <div class="row ">
+                        <div class="col-6">
+                            <label for="name">Service Name:</label>
+                            {{ $serviceName }}
+                        </div>
+                        <div class="col-6 text-right">
+                            Quantity: <span id="quantity">{{ $quantity }}</span>
+                        </div>
+                    </div>
                     <hr>
-                </div>
-                <div class="form-group">
-                    Quantity: <span id="quantity">{{ $quantity }}</span>
+                    <div class="row">
+                        <div class="col-12">
+                            Select Pets :
+                            Please select the pets you would like to add to this service.<br><br>
+                            @foreach ($pets as $pet)
+                                <label for="pet_{{ $pet->id }}">
+                                    <input type="checkbox" name="pets[]" id="pet_{{ $pet->id }}" value="{{ $pet->id }}"  class="pet-checkbox"  >
+                                    {{ $pet->name }} //
+                                </label>
+                            @endforeach
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="date">Estimated Date(s):</label>
+                            <input type="text" name="date" id="date" multiple required>
+                        </div>
+                        <div class="col-6">
+                            <label for="shift">Shift:</label>
+                            <select name="shift" id="shift" required>
+                                <option value="" selected>Pick an option</option>
+                                <option value="morning">Morning Shift</option>
+                                <option value="afternoon">Afternoon Shift</option>
+                            </select>
+                        </div>
+                    </div>
                     <hr>
-                </div>
-                <div class="form-group">
-                    Select Pets <br><br>
-                    Please select the pets you would like to add to this service.<br><br>
-                    @foreach ($pets as $pet)
-                        <label for="pet_{{ $pet->id }}">
-                            <input type="checkbox" name="pets[]" id="pet_{{ $pet->id }}" value="{{ $pet->id }}"  class="pet-checkbox">
-                            {{ $pet->name }}<br>
-                        </label>
-                    @endforeach
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="address">Address:</label>
+                            <input type="text" name="address" id="address" required>
+                        </div>
+                        <div class="col-3">
+                            <label for="comment">Comment:</label>
+                            <input type="text" name="comment" id="comment">
+                        </div>
+                    </div>
                     <hr>
-                </div>
-                <div class="form-group">
-                  <label for="date">Estimated Date:</label>
-                  <input type="date" name="date" id="date" required>
-                  <hr>
-              </div>
-              <div class="form-group">
-                  <label for="shift">Pickup Addres:</label>
-                  <input type="text" name="shift" id="shift" required>
-              </div>
-                <label for="quantity" class="d-none">Quantity:</label>
-                <input type="number" name="quantity" id="quantityForm"  class="d-none">
-                <button type="submit" class="btn btn-sm btn-primary">Schedule Service:</button>
-            </form>
+                    <div class="form-group">
+                        <label for="quantity" class="d-none">Quantity:</label>
+                        <input type="number" name="quantity" id="quantityForm"  class="d-none">
+                    </div>
+                    <button type="submit" class="btn boton">Schedule Service</button>
+                </form>
+            </div>
             
            </div>     
       </div>
@@ -71,21 +98,35 @@ use Illuminate\Support\Str;
 <!-- Agrega esto en tu plantilla Blade antes de cerrar la etiqueta </body> -->
 <!-- Agrega esto en tu plantilla Blade antes de cerrar la etiqueta </body> -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <!-- Agrega esto en tu plantilla Blade después de incluir jQuery -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-
-
         // Obtén el elemento de cantidad
-        var quantityElement = document.getElementById('quantity');
+        var dateInput = document.getElementById('date');
+        var fp = flatpickr(dateInput, {
+            mode: 'multiple',
+            dateFormat: 'Y-m-d',
+            onChange: function () {
+                // Actualiza la cantidad basada en la selección de fechas
+                updateQuantity();
 
+                // Valida si la cantidad de fechas seleccionadas es mayor que la cantidad disponible
+                validateDateQuantity();
+            }
+        });
+        var quantityElement = document.getElementById('quantity');
         // Obtén todos los checkboxes con la clase 'pet-checkbox'
         var petCheckboxes = document.querySelectorAll('.pet-checkbox');
-
-
-
-
         // Añade un evento de cambio a cada checkbox
+        dateInput.addEventListener('change', function () {
+            // Actualiza la cantidad basada en la selección de fechas
+            updateQuantity();
+
+            // Valida si la cantidad de fechas seleccionadas es mayor que la cantidad disponible
+            validateDateQuantity();
+        });
         petCheckboxes.forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
                 // Actualiza la cantidad basada en la selección de checkboxes
@@ -97,24 +138,24 @@ use Illuminate\Support\Str;
         });
 
         // Función para actualizar la cantidad
-        function updateQuantity() {
-            // Obtén la cantidad inicial desde Blade
-            var quantity = parseInt("{{ $quantity }}");
-
-            // Itera sobre los checkboxes y resta 1 a la cantidad por cada checkbox seleccionado
-            petCheckboxes.forEach(function(checkbox) {
-                if (checkbox.checked) {
-                    quantity -= 1;
-
-                }
-            });
-
-            // Actualiza el valor de la cantidad en el elemento de cantidad
-            quantityElement.textContent = quantity;
 
 
+        function validateDateQuantity() {
+            // Obtén la cantidad de fechas seleccionadas
+            var selectedDateCount = dateInput.value.split(',').filter(Boolean).length;
+
+            // Obtén la cantidad disponible
+            var availableQuantity = parseInt("{{ $quantity }}");
+
+            // Si la cantidad de fechas seleccionadas es mayor que la cantidad disponible, muestra un mensaje y elimina la última fecha
+            if (selectedDateCount > availableQuantity) {
+                alert("The number of selected dates exceeds the available quantity.");
+                // Elimina la última fecha seleccionada
+                dateInput.value = dateInput.value.split(',').slice(0, -1).join(',');
+                // Actualiza la cantidad nuevamente
+                updateQuantity();
+            }
         }
-
         // Función para validar la cantidad de mascotas seleccionadas
         function validatePetQuantity() {
             // Obtén la cantidad de mascotas seleccionadas
@@ -132,6 +173,26 @@ use Illuminate\Support\Str;
                 updateQuantity();
             }
         }
+        function updateQuantity() {
+            // Obtén la cantidad inicial desde Blade
+            var quantity = parseInt("{{ $quantity }}");
+
+            // Obtén la cantidad de fechas seleccionadas
+            var selectedDateCount = dateInput.value.split(',').filter(Boolean).length;
+
+            // Obtén la cantidad de mascotas seleccionadas
+            var selectedPetCount = document.querySelectorAll('.pet-checkbox:checked').length;
+
+            // Calcula la cantidad a restar teniendo en cuenta la combinación de fechas y mascotas seleccionadas
+            var subtractionAmount = selectedDateCount * selectedPetCount;
+
+            // Resta la cantidad calculada
+            quantity -= subtractionAmount;
+
+            // Actualiza el valor de la cantidad en el elemento de cantidad
+            quantityElement.textContent = quantity;
+        }
+
     });
 </script>
 

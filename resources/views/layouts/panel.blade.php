@@ -82,37 +82,42 @@
   </nav>
   <div class="main-content">
     <!-- Navbar -->
-    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
-      <div class="container-fluid">
-        <!-- Brand -->
-        <a class="h2 mb-0  d-lg-inline-block" href="./index.html" style="background:white; border-radius:12px;   padding: 4px 10px;">G'day,  {{ auth()->user()->name }}! Welcome to a ripper Woof experience!</a>
-        <!-- Form -->
 
-        <!-- User -->
-        <ul class="navbar-nav align-items-center d-none d-md-flex">
-          <li class="nav-item dropdown">
-            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <div class="media align-items-center">
-                <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="{{asset('img/theme/team-4-800x800.jpg')}}">
-                </span>
-                <div class="media-body ml-2 d-none d-lg-block">
-            
-                  @if(auth()->check() && auth()->user()->name)
-                     <span class="mb-0 text-sm font-weight-bold">{{ auth()->user()->name }}</span>
-                  @else
-                    @auth
-                      {{ Auth::logout() }}
-                    @endauth
-                  @endif
-                </div>
-              </div>
-            </a>
-            @include('includes.panel.UserOptions')
-          </li>
-        </ul>
+      <div class="container-fluid navbar navbar-top">
+        <!-- Brand -->
+        <div class="row">
+          <div class="col-9">
+            <a class="h2 d-lg-inline-block" href="./index.html" style="background:white; border-radius:12px; padding: 4px 10px;">G'day,  {{ auth()->user()->name }}! Welcome to a ripper Woof experience!</a>
+        </div>
+        <div class="col-3 text-right">
+            <ul class="navbar-nav d-none d-md-flex">
+              <li class="nav-item dropdown">
+                <a class="nav-link " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
+                    <div class="container text-center d-block">
+                    <span class="avatar avatar-sm rounded-circle">
+                      <img alt="Image placeholder" src="{{asset('img/theme/team-4-800x800.jpg')}}">
+                    </span><br>
+                    <span>
+                        @if(auth()->check() && auth()->user()->name)
+                        Profile  {{ auth()->user()->name }}
+                        @else
+                          @auth
+                            {{ Auth::logout() }}
+                          @endauth
+                        @endif
+                      </span>
+                    </div>
+         
+                </a>
+                @include('includes.panel.UserOptions')
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </nav>
+
     <!-- End Navbar -->
     <!-- Header -->
     <div class="header bg-gradient-primary pb-8 pt-4 pt-md-6">
