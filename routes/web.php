@@ -16,6 +16,7 @@ use App\Http\Controllers\user\PetController;
 use App\Http\Controllers\user\UserRedemptionController;
 use App\Http\Controllers\admin\AdminRedemController;
 use App\Http\Controllers\walker\WalkerScheduledController;
+use App\Http\Controllers\user\UserScheduledController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentMail;
@@ -91,6 +92,12 @@ Route::middleware(['auth', 'user'])->group(function () {
     ->name('user.RedemptionController.create');
     Route::post('/user/UserRedemptionController/{userId}/{redeemedServiceId}/store', [UserRedemptionController::class, 'store'])
     ->name('user.RedemptionController.store');
+
+
+    Route::get('/user/UserScheduledController/index', [UserScheduledController::class, 'index'])
+    ->name('user.IndexScheduled');
+
+
 });
 
 Route::middleware(['auth', 'walker'])->group(function () {

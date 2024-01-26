@@ -37,7 +37,7 @@
     </li>
     <li class="nav-item">
     <a class="nav-link" href="{{ route('admin.IndexRedem') }}">
-        <i class="fas fa-clipboard-list"></i>Booking Request
+        <i class="fas fa-clipboard-list"></i>Bookings
       </a>
     </li>
     <li class="nav-item">
@@ -61,7 +61,7 @@
     </li>
 
     <li class="nav-item">
-      <a  class="nav-link "  >
+      <a  class="nav-link " href="{{ route('user.IndexScheduled') }}"> 
         <i class="ni ni-bullet-list-67 text-red"></i>Scheduled Services
         
       </a>
@@ -78,11 +78,6 @@
       </a>
     </li>
     @else
-    <li class="nav-item">
-      <a class="nav-link " href="./examples/tables.html">
-        <i class="ni ni-bullet-list-67 text-red"></i>Service Request
-      </a>
-    </li>
     <li class="nav-item">
      <a class="nav-link " href="{{ route('walker.IndexScheduled' , ['userId' => Auth::id()]) }}">
         <i class="ni ni-bullet-list-67 text-red"></i>Assigned Scheduled

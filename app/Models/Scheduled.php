@@ -25,7 +25,12 @@ class Scheduled extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function walker()
+    {
+        return $this->belongsTo(User::class, 'walker_id');
     }
 
 }
