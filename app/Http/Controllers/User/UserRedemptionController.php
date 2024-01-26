@@ -30,7 +30,7 @@ class UserRedemptionController extends Controller
     {
         // Obtén el servicio redimido específico
         $redeemedServices = RedeemedService::findOrFail($redeemedServiceId);
-    
+        $user = User::findOrFail($userId);
         // Obtén información adicional sobre el servicio (si es necesario)
         $serviceName = $redeemedServices->service->name;
         $serviceCreatedAt = $redeemedServices->service->created_at;
@@ -41,7 +41,7 @@ class UserRedemptionController extends Controller
 
     
         // Puedes pasar esta información a la vista
-        return view('users.UserRedeemCreate', compact('redeemedServices', 'userId', 'serviceName', 'serviceCreatedAt', 'quantity', 'state' , 'pets'));
+        return view('users.UserRedeemCreate', compact('redeemedServices', 'user', 'serviceName', 'serviceCreatedAt', 'quantity', 'state' , 'pets'));
     }
     
     public function store(Request $request, $userId, $redeemedServiceId)
@@ -59,7 +59,7 @@ class UserRedemptionController extends Controller
         $redemption->user_id = $user_id;
         $redemption->service_id = $idService;
         $redemption->quantity = $request->input('quantity');
-        $redemption->state = 'Send';
+        $redemption->state = 'Send To Admin';
         $redemption->date = $request->input('date');
         $redemption->address = $request->input('address');
         $redemption->comment = $request->input('comment');

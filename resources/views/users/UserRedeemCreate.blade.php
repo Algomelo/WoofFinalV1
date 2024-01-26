@@ -36,7 +36,7 @@ use Illuminate\Support\Str;
             @endforeach
             @endif
             <div class="container">
-                <form action="{{ route('user.RedemptionController.store', ['userId' => Auth::id(), 'redeemedServiceId' => $redeemedServices->id]) }}" method="post">
+                <form action="{{ route('user.RedemptionController.store', ['userId' => Auth::id(), 'redeemedServiceId' => $redeemedServices->id]) }}"  id="myForm"  method="post">
                 @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                     
@@ -89,11 +89,13 @@ use Illuminate\Support\Str;
                     <hr>
                     <div class="row">
                         <div class="col-3">
-                            <label for="address">Address:</label>
-                            <input type="text" name="address" id="address" required>
+                            <label for="address">Address :</label>
+                            <input type="text" name="address" value="{{$user->address}}" id="address" required>
+                            (Please confirm your address)
+                            
                         </div>
                         <div class="col-3">
-                            <label for="comment">Comment:</label>
+                            <label for="comment">Comment:<br></label>
                             <input type="text" name="comment" id="comment">
                         </div>
                     </div>
@@ -102,7 +104,8 @@ use Illuminate\Support\Str;
                         <label for="quantity" class="d-none">Quantity:</label>
                         <input type="number" name="quantity" id="quantityForm"  class="d-none">
                     </div>
-                    <button type="submit" class="btn boton" onclick="validateForm()">Schedule Service</button>
+                    
+                    <button type="button" class="btn boton" onclick="validateForm()">Schedule Service</button>
                 </form>
             </div>
             
@@ -267,17 +270,19 @@ use Illuminate\Support\Str;
                 petsError.innerHTML = '';
             }
 
-            // Envía el formulario si ambas validaciones son exitosas
-            if (dateError.innerHTML === '' && petsError.innerHTML === '') {
-                document.getElementById('myForm').submit();
-            }
+ 
 
             if (shiftSelect.value === '') {
                 shiftError.innerHTML = 'Please pick a shift';
             } else {
                 shiftError.innerHTML = '';
             }
+                       // Envía el formulario si ambas validaciones son exitosas
+            if (dateError.innerHTML === '' && petsError.innerHTML === '' && shiftError.innerHTML === '') {
+                document.getElementById('myForm').submit();
+            }
         }
+
 
 </script>
 

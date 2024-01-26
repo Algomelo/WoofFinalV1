@@ -82,4 +82,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Pet::class);
     }
+    
+    public function scheduled()
+    {
+        return $this->hasMany(Scheduled::class);
+    }
 }

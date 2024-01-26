@@ -41,11 +41,10 @@ use Illuminate\Support\Str;
                 <td>{{ $scheduleds->state }}</td>
                 <td>
                     User Name:<br> {{ $scheduleds->user->name }}<br>_________________________
-                    <br>Service Name:<br>{{$scheduleds->service->name}}<br>_________________________
+                    <br>Service Name:<br>{{$scheduleds->nameservice}}<br>_________________________
                     <br>Pets Associated:<br>
-                    @foreach ($scheduleds->pets as $pet)
-                    {{ $pet->name }},
-                    @endforeach<br>_________________________
+        
+                    {{$scheduleds->namepets}}
                     <br>Pickup Dates:<br>{{ $scheduleds->date}}
                 </td>
                 <td>

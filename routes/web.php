@@ -14,7 +14,8 @@ use App\Http\Controllers\admin\PackageController;
 use App\Http\Controllers\user\UserServiceRequestController;
 use App\Http\Controllers\user\PetController;
 use App\Http\Controllers\user\UserRedemptionController;
-use App\Http\Controllers\admin\AdminScheduledController;
+use App\Http\Controllers\admin\AdminRedemController;
+use App\Http\Controllers\walker\WalkerScheduledController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentMail;
@@ -49,6 +50,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Auth::routes();
+
+Auth::routes();
+
+
 Route::middleware(['auth', 'user'])->group(function () {
 
     // CRUD SERVICE REQUEST USER
@@ -86,6 +91,12 @@ Route::middleware(['auth', 'user'])->group(function () {
     ->name('user.RedemptionController.create');
     Route::post('/user/UserRedemptionController/{userId}/{redeemedServiceId}/store', [UserRedemptionController::class, 'store'])
     ->name('user.RedemptionController.store');
+});
+
+Route::middleware(['auth', 'walker'])->group(function () {
+
+    Route::get('/walker/scheduled/index', [WalkerScheduledController::class, 'index'])->name('walker.IndexScheduled');
+
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -148,10 +159,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/attach-services-packages', [ServiceRequestController::class, 'attachServicesAndPackages'])->name('admin.attachServicesAndPackages');
 
 
-    // Ruta para vista de agendamientos de servicio
+    // Ruta para vista de redencion o asignacion de  agendamientos de servicio
+
+    Route::get('/admin/redem/index', [AdminRedemController::class, 'index'])->name('admin.IndexRedem');
+    Route::get('/admin/redem/{scheduledId}/edit', [AdminRedemController::class, 'edit'])->name('admin.EditRedem');
+    Route::put('/admin/redem/{scheduledId}/store', [AdminRedemController::class, 'store'])->name('admin.StoreRedem');
+
+
+    // Ruta servicios agendados
 
     Route::get('/admin/scheduled/index', [AdminScheduledController::class, 'index'])->name('admin.IndexScheduled');
-
 
 });
 

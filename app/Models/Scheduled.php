@@ -7,14 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Scheduled extends Model
 {
+    protected $table = 'scheduled'; // Debería ser singular
+
+    use HasFactory;
+
     protected $fillable = [
-        'service_id',
+        'nameservice',
+        'user_id',
         'quantity',
         'state',
         'comment',
         'address',
         'date',
         'shift',
+        'namepets'
     ];
-    use HasFactory;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
