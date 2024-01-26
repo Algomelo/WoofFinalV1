@@ -77,8 +77,9 @@ class AdminRedemController extends Controller
 
         $scheduled->approveScheduled($walkerId, $serviceScheduled, $petScheduled, $dateScheduled, $shiftScheduled, $commentScheduled ,$addressScheduled);
 
-        
-        return redirect()->route('user.RedemptionController.index', ['userId' => $userId]);
+        $scheduled = Redemption::with( 'user', 'pets', 'service')->orderByDesc('created_at')->get();
+
+        return view('admin.AdminRedeemIndex', compact( 'scheduled'));
 
     }
 }
