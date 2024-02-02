@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->integer('cedula');
+            $table->integer('cedula')->nullable();
             $table->string('address');
             $table->string('phone');
-            $table->string('role');
+            $table->string('role')->default('user');
 
         });
     }

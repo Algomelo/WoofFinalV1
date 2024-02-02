@@ -6,43 +6,12 @@ use Illuminate\Support\Str;
 
 @section('content')
 <style>
-    .ServiceSection:hover,
-    .PackagesSection:hover,
-    .texto_servicio:hover,
-    .texto_paquete:hover {
-        background-color: #F2761D;
-        color: #fff;
-        transition: background-color 0.3s ease;
-    }
-    .PackagesSection{
-        margin: 54px 0px;
 
-    }
-
-
-
-
-    .texto_paquete, .texto_servicio {
-        margin: 30px;
-        padding: 10px;
-        text-decoration: none;
-        border: 1px solid #000;
-        transition: background-color 0.3s, color 0.3s;
-        transition: background-color 0.3s ease;
-        padding:20px;
-        border-radius: 20px; /* Radio de las esquinas */;
-    }
-    .texto_paquete:hover, .texto_servicio:hover {
-        background-color: #F2761D;
-        color: #fff;
-        padding:20px;
-        border-radius: 20px; /* Radio de las esquinas */;
-    }
-    
 </style>
 
 
 
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
 
 
@@ -68,9 +37,16 @@ use Illuminate\Support\Str;
         
                 <div class="container d-block" style="justify-content: space-evenly;">
              
-                                 <div class="form-group" style="text-align:center;">
-                                 <a href="javascript:void(0);" onclick="showSection('includePackagesSection')" class="texto_paquete" style="margin:30px 30px; color:black;">Include Packages  (Select Created Packages) </a> 
-                                 <a href="javascript:void(0);" onclick="showSection('includeServicesSection')" class="texto_servicio"style="margin:30px 30px; color:black;">Include Services (Create Custom Package) </a> 
+                                 <div class="container botonespaquetes text-center">
+                                    <div class="row">
+                                        <div class="container col-6 d-flex">
+                                            <a href="javascript:void(0);" onclick="showSection('includePackagesSection')" class="texto_paquete" style="margin:30px 30px; color:black;">Include Packages  (Select Created Packages) </a> 
+                                        </div>
+                                        <div class="container col-6 d-flex">
+                                            <a href="javascript:void(0);" onclick="showSection('includeServicesSection')" class="texto_servicio"style="margin:30px 30px; color:black;">Include Services (Create Custom Package) </a> 
+                                        </div>
+                                    </div>
+                                </div>                                    
 
                                  <form action="{{ route('user.sendRequest', $userId) }}" method="post">
                                     @csrf
@@ -83,8 +59,8 @@ use Illuminate\Support\Str;
 
 
                                         @foreach ($allPackages as $package)
-                                            <div id="PackagesSection" class="container PackagesSection" style="padding:30px;" >                                          <br> 
-                                            <br> 
+                                            <div id="PackagesSection" class="container PackagesSection" style="padding:10px;" >                                
+                                            
                                                 
                                                                     <tr>
                                                                     
@@ -109,7 +85,7 @@ use Illuminate\Support\Str;
                                                                             </ul>
                                                                         </td>
                                                                         <td>
-                                                        <input type="number" name="package_quantity[{{ $package->id }}]" placeholder="Quantity" value=""  class="quantity-input d-none"> <br><br>
+                                                        <input type="number" name="package_quantity[{{ $package->id }}]" placeholder="Quantity" value=""  class="quantity-input d-none"> 
 
                                                         <strong>Package price:</strong>  $ {{ $package->price }} (xUnit)<br><br>
 
@@ -138,7 +114,7 @@ use Illuminate\Support\Str;
 
 
                                     @foreach ($allServices as $service)
-                                    <div class="container ServiceSection" style="padding:30px;" >                                          <br> 
+                                    <div class="container ServiceSection" style="padding:10px;" >                                    
                                             <h2> {{ $service->name }}</h2>
 
                                            

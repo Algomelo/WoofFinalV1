@@ -60,6 +60,22 @@
                 </div>
               </div>
               <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                  </div>
+                  <input class="form-control" placeholder="Address" type="text" name="address" value="{{ old('address') }}" required autocomplete="address">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                  </div>
+                  <input class="form-control" placeholder="Phone" type="number" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+                </div>
+              </div>
+              <div class="form-group">
                 <div class="input-group input-group-alternative">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>

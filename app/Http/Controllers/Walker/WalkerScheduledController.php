@@ -21,7 +21,7 @@ class WalkerScheduledController extends Controller
         // Obtén la solicitud de servicio a redimir para el usuario específico
         $userId = Auth::id();
         $scheduled = Scheduled::with('user')
-            ->where('user_id', $userId)
+            ->where('walker_id', $userId)
             ->orderByDesc('created_at')
             ->get();    
         // Obtén los paquetes redimidos asociados a la solicitud

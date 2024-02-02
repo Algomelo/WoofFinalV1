@@ -1,6 +1,8 @@
 @extends('layouts.panel')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
 
 <div class="card shadow">
     <div class="card-header border-0">
@@ -9,7 +11,7 @@
                 <h3 class="mb-0">New Package</h3>
             </div>
             <div class="col text-right">
-                <a href="{{ url('packages')}}" class="btn btn-sm btn-success"><i class="fas fa-angle-left"></i>Return</a>
+                <a href="{{ url('packages')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
             </div>
         </div>
     </div>
@@ -57,13 +59,13 @@
                          Service Price : ${{ $service->price }} (xUnit)
                     </label>
                     
-                    <input type="number" name="quantities[{{ $service->id }}]" placeholder="Quantity" value="" class="quantity-input"> <br>
+                    <input type="number" name="quantities[{{ $service->id }}]" placeholder="Quantity" value="" class="quantity-input"> <br><hr>
                     <span class="service-price" style="display:none;">{{ $service->price }}  </span>
                     
                 @endforeach
 
             </div>
-            <button type="submit" class="btn btn-sm btn-primary">Create Package</button>
+            <button type="submit" class="btn boton">Create Package</button>
             <div id="total-price"><strong>Total Price: $0</strong></div>
         </form>
 

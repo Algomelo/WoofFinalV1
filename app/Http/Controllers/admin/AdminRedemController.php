@@ -62,7 +62,6 @@ class AdminRedemController extends Controller
         $scheduled = Redemption::findOrFail($scheduledId);  
 
         $scheduled->state = "Send To Walker";
-
         $scheduled->save();
 
         $dateScheduled = $request->input('date');
@@ -74,8 +73,8 @@ class AdminRedemController extends Controller
         $petScheduled = $scheduled->pets->pluck('name')->toArray();
 
         $walkerId = $request->input('walkers');
-
-        $scheduled->approveScheduled($walkerId, $serviceScheduled, $petScheduled, $dateScheduled, $shiftScheduled, $commentScheduled ,$addressScheduled);
+        $userId=$scheduled->user_id;
+        $scheduled->approveScheduled($walkerId, $serviceScheduled, $petScheduled, $dateScheduled, $shiftScheduled, $commentScheduled ,$addressScheduled, $userId);
 
         $scheduled = Redemption::with( 'user', 'pets', 'service')->orderByDesc('created_at')->get();
 

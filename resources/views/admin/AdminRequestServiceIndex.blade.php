@@ -4,24 +4,24 @@
 
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
-<div class="card shadow">
+<div class="card shadow">    
     <div class="card-header border-0">
-    <div class="row align-items-center">
+        <div class="row align-items-center">
             <div class="col">
               <h3 class="mb-0">Request Services</h3>
             </div>
-            <a class="boton" href="{{ route('serviceRequests.create') }}">Create New Service Request</a>
-    </div>        
+            <div class="col text-right">
+                <a class="boton" href="{{ route('serviceRequests.create') }}">New Service Request</a>
+            </div>
+        </div>     
+    </div>           
     <div class="card-body">
             @if(session('notification'))
             <div class="alert alert-success" role="alert">
                 {{session('notification')}}
             </div>
-
             @endif
-
-         </div>
-
+    </div>
                 @if($errors->any())
                 @foreach($errors->all() as $error)
                 <div class="alert alert-danger" role="alert">
@@ -46,7 +46,7 @@
                     <th scope="col">Options</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="background:white">
                 @foreach($serviceRequests as $serviceRequest)
                 <tr>
                     <th scope="row">
@@ -102,17 +102,7 @@
         </table>
     </div>
 
-    <div class="container">
-        <div class="container-dialog" role="document">
-            <div class="container-content" style="width:100%">
-                <div class="container">
-                    <div class="container d-block" style="justify-content: space-evenly;">
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </div>
 @endsection

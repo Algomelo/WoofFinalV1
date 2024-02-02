@@ -26,7 +26,7 @@
                             <label for="filterInput" class="form-label">Filter by Name:</label>
                             <input type="text" class="form-control" id="filterNameInput" placeholder="Type to filter by name">
                         </div>
-                        <div class="col-md-6 " >
+                        <div class="col-md-6 d-none" >
                             <label for="filterEmailInput" class="form-label">Filter by Email:</label>
                             <input type="text" class="form-control" id="filterEmailInput" placeholder="Type to filter by email">
                         </div>

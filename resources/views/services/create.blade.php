@@ -1,6 +1,7 @@
 @extends('layouts.panel')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
 
       <div class="card shadow">
@@ -10,7 +11,7 @@
               <h3 class="mb-0">New Service</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('services')}}" class="btn btn-sm btn-success"><i class="fas fa-angle-left"></i>Return</a>
+              <a href="{{ url('services')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
             </div>
           </div>
         </div>
@@ -40,7 +41,7 @@
                     <label for="price">Price</label>
                     <input type="number" name="price" class="form-control" value="{{old('price')}}" required>
                 </div>
-                <button type="submit" class="btn btn-sm btn-primary">Create Service</button>
+                <button type="submit" class="btn boton">Create Service</button>
 
             </form>
             

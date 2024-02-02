@@ -14,6 +14,7 @@ class Scheduled extends Model
     protected $fillable = [
         'nameservice',
         'user_id',
+        'walker_id',
         'quantity',
         'state',
         'comment',

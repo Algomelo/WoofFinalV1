@@ -5,6 +5,7 @@ use Illuminate\Support\Str;
 @extends('layouts.panel')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
 
       <div class="card shadow">
@@ -14,7 +15,7 @@ use Illuminate\Support\Str;
               <h3 class="mb-0">Edit User</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('users')}}" class="btn btn-sm btn-success"><i class="fas fa-angle-left"></i>Return</a>
+              <a href="{{ url('users')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
             </div>
           </div>
         </div>
@@ -58,7 +59,7 @@ use Illuminate\Support\Str;
                   <input type="text" name="password" class="form-control" >
                   <small class="text-warning">Solo llene el campo si desea cambiar la contraseña</small>
               </div>
-                <button type="submit" class="btn btn-sm btn-primary">Save changes</button>
+                <button type="submit" class="btn boton">Save changes</button>
 
             </form>
             

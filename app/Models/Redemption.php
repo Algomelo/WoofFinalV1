@@ -36,15 +36,17 @@ class Redemption extends Model
     }
 
 
-    public function approveScheduled($walkerId, $serviceScheduled, $petScheduled, $dateScheduled, $shiftScheduled, $commentScheduled, $addressScheduled)
+    public function approveScheduled($walkerId, $serviceScheduled, $petScheduled, $dateScheduled, $shiftScheduled, $commentScheduled, $addressScheduled, $userId)
     {
+      
 
         if ($this->state === 'Send To Walker') {
             // Obtiene todos los servicios y paquetes asociados a la solicitud
             $petScheduled = implode(',', $petScheduled);
             Scheduled::create([
                 'nameservice' => $serviceScheduled,
-                'user_id' => $walkerId,
+                'user_id' => $userId,
+                'walker_id' => $walkerId,
                 'state' => "assign",
                 'date' =>  $dateScheduled,
                 'shift' => $shiftScheduled  , 

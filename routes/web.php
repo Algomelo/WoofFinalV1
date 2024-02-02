@@ -43,7 +43,10 @@ Route::view('/contactusers','contactusers')->name('contactusers');
 Route::view('/contactjob','contactjob') ->name('contactjob');
 
 
-Auth::routes();
+
+
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -52,7 +55,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes();
 
-Auth::routes();
 
 
 Route::middleware(['auth', 'user'])->group(function () {

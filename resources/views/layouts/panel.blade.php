@@ -61,7 +61,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <a href="./index.html">
-                <img width="500" height="200"src="{{asset('img/brand/blue.png')}}">
+                <!--<img width="500" height="200"src="{{asset('img/brand/blue.png')}}"> -->
               </a>
             </div>
             <div class="col-6 collapse-close">
@@ -81,49 +81,39 @@
     </div>
   </nav>
   <div class="main-content">
-    <!-- Navbar -->
-
+    <div class="header bg-gradient-primary pb-8 pt-4 pt-md-6">
       <div class="container-fluid navbar navbar-top">
-        <!-- Brand -->
         <div class="row">
-          <div class="col-9">
-            <a class="h2 d-lg-inline-block" href="./index.html" style="background:white; border-radius:12px; padding: 4px 10px;">G'day,  {{ auth()->user()->name }}! Welcome to a ripper Woof experience!</a>
-        </div>
-        <div class="col-3 text-right">
+          <div class="col-12 col-sm-9">
+              <a class="h2 inline-block" href="./index.html" style="background:white; border-radius:12px; padding: 4px 10px;">G'day,  {{ auth()->user()->name }}! Welcome to a ripper Woof experience!</a>
+          </div>
+          <div class="col-3 text-right">
             <ul class="navbar-nav d-none d-md-flex">
               <li class="nav-item dropdown">
                 <a class="nav-link " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-
                     <div class="container text-center d-block">
-                    <span class="avatar avatar-sm rounded-circle">
-                      <img alt="Image placeholder" src="{{asset('img/theme/team-4-800x800.jpg')}}">
-                    </span><br>
-                    <span>
-                        @if(auth()->check() && auth()->user()->name)
-                        Profile  {{ auth()->user()->name }}
-                        @else
-                          @auth
-                            {{ Auth::logout() }}
-                          @endauth
-                        @endif
-                      </span>
+                      <span class="avatar avatar-sm rounded-circle">
+                        <img alt="Image placeholder" src="{{asset('img/theme/team-4-800x800.jpg')}}">
+                      </span><br>
+                      <span>
+                          @if(auth()->check() && auth()->user()->name)
+                          Profile  {{ auth()->user()->name }}
+                          @else
+                            @auth
+                              {{ Auth::logout() }}
+                            @endauth
+                          @endif
+                        </span>
                     </div>
-         
                 </a>
                 @include('includes.panel.UserOptions')
               </li>
             </ul>
           </div>
         </div>
-      </div>
-
-    <!-- End Navbar -->
-    <!-- Header -->
-    <div class="header bg-gradient-primary pb-8 pt-4 pt-md-6">
-      
+      </div>  
     </div>
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt--5   mt-sm--7">
      @yield('content')
       <!-- Footer -->
       @include('includes.panel.footer')

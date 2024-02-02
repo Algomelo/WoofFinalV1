@@ -9,10 +9,8 @@ use Illuminate\Support\Str;
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
 <div class="card shadow">
-
         <div class="card-body d-flex justify-content-between">
         <h2>Booking Request</h2> <br>
-
             @if($errors->any())
             @foreach($errors ->all() as $error)
             <div class="alert alert-danger" role="alert">
@@ -22,7 +20,6 @@ use Illuminate\Support\Str;
             @endforeach
             @endif
         </div>
-
         <div class="table-responsive">
     <!-- Projects table -->
     <table class="table align-items-center table-flush text-center">

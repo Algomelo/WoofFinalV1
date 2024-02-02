@@ -5,44 +5,15 @@ use Illuminate\Support\Str;
 @extends('layouts.panel')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
 <style>
-    .ServiceSection:hover,
-    .PackagesSection:hover,
-    .texto_servicio:hover,
-    .texto_paquete:hover {
-        background-color: #F2761D;
-        color: #fff;
-        transition: background-color 0.3s ease;
-    }
-    .PackagesSection{
-        margin: 54px 0px;
-
-    }
-
-
-
-
-    .texto_paquete, .texto_servicio {
-        margin: 30px;
-        padding: 10px;
-        text-decoration: none;
-        border: 1px solid #000;
-        transition: background-color 0.3s, color 0.3s;
-        transition: background-color 0.3s ease;
-        padding:20px;
-        border-radius: 20px; /* Radio de las esquinas */;
-    }
-    .texto_paquete:hover, .texto_servicio:hover {
-        background-color: #F2761D;
-        color: #fff;
-        padding:20px;
-        border-radius: 20px; /* Radio de las esquinas */;
-    }
-
+ 
 
 
     
 </style>
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
 
 
@@ -106,20 +77,20 @@ use Illuminate\Support\Str;
 
 
             <div class="form-group">
-                <h4>Select Services:</h4>
+                <h4>Please select Services:</h4>
                 <div class="container d-block" >
                 @foreach($allServices as $service)
                     
                         <label for="service_{{ $service->id }}">
                             <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}" class="service-checkbox">
-                            Name Service : {{ $service->name }} - 
+                            Name Service : {{ $service->name }} 
                         </label>
                         <label for="service_{{ $service->id }}">
 
                             Price Service:  $ {{ $service->price }}  (xUnit)
 
                          </label>
-                         <input type="number" name="service_quantity[{{ $service->id }}]" placeholder="Quantity" value="" class="quantity-input">
+                         <input type="number" name="service_quantity[{{ $service->id }}]" placeholder="Quantity" value="" class="quantity-input"><hr>
                          <span class="service-price" style="display:none;">{{ $service->price }}</span>
 
                    
@@ -129,7 +100,7 @@ use Illuminate\Support\Str;
             </div>
 
             <div class="form-group">
-                <h4>Select Packages:</h4>
+                <h4>Please select Packages:</h4>
                 @foreach($allPackages as $package)
                 <div class="container d-block" >
 
@@ -140,9 +111,10 @@ use Illuminate\Support\Str;
                     <label for="package_{{ $package->id }}">
                         Price Package:  $ {{ $package->price }}  (xUnit)
                         <input type="number" name="package_quantity[{{ $package->id }}]" placeholder="Quantity" value="" class="quantity-input d-none">
-                        <span class="service-price" style="display:none;">{{ $package->price }}</span>
-
+                        <span class="service-price" style="display:none;">{{ $package->price }}</span> 
                     </label>
+                    <hr>
+
                 </div>
                 @endforeach
 
@@ -163,7 +135,7 @@ use Illuminate\Support\Str;
             </div>
 
 
-            <button type="submit" class="btn btn-sm btn-primary">Assign request</button>
+            <button type="submit" class="btn boton">Assign request</button>
         </form>
 
                                

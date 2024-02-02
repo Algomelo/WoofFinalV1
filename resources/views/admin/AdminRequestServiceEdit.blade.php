@@ -1,6 +1,7 @@
 @extends('layouts.panel')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
     <div class="card shadow">
         <div class="card-body">
@@ -145,7 +146,7 @@
                 <!-- Otros campos y controles según tus necesidades -->
 
                 <!-- Botón de envío del formulario -->
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="submit" class="btn boton">Save Changes</button>
             </form>
         </div>
     </div>

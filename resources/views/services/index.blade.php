@@ -37,7 +37,7 @@
                 <th scope="col">Options</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody >
                 @foreach ($services as $service)
                 <tr>
                     <th scope="row">
@@ -63,8 +63,6 @@
                     
                   </tr>  
                 @endforeach
-              
-              
             </tbody>
           </table>
         </div>
