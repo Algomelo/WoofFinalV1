@@ -36,7 +36,7 @@
       </a>
     </li>
     <li class="nav-item">
-    <a class="nav-link" href="{{ route('admin.IndexRedem') }}">
+    <a class="nav-link" href="{{ url('/serviceRedems') }}">
         <i class="fas fa-clipboard-list"></i>Bookings
       </a>
     </li>

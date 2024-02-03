@@ -46,7 +46,7 @@ use Illuminate\Support\Str;
                     <br>Pickup Dates:<br>{{ $scheduleds->date}}
                 </td>
                 <td>
-                <a class="btn boton" href="{{ route ('admin.EditRedem',['scheduledId' => $scheduleds->id])}}">Edit // approve </a>
+                <a href="{{ url('/serviceRedems/'.$scheduleds->id.'/edit') }}" class=" btn boton">See More Info / Edit Info</a>
                 </td>
             </tr>
             @endforeach

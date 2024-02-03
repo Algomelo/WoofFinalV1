@@ -36,7 +36,7 @@ use Illuminate\Support\Str;
             @endforeach
             @endif
             <div class="container">
-                <form method="POST" action="{{ route ('admin.StoreRedem',['scheduledId' => $scheduled->id])}}">
+                <form action="{{url('/serviceRedems/'.$scheduled->id)}}" method="POST">                
                 @csrf
                 @method('PUT')
                     <div class="row ">

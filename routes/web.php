@@ -8,9 +8,6 @@ use App\Http\Controllers\ContactForm;
 use App\Http\Controllers\ContactJobController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\admin\ServiceController;
-use App\Http\Controllers\admin\ServiceRequestController;
-use App\Http\Controllers\admin\PackageController;
 use App\Http\Controllers\user\UserServiceRequestController;
 use App\Http\Controllers\user\PetController;
 use App\Http\Controllers\user\UserRedemptionController;
@@ -121,6 +118,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('serviceRequests','App\Http\Controllers\admin\ServiceRequestController');
     
 
+    Route::resource('serviceRedems','App\Http\Controllers\admin\AdminRedemController');
+
+
+    // Ruta servicios agendados
+
+    //Route::get('/admin/scheduled/index', [AdminScheduledController::class, 'index'])->name('admin.IndexScheduled');
+
+
     // Ejemplo para una ruta web
     Route::resource('blogs','App\Http\Controllers\BlogController');
 
@@ -131,22 +136,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/blogs/{id}', [BlogController::class, 'update']); // Actualizar el blog existente
     // Ruta solicitud de servicios admin
 
-    Route::post('/users/{userId}/assign-request-form', [ServiceRequestController::class,'assignRequest'])
-    ->name('admin.assignRequestForm');
 
-
-
-
-    // Ruta para vista de redencion o asignacion de  agendamientos de servicio
-
-    Route::get('/admin/redem/index', [AdminRedemController::class, 'index'])->name('admin.IndexRedem');
-    Route::get('/admin/redem/{scheduledId}/edit', [AdminRedemController::class, 'edit'])->name('admin.EditRedem');
-    Route::put('/admin/redem/{scheduledId}/store', [AdminRedemController::class, 'store'])->name('admin.StoreRedem');
-
-
-    // Ruta servicios agendados
-
-    Route::get('/admin/scheduled/index', [AdminScheduledController::class, 'index'])->name('admin.IndexScheduled');
 
 });
 
