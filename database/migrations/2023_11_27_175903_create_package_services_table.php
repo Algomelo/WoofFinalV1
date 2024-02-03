@@ -18,7 +18,7 @@ return new class extends Migration
             // Claves foráneas
 
             $table->foreignId('package_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignId('services_id')->nullable(); // Sin restricción de eliminación en cascada
+            $table->foreignId('service_id')->nullable(); // Sin restricción de eliminación en cascada
     
             // Otros campos
             $table->integer('quantity');

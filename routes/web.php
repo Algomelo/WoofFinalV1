@@ -7,11 +7,9 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ContactForm;
 use App\Http\Controllers\ContactJobController;
 use App\Http\Controllers\LandingController;
-use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\user\UserServiceRequestController;
 use App\Http\Controllers\user\PetController;
 use App\Http\Controllers\user\UserRedemptionController;
-use App\Http\Controllers\admin\AdminRedemController;
 use App\Http\Controllers\walker\WalkerScheduledController;
 use App\Http\Controllers\user\UserScheduledController;
 
@@ -122,9 +120,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 
     // Ruta servicios agendados
-
-    //Route::get('/admin/scheduled/index', [AdminScheduledController::class, 'index'])->name('admin.IndexScheduled');
-
 
     // Ejemplo para una ruta web
     Route::resource('blogs','App\Http\Controllers\BlogController');
