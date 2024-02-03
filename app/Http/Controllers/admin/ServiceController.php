@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
-use App\Models\Services;
+use App\Models\Service;
 use App\Http\Controllers\Controller;
 
-
-class ServicesController extends Controller
+class ServiceController extends Controller
 {
-    //
-
-    
+    /**
+     * Display a listing of the resource.
+     */
     public function index(){
-        $services = Services::all();
+        $services = Service::all();
 
         return view('services.index', compact('services'));
 
@@ -25,8 +24,11 @@ class ServicesController extends Controller
 
     }
 
-    public function sendData(Request $request){
-
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
         $rules = [
             'name' => 'required|min:3',
             'price' => 'required'
@@ -38,24 +40,33 @@ class ServicesController extends Controller
         ];
         $this->validate($request,$rules,$message);
 
-        $service = new Services();
+        $service = new Service();
         $service->name =$request->input('name');
         $serviceName=$service->name;
         $service->description =$request->input('description');
         $service->price =$request->input('price');
         $service->save();
         $notification = 'The ' . $serviceName. ' service has been created successfully';
-        return redirect('/servicesaut')->with(compact('notification'));
+        return redirect('/services')->with(compact('notification'));
+        }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
     }
 
- 
-
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit($id) {
-        $service = Services::findOrFail($id);
+        $service = Service::findOrFail($id);
         return view('services.edit', compact('service'));
     }
 
-    public function update(Request $request, Services $service){
+    public function update(Request $request, Service $service){
 
         $rules = [
             'name' => 'required|min:3',
@@ -74,17 +85,17 @@ class ServicesController extends Controller
         $service->price =$request->input('price');
         $service->save();
         $notification = 'The ' .$editName .' service has been successfully modified';
-        return redirect('/servicesaut')->with(compact('notification'));
+        return redirect('/services')->with(compact('notification'));
     }
 
-    public function destroy(Services $service){
+    public function destroy(Service $service){
 
         $deleteName = $service->name;
         $service->delete();
         $notification = 'The '.$deleteName. 'service has been successfully removed.';
 
 
-        return redirect('/servicesaut')->with(compact('notification'));
+        return redirect('/services')->with(compact('notification'));
 
 
     }

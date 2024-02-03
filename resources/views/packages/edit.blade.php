@@ -26,7 +26,8 @@
             @endif
 
 
-    <form action="{{ url('/packages/', $package->id) }}" method="POST">
+    <form action="{{ url('/packages/'.$package->id) }}" method="POST">
+
     @csrf
     @method('PUT')
     <div class="form-group">

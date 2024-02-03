@@ -8,7 +8,7 @@ use App\Http\Controllers\ContactForm;
 use App\Http\Controllers\ContactJobController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\admin\ServicesController;
+use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\ServiceRequestController;
 use App\Http\Controllers\admin\PackageController;
 use App\Http\Controllers\user\UserServiceRequestController;
@@ -36,7 +36,7 @@ Route::post('/confirm-contacjob', [ContactJobController::class, 'EnviarContactJo
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 Route::view('/landing','landing')->name('landing');
 Route::view('/','index')->name('index');;
-Route::view('/services','services2')->name('services') ;
+//Route::view('/services','services2')->name('services') ;
 Route::view('/gallery','gallery')->name('gallery');
 Route::view('/aboutus','aboutus')->name('about');
 Route::view('/contactusers','contactusers')->name('contactusers');
@@ -109,25 +109,24 @@ Route::middleware(['auth', 'walker'])->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
-
-    // CRUD de Servicios
-    Route::get('/servicesaut', [ServicesController::class, 'index']);
-    Route::get('/services/create', [ServicesController::class, 'create']);
-    Route::get('/services/{service}/edit', [ServicesController::class, 'edit']);
-    Route::post('/services', [ServicesController::class, 'sendData']);
-    Route::put('/services/{service}', [ServicesController::class, 'update']);
-    Route::delete('/services/{service}', [ServicesController::class, 'destroy']);
-    // CRUD de Paquetes
-    Route::get('/packages', [PackageController::class, 'index']);
-    Route::get('/packages/create', [PackageController::class, 'create']);
-    Route::get('/packages/{package}/edit', [PackageController::class, 'edit']);
-    Route::post('/packages', [PackageController::class, 'store']);
-    Route::put('/packages//{id}', [PackageController::class, 'update']);
-    Route::delete('/packages/{package}', [PackageController::class, 'destroy']);
-    //Ruta Paseadores admin
     Route::resource('walkers','App\Http\Controllers\admin\WalkerController');
     // Ruta Usuarios admin
     Route::resource('users','App\Http\Controllers\admin\UserController');
+    // CRUD de Servicios //* //*
+    Route::resource('services','App\Http\Controllers\admin\ServiceController');
+
+    Route::resource('packages','App\Http\Controllers\admin\PackageController');
+    // Ejemplo para una ruta web
+    Route::post('/update-total-price', 'ResourceController@updateTotalPrice');
+
+
+
+    // CRUD de Paquetes
+
+    //Ruta Paseadores admin
+
+    Route::post('/delete-selected-users', 'App\Http\Controllers\admin\UserController@deleteSelectedUsers');
+
     Route::resource('blogs','App\Http\Controllers\BlogController');
     // Ruta blog admin
     Route::get('/blogs/create', [BlogController::class, 'showForm']); // Mostrar formulario de creación de blog
@@ -139,7 +138,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/users/{userId}/assign-request-form', [ServiceRequestController::class,'assignRequest'])
     ->name('admin.assignRequestForm');
 
-    Route::post('/delete-selected-users', 'App\Http\Controllers\admin\UserController@deleteSelectedUsers');
 
     // Ruta para solicitudes de servicio
     

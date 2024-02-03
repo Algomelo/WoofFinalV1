@@ -5,8 +5,7 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Models\Package;
-use App\Models\Services;
-use App\Models\Users;
+use App\Models\Service;
 use App\Http\Controllers\Controller;
 
 class PackageController extends Controller
@@ -23,7 +22,7 @@ class PackageController extends Controller
     // Mostrar el formulario para crear un nuevo paquete
     public function create()
     {
-        $services = Services::all(); // Obtener todos los servicios para mostrar en el formulario
+        $services = Service::all(); // Obtener todos los servicios para mostrar en el formulario
         return view('packages.create', compact('services'));
     }
 
@@ -105,7 +104,7 @@ class PackageController extends Controller
         $custom_price = $package->custom_price;
 
 
-        $allServices = Services::all();
+        $allServices = Service::all();
         $isChecked = $custom_price ? 'checked' : '';
 
 
@@ -164,7 +163,6 @@ class PackageController extends Controller
     
         // Actualizar el precio total del paquete
         $totalPrice = $this->updateTotalPrice($request);
-    
         // Establecer el precio total en el paquete
         $package->price = $totalPrice;
     
@@ -176,8 +174,6 @@ class PackageController extends Controller
 
         return redirect('/packages')->with(compact('notification'));
     }
-    
-    
 
     public function destroy(string $id)
     {
@@ -201,7 +197,7 @@ class PackageController extends Controller
             foreach ($serviceIds as $index => $serviceId) {
                 if (isset($quantities[$serviceId]) && $quantities[$serviceId] > 0) {
                     $quantity = $quantities[$serviceId];
-                    $service = Services::find($serviceId);
+                    $service = Service::find($serviceId);
                     if ($service) {
                         $totalPrice += $service->price * $quantity;
                     }
