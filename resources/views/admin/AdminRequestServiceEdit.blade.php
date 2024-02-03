@@ -18,7 +18,7 @@
             
 
             <!-- Formulario de edición -->
-            <form method="POST" action="{{ route('admin.updateServiceRequest', [ 'serviceRequestId' => $serviceRequest->id]) }}">
+            <form action="{{url('/serviceRequests/'.$serviceRequest->id)}}" method="POST">
                 @csrf
                 @method('PUT')
 

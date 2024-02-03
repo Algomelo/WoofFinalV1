@@ -112,22 +112,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('walkers','App\Http\Controllers\admin\WalkerController');
     // Ruta Usuarios admin
     Route::resource('users','App\Http\Controllers\admin\UserController');
+    Route::post('/delete-selected-users', 'App\Http\Controllers\admin\UserController@deleteSelectedUsers');
     // CRUD de Servicios //* //*
     Route::resource('services','App\Http\Controllers\admin\ServiceController');
 
     Route::resource('packages','App\Http\Controllers\admin\PackageController');
+
+    Route::resource('serviceRequests','App\Http\Controllers\admin\ServiceRequestController');
+    
+
     // Ejemplo para una ruta web
-    Route::post('/update-total-price', 'ResourceController@updateTotalPrice');
-
-
-
-    // CRUD de Paquetes
-
-    //Ruta Paseadores admin
-
-    Route::post('/delete-selected-users', 'App\Http\Controllers\admin\UserController@deleteSelectedUsers');
-
     Route::resource('blogs','App\Http\Controllers\BlogController');
+
     // Ruta blog admin
     Route::get('/blogs/create', [BlogController::class, 'showForm']); // Mostrar formulario de creación de blog
     Route::post('/agregar_blog', [BlogController::class, 'store'])->name('blog.store'); // Almacenar el nuevo blog
@@ -139,24 +135,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     ->name('admin.assignRequestForm');
 
 
-    // Ruta para solicitudes de servicio
-    
-    Route::post('/service-requests', [ServiceRequestController::class, 'store'])
-        ->name('admin.storeRequest');
-
-
-    Route::get('/admin/service-requests', [ServiceRequestController::class, 'showIndexRequest'])->name('admin.showIndexRequest');
-
-    Route::get('/admin/service-requests/{userId}/{serviceRequestId}/edit', [ServiceRequestController::class, 'edit'])->name('admin.editServiceRequest');
-
-    Route::put('/admin/update-service-request/{serviceRequestId}', [ServiceRequestController::class, 'update'])->name('admin.updateServiceRequest');
-    Route::delete('/admin/delete-service-request/{serviceRequestId}', [ServiceRequestController::class, 'destroy'])->name('admin.deleteServiceRequest');
-
-    Route::get('/service-requests/create', [ServiceRequestController::class, 'create'])
-    ->name('serviceRequests.create');
-
-    Route::post('/admin/calculate-total-price', [ServiceRequestController::class, 'calculateTotalPrice'])->name('admin.calculateTotalPrice');
-    Route::post('/admin/attach-services-packages', [ServiceRequestController::class, 'attachServicesAndPackages'])->name('admin.attachServicesAndPackages');
 
 
     // Ruta para vista de redencion o asignacion de  agendamientos de servicio

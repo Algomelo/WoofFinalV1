@@ -42,7 +42,7 @@ class ServiceRequest extends Model
 
     public function services()
     {
-        return $this->belongsToMany(Services::class, 'service_service_request', 'service_request_id', 'service_id')
+        return $this->belongsToMany(Service::class, 'service_service_request', 'service_request_id', 'service_id')
             ->withPivot('service_quantity');
     }
 

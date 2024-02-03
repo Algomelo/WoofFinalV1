@@ -31,7 +31,7 @@
       </a>
     </li>
     <li class="nav-item">
-    <a class="nav-link" href="{{ route('admin.showIndexRequest') }}">
+    <a class="nav-link" href="{{ url('/serviceRequests') }}">
         <i class="fas fa-clipboard-list"></i>Service Request
       </a>
     </li>

@@ -11,7 +11,9 @@
               <h3 class="mb-0">Request Services</h3>
             </div>
             <div class="col text-right">
-                <a class="boton" href="{{ route('serviceRequests.create') }}">New Service Request</a>
+                <a href="{{ url('serviceRequests/create')}}" class="btn boton">New Service Request</a>
+
+                
             </div>
         </div>     
     </div>           
@@ -87,10 +89,10 @@
                     </td>
                     <td>
                     @if($serviceRequest->state !== 'passed')
-                        <form action="{{ route('admin.deleteServiceRequest', ['serviceRequestId' => $serviceRequest->id]) }}" method="POST" onsubmit="return confirm('¿Estás seguro?')">
+                        <form action="{{ url('/serviceRequests/'.$serviceRequest->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a href="{{ route('admin.editServiceRequest', ['userId' => $serviceRequest->user_id, 'serviceRequestId' => $serviceRequest->id]) }}" class="btn boton">Edit</a>
+                            <a href="{{ url('/serviceRequests/'.$serviceRequest->id.'/edit') }}" class=" btn boton">See More Info / Edit Info</a>
                             <button type="submit" class="btn boton-eliminar">Eliminar</button>
 
                     @endif

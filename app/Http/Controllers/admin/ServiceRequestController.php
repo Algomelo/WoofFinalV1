@@ -7,7 +7,7 @@ use App\Http\Controllers\admin\UserController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Package;  // Asegúrate de que estás importando la clase Package
-use App\Models\Services;
+use App\Models\Service;
 use App\Models\User;
 use App\Models\ServiceRequest;
 use Illuminate\Support\Facades\View;
@@ -17,14 +17,14 @@ use Illuminate\Support\Facades\View;
 class ServiceRequestController extends Controller
 {
 
-    public function edit($userId, $serviceRequestId)
+    public function edit($serviceRequestId)
     {
         $serviceRequest = ServiceRequest::findOrFail($serviceRequestId);
         $uniqueNumbers = $serviceRequest->pluck('unique_number');
-        $allServices = Services::all();
+        $allServices = Service::all();
         $allPackages = Package::all();
 
-        return view('admin.AdminRequestServiceEdit', compact('serviceRequest', 'userId', 'uniqueNumbers', 'allServices' ,'allPackages'));
+        return view('admin.AdminRequestServiceEdit', compact('serviceRequest', 'uniqueNumbers', 'allServices' ,'allPackages'));
 
     }
     public function create()
@@ -34,13 +34,13 @@ class ServiceRequestController extends Controller
 
 
         // Obtener la lista de todos los servicios y paquetes disponibles
-        $allServices = Services::all(); // Ajusta según tus necesidades
+        $allServices = Service::all(); // Ajusta según tus necesidades
         $allPackages = Package::all(); // Ajusta según tus necesidades
 
         return view('admin.AdminRequestServiceCreate', compact('allUsers', 'allServices', 'allPackages'));
 
     }
-        public function showIndexRequest()
+        public function index()
     {
 
         $serviceRequests = ServiceRequest::all()->sortByDesc('created_at');
@@ -133,8 +133,8 @@ class ServiceRequestController extends Controller
     $notification = 'The Request Service has been successfully created';
 
 
+    return redirect('/serviceRequests')->with(compact('notification'));
 
-    return redirect()->route('admin.showIndexRequest')->with(compact('notification'));
 
     }
 
@@ -213,77 +213,12 @@ class ServiceRequestController extends Controller
 
 
 
-    return redirect()->route('admin.showIndexRequest')->with(compact('notification'));
+    return redirect('/serviceRequests')->with(compact('notification'));
     
 
     // Redirige a la vista deseada después de la actualización
 }
 
-
-/*
-
-public function updateServiceRequest(Request $request, $userId, $serviceRequestId)
-    {
-        $validatedData = $request->validate([
-            'comment' => 'required',
-            'state' => 'required',
-            'services' => 'array',
-            'packages' => 'array',
-        ]);
-        $totalPrice = $request->input('price');
-
-        $totalPrice = $this->updateTotalPrice($request);
-        $totalPrice = $this->updateTotalPrice($request);
-
-        // Obtener la solicitud de servicio por ID
-        $serviceRequest = ServiceRequest::findOrFail($serviceRequestId);
-    
-        // Actualizar los campos básicos de la solicitud
-        $serviceRequest->update([
-            'comment' => $validatedData['comment'],
-            'state' => $validatedData['state'],
-            'price' => 0, // Actualizar el precio
-        ]);
-
-
-
-            // Actualizar las cantidades para los servicios
-    foreach ($request->input('service_quantity', []) as $serviceId => $quantity) {
-        $serviceRequest->services()->updateExistingPivot($serviceId, ['service_quantity' => $quantity]);
-    }
-
-    // Actualizar las cantidades para los paquetes
-    foreach ($request->input('package_quantity', []) as $packageId => $quantity) {
-        $serviceRequest->packages()->updateExistingPivot($packageId, ['package_quantity' => $quantity]);
-    }
-        // Actualizar servicios asociados
-        $selectedServices = $request->input('services');
-        $service_quantity = $request->input('service_quantity');
-        $serviceData = [];
-    
-        foreach ($selectedServices as $serviceId) {
-            $quantity = isset($service_quantity[$serviceId]) ? $service_quantity[$serviceId] : 0;
-            $serviceData[$serviceId] = ['service_quantity' => $quantity];
-        }
-    
-        $serviceRequest->services()->sync($serviceData);
-    
-        // Actualizar paquetes asociados
-        $selectedPackages = $request->input('packages');
-        $package_quantity = $request->input('package_quantity');
-        $packageData = [];
-    
-        foreach ($selectedPackages as $packageId) {
-            $quantity = isset($package_quantity[$packageId]) ? $package_quantity[$packageId] : 0;
-            $packageData[$packageId] = ['package_quantity' => $quantity];
-        }
-    
-        $serviceRequest->packages()->sync($packageData);
-    
-        return redirect()->route('admin.showIndexRequest');
-    }
-    
-*/
     
 
     private function updateTotalPrice(Request $request)
@@ -305,7 +240,7 @@ public function updateServiceRequest(Request $request, $userId, $serviceRequestI
             foreach ($serviceIds as $index => $serviceId) {
                 if (isset($quantities[$serviceId]) && $quantities[$serviceId] > 0) {
                     $quantity = $quantities[$serviceId];
-                    $service = Services::find($serviceId);
+                    $service = Service::find($serviceId);
                     if ($service) {
                         $totalPrice += $service->price * $quantity;
                     }
@@ -342,7 +277,8 @@ public function updateServiceRequest(Request $request, $userId, $serviceRequestI
 
 
 
-        return redirect()->route('admin.showIndexRequest')->with(compact('notification'));    }
+        return redirect('/serviceRequests')->with(compact('notification'));
+    }
 
 
 

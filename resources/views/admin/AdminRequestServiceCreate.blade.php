@@ -44,7 +44,8 @@ use Illuminate\Support\Str;
              
     <div class="form-group" >
 
-    <form method="POST" action="{{ route('admin.storeRequest') }}">
+    <form action="{{url('/serviceRequests')}}" method="POST">
+
                                  
                                  @csrf
             <div class="form-group">
