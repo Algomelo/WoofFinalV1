@@ -1,14 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-use App\Http\Controllers\admin\PackageController;
-use App\Http\Controllers\admin\ServicesController;
+
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use App\Models\Package;  // Asegúrate de que estás importando la clase Package
-use App\Models\Services;
-use App\Models\ServiceRequest;
 
 
 class UserController extends Controller
@@ -16,68 +12,10 @@ class UserController extends Controller
     public function index()
     {
         $users = User::users()->paginate(100);
-        $services = Services::all();
-        $packages = Package::all();
-        return view('users.index', compact('users', 'packages'));
+
+        return view('users.index', compact('users'));
 
     }
-
-
-
-    public function assignRequestForm($userId)
-    {
-        // Obtener el usuario
-        $user = User::findOrFail($userId);
-
-        // Obtener todos los paquetes disponibles
-        $allPackages = Package::all();
-        $allServices = Services::all();
-
-        // Obtener los paquetes asignados al usuario
-        $userPackages = $user->packages;
-        $userServices= $user->services;
-
-
-        return view('users.userservices', compact('user', 'allPackages', 'userPackages', 'allServices', 'userServices'));
-    }
-   
-    public function assignServices(Request $request, $userId)
-    {
-        // Obtener el usuario
-        $user = User::findOrFail($userId);
-    
-        // Obtener los paquetes seleccionados
-
-        $selectedServices = $request->input('services');
-        $selectedPackages = $request->input('packages');
-
-
-        // Verificar si hay paquetes seleccionados
-        // Verificar si hay paquetes seleccionados
-        if (empty($selectedPackages)) {
-            return redirect()->back()->with('error', 'Debes seleccionar al menos un servicio.');
-        }
-
-        // Agrega esta línea para verificar los paquetes seleccionados
-        //  dd($selectedPackages);
-
-        foreach ($selectedPackages as $packageId) {
-            // Verificar si el servicio tiene una cantidad válida
-            $quantity = isset($quantities[$packageId]) ? $quantities[$packageId] : 0;
-    
-            // Agregar el servicio y cantidad al array de datos
-            $serviceData[$packageId] = ['quantity' => $quantity];
-        }
-
-        // Asignar los paquetes al usuario
-        $user->packages()->sync($selectedPackages);
-
-        // Redirigir con un mensaje de éxito
-        return redirect()->route('users.assignRequestForm', $userId)->with('success', 'Paquetes asignados exitosamente.');
-
-    }
-
-
     /**
      * Show the form for creating a new resource.
      */

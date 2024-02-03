@@ -135,14 +135,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/blogs/{ide}/dit', [BlogController::class, 'showEditForm']); // Mostrar formulario de edición
     Route::put('/blogs/{id}', [BlogController::class, 'update']); // Actualizar el blog existente
     // Ruta solicitud de servicios admin
-    Route::post('/users/{userId}/assign-packages', [UserController::class, 'assignPackages'])->name('users.assign-packages');
-    Route::get('/userservices/{userId}/{packageId}', [UserController::class,'showPackagesById'])
-        ->name('users.userservices');
-    Route::post('/users/{userId}/assignPackages', [UserController::class,'assignPackagesForm'])
-        ->name('users.assignPackagesForm');
-    // vista administracion usuario
-    Route::get('/users/{userId}/assign-request-form', [UserController::class,'assignRequestForm'])
-    ->name('admin.assignPackagesForm');
+
     Route::post('/users/{userId}/assign-request-form', [ServiceRequestController::class,'assignRequest'])
     ->name('admin.assignRequestForm');
 
