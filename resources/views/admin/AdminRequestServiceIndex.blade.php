@@ -64,16 +64,20 @@
                     <td>
                         <p>Services:</p>
                         <ul>
-                            @foreach($serviceRequest->services as $service)
-                            <li>{{ $service->name }} <br> - Quantity: {{ $service->pivot->service_quantity }}</li>
-                            @endforeach
+                            @forelse($serviceRequest->services as $service)
+                                <li>{{ optional($service)->name }} <br> - Quantity: {{ optional($service->pivot)->service_quantity }}</li>
+                            @empty
+                                <li>No services</li>
+                            @endforelse
                         </ul>
 
                         <p>Packages:</p>
                         <ul>
-                            @foreach($serviceRequest->packages as $package)
-                            <li>{{ $package->name }} <br> - Quantity: {{ $package->pivot->package_quantity }}</li>
-                            @endforeach
+                            @forelse($serviceRequest->packages as $package)
+                                <li>{{ optional($package)->name }} <br> - Quantity: {{ optional($package->pivot)->package_quantity }}</li>
+                            @empty
+                                <li>No packages</li>
+                            @endforelse
                         </ul>
                     </td>
                     <td>

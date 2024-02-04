@@ -8,10 +8,8 @@ use App\Http\Controllers\ContactForm;
 use App\Http\Controllers\ContactJobController;
 use App\Http\Controllers\LandingController;
 
-use App\Http\Controllers\user\PetController;
 use App\Http\Controllers\user\UserRedemptionController;
 use App\Http\Controllers\walker\WalkerScheduledController;
-use App\Http\Controllers\user\UserScheduledController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentMail;
