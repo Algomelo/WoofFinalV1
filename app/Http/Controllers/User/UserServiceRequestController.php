@@ -5,26 +5,29 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Package;  // Asegúrate de que estás importando la clase Package
-use App\Models\Services;
+use App\Models\Service;
 use App\Models\User;
 use App\Models\ServiceRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserServiceRequestController extends Controller
 {
 
-    public function showRequestForm($userId)
+    public function create()
     {
+        $userId = Auth::id();
         $userId = User::findOrFail($userId);
    
         $allPackages = Package::all();
-        $allServices = Services::all();
-        $services = Services::all();
+        $allServices = Service::all();
+        $services = Service::all();
         $packages = Package::all();
 
 
         return view('users.UserRequestService', compact('userId', 'allPackages', 'allServices', 'services', 'packages'));
     }
-    public function showIndexRequest($userId){
+    public function index(){
+        $userId = Auth::id();
         $user = User::findOrFail($userId);
         $serviceRequests = $user->serviceRequests()->orderByDesc('created_at')->get();
 
@@ -63,7 +66,7 @@ class UserServiceRequestController extends Controller
         foreach ($selectedServices as $serviceId) {
 
             $serviceQuantity = $request->input("service_quantity.$serviceId", 0);
-            $service = Services::find($serviceId);
+            $service = Service::find($serviceId);
             $priceService = $serviceQuantity * $service->price;
             $totalPrice += $priceService;
     
@@ -87,10 +90,8 @@ class UserServiceRequestController extends Controller
         $serviceRequest->save();
 
         // Redireccionar o hacer lo que sea necesario después de la creación
-        return redirect()->route('user.showIndexRequest', [
-            'userId' => $serviceRequest->user_id,
-            'uniqueNumber' => $uniqueNumber,
-        ]);
+            return $this->index();
+
             }
 
 
@@ -101,7 +102,7 @@ class UserServiceRequestController extends Controller
         $userId = User::findOrFail($userId);
         $serviceRequest = ServiceRequest::findOrFail($serviceRequestId);
         $allPackages = Package::all();
-        $allServices = Services::all();
+        $allServices = Service::all();
 
         // Puedes pasar más datos necesarios a la vista si es necesario
 
@@ -129,7 +130,7 @@ class UserServiceRequestController extends Controller
             $serviceData = [];
             foreach ($selectedServices as $serviceId) {
                 $quantity = $service_quantity[$serviceId] ?? 0;
-                $service = Services::find($serviceId);
+                $service = Service::find($serviceId);
                 $priceService = $quantity * $service->price;
                 $totalPrice += $priceService;
                 $serviceData[$serviceId] = ['service_quantity' => $quantity];
@@ -163,13 +164,13 @@ class UserServiceRequestController extends Controller
 
 
 
-         public function destroy($userId, $serviceRequestId)
+         public function destroy( $serviceRequestId)
         {
             $serviceRequest = ServiceRequest::findOrFail($serviceRequestId);
             $serviceRequest->delete();
 
             // Redireccionar o hacer lo que sea necesario después de la eliminación
-            return redirect()->route('user.showIndexRequest', ['userId' => $userId]);
+            return $this->index();
         }
 
 

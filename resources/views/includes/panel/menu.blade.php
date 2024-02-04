@@ -50,7 +50,7 @@
     
 
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('user.showIndexRequest', ['userId' => Auth::id()]) }}">
+      <a class="nav-link " href="{{ url('/userServiceRequest')}}">
         <i class="ni ni-bullet-list-67 text-red"></i>Request Service
       </a>
     </li>

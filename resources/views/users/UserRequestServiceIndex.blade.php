@@ -15,7 +15,8 @@ use Illuminate\Support\Str;
 
         <div class="card-body d-flex justify-content-between">
         <h2> Request Services</h2> <br>
-           <a href="{{ route('user.sendRequestForm', ['userId' => $userId]) }}" class="btn boton ">New service request</a>
+         <a href="{{ url('userServiceRequest/create')}}" class="btn boton">New Walker</a>
+
 
             @if($errors->any())
             @foreach($errors ->all() as $error)
@@ -75,10 +76,12 @@ use Illuminate\Support\Str;
                 <td>
                     @if($serviceRequest->state !== 'passed')
                     
-                    <a href="{{ route('user.editServiceRequest',['userId' => $userId, 'serviceRequestId' => $serviceRequest->id]) }}" class="btn boton">Edit</a><br><br>
-                    <form action="{{ route('user.deleteServiceRequest', ['userId' => $userId, 'serviceRequestId' => $serviceRequest->id]) }}" method="POST" onsubmit="return confirm('¿Estás seguro?')">
+                    <a href="{{url('/userServiceRequest/'.$serviceRequest->id.'/edit')}}" class=" btn boton">Edit</a>
+
+                    <form action="{{url('/userServiceRequest/'.$serviceRequest->id)}}"  method="POST" onsubmit="return confirm('¿Estás seguro?')">
                         @csrf
                         @method('DELETE')
+                        
                         <button type="submit" class="btn boton-eliminar ">Eliminar</button>
                     </form>
                     @endif

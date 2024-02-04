@@ -47,8 +47,7 @@ use Illuminate\Support\Str;
                                         </div>
                                     </div>
                                 </div>                                    
-
-                                 <form action="{{ route('user.sendRequest', $userId) }}" method="post">
+                                <form action="{{url('/userServiceRequest')}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 

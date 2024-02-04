@@ -7,9 +7,11 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ContactForm;
 use App\Http\Controllers\ContactJobController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\user\UserServiceRequestController;
 use App\Http\Controllers\user\PetController;
 use App\Http\Controllers\user\UserRedemptionController;
+use App\Http\Controllers\admin\AdminRedemController;
 use App\Http\Controllers\walker\WalkerScheduledController;
 use App\Http\Controllers\user\UserScheduledController;
 
@@ -53,20 +55,10 @@ Auth::routes();
 
 
 Route::middleware(['auth', 'user'])->group(function () {
+    Route::resource('userServiceRequest','App\Http\Controllers\User\UserServiceRequestController');
 
     // CRUD SERVICE REQUEST USER
-    Route::get('/user/{userId}/send-request-form', [UserServiceRequestController::class, 'showRequestForm'])
-        ->name('user.sendRequestForm');
-    Route::post('/user/{userId}/send-request', [UserServiceRequestController::class, 'store'])
-        ->name('user.sendRequest');
-    Route::get('/users/{userId}/showIndexRequest', [UserServiceRequestController::class, 'showIndexRequest'])
-        ->name('user.showIndexRequest');
-    Route::delete('/user/{userId}/service-request/{serviceRequestId}', [UserServiceRequestController::class, 'destroy'])
-    ->name('user.deleteServiceRequest');
-    Route::get('/user/{userId}/service-request/{serviceRequestId}/edit', [UserServiceRequestController::class, 'edit'])
-    ->name('user.editServiceRequest');
-    Route::put('/users/service-requests/{serviceRequestId}', [UserServiceRequestController::class, 'update'])
-    ->name('user.updateServiceRequest');
+
     
     // CRUD PETS
     Route::get('/user/pets/{userId}', [PetController::class, 'index'])
