@@ -36,7 +36,8 @@ use Illuminate\Support\Str;
             @endforeach
             @endif
             <div class="container">
-                <form action="{{ route('user.RedemptionController.store', ['userId' => Auth::id(), 'redeemedServiceId' => $redeemedServices->id]) }}"  id="myForm"  method="post">
+
+                <form action="{{ url('userRedemption/store/'.$redeemedServices->id)}}"  id="myForm"  method="post">
                 @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                     

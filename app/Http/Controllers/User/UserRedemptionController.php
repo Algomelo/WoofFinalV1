@@ -5,31 +5,32 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\Package;  // Asegúrate de que estás importando la clase Package
-use App\Models\Services;
 use App\Models\User;
-use App\Models\ServiceRequest;
 use App\Models\RedeemedService;
 use App\Models\Pet;
 use App\Models\Redemption;
+use Illuminate\Support\Facades\Auth;
 
 
 class UserRedemptionController extends Controller
 {
-    public function index(Request $request, $userId)
+    public function index()
     {
         // Obtén la solicitud de servicio a redimir para el usuario específico
             // Obtén los servicios redimidos asociados a la solicitud
+            $userId = Auth::id();
             $redeemedServices = RedeemedService::where('user_id', $userId)->get();
             // Obtén los paquetes redimidos asociados a la solicitud
             return view('users.UserRedeemIndex', compact( 'redeemedServices'));
    
     }
 
-    public function create(Request $request, $userId, $redeemedServiceId)
+    public function create(Request $request, $redeemedServiceId)
     {
         // Obtén el servicio redimido específico
         $redeemedServices = RedeemedService::findOrFail($redeemedServiceId);
+        $userId = Auth::id();
+
         $user = User::findOrFail($userId);
         // Obtén información adicional sobre el servicio (si es necesario)
         $serviceName = $redeemedServices->service->name;
@@ -44,8 +45,10 @@ class UserRedemptionController extends Controller
         return view('users.UserRedeemCreate', compact('redeemedServices', 'user', 'serviceName', 'serviceCreatedAt', 'quantity', 'state' , 'pets'));
     }
     
-    public function store(Request $request, $userId, $redeemedServiceId)
+    public function store(Request $request,  $redeemedServiceId)
     {
+        $userId = Auth::id();
+
         $request->validate([
             // Validaciones...
         ]);
@@ -82,7 +85,8 @@ class UserRedemptionController extends Controller
             }
         }    
         
-        return redirect()->route('user.RedemptionController.index', ['userId' => $userId]);
+        return $this->index();
+
 
     }
 }

@@ -7,11 +7,9 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ContactForm;
 use App\Http\Controllers\ContactJobController;
 use App\Http\Controllers\LandingController;
-use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\user\UserServiceRequestController;
+
 use App\Http\Controllers\user\PetController;
 use App\Http\Controllers\user\UserRedemptionController;
-use App\Http\Controllers\admin\AdminRedemController;
 use App\Http\Controllers\walker\WalkerScheduledController;
 use App\Http\Controllers\user\UserScheduledController;
 
@@ -74,17 +72,13 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::put('/user/pets/{userId}/update/{petId}', [PetController::class, 'update'])
         ->name('user.pets.update');
 
+
     // CRUD AGENDAMIENTO
-    Route::get('/user/UserRedemptionController/{userId}', [UserRedemptionController::class, 'index'])
-    ->name('user.RedemptionController.index');
-    Route::get('/user/UserRedemptionController/{userId}/{redeemedServiceId}/create', [UserRedemptionController::class, 'create'])
-    ->name('user.RedemptionController.create');
-    Route::post('/user/UserRedemptionController/{userId}/{redeemedServiceId}/store', [UserRedemptionController::class, 'store'])
-    ->name('user.RedemptionController.store');
+    Route::resource('userRedemption','App\Http\Controllers\User\UserRedemptionController');
+    Route::get('/userRedemption/create/{redeemedServiceId}', [UserRedemptionController::class, 'create']);
+    Route::post('/userRedemption/store/{redeemedServiceId}', [UserRedemptionController::class, 'store']);
 
-
-    Route::get('/user/UserScheduledController/index', [UserScheduledController::class, 'index'])
-    ->name('user.IndexScheduled');
+    Route::get('/user/UserScheduledController/index', [UserScheduledController::class, 'index']);
 
 
 });

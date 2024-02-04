@@ -45,8 +45,8 @@ use Illuminate\Support\Str;
                     <td>{{ $redeemedService->created_at}}</td>
                     <td>{{ $redeemedService->quantity }}</td>
                     <td>{{ $redeemedService->state }}</td> 
-                    <td>                    
-                        <a href="{{ route('user.RedemptionController.create', ['userId' => Auth::id(), 'redeemedServiceId' => $redeemedService->id]) }}" class="btn boton">Redimir</a><br><br>
+                    <td> 
+                      <a href="{{ url('userRedemption/create/'.$redeemedService->id)}}" class="btn boton">Redimir</a><br><br>
 
                     </td> 
                 </tr>
