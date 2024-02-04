@@ -60,9 +60,10 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::resource('userPets','App\Http\Controllers\User\PetController');
 
     // CRUD AGENDAMIENTO
-    Route::resource('userRedemption','App\Http\Controllers\User\UserRedemptionController');
     Route::get('/userRedemption/create/{redeemedServiceId}', [UserRedemptionController::class, 'create']);
     Route::post('/userRedemption/store/{redeemedServiceId}', [UserRedemptionController::class, 'store']);
+
+    Route::resource('userRedemption', 'App\Http\Controllers\User\UserRedemptionController');
 
     Route::resource('userScheduled','App\Http\Controllers\User\UserScheduledController');
 
