@@ -29,11 +29,10 @@ use Illuminate\Support\Str;
             @endforeach
             @endif
 
+            <form action="{{url('/userPets')}}" method="POST">
 
-            <form action="{{ route('user.pets.store', ['userId' => $userId]) }}" method="POST">
 
                 @csrf
-                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
 
                 <div class="form-group">

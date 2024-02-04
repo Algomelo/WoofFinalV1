@@ -28,15 +28,12 @@ use Illuminate\Support\Str;
             </div>
             @endforeach
             @endif
-
-
-            <form action="{{ route('user.pets.update',['userId' => $userId, 'petId' => $pet->id]) }}" method="POST">
+            <form action="{{url('/userPets/'.$pet->id)}}" method="POST">
         
 
                 @csrf
                 @method('PUT')
 
-                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
 
                 <div class="form-group">
@@ -61,7 +58,7 @@ use Illuminate\Support\Str;
 
 
                     
-                <button type="submit" class="btn btn-sm btn-primary">Create Pet</button>
+                <button type="submit" class="btn btn-sm btn-primary">Edit Pet</button>
 
             </form>
             

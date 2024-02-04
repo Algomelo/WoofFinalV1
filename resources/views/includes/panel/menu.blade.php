@@ -68,7 +68,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a  class="nav-link "  href="{{ route('user.pets.index' , ['userId' => Auth::id()]) }}">
+    <a class="nav-link " href="{{ url('/userPets')}}">
 
         <i class="ni ni-bullet-list-67 text-red"></i>My Pets
       </a>

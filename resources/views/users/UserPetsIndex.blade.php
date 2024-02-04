@@ -10,8 +10,8 @@
             <div class="col">
               <h3 class="mb-0">My Pets</h3>
             </div>
+            <a href="{{ url('userPets/create')}}" class="btn boton">New pet</a>
 
-            <a  class="boton"  href="{{ route('user.pets.create', ['userId' => $userId]) }}">Add new Pet</a>
 
     </div>        
                 @if($errors->any())
@@ -56,12 +56,12 @@
                         {{ $pet->created_at}}
                     </td>
                     <td>
-
-                        <form action="{{ route('user.pets.destroy', ['userId' => $userId, 'petId' => $pet->id]) }}" method="POST" onsubmit="return confirm('¿Estás seguro?')">
+                    <form action="{{url('/userPets/'.$pet->id)}}" method="POST" onsubmit="return confirm('¿Estás seguro?')">
 
                             @csrf
                             @method('DELETE')
-                            <a href="{{ route('user.pets.edit', ['userId' => $userId, 'petId' => $pet->id]) }}" class="btn boton">Edit</a>
+                            <a href="{{url('/userPets/'.$pet->id.'/edit')}}" class=" btn boton">Edit</a>
+
                             <button type="submit" class="btn boton-eliminar">Eliminar</button>
                         </form>
                     </td>

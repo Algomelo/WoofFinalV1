@@ -59,19 +59,7 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     
     // CRUD PETS
-    Route::get('/user/pets/{userId}', [PetController::class, 'index'])
-    ->name('user.pets.index');
-    Route::get('/user/pets/{userId}/petscreate', [PetController::class, 'create'])
-    ->name('user.pets.create');
-    Route::post('/user/pets/{userId}/petsstore', [PetController::class, 'store'])
-    ->name('user.pets.store');
-    Route::delete('/user/pets/{userId}/destroy/{petId}', [PetController::class, 'destroy'])
-    ->name('user.pets.destroy');
-    Route::get('/user/pets/{userId}/edit/{petId}', [PetController::class, 'edit'])
-    ->name('user.pets.edit');
-    Route::put('/user/pets/{userId}/update/{petId}', [PetController::class, 'update'])
-        ->name('user.pets.update');
-
+    Route::resource('userPets','App\Http\Controllers\User\PetController');
 
     // CRUD AGENDAMIENTO
     Route::resource('userRedemption','App\Http\Controllers\User\UserRedemptionController');
