@@ -81,7 +81,7 @@
                         </ul>
                     </td>
                     <td>
-                    {{ $serviceRequest->user->name}}
+                    {{ optional($serviceRequest->user)->name }}
 
                     </td>
                     <td>
