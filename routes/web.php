@@ -78,7 +78,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/userRedemption/create/{redeemedServiceId}', [UserRedemptionController::class, 'create']);
     Route::post('/userRedemption/store/{redeemedServiceId}', [UserRedemptionController::class, 'store']);
 
-    Route::get('/user/UserScheduledController/index', [UserScheduledController::class, 'index']);
+    Route::resource('userScheduled','App\Http\Controllers\User\UserScheduledController');
 
 
 });
