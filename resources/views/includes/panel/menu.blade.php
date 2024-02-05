@@ -80,7 +80,7 @@
     </li>
     @else
     <li class="nav-item">
-     <a class="nav-link " href="{{ route('walker.IndexScheduled' , ['userId' => Auth::id()]) }}">
+    <a class="nav-link " href="{{ url('/walkersScheduled')}}">
         <i class="ni ni-bullet-list-67 text-red"></i>Assigned Scheduled
       </a>
     </li>

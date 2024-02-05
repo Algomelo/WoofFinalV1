@@ -72,8 +72,7 @@ Route::middleware(['auth', 'user'])->group(function () {
 });
 
 Route::middleware(['auth', 'walker'])->group(function () {
-
-    Route::get('/walker/scheduled/index', [WalkerScheduledController::class, 'index'])->name('walker.IndexScheduled');
+    Route::resource('walkersScheduled','App\Http\Controllers\Walker\WalkerScheduledController');
 
 });
 
