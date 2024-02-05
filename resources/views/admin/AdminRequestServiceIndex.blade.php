@@ -96,7 +96,7 @@
                         <form action="{{ url('/serviceRequests/'.$serviceRequest->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a href="{{ url('/serviceRequests/'.$serviceRequest->id.'/edit') }}" class=" btn boton">See More Info / Edit Info</a>
+                            <a href="{{ url('/serviceRequests/'.$serviceRequest->id.'/edit') }}" class=" btn boton">Edit Request/ Approved Request</a>
                             <button type="submit" class="btn boton-eliminar">Eliminar</button>
 
                     @endif

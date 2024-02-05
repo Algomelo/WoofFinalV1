@@ -9,7 +9,7 @@ use App\Http\Controllers\ContactJobController;
 use App\Http\Controllers\LandingController;
 
 use App\Http\Controllers\User\UserRedemptionController;
-use App\Http\Controllers\walker\WalkerScheduledController;
+use App\Http\Controllers\Walker\WalkerScheduledController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentMail;

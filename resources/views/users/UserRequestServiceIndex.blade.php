@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
         <div class="card-body d-flex justify-content-between">
         <h2> Request Services</h2> <br>
-         <a href="{{ url('userServiceRequest/create')}}" class="btn boton">New Walker</a>
+         <a href="{{ url('userServiceRequest/create')}}" class="btn boton">New Request</a>
 
 
             @if($errors->any())
