@@ -108,3 +108,4 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 });
 
+URL::forceScheme('https');
