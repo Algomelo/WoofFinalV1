@@ -10,6 +10,7 @@ use App\Http\Controllers\LandingController;
 
 use App\Http\Controllers\User\UserRedemptionController;
 use App\Http\Controllers\Walker\WalkerScheduledController;
+use App\Http\Controllers\admin\AdminRedemController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentMail;
@@ -88,6 +89,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::resource('serviceRequests','App\Http\Controllers\admin\ServiceRequestController');
     
+    Route::put('serviceRedems/store/{scheduledId}', [AdminRedemController::class, 'store']);
 
     Route::resource('serviceRedems','App\Http\Controllers\admin\AdminRedemController');
 
@@ -103,6 +105,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/blogs/{ide}/dit', [BlogController::class, 'showEditForm']); // Mostrar formulario de edición
     Route::put('/blogs/{id}', [BlogController::class, 'update']); // Actualizar el blog existente
     // Ruta solicitud de servicios admin
+
 
 
 
