@@ -47,7 +47,7 @@
                 <!-- Projects table -->
                 <table class="table align-items-center table-flush">
                     <thead class="thead-light">
-                    <tr>
+                    <tr class="text-center">
                         <th scope="col">Name</th>
             
 
@@ -63,7 +63,7 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="row">
                                     {{$user->name}}
                                     
@@ -75,7 +75,7 @@
                                     <form action="{{ url('/users/'.$user->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ url('/users/'.$user->id.'/edit') }}" class=" btn boton">See More Info / Edit Info</a>
+                                        <a href="{{ url('/users/'.$user->id.'/edit') }}" class=" btn boton">See More Info / Edit Info</a> <br> <br>
 
                                         <button type="button" class="btn boton-eliminar" data-toggle="modal" data-target="#confirmDeleteModal{{ $user->id }}">
                                             Delete

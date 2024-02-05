@@ -21,9 +21,17 @@ use Illuminate\Support\Str;
 
 
 <div class="card shadow">
-
+        <div class="card-header border-0">
+            <div class="row align-items-center">
+                <div class="col">
+                <h3 class="mb-0">Create Request Service </h3>
+                </div>
+                <div class="col text-right">
+                <a href="{{ url('serviceRequests')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
+                </div>
+            </div>
+        </div>
         <div class="card-body">
-           <h1>Create Request Service </h1>
             @if($errors->any())
             @foreach($errors ->all() as $error)
             <div class="alert alert-danger" role="alert">

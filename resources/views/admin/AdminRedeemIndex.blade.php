@@ -9,8 +9,16 @@ use Illuminate\Support\Str;
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
 <div class="card shadow">
+    <div class="card-header border-0">
+            <div class="row align-items-center">
+                <div class="col">
+                <h3 class="mb-0">Booking Request</h3>
+                </div>
+                <div class="col text-right">
+                </div>
+            </div>     
+        </div>   
         <div class="card-body d-flex justify-content-between">
-        <h2>Booking Request</h2> <br>
             @if($errors->any())
             @foreach($errors ->all() as $error)
             <div class="alert alert-danger" role="alert">

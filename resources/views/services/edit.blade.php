@@ -2,6 +2,7 @@
 
 @section('content')
 
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
       <div class="card shadow">
         <div class="card-header border-0">
@@ -10,7 +11,7 @@
               <h3 class="mb-0">Edit Service</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('services')}}" class="btn btn-sm btn-success"><i class="fas fa-angle-left"></i>Return</a>
+              <a href="{{ url('services')}}" class="btn  boton"><i class="fas fa-angle-left"></i>Return</a>
             </div>
           </div>
         </div>
@@ -41,7 +42,7 @@
                     <label for="name">Price</label>
                     <input type="number" name="price" class="form-control" value="{{old('price',$service->price)}}" required>
                 </div>
-                <button type="submit" class="btn btn-sm btn-primary">Save Service</button>
+                <button type="submit" class="btn boton">Save Service</button>
 
             </form>
             

@@ -30,7 +30,7 @@
           <!-- Projects table -->
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
-              <tr>
+              <tr class="text-center">
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Price</th>
@@ -39,7 +39,7 @@
             </thead>
             <tbody >
                 @foreach ($services as $service)
-                <tr>
+                <tr class="text-center"> 
                     <th scope="row">
                       {{$service->name}}
                     </th>
@@ -54,7 +54,7 @@
                          <form action="{{url('/services/'.$service->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a href="{{url('/services/'.$service->id.'/edit')}}" class="btn boton">Edit</a>
+                            <a href="{{url('/services/'.$service->id.'/edit')}}" class="btn boton">Edit</a><br><br>
                             <button type="submit" class="btn boton-eliminar">Delete</button>
 
                          </form>

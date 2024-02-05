@@ -28,7 +28,7 @@
           <!-- Projects table -->
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
-              <tr>
+              <tr class="text-center">
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">totalprice</th>
@@ -38,7 +38,7 @@
             </thead>
             <tbody>
                 @foreach ($packages as $package)
-                <tr>
+                <tr class="text-center">
                     <th scope="row">
                       {{$package->name}}
                     </th>
@@ -63,7 +63,7 @@
                          <form action="{{url('/packages/'.$package->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a href="{{url('/packages/'.$package->id.'/edit')}}" class="btn boton">Edit</a> 
+                            <a href="{{url('/packages/'.$package->id.'/edit')}}" class="btn boton">Edit</a> <br><br>
                             <button type="submit" class="btn boton-eliminar">Delete</button> 
 
                          </form>

@@ -19,10 +19,10 @@ use Illuminate\Support\Str;
         <div class="card-header border-0">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">Edit Redeem  service</h3>
+              <h3 class="mb-0">Edit booking request</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('users')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
+              <a href="{{ url('serviceRedems')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
             </div>
           </div>
         </div>

@@ -30,7 +30,7 @@
           <!-- Projects table -->
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
-              <tr>
+              <tr class="text-center">
                 <th scope="col">Name</th>
                 <th scope="col">Identication Card</th>
                 <th scope="col">Email</th>
@@ -41,7 +41,7 @@
             </thead>
             <tbody>
                 @foreach ($walkers as $walker)
-                <tr>
+                <tr class="text-center">
                     <th scope="row">
                       {{$walker->name}}
                     </th>
@@ -62,7 +62,7 @@
                          <form action="{{url('/walkers/'.$walker->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a href="{{url('/walkers/'.$walker->id.'/edit')}}" class=" btn boton">Edit</a>
+                            <a href="{{url('/walkers/'.$walker->id.'/edit')}}" class=" btn boton">Edit</a><br><br>
                             <button type="submit" class="btn boton-eliminar">Delete</button>
 
                          </form>

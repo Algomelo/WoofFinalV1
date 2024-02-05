@@ -4,6 +4,8 @@ use Illuminate\Support\Str;
 @extends('layouts.panel')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
 
 
       <div class="card shadow">
@@ -13,7 +15,7 @@ use Illuminate\Support\Str;
               <h3 class="mb-0">New Walker</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('walkers')}}" class="btn btn-sm btn-success"><i class="fas fa-angle-left"></i>Return</a>
+              <a href="{{ url('walkers')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
             </div>
           </div>
         </div>
@@ -55,7 +57,7 @@ use Illuminate\Support\Str;
                   <label for="password">Password</label>
                   <input type="text" name="password" class="form-control" value="{{old('password', Str::random(8))}}">
               </div>
-                <button type="submit" class="btn btn-sm btn-primary">Create Walker</button>
+                <button type="submit" class="btn boton">Create Walker</button>
 
             </form>
             

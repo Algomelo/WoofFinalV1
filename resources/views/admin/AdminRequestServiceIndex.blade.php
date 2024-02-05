@@ -8,12 +8,10 @@
     <div class="card-header border-0">
         <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">Request Services</h3>
+              <h3 class="mb-0">Service Requests</h3>
             </div>
             <div class="col text-right">
                 <a href="{{ url('serviceRequests/create')}}" class="btn boton">New Service Request</a>
-
-                
             </div>
         </div>     
     </div>           
@@ -37,7 +35,7 @@
         <!-- Projects table -->
         <table class="table align-items-center table-flush">
             <thead class="thead-light">
-                <tr>
+                <tr class="text-center">
                     <th scope="col"># Request</th>
                     <th scope="col">Comment</th>
                     <th scope="col">Price</th>
@@ -50,7 +48,7 @@
             </thead>
             <tbody style="background:white">
                 @foreach($serviceRequests as $serviceRequest)
-                <tr>
+                <tr class="text-center">
                     <th scope="row">
                         {{ $uniqueNumbers[$loop->index] }}
                     </th>
@@ -91,13 +89,13 @@
                     {{ $serviceRequest->created_at}}
 
                     </td>
-                    <td>
+                    <td class="text-center"> 
                     @if($serviceRequest->state !== 'passed')
                         <form action="{{ url('/serviceRequests/'.$serviceRequest->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a href="{{ url('/serviceRequests/'.$serviceRequest->id.'/edit') }}" class=" btn boton">Edit Request/ Approved Request</a>
-                            <button type="submit" class="btn boton-eliminar">Eliminar</button>
+                            <a href="{{ url('/serviceRequests/'.$serviceRequest->id.'/edit') }}" class=" btn boton">Approve services / Edit requests</a><br><br>
+                            <button type="submit" class="btn boton-eliminar">Delete Request</button>
 
                     @endif
                         </form>
