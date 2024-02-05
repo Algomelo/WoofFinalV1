@@ -8,7 +8,7 @@ use App\Http\Controllers\ContactForm;
 use App\Http\Controllers\ContactJobController;
 use App\Http\Controllers\LandingController;
 
-use App\Http\Controllers\user\UserRedemptionController;
+use App\Http\Controllers\User\UserRedemptionController;
 use App\Http\Controllers\walker\WalkerScheduledController;
 
 use Illuminate\Support\Facades\Mail;
