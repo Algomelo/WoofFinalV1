@@ -14,6 +14,130 @@ use Illuminate\Support\Str;
             color: red;
         }
     </style>
+@if(!auth()->user()->show_manual)
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Aquí puedes mostrar una ventana modal o ejecutar un script -->
+    <script>
+        $(document).ready(function() {
+            // Muestra la modal principal cuando se carga la página
+            $('#myModal').modal('show');
+
+            // Redirige a otra modal cuando se oculta la modal principal
+            $('#myModal').on('hidden.bs.modal', function () {
+                // Aquí decides a qué modal redirigir
+                $('#includePackagesSectionModal').modal('show'); // Muestra la modal de includePackagesSection después de que se cierre la modal principal
+            });
+
+            // Desplázate hasta el final de la página solo después de que se cierre la modal de includePackagesSection
+            $('#includePackagesSectionModal').on('hidden.bs.modal', function () {
+                $('html, body').animate({ scrollTop: $(document).height() }, 'slow', function() {
+                    // Una vez que el desplazamiento se ha completado, muestra la última modal
+                    $('#SendToRequest').modal('show');
+                });
+            });
+        });
+    </script>
+
+@endif
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Instrucciones para solicitar un servicio</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>In this section, you can redeem the selected service. Please ensure all fields are filled out, and if you haven't already, include your pet in the pets section.</p>
+                        <img alt="Image placeholder" src="{{asset('img/redemcreate.png')}}" class="img-fluid">
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
+                            @method('PUT') <!-- Agrega el método PUT -->
+                            @csrf
+                            <div class="form-check">
+                                <input type="hidden" name="noMostrarManual" value="0"> <!-- Valor predeterminado, se enviará si el checkbox no está marcado -->
+                                <input class="form-check-input" type="checkbox" id="noMostrarManual" name="noMostrarManual" value="1" onchange="updateCheckboxValue(this)">
+                                    <label class="form-check-label" for="noMostrarManual">
+                                        Hide this message in the future
+                                    </label>
+                                </div>
+                        </form>
+                        <button type="button" class="btn boton" data-dismiss="modal" onclick="submitForm()">Close</button> <!-- Cambiar a tipo "button" -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="includePackagesSectionModal" tabindex="-1" role="dialog" aria-labelledby="includePackagesSectionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="includePackagesSectionModalLabel">Instrucciones para seleccionar un paquete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>It's essential to select the number of pets and the desired redemption duration for your services. Remember, each selected pet and day will deduct the corresponding unit from the available service.</p>
+                        <img alt="Image placeholder" src="{{asset('img/redemcreate1.png')}}" class="img-fluid">
+                    </div>
+                    <div class="modal-footer">
+                        <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
+                            @method('PUT') <!-- Agrega el método PUT -->
+                            @csrf
+                            <div class="form-check">
+                                <input type="hidden" name="noMostrarManual" value="0"> <!-- Valor predeterminado, se enviará si el checkbox no está marcado -->
+                                <input class="form-check-input" type="checkbox" id="noMostrarManual" name="noMostrarManual" value="1" onchange="updateCheckboxValue(this)">
+                                    <label class="form-check-label" for="noMostrarManual">
+                                        Hide this message in the future
+                                    </label>
+                                </div>
+
+                        </form>
+                        <button type="button" class="btn boton" data-dismiss="modal" onclick="submitForm()">Close</button> <!-- Cambiar a tipo "button" -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="SendToRequest" tabindex="-1" role="dialog" aria-labelledby="SendToRequestLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="SendToRequestLabel">Instrucciones para seleccionar un paquete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please remember to submit your request so that we can receive your information and schedule your service. (Keep in mind that once your request is scheduled, you can view it in the schedules section.)</p>
+                        <img alt="Image placeholder" src="{{asset('img/redemcreate2.png')}}" class="img-fluid">
+                    </div>
+                    <div class="modal-footer">
+                        <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
+                            @method('PUT') <!-- Agrega el método PUT -->
+                            @csrf
+                            <div class="form-check">
+                                <input type="hidden" name="noMostrarManual" value="0"> <!-- Valor predeterminado, se enviará si el checkbox no está marcado -->
+                                <input class="form-check-input" type="checkbox" id="noMostrarManual" name="noMostrarManual" value="1" onchange="updateCheckboxValue(this)">
+                                    <label class="form-check-label" for="noMostrarManual">
+                                        Hide this message in the future
+                                    </label>
+                                </div>
+
+                        </form>
+                        <button type="button" class="btn boton" data-dismiss="modal" onclick="submitForm()">Close</button> <!-- Cambiar a tipo "button" -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
       <div class="card shadow">
         <div class="card-header border-0">

@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-@if(auth()->user()->show_manual)
+@if(auth()->check() && auth()->user()->role == 'user' && !auth()->user()->show_manual)
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <!-- Aquí puedes mostrar una ventana modal o ejecutar un script -->
@@ -20,25 +20,46 @@ use Illuminate\Support\Str;
 
         <!-- Agrega aquí el código HTML para la ventana modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Instrucciones para solicitar un servicio</h5>
+                    <div class="modal-header" style="padding-bottom:0rem;">
+                        <h4 class="modal-title" id="exampleModalLabel">Guidelines for Service Requests</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>This section showcases all services previously approved by the administrator and now available for redemption. Each redeemed service will incur a discount. It's essential to create at least one pet in the pets section before redeeming a service to associate it properly.</p>
-                        <img src="./images/servicerequestindex.png" alt="Descripción de la imagen">
+                        <!-- Contenido para pantallas grandes -->
+                        <div class="d-none d-lg-block">
+                        <p>In this section, you can browse through the available services for redemption. Please remember that before redeeming a service, you need to add at least one pet to the system in the pets section. Also, once your request is scheduled, you'll find it listed in the schedules section."</p>
+                            <img  src="{{asset('img/redemindex.png')}}"  class="img-fluid">
+                        </div>
+                        <!-- Contenido para pantallas pequeñas -->
+                        <div class="d-lg-none">
+                            <p>"Contenido alternativo para pantallas pequeñas."</p>
+                            <img  src="{{asset('img/requestindex.png')}}"  class="img-fluid">
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                        <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
+                            @method('PUT') <!-- Agrega el método PUT -->
+                            @csrf
+                            <div class="form-check">
+                                <input type="hidden" name="noMostrarManual" value="0"> <!-- Valor predeterminado, se enviará si el checkbox no está marcado -->
+                                <input class="form-check-input" type="checkbox" id="noMostrarManual" name="noMostrarManual" value="1" onchange="updateCheckboxValue(this)">
+                                    <label class="form-check-label" for="noMostrarManual">
+                                        Hide this message in the future
+                                    </label>
+                                </div>
+
+                        </form>
+                        <button type="button" class="btn boton" data-dismiss="modal" onclick="submitForm()">Close</button> <!-- Cambiar a tipo "button" -->
+
                     </div>
                 </div>
             </div>
         </div>
     @endif
+
 
 
 
@@ -77,7 +98,7 @@ use Illuminate\Support\Str;
                     <td>{{ $redeemedService->quantity }}</td>
                     <td>{{ $redeemedService->state }}</td> 
                     <td> 
-                      <a href="{{ url('userRedemption/create/'.$redeemedService->id)}}" class="btn boton">Redimir</a><br><br>
+                      <a href="{{ url('userRedemption/create/'.$redeemedService->id)}}" class="btn boton">Redeem service</a><br><br>
 
                     </td> 
                 </tr>

@@ -48,8 +48,8 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="modal-body">
                         <p>"Select from our range of custom package options or take advantage of specially discounted packages tailored just for you.</p>
-                        <img src="images/requestcreate.png" alt="Descripción de la imagen" class="img-fluid">
-                        <img src="./images/requestindex.png" alt="Descripción de la imagen" class="img-fluid">
+                        <img alt="Image placeholder" src="{{asset('img/requestcreate.png')}}" class="img-fluid">
+
 
                     </div>
                     <div class="modal-footer">
@@ -63,17 +63,15 @@ use Illuminate\Support\Str;
                                         Hide this message in the future
                                     </label>
                                 </div>
-
                         </form>
                         <button type="button" class="btn boton" data-dismiss="modal" onclick="submitForm()">Close</button> <!-- Cambiar a tipo "button" -->
-
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="modal fade" id="includePackagesSectionModal" tabindex="-1" role="dialog" aria-labelledby="includePackagesSectionModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="includePackagesSectionModalLabel">Instrucciones para seleccionar un paquete</h5>
@@ -83,7 +81,7 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="modal-body">
                         <p>If you choose a personalized package, you'll enjoy the freedom to tailor the amount of each service according to your preferences. Otherwise, existing packages will be added as separate units.</p>
-                        <img src="images/servicerequestcreate.png" alt="Descripción de la imagen">
+                        <img alt="Image placeholder" src="{{asset('img/requestcreate1.png')}}" class="img-fluid">
                     </div>
                     <div class="modal-footer">
                         <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
@@ -105,7 +103,7 @@ use Illuminate\Support\Str;
             </div>
         </div>
         <div class="modal fade" id="SendToRequest" tabindex="-1" role="dialog" aria-labelledby="SendToRequestLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="SendToRequestLabel">Instrucciones para seleccionar un paquete</h5>
@@ -115,7 +113,7 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="modal-body">
                         <p>After choosing your package, remember to submit your request promptly.</p>
-                        <img src="images/servicerequestcreate.png" alt="Descripción de la imagen">
+                        <img alt="Image placeholder" src="{{asset('img/requestcreate2.png')}}" class="img-fluid">
                     </div>
                     <div class="modal-footer">
                         <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
@@ -260,7 +258,7 @@ use Illuminate\Support\Str;
                                     </div>
                                     <div class="container d-block" style="text-align:center">
                                         <input name="comment" placeholder="Make a comment" type="text"  style="width:80%; height 15h; border-radius:3px; padding:30px"><br>
-                                        <button type="submit" class="btn btn-sm btn-primary w-20" style="margin: 14px 0px;">Send Request</button>
+                                        <button type="submit" class="btn boton " style="margin: 14px 0px;">Send Request</button>
                                     </div>
                                 </form>
                                

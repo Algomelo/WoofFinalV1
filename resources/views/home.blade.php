@@ -14,7 +14,7 @@
 
 
     <!-- Aquí verificamos si el campo show_manual es verdadero -->
-    @if(!auth()->user()->show_manual)
+    @if(auth()->check() && auth()->user()->role == 'user' && !auth()->user()->show_manual)
         <!-- Aquí puedes mostrar una ventana modal o ejecutar un script -->
         <script>
             // Ejemplo de script que muestra una ventana modal
@@ -28,15 +28,14 @@
           <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Instrucciones para solicitar un servicio</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Guidelines for Service Requests</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <p>Discover our tailored services by selecting the 'Service Request' option.</p>
-
-                        <img src="images/home.png" alt="Descripción de la imagen" class="img-fluid">
+                        <img  src="{{asset('img/home.png')}}"  class="img-fluid">
                     </div>
                     <div class="modal-footer">
                         <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
