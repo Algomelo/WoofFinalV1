@@ -48,9 +48,11 @@
 
     @elseif(auth()->check() && auth()->user()->role == 'user')
     
-    
-
-    
+    <li class="nav-item">
+    <a class="nav-link " href="{{ url('/home')}}">
+        <i class="ni ni-bullet-list-67 text-red"></i>My Profile
+      </a>
+    </li>    
     <li class="nav-item">
       <a class="nav-link " href="{{ url('/userServiceRequest')}}">
         <i class="ni ni-bullet-list-67 text-red"></i>Request Service
@@ -73,11 +75,6 @@
     <a class="nav-link " href="{{ url('/userPets')}}">
 
         <i class="ni ni-bullet-list-67 text-red"></i>My Pets
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link " href="./examples/tables.html">
-        <i class="ni ni-bullet-list-67 text-red"></i>Profile
       </a>
     </li>
 
