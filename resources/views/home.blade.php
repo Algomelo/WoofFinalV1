@@ -35,7 +35,7 @@
                     </div>
                     <div class="modal-body">
                         <p>Discover our tailored services by selecting the 'Service Request' option.</p>
-                        <img  src="{{asset('img/home.png')}}"  class="img-fluid">
+                        <img  src="{{asset('img/home.PNG')}}"  class="img-fluid">
                     </div>
                     <div class="modal-footer">
                         <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
