@@ -31,12 +31,12 @@ use Illuminate\Support\Str;
                         <!-- Contenido para pantallas grandes -->
                         <div class="d-none d-lg-block">
                         <p>In this section, you can browse through the available services for redemption. Please remember that before redeeming a service, you need to add at least one pet to the system in the pets section. Also, once your request is scheduled, you'll find it listed in the schedules section."</p>
-                            <img  src="{{asset('img/redemindex.png')}}"  class="img-fluid">
+                            <img  src="{{asset('img/redemindex.PNG')}}"  class="img-fluid">
                         </div>
                         <!-- Contenido para pantallas pequeñas -->
                         <div class="d-lg-none">
                             <p>"Contenido alternativo para pantallas pequeñas."</p>
-                            <img  src="{{asset('img/requestindex.png')}}"  class="img-fluid">
+                            <img  src="{{asset('img/requestindex.PNG')}}"  class="img-fluid">
                         </div>
                     </div>
                     <div class="modal-footer">

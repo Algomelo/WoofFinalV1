@@ -48,7 +48,7 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="modal-body">
                         <p>"Select from our range of custom package options or take advantage of specially discounted packages tailored just for you.</p>
-                        <img alt="Image placeholder" src="{{asset('img/requestcreate.png')}}" class="img-fluid">
+                        <img alt="Image placeholder" src="{{asset('img/requestcreate.PNG')}}" class="img-fluid">
 
 
                     </div>
@@ -81,7 +81,7 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="modal-body">
                         <p>If you choose a personalized package, you'll enjoy the freedom to tailor the amount of each service according to your preferences. Otherwise, existing packages will be added as separate units.</p>
-                        <img alt="Image placeholder" src="{{asset('img/requestcreate1.png')}}" class="img-fluid">
+                        <img alt="Image placeholder" src="{{asset('img/requestcreate1.PNG')}}" class="img-fluid">
                     </div>
                     <div class="modal-footer">
                         <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
@@ -113,7 +113,7 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="modal-body">
                         <p>After choosing your package, remember to submit your request promptly.</p>
-                        <img alt="Image placeholder" src="{{asset('img/requestcreate2.png')}}" class="img-fluid">
+                        <img alt="Image placeholder" src="{{asset('img/requestcreate2.PNG')}}" class="img-fluid">
                     </div>
                     <div class="modal-footer">
                         <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">

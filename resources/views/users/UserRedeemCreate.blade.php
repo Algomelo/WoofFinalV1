@@ -52,7 +52,7 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="modal-body">
                         <p>In this section, you can redeem the selected service. Please ensure all fields are filled out, and if you haven't already, include your pet in the pets section.</p>
-                        <img alt="Image placeholder" src="{{asset('img/redemcreate.png')}}" class="img-fluid">
+                        <img alt="Image placeholder" src="{{asset('img/redemcreate.PNG')}}" class="img-fluid">
 
 
                     </div>
@@ -85,7 +85,7 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="modal-body">
                         <p>It's essential to select the number of pets and the desired redemption duration for your services. Remember, each selected pet and day will deduct the corresponding unit from the available service.</p>
-                        <img alt="Image placeholder" src="{{asset('img/redemcreate1.png')}}" class="img-fluid">
+                        <img alt="Image placeholder" src="{{asset('img/redemcreate1.PNG')}}" class="img-fluid">
                     </div>
                     <div class="modal-footer">
                         <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
@@ -117,7 +117,7 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="modal-body">
                         <p>Please remember to submit your request so that we can receive your information and schedule your service. (Keep in mind that once your request is scheduled, you can view it in the schedules section.)</p>
-                        <img alt="Image placeholder" src="{{asset('img/redemcreate2.png')}}" class="img-fluid">
+                        <img alt="Image placeholder" src="{{asset('img/redemcreate2.PNG')}}" class="img-fluid">
                     </div>
                     <div class="modal-footer">
                         <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
