@@ -5,6 +5,8 @@
         <!--  MENU USUARIOS --->
         <!--  MENU USUARIOS --->
         <!--  MENU USUARIOS --->
+        <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
@@ -61,38 +63,52 @@
 
 
 
+        @if(auth()->check() && auth()->user()->role== 'user')
 
         <div class="row">
             <div class="col-md-12 mb-4">
               <div class="card">
                   <div class="card-body">
-                      <h5 class="card-title">Actualizar Datos Personales</h5>
+                      <h5 class="card-title">Update Personal Information</h5>
+                      <form action="{{ route('users.update', [auth()->user()->id]) }}" method="POST" enctype="multipart/form-data">
                           @csrf
                           @method('PUT')
 
                           <div class="form-group">
-                              <label for="name">Nombre</label>
+                              <label for="name">Name</label>
                               <input type="text" class="form-control" id="name" name="name" value="{{ auth()->user()->name }}">
                           </div>
 
                           <div class="form-group">
-                              <label for="email">Correo electrónico</label>
+                              <label for="email">Email</label>
                               <input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}">
+                          </div>
+                          <div class="form-group">
+                              <label for="cedula">Cedula</label>
+                              <input type="number" class="form-control" id="cedula" name="cedula" value="{{ auth()->user()->cedula }}">
+                          </div>
+                          <div class="form-group">
+                              <label for="address">Cedula</label>
+                              <input type="text" class="form-control" id="address" name="address" value="{{ auth()->user()->address }}">
+                          </div>
+                          <div class="form-group">
+                              <label for="text">Phone</label>
+                              <input type="text" class="form-control" id="phohe" name="phohe" value="{{ auth()->user()->phone }}">
                           </div>
 
                           <div class="form-group">
-                              <label for="photo">Foto de Perfil</label>
+                              <label for="photo">Profile Picture</label>
                               <input type="file" class="form-control-file" id="photo" name="photo">
                           </div>
 
-                          <button type="submit" class="btn btn-primary">Actualizar Datos</button>
+                          <button type="submit" class="btn boton">Update Information</button>
                       </form>
                   </div>
               </div>
             </div>    
         </div>    
       
-
+@endif
 
         <!-- FIN MENU USUARIOS --->
         <!-- FIN MENU USUARIOS --->

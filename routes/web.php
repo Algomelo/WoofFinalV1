@@ -12,6 +12,7 @@ use App\Http\Controllers\User\UserRedemptionController;
 use App\Http\Controllers\Walker\WalkerScheduledController;
 use App\Http\Controllers\admin\AdminRedemController;
 use App\Http\Controllers\UserPreferenceController;
+use App\Http\Controllers\admin\UserController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentMail;
@@ -70,6 +71,8 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::resource('userRedemption', 'App\Http\Controllers\User\UserRedemptionController');
 
     Route::resource('userScheduled','App\Http\Controllers\User\UserScheduledController');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+    
 
 
 });
@@ -80,9 +83,10 @@ Route::middleware(['auth', 'walker'])->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('users','App\Http\Controllers\admin\UserController');
+
     Route::resource('walkers','App\Http\Controllers\admin\WalkerController');
     // Ruta Usuarios admin
-    Route::resource('users','App\Http\Controllers\admin\UserController');
     Route::post('/delete-selected-users', 'App\Http\Controllers\admin\UserController@deleteSelectedUsers');
     // CRUD de Servicios //* //*
     Route::resource('services','App\Http\Controllers\admin\ServiceController');

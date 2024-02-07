@@ -99,12 +99,18 @@ class UserController extends Controller
             'phone.required'         => 'El numero telefonico es obligatorio',
 
         ];
+        dd($request->hasFile('photo'));
 
         $this->validate($request,$rules,$messages);
         $user = User::users()->findOrFail($id);
 
         $data = $request->only('name','email','cedula','address','phone');
         $password =$request->input('password');
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $path = $photo->store('profile_photos', 'public');
+            $user->photo = $path;
+        }
 
         if($password)
         $data['password'] = bcrypt($password);
