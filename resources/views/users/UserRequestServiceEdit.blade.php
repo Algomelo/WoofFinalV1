@@ -47,7 +47,7 @@ use Illuminate\Support\Str;
 
                                 </div>
 
-                                 <form action="{{ route('user.updateServiceRequest', ['serviceRequestId' => $serviceRequest->id]) }}" method="post">
+                                <form action="{{ url('/userServiceRequest/'.$serviceRequest->id) }}" method="POST">
 
                                         @csrf
                                         @method('PUT')

@@ -75,6 +75,10 @@
   
         
         <!-- Navigation -->
+      
+
+    
+        
         @include('includes.panel.menu')
 
       </div>

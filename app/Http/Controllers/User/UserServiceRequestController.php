@@ -45,7 +45,6 @@ class UserServiceRequestController extends Controller
         // Validar y procesar los datos del formulario según sea necesario
         $validatedData = $request->validate([
             // ... (tus reglas de validación)
-            'comment' => 'required',
             'user_id' => 'required',
 
         ]);
@@ -96,9 +95,9 @@ class UserServiceRequestController extends Controller
 
 
 
-    public function edit($userId, $serviceRequestId)
+    public function edit( $serviceRequestId)
     {
-        
+        $userId = Auth::id();
         $userId = User::findOrFail($userId);
         $serviceRequest = ServiceRequest::findOrFail($serviceRequestId);
         $allPackages = Package::all();

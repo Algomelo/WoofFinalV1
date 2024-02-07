@@ -7,7 +7,38 @@ use Illuminate\Support\Str;
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+@if(auth()->user()->show_manual)
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+        <!-- Aquí puedes mostrar una ventana modal o ejecutar un script -->
+        <script>
+            // Ejemplo de script que muestra una ventana modal
+            $(document).ready(function() {
+                $('#myModal').modal('show'); // Asegúrate de que el ID del modal coincida con el que estás utilizando
+            });
+        </script>
+
+        <!-- Agrega aquí el código HTML para la ventana modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Instrucciones para solicitar un servicio</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>This section showcases all services previously approved by the administrator and now available for redemption. Each redeemed service will incur a discount. It's essential to create at least one pet in the pets section before redeeming a service to associate it properly.</p>
+                        <img src="./images/servicerequestindex.png" alt="Descripción de la imagen">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 
 
 

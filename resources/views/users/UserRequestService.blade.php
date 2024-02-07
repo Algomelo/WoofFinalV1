@@ -5,13 +5,137 @@ use Illuminate\Support\Str;
 @extends('layouts.panel')
 
 @section('content')
-<style>
-
-</style>
-
-
 
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
+
+
+@if(!auth()->user()->show_manual)
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Aquí puedes mostrar una ventana modal o ejecutar un script -->
+    <script>
+        $(document).ready(function() {
+            // Muestra la modal principal cuando se carga la página
+            $('#myModal').modal('show');
+
+            // Redirige a otra modal cuando se oculta la modal principal
+            $('#myModal').on('hidden.bs.modal', function () {
+                // Aquí decides a qué modal redirigir
+                $('#includePackagesSectionModal').modal('show'); // Muestra la modal de includePackagesSection después de que se cierre la modal principal
+            });
+
+            // Desplázate hasta el final de la página solo después de que se cierre la modal de includePackagesSection
+            $('#includePackagesSectionModal').on('hidden.bs.modal', function () {
+                $('html, body').animate({ scrollTop: $(document).height() }, 'slow', function() {
+                    // Una vez que el desplazamiento se ha completado, muestra la última modal
+                    $('#SendToRequest').modal('show');
+                });
+            });
+        });
+    </script>
+
+@endif
+        <!-- Agrega aquí el código HTML para la ventana modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Instrucciones para solicitar un servicio</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>"Select from our range of custom package options or take advantage of specially discounted packages tailored just for you.</p>
+                        <img src="images/requestcreate.png" alt="Descripción de la imagen" class="img-fluid">
+                        <img src="./images/requestindex.png" alt="Descripción de la imagen" class="img-fluid">
+
+                    </div>
+                    <div class="modal-footer">
+                        <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
+                            @method('PUT') <!-- Agrega el método PUT -->
+                            @csrf
+                            <div class="form-check">
+                                <input type="hidden" name="noMostrarManual" value="0"> <!-- Valor predeterminado, se enviará si el checkbox no está marcado -->
+                                <input class="form-check-input" type="checkbox" id="noMostrarManual" name="noMostrarManual" value="1" onchange="updateCheckboxValue(this)">
+                                    <label class="form-check-label" for="noMostrarManual">
+                                        Hide this message in the future
+                                    </label>
+                                </div>
+
+                        </form>
+                        <button type="button" class="btn boton" data-dismiss="modal" onclick="submitForm()">Close</button> <!-- Cambiar a tipo "button" -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="includePackagesSectionModal" tabindex="-1" role="dialog" aria-labelledby="includePackagesSectionModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="includePackagesSectionModalLabel">Instrucciones para seleccionar un paquete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>If you choose a personalized package, you'll enjoy the freedom to tailor the amount of each service according to your preferences. Otherwise, existing packages will be added as separate units.</p>
+                        <img src="images/servicerequestcreate.png" alt="Descripción de la imagen">
+                    </div>
+                    <div class="modal-footer">
+                        <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
+                            @method('PUT') <!-- Agrega el método PUT -->
+                            @csrf
+                            <div class="form-check">
+                                <input type="hidden" name="noMostrarManual" value="0"> <!-- Valor predeterminado, se enviará si el checkbox no está marcado -->
+                                <input class="form-check-input" type="checkbox" id="noMostrarManual" name="noMostrarManual" value="1" onchange="updateCheckboxValue(this)">
+                                    <label class="form-check-label" for="noMostrarManual">
+                                        Hide this message in the future
+                                    </label>
+                                </div>
+
+                        </form>
+                        <button type="button" class="btn boton" data-dismiss="modal" onclick="submitForm()">Close</button> <!-- Cambiar a tipo "button" -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="SendToRequest" tabindex="-1" role="dialog" aria-labelledby="SendToRequestLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="SendToRequestLabel">Instrucciones para seleccionar un paquete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>After choosing your package, remember to submit your request promptly.</p>
+                        <img src="images/servicerequestcreate.png" alt="Descripción de la imagen">
+                    </div>
+                    <div class="modal-footer">
+                        <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
+                            @method('PUT') <!-- Agrega el método PUT -->
+                            @csrf
+                            <div class="form-check">
+                                <input type="hidden" name="noMostrarManual" value="0"> <!-- Valor predeterminado, se enviará si el checkbox no está marcado -->
+                                <input class="form-check-input" type="checkbox" id="noMostrarManual" name="noMostrarManual" value="1" onchange="updateCheckboxValue(this)">
+                                    <label class="form-check-label" for="noMostrarManual">
+                                        Hide this message in the future
+                                    </label>
+                                </div>
+
+                        </form>
+                        <button type="button" class="btn boton" data-dismiss="modal" onclick="submitForm()">Close</button> <!-- Cambiar a tipo "button" -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -147,7 +271,30 @@ use Illuminate\Support\Str;
 
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script >
+        function updateCheckboxValue(checkbox) {
+        if (checkbox.checked) {
+            checkbox.value = "1"; // Si está marcado, cambia el valor a 1 (verdadero)
+        } else {
+            checkbox.value = "0"; // Si no está marcado, cambia el valor a 0 (falso)
+        }
+    }
 
+    function submitForm() {
+        var form = document.getElementById("manualPreferenceForm");
+        var formData = new FormData(form);
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", form.action);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                // Acciones adicionales después de que el formulario se envíe con éxito
+                console.log("Formulario enviado correctamente");
+            }
+        };
+        xhr.send(formData);
+    }
+</script>
 
 <script>
 
@@ -167,11 +314,13 @@ use Illuminate\Support\Str;
 
             // Cambia el color del texto y del fondo para reflejar la sección activa
             if (sectionId == "includePackagesSection") {
+
                 textoPaquete.style.color = '#fff';
                 textoPaquete.style.backgroundColor = "#F2761D";
                 textoServicio.style.backgroundColor = "#fff";
                 textoServicio.style.color = 'black'; // Cambia el color del otro enlace
             } else if (sectionId == "includeServicesSection") {
+
                 textoServicio.style.color = 'white';
                 textoServicio.style.backgroundColor = "#F2761D";
                 textoPaquete.style.backgroundColor = "#fff";
@@ -192,7 +341,9 @@ use Illuminate\Support\Str;
             }
         });
     });
+
 </script>
+
 @endsection
 
 

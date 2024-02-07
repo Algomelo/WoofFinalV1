@@ -48,7 +48,9 @@
 
     @elseif(auth()->check() && auth()->user()->role == 'user')
     
+    
 
+    
     <li class="nav-item">
       <a class="nav-link " href="{{ url('/userServiceRequest')}}">
         <i class="ni ni-bullet-list-67 text-red"></i>Request Service
@@ -78,6 +80,9 @@
         <i class="ni ni-bullet-list-67 text-red"></i>Profile
       </a>
     </li>
+
+
+
     @else
     <li class="nav-item">
     <a class="nav-link " href="{{ url('/walkersScheduled')}}">

@@ -11,6 +11,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\User\UserRedemptionController;
 use App\Http\Controllers\Walker\WalkerScheduledController;
 use App\Http\Controllers\admin\AdminRedemController;
+use App\Http\Controllers\UserPreferenceController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentMail;
@@ -44,6 +45,7 @@ Route::view('/contactjob','contactjob') ->name('contactjob');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
 // ... otras rutas
 
 
@@ -52,6 +54,7 @@ Auth::routes();
 
 
 Route::middleware(['auth', 'user'])->group(function () {
+    Route::put('manualPreference', [UserPreferenceController::class, 'updateShowManualPreference'])->name('update.show_manual_preference');
     Route::resource('userServiceRequest','App\Http\Controllers\User\UserServiceRequestController');
 
     // CRUD SERVICE REQUEST USER
@@ -110,4 +113,4 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 });
 
-URL::forceScheme('https');
+//URL::forceScheme('https');

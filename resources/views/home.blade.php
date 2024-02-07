@@ -3,7 +3,61 @@
 @section('content')
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script>
+    // Ejemplo de script que muestra una ventana modal
+    $(document).ready(function() {
+        $('#myModal').modal('show'); // Asegúrate de que el ID del modal coincida con el que estás utilizando
+    });
+</script>
+
+
+    <!-- Aquí verificamos si el campo show_manual es verdadero -->
+    @if(!auth()->user()->show_manual)
+        <!-- Aquí puedes mostrar una ventana modal o ejecutar un script -->
+        <script>
+            // Ejemplo de script que muestra una ventana modal
+            $(document).ready(function() {
+                $('#myModal').modal('show'); // Asegúrate de que el ID del modal coincida con el que estás utilizando
+            });
+        </script>
+
+        <!-- Agrega aquí el código HTML para la ventana modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Instrucciones para solicitar un servicio</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Discover our tailored services by selecting the 'Service Request' option.</p>
+
+                        <img src="images/home.png" alt="Descripción de la imagen" class="img-fluid">
+                    </div>
+                    <div class="modal-footer">
+                        <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
+                            @method('PUT') <!-- Agrega el método PUT -->
+                            @csrf
+                            <div class="form-check">
+                                <input type="hidden" name="noMostrarManual" value="0"> <!-- Valor predeterminado, se enviará si el checkbox no está marcado -->
+                                <input class="form-check-input" type="checkbox" id="noMostrarManual" name="noMostrarManual" value="1" onchange="updateCheckboxValue(this)">
+                                    <label class="form-check-label" for="noMostrarManual">
+                                        Hide this message in the future
+                                    </label>
+                                </div>
+
+                        </form>
+                        <button type="button" class="btn boton" data-dismiss="modal" onclick="submitForm()">Close</button> <!-- Cambiar a tipo "button" -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 <div class="row">
 
     <div class="col-md-12 mb-4">
@@ -16,11 +70,11 @@
                         {{ session('status') }}
                     </div>
                 @endif
-
                 {{ __('You are logged in!') }}
             </div>
         </div>
     </div>
+    
 
     <div class="col-xl-8 mb-5 mb-xl-0">
       <div class="card bg-gradient-default shadow">
@@ -296,4 +350,7 @@
       </div>
     </div>
   </div>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="js/prefferGuide.js" ></script>
+
 @endsection
