@@ -99,7 +99,6 @@ class UserController extends Controller
             'phone.required'         => 'El numero telefonico es obligatorio',
 
         ];
-        dd($request->hasFile('photo'));
 
         $this->validate($request,$rules,$messages);
         $user = User::users()->findOrFail($id);

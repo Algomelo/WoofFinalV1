@@ -97,7 +97,12 @@
                 <a class="nav-link " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="container text-center d-block">
                       <span class="avatar avatar-sm rounded-circle">
-                        <img alt="Image placeholder" src="{{asset('img/theme/team-4-800x800.jpg')}}">
+                        <!-- Mostrar la foto de perfil del usuario -->
+                          @if(auth()->user()->photo)
+                              <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="Foto de perfil">
+                          @else
+                              <img alt="Image placeholder" src="{{asset('img/theme/team-4-800x800.jpg')}}">
+                          @endif
                       </span><br>
                       <span>
                           @if(auth()->check() && auth()->user()->name)

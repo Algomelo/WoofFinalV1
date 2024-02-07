@@ -9,12 +9,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script>
-    // Ejemplo de script que muestra una ventana modal
-    $(document).ready(function() {
-        $('#myModal').modal('show'); // Asegúrate de que el ID del modal coincida con el que estás utilizando
-    });
-</script>
 
 
     <!-- Aquí verificamos si el campo show_manual es verdadero -->
