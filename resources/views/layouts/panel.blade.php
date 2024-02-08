@@ -99,7 +99,7 @@
                       <span class="avatar avatar-sm rounded-circle">
                         <!-- Mostrar la foto de perfil del usuario -->
                           @if(auth()->user()->photo)
-                              <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="Foto de perfil">
+                              <img src="{{ asset('storage/images/' . $user->photo) }}" alt="Profile Picture">
                           @else
                               <img alt="Image placeholder" src="{{asset('img/theme/team-4-800x800.jpg')}}">
                           @endif

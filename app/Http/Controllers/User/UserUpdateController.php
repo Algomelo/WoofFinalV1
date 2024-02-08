@@ -47,6 +47,11 @@ class UserUpdateController extends Controller
         if($password)
         $data['password'] = bcrypt($password);
         $user->fill($data)->save();
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('public/images');
+            $user->photo = basename($imagePath);
+            $user->save();
+        }
 
 
 
