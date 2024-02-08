@@ -63,38 +63,37 @@
             <div class="col-md-12 mb-4">
               <div class="card">
                   <div class="card-body">
-                      <h5 class="card-title">Update Personal Information</h5>
-                      <form action="{{ route('users.update', [auth()->user()->id]) }}" method="POST" enctype="multipart/form-data">
+                      <h5 class="card-title">My Profile</h5>
+
+                      <form action="{{url('userUpdate',$user->id)}}" method="POST" enctype="multipart/form-data">
                           @csrf
                           @method('PUT')
-
-                          <div class="form-group">
-                              <label for="name">Name</label>
-                              <input type="text" class="form-control" id="name" name="name" value="{{ auth()->user()->name }}">
-                          </div>
-
-                          <div class="form-group">
-                              <label for="email">Email</label>
-                              <input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}">
-                          </div>
-                          <div class="form-group">
-                              <label for="cedula">Cedula</label>
-                              <input type="number" class="form-control" id="cedula" name="cedula" value="{{ auth()->user()->cedula }}">
-                          </div>
-                          <div class="form-group">
-                              <label for="address">Cedula</label>
-                              <input type="text" class="form-control" id="address" name="address" value="{{ auth()->user()->address }}">
-                          </div>
-                          <div class="form-group">
-                              <label for="text">Phone</label>
-                              <input type="text" class="form-control" id="phohe" name="phohe" value="{{ auth()->user()->phone }}">
-                          </div>
-
                           <div class="form-group">
                               <label for="photo">Profile Picture</label>
                               <input type="file" class="form-control-file" id="photo" name="photo">
                           </div>
+                          <div class="form-group">
+                              <label for="name">Name</label>
 
+                              <input type="text" name="name" class="form-control" value="{{old('name',$user->name)}}">
+                          </div>
+
+                          <div class="form-group">
+                              <label for="email">Email</label>
+                              <input type="email" name="email" class="form-control" value="{{old('email',$user->email)}}">
+                          </div>
+                          <div class="form-group">
+                              <label for="cedula">Cedula</label>
+                              <input type="text" name="cedula" class="form-control" value="{{old('cedula',$user->cedula)}}">
+                          </div>
+                          <div class="form-group">
+                              <label for="address">Cedula</label>
+                              <input type="text" name="address" class="form-control" value="{{old('address',$user->address)}}">
+                          </div>
+                          <div class="form-group">
+                              <label for="text">Phone</label>
+                              <input type="tel" name="phone" class="form-control" value="{{old('phone',$user->phone)}}">
+                          </div>
                           <button type="submit" class="btn boton">Update Information</button>
                       </form>
                   </div>

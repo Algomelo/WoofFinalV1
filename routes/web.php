@@ -71,8 +71,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::resource('userRedemption', 'App\Http\Controllers\User\UserRedemptionController');
 
     Route::resource('userScheduled','App\Http\Controllers\User\UserScheduledController');
-    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-    
+    Route::put('userUpdate/{user}', 'App\Http\Controllers\User\UserUpdateController@update');
 
 
 });
@@ -81,6 +80,7 @@ Route::middleware(['auth', 'walker'])->group(function () {
     Route::resource('walkersScheduled','App\Http\Controllers\Walker\WalkerScheduledController');
 
 });
+
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('users','App\Http\Controllers\admin\UserController');
@@ -117,4 +117,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 });
 
-URL::forceScheme('https');
+//URL::forceScheme('https');
+
+
+
+

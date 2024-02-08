@@ -105,11 +105,6 @@ class UserController extends Controller
 
         $data = $request->only('name','email','cedula','address','phone');
         $password =$request->input('password');
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $path = $photo->store('profile_photos', 'public');
-            $user->photo = $path;
-        }
 
         if($password)
         $data['password'] = bcrypt($password);
