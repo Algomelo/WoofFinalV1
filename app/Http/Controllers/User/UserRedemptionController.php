@@ -22,6 +22,7 @@ class UserRedemptionController extends Controller
             $redeemedServices = RedeemedService::where('user_id', $userId)->get();
             // Obtén los paquetes redimidos asociados a la solicitud
             return view('users.UserRedeemIndex', compact( 'redeemedServices'));
+
    
     }
 
@@ -85,7 +86,7 @@ class UserRedemptionController extends Controller
             }
         }    
         
-        return $this->index();
+        return redirect()->route('userRedemption.index');
 
 
     }

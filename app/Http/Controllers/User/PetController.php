@@ -48,7 +48,7 @@ class PetController extends Controller
         $pet = Pet::create($validatedData);
 
 
-        return $this->index();
+        return redirect()->route('userPets.index');
 
     }
         public function edit( $petId)
@@ -73,7 +73,8 @@ class PetController extends Controller
     
         $pet = Pet::findOrFail($petId);
         $pet->update($validatedData);
-        return $this->index();
+        return redirect()->route('userPets.index');
+
 
     }
 
@@ -86,7 +87,7 @@ class PetController extends Controller
         $pet = Pet::findOrFail($petId);
         $pet->delete();
 
-        return $this->index();
+        return redirect()->route('userPets.index');
     }
 
 

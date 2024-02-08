@@ -89,7 +89,7 @@ class UserServiceRequestController extends Controller
         $serviceRequest->save();
 
         // Redireccionar o hacer lo que sea necesario después de la creación
-            return $this->index();
+        return redirect()->route('userServiceRequest.index');
 
             }
 
@@ -112,7 +112,7 @@ class UserServiceRequestController extends Controller
     {
 
         $validatedData = $request->validate([
-            'comment' => 'required',
+            'comment' => 'nullable', // Ahora el campo 'comment' es opcional
             'user_id' => 'required',
         ]);
     
@@ -156,9 +156,8 @@ class UserServiceRequestController extends Controller
         //$selectedPackages = $request->input('packages', []);
         $serviceRequest->update(['price' => $totalPrice]);
         $serviceRequest->save();
-        return redirect()->route('user.showIndexRequest', [
-            'userId' => $serviceRequest->user_id,
-        ]);
+        return redirect()->route('userServiceRequest.index');
+
         }
 
 
@@ -169,7 +168,7 @@ class UserServiceRequestController extends Controller
             $serviceRequest->delete();
 
             // Redireccionar o hacer lo que sea necesario después de la eliminación
-            return $this->index();
+            return redirect()->route('userServiceRequest.index');
         }
 
 

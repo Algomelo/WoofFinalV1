@@ -23,6 +23,10 @@ class UserScheduledController extends Controller
         // Obtén los paquetes redimidos asociados a la solicitud
         return view('users.UserScheduledIndex', compact( 'scheduled'));
     }
+    public function edit( $scheduledsid)
+    {
+
+    }
 
 }
 

@@ -56,7 +56,8 @@ class UserUpdateController extends Controller
 
 
         $notification = 'La informacion del usuario se ha registrado correctamente.';
-        return view('home', compact('user'));
+        return redirect()->route('home', compact('user'));
+
     }
 
     /**
