@@ -54,7 +54,7 @@ class ServiceRequestController extends Controller
     public function store(Request $request)
     {
     $validatedData = $request->validate([
-        'comment' => 'required',
+        'comment' => 'nullable',
         'state' => 'required',
         'services' => 'array',
         'packages' => 'array',
@@ -142,7 +142,7 @@ class ServiceRequestController extends Controller
     public function update(Request $request, $serviceRequestId)
     {
     $validatedData = $request->validate([
-        'comment' => 'required',
+        'comment' => 'nullable',
         'state' => 'required',
         'services' => 'array',
         'packages' => 'array',
