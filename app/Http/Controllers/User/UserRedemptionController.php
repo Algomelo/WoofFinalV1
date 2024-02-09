@@ -62,20 +62,24 @@ class UserRedemptionController extends Controller
         $user_id = $request->input('user_id');
         $redemption->user_id = $user_id;
         $redemption->service_id = $idService;
-        $redemption->quantity = $request->input('quantity');
+       $redemption->quantity = $request->input('quantity');
         $redemption->state = 'Send To Admin';
         $redemption->date = $request->input('date');
+        $datesArray = explode(", ", $redemption->date);
+        $countDate = count($datesArray);
         $redemption->address = $request->input('address');
         $redemption->comment = $request->input('comment');
         $redemption->shift = $request->input('shift');
+        
         $redemption->save();
-    
-
+      // dd($redeemedServices->quantity);
         if ($request->has('pets')) {
             $redemption->pets()->attach($request->input('pets'), ['quantity' => $request->input('quantity')]);
             $quantitypets = count($request->input('pets'));
+            $cantidadAReducir = $quantitypets * $countDate;
+
             // Asegúrate de que la cantidad a reducir no sea mayor que la cantidad actual
-            $cantidadAReducir = min($quantitypets, $redeemedServices->quantity);    
+            $cantidadAReducir = min($cantidadAReducir , $redeemedServices->quantity);    
             // Si hay más de una unidad, reducimos la cantidad según la cantidad de mascotas seleccionadas
             if ($cantidadAReducir > 0) {
                 $redeemedServices->decrement('quantity', $cantidadAReducir);    

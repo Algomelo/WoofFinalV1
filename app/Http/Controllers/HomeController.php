@@ -27,16 +27,20 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->role === 'admin') {
+        if ($user->role === 'admin' ) {
             // Usuario con rol de administrador
             return view('homeAdmin');
-        } elseif ($user->role === 'user') {
+        } elseif ($user->role === 'user' ) {
             $id = Auth::id();
             $user = User::users()->findOrFail($id);
             return view('home', compact('user'));
-        } else {
-            // Otros roles, puedes manejarlos según tus necesidades
+        } elseif($user->role === 'walker') {
+
+            return view('home', compact('user'));
+
+        }else{
             abort(403, 'Acceso no autorizado');
+
         }
 }
 }
