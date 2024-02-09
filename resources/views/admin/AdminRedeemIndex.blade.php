@@ -41,24 +41,38 @@ use Illuminate\Support\Str;
         </thead>
         <tbody>
             
-            @foreach ($scheduled as $scheduleds)
-            <tr>
-                <td>{{ $scheduleds->created_at}}</td>
-                <td>{{ $scheduleds->state }}</td>
-                <td>
-                    User Name:<br> {{ $scheduleds->user->name }}<br>_________________________
-                    <br>Service Name:<br>{{$scheduleds->service->name}}<br>_________________________
-                    <br>Pets Associated:<br>
-                    @foreach ($scheduleds->pets as $pet)
+        @foreach ($scheduled as $scheduleds)
+        <tr>
+            <td>{{ $scheduleds->created_at}}</td>
+            <td>{{ $scheduleds->state }}</td>
+            <td>
+                User Name:<br> 
+                @if ($scheduleds->user)
+                    {{ $scheduleds->user->name }}
+                @else
+                    User Not Found
+                @endif
+                <br>_________________________
+                <br>Service Name:<br>
+                @if ($scheduleds->service)
+                    {{$scheduleds->service->name}}
+                @else
+                    Service Not Found
+                @endif
+                <br>_________________________
+                <br>Pets Associated:<br>
+                @foreach ($scheduleds->pets as $pet)
                     {{ $pet->name }},
-                    @endforeach<br>_________________________
-                    <br>Pickup Dates:<br>{{ $scheduleds->date}}
-                </td>
-                <td>
+                @endforeach
+                <br>_________________________
+                <br>Pickup Dates:<br>{{ $scheduleds->date}}
+            </td>
+            <td>
                 <a href="{{ url('/serviceRedems/'.$scheduleds->id.'/edit') }}" class=" btn boton">Edit booking / Assign to Walker</a>
-                </td>
-            </tr>
-            @endforeach
+            </td>
+        </tr>
+        @endforeach
+
         </tbody>
     </table>
 </div>
