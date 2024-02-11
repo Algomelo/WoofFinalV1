@@ -90,11 +90,11 @@
 
                     </td>
                     <td class="text-center"> 
-                    @if($serviceRequest->state !== 'passed')
+                    @if($serviceRequest->state !== 'Approved')
                         <form action="{{ url('/serviceRequests/'.$serviceRequest->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a href="{{ url('/serviceRequests/'.$serviceRequest->id.'/edit') }}" class=" btn boton">Approve services / Edit requests</a><br><br>
+                            <a href="{{ url('/serviceRequests/'.$serviceRequest->id.'/edit') }}" class=" btn boton">Approve services / <br> Edit requests</a><br><br>
                             <button type="submit" class="btn boton-eliminar">Delete Request</button>
 
                     @endif

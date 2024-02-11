@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\RedeemedService;
 use App\Models\Pet;
 use App\Models\Redemption;
+use App\Models\Scheduled;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -62,17 +64,15 @@ class UserRedemptionController extends Controller
         $user_id = $request->input('user_id');
         $redemption->user_id = $user_id;
         $redemption->service_id = $idService;
-       $redemption->quantity = $request->input('quantity');
+        $redemption->quantity = $request->input('quantity');
         $redemption->state = 'Send To Admin';
-        $redemption->date = $request->input('date');
-        $datesArray = explode(", ", $redemption->date);
+
+        $redemptiondate = $request->input('date');
+        $datesArray = explode(", ",  $redemptiondate);
         $countDate = count($datesArray);
-        $redemption->address = $request->input('address');
-        $redemption->comment = $request->input('comment');
-        $redemption->shift = $request->input('shift');
-        
+
         $redemption->save();
-      // dd($redeemedServices->quantity);
+        
         if ($request->has('pets')) {
             $redemption->pets()->attach($request->input('pets'), ['quantity' => $request->input('quantity')]);
             $quantitypets = count($request->input('pets'));
@@ -89,7 +89,39 @@ class UserRedemptionController extends Controller
                 }
             }
         }    
-        
+
+        $redemption = Redemption::findOrFail($redemption->id);  
+
+        $petScheduled = $redemption->pets->pluck('name')->toArray();
+        $petScheduled = implode(',', $petScheduled);
+        $serviceNameScheduled = $redemption->service->name;
+        $userIdScheduled = $request->input('user_id');
+        $dateScheduled =  $request->input('date');
+        $shiftScheduled = $request->input('shift');
+        $commentScheduled = $request->input('comment');
+        $addressScheduled = $request->input('address');
+        $quantityScheduled = $cantidadAReducir;
+
+        Scheduled::create([
+            'nameservice' => $serviceNameScheduled,
+            'user_id' => $userIdScheduled,
+            'walker_id' => null,
+            'state' => "Send",
+            'date' =>  $dateScheduled,
+            'shift' => $shiftScheduled  , 
+            'comment' => $commentScheduled,
+            'address' => $addressScheduled,
+            'namepets' =>  $petScheduled ,
+            'quantity' => $quantityScheduled
+        ]);
+
+
+
+
+
+
+
+
         return redirect()->route('userRedemption.index');
 
 

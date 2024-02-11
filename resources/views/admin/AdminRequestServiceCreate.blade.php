@@ -74,7 +74,7 @@ use Illuminate\Support\Str;
 
                     <option value="pending">Pending</option>
 
-                    <option value="passed">Passed</option>
+                    <option value="Approved">Approved</option>
                     <option value="cancelled">Cancelled</option>
                 </select>
             </div>

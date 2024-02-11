@@ -23,8 +23,8 @@
   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light" id="sidenav-main" style="background-image: url(/img/banner_huellas_azul.png) !important;">
     <div class="container-fluid">
       <!-- Toggler -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation" style="background-color:#F2761D;">
+        <span class="navbar-toggler-icon"  ></span>
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="/home">
@@ -104,7 +104,7 @@
                               <img alt="Image placeholder" src="{{asset('img/theme/team-4-800x800.jpg')}}">
                           @endif
                       </span><br>
-                      <span>
+                      <span class="profile">
                           @if(auth()->check() && auth()->user()->name)
                           Profile  {{ auth()->user()->name }}
                           @else

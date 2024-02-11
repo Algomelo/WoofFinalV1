@@ -146,7 +146,7 @@ use Illuminate\Support\Str;
               <h3 class="mb-0">Redeem new service</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('users')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
+              <a href="{{ url('userRedemption')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
             </div>
           </div>
         </div>
@@ -193,35 +193,34 @@ use Illuminate\Support\Str;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
-                            <label for="date">Estimated Date(s):</label>
-                            <input type="text" name="date" id="date"  ><br>
+                        <div class="col-lg-6 col-sm-12">
+                            <label for="date">Estimated Date(s):</label><br>
+                            <input type="text" name="date" id="date" style="border:solid 1px;"  ><br><br>
                             <span id="dateError" class="error"></span>
 
                         </div>
-                        <div class="col-6">
-                            <label for="shift">Shift:</label>
-                            <select name="shift" id="shift">
+                        <div class="col-lg-6 col-sm-12">
+                            <label for="shift">Shift:</label> <br>
+                            <select name="shift" id="shift"><br>
                                 <option value="" selected>Pick an option</option>
                                 <option value="Any shift">Any shift</option>
                                 <option value="morning">Morning Shift</option>
                                 <option value="afternoon">Afternoon Shift</option>
                             </select><br>
                             <span id="shiftError" class="error"></span>
-
                         </div>
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-3">
-                            <label for="address">Address :</label>
-                            <input type="text" name="address" value="{{$user->address}}" id="address" required>
-                            (Please confirm your address)
+                        <div class="col-lg-6 col-sm-12">
+                            <label for="address">Address :</label> <br>
+                            <input type="text" name="address" value="{{$user->address}}" id="address" required style="border:solid 1px;">
+                            (Please confirm your address) <br><br>
                             
                         </div>
-                        <div class="col-3">
-                            <label for="comment">Comment:<br></label>
-                            <input type="text" name="comment" id="comment">
+                        <div class="col-lg-6 col-sm-12">
+                            <label for="comment">Comment:</label> <br>
+                            <input type="text" name="comment" id="comment" style="border:solid 1px;">
                         </div>
                     </div>
                     <hr>

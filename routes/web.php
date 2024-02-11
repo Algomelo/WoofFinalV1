@@ -95,7 +95,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::resource('serviceRequests','App\Http\Controllers\admin\ServiceRequestController');
     
-    Route::put('serviceRedems/store/{scheduledId}', [AdminRedemController::class, 'store']);
+    Route::put('serviceRedems/update/{scheduledId}', [AdminRedemController::class, 'update']);
 
     Route::resource('serviceRedems','App\Http\Controllers\admin\AdminRedemController');
 

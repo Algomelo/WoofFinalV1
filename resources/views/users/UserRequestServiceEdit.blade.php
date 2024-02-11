@@ -162,7 +162,7 @@ use Illuminate\Support\Str;
                                     </div>
                                     <div class="container d-block" style="text-align:center">
                                         <input name="comment" placeholder="Make a comment" type="text"  style="width:80%; height 15h; border-radius:3px; padding:30px"><br>
-                                        <button type="submit" class="btn btn-sm btn-primary w-20" style="margin: 14px 0px;">Send Request</button>
+                                        <button type="submit" class="btn boton" style="margin: 14px 0px;">Send Request</button>
                                     </div>
                                 </form>
                                

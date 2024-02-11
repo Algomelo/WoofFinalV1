@@ -36,58 +36,57 @@ use Illuminate\Support\Str;
             @endforeach
             @endif
             <div class="container">
-                <form action="{{url('/serviceRedems/store/'.$scheduled->id)}}" method="POST">                
+                <form action="{{url('/serviceRedems/update/'.$scheduled->id)}}" method="POST">                
                 @csrf
                 @method('PUT')
                     <div class="row ">
-                        <div class="col-6">
+                        <div class="col-4">
                             <label for="name">Service Name:</label>
-                            {{ $service->name }}
+                            {{ $scheduled->nameservice }}
                         </div>
-                        <div class="col-6 text-right">
-                           Request Quantity: <span id="quantity">{{ $scheduled->quantity }}</span>
+                        <div class="col-4 text-center">
+                            State: <span id="quantity">{{ $scheduled->state }}</span>
                             <span id="quantityError" class="error"></span>
                         </div>
+                        <div class="col-4 text-right">
+                            Quantity: <span id="quantity">{{ $scheduled->quantity }}</span>
+                            <span id="quantityError" class="error"></span>
+                        </div>
+
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-12">
                             Associated pets: <br> <br>
-                            @foreach($pets as $pet)
-                                {{$pet->name}}
-                                <br>
-                            @endforeach
-                            <br>
+                           {{$scheduled->namepets }}
                             <hr>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
-                            <label for="date">Estimated Date(s):</label>
-                            <input type="text" name="date" id="date"  ><br>
+                        <div class="col-lg-6 col-sm-12">
+                            <label for="date">Estimated Date(s):</label> <br>
+                            <input type="text" name="date" id="date"  ><br><br>
                             <span id="dateError" class="error"></span>
 
                         </div>
-                    <div class="col-6">
-                        <label for="shift">Shift:</label>
-                        <select name="shift" id="shift">
-                            <option value="Any shift" {{ $scheduled->shift == 'Any shift' ? 'selected' : '' }}>Any shift</option>
-                            <option value="morning" {{ $scheduled->shift == 'morning' ? 'selected' : '' }}>Morning Shift</option>
-                            <option value="afternoon" {{ $scheduled->shift == 'afternoon' ? 'selected' : '' }}>Afternoon Shift</option>
-                        </select><br>
-                        <span id="shiftError" class="error"></span>
-                    </div>
-
+                        <div class="col-lg-6 col-sm-12">
+                            <label for="shift">Shift:</label> <br>
+                            <select name="shift" id="shift">
+                                <option value="Any shift" {{ $scheduled->shift == 'Any shift' ? 'selected' : '' }}>Any shift</option>
+                                <option value="morning" {{ $scheduled->shift == 'morning' ? 'selected' : '' }}>Morning Shift</option>
+                                <option value="afternoon" {{ $scheduled->shift == 'afternoon' ? 'selected' : '' }}>Afternoon Shift</option>
+                            </select>
+                            <span id="shiftError" class="error"></span>
+                        </div>
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-3">
-                            <label for="address">Address :</label>
-                            <input type="text" name="address" value="{{$scheduled->address}}" id="address" required>
-                            
+                        <div class="col-lg-6 col-sm-12">
+                            <label for="address">Address :</label> <br>
+                            <input type="text" name="address" value="{{$scheduled->address}}" id="address" required><br><br>
                         </div>
-                        <div class="col-3">
-                            <label for="comment">Comment:<br></label>
+                        <div class="col-lg-6 col-sm-12">
+                            <label for="comment">Comment:</label><br>
                             <input type="text" name="comment" id="comment" value="{{$scheduled->comment}}">
                         </div>
                     </div>

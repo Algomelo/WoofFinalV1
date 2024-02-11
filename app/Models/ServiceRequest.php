@@ -50,7 +50,7 @@ class ServiceRequest extends Model
     public function approveAndRedeem()
     {
         // Verifica si el estado es aprobado
-        if ($this->state === 'passed') {
+        if ($this->state === 'Approved') {
 
 
             // Obtiene todos los servicios y paquetes asociados a la solicitud

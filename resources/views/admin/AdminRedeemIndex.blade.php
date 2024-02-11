@@ -54,21 +54,11 @@ use Illuminate\Support\Str;
                 @endif
                 <br>_________________________
                 <br>Service Name:<br>
-                @if ($scheduleds->service)
-                    {{$scheduleds->service->name}}
-                @else
-                    Service Not Found
-                @endif
-                <br>_________________________
-                <br>Pets Associated:<br>
-                @foreach ($scheduleds->pets as $pet)
-                    {{ $pet->name }},
-                @endforeach
-                <br>_________________________
-                <br>Pickup Dates:<br>{{ $scheduleds->date}}
+                    {{$scheduleds->nameservice}}
+   
             </td>
             <td>
-                <a href="{{ url('/serviceRedems/'.$scheduleds->id.'/edit') }}" class=" btn boton">Edit booking / Assign to Walker</a>
+                <a href="{{ url('/serviceRedems/'.$scheduleds->id.'/edit') }}" class=" btn boton">Approve Scheduling /<br>  Assign to Walker</a>
             </td>
         </tr>
         @endforeach

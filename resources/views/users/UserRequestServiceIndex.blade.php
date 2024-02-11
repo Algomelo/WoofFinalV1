@@ -103,7 +103,7 @@ use Illuminate\Support\Str;
                 <th scope="row">{{ $uniqueNumbers[$loop->index] }}</th>
                 <td>{{ $serviceRequest->comment }}</td>
                 
-                @if($serviceRequest->state === 'passed')
+                @if($serviceRequest->state === 'Approved')
                     <td>$ {{ $serviceRequest->price }}</td>
                 @else
                     <td>-</td>
@@ -128,7 +128,7 @@ use Illuminate\Support\Str;
                 <td>{{ $serviceRequest->created_at}}</td>
 
                 <td class="text-center">
-                    @if($serviceRequest->state !== 'passed')
+                    @if($serviceRequest->state !== 'Approved')
                     
                     <a href="{{url('/userServiceRequest/'.$serviceRequest->id.'/edit')}}" class=" btn boton">Edit</a>
 

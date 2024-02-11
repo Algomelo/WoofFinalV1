@@ -1,21 +1,50 @@
-.boton{
+body{
+    font-family: 'Preahvihear', sans-serif !important;
+}
+.textomenudashboard{
+    font-family: 'Preahvihear', sans-serif !important;
 
+
+}
+
+.profile{
+    font-family: 'Preahvihear', sans-serif !important;
+    color: white !important;
+
+}
+.profile:hover{
+    font-family: 'Preahvihear', sans-serif !important;
+    color: white !important;
+
+}
+.textomenudashboard:hover{
+    font-family: 'Preahvihear', sans-serif !important;
+    color:#F2761D !important;
+
+}
+
+.boton{
     background-image: url('/img/banner_huellas.png') !important;
     color: white;
     padding: 3px 10px;
     /* margin: 0px; */
-    height: 29px;
+    height: 100%;
     border-radius: 12px;
-    
+}
+.boton:hover{
+    background-image:url(/img/banner_huellas_azul.png) !important;
+    color: white;
+    padding: 3px 10px;
+    /* margin: 0px; */
+    height: 100%;
+    border-radius: 12px;
 }
 
 .boton-eliminar{
-
     background: red;
     color: white;
-    padding: 0px 10px;
-
-    height: 29px;
+    padding: 3px 10px;
+    height: 100%;
     border-radius: 12px;
     border-color: transparent !important;
 }

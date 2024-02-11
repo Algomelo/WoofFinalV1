@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
               <h3 class="mb-0">New Pet</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('users')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
+              <a href="{{ url('userPets')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@ use Illuminate\Support\Str;
 
 
                 <div class="form-group">
-                    <label for="phone">Age</label>
+                    <label for="phone">DOB - Day of birth</label>
                     <input type="tel" name="age" class="form-control" value="{{ $pet->age }}" required>
                 </div>
                 <div class="form-group">

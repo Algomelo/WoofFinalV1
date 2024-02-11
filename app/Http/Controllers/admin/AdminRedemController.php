@@ -19,7 +19,7 @@ class AdminRedemController extends Controller
     {
         // Obtén la solicitud de servicio a redimir para el usuario específico
         // Obtén los servicios redimidos asociados a la solicitud
-        $scheduled = Redemption::with( 'user', 'pets', 'service')->orderByDesc('created_at')->get();
+        $scheduled = Scheduled::with( 'user')->orderByDesc('created_at')->get();
     
         // Obtén los paquetes redimidos asociados a la solicitud
         return view('admin.AdminRedeemIndex', compact( 'scheduled'));
@@ -30,15 +30,13 @@ class AdminRedemController extends Controller
     public function edit(Request $request, $scheduledId)
     {
         // Obtén el servicio redimido específico
-        $scheduled = Redemption::findOrFail($scheduledId);
+        $scheduled = Scheduled::findOrFail($scheduledId);
         
         $user = $scheduled->user;
         $pets = $scheduled->pets;
         $service = $scheduled->service;
         $scheduledDates = $this->getFormattedScheduledDates($scheduled->date);   //  datos para mostrar el calendario 
         $allWalkers = User::where('role', 'walker')->get();
-   
-
         
         // Puedes pasar esta información a la vista
         return view('admin.AdminRedeemEdit', compact('scheduled','pets','user','service' ,'scheduledDates','allWalkers'));
@@ -56,29 +54,21 @@ class AdminRedemController extends Controller
         return $formattedDates;
     }
     
-    public function store(Request $request, $scheduledId)
+    public function update(Request $request, $scheduledId)
     {
+        $scheduled = Scheduled::findOrFail($scheduledId);  
+        $scheduled->update([
+            'state' => "Approved",
+            'date' => $request->input('date'),
+            'shift' => $request->input('shift'),
+            'comment' => $request->input('comment'),
+            'address' => $request->input('address'),
+            'walker_id' => $request->input('walkers'),
+        ]);
 
-        $scheduled = Redemption::findOrFail($scheduledId);  
+        $notification="Dsgdsg";
 
-        $scheduled->state = "Send To Walker";
-        $scheduled->save();
-
-        $dateScheduled = $request->input('date');
-        $shiftScheduled = $request->input('shift');
-        $commentScheduled = $request->input('comment');
-        $addressScheduled = $request->input('address');
-
-        $serviceScheduled = $scheduled->service->name;
-        $petScheduled = $scheduled->pets->pluck('name')->toArray();
-
-        $walkerId = $request->input('walkers');
-        $userId=$scheduled->user_id;
-        $scheduled->approveScheduled($walkerId, $serviceScheduled, $petScheduled, $dateScheduled, $shiftScheduled, $commentScheduled ,$addressScheduled, $userId);
-
-        $scheduled = Redemption::with( 'user', 'pets', 'service')->orderByDesc('created_at')->get();
-
-        return view('admin.AdminRedeemIndex', compact( 'scheduled'));
+        return redirect('/serviceRedems')->with(compact('notification'));
 
     }
 }

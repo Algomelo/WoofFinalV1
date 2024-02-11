@@ -75,7 +75,7 @@
                                     <form action="{{ url('/users/'.$user->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ url('/users/'.$user->id.'/edit') }}" class=" btn boton">See More Info / Edit Info</a> <br> <br>
+                                        <a href="{{ url('/users/'.$user->id.'/edit') }}" class=" btn boton">See More Info /<br> Edit Info</a> <br> <br>
 
                                         <button type="button" class="btn boton-eliminar" data-toggle="modal" data-target="#confirmDeleteModal{{ $user->id }}">
                                             Delete
