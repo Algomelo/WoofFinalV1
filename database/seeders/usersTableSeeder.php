@@ -24,12 +24,12 @@ class usersTableSeeder extends Seeder
             'role' => 'admin',
         ]);
         
-/** 
-       * User::factory()
-        *->count(5)
+
+       User::factory()
+        count(20)
         
-       *->create();
-    */
+       create();
+    
 
     }
 }
