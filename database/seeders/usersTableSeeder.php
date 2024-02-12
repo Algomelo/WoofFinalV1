@@ -15,21 +15,17 @@ class usersTableSeeder extends Seeder
     {
         User::create([
             'name' => 'Fabian',
-            'email' => 'admin1@gmail.com',
+            'email' => 'admin3@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('1234'), // password
-            'cedula' => '1020844764',
+            'cedula' => '1021744764',
             'address' => 'av chile',
             'phone' => '+573057202110',
             'role' => 'admin',
         ]);
         
-/** 
-       * User::factory()
-        *->count(5)
-        
-       *->create();
-    */
-
+        User::factory()
+        ->count(30)
+        ->create();
     }
 }
