@@ -36,10 +36,11 @@ class PetController extends Controller
     public function store(Request $request)
     {
         $userId = Auth::id();
+   
 
         $validatedData = $request->validate([
             'name' => 'required',
-            'age' => 'required',
+            'date_of_birth' => 'required',
             'breed' => 'nullable',
             'comment' => 'nullable',
         ]);

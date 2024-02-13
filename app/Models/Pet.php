@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pet extends Model
 {
-    protected $fillable = ['name', 'age', 'breed', 'comment', 'user_id'];
+    protected $fillable = ['name', 'date_of_birth', 'breed', 'comment', 'user_id'];
 
 
     public function user()

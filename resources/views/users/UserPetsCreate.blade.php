@@ -43,23 +43,14 @@ use Illuminate\Support\Str;
 
 
                 <div class="form-group">
-                    <label for="age">DOB - Day of birth</label>
-                    <input type="date" name="age" class="form-control" value="{{old('age')}}" required>
+                    <label for="date_of_birth">DOB - Day of birth</label>
+                    <input type="date" name="date_of_birth" class="form-control" value="{{old('date_of_birth')}}" required>
                 </div>
                 <div class="form-group">
                     <label for="direction">Breed</label>
                     <input type="text" name="breed" class="form-control" value="{{old('breed')}}">
-                </div>
-                <div class="form-group">
-                    <label for="direction">Comment</label>
-                    <input type="text" name="comment" class="form-control" value="{{old('comment')}}">
-                </div>
-
-
-
-                    
+                </div>                    
                 <button type="submit" class="btn boton">Create Pet</button>
-
             </form>
             
            </div>     

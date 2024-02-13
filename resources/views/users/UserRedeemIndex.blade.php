@@ -84,9 +84,9 @@ use Illuminate\Support\Str;
         <thead class="thead-light">
             <tr>
                 <th scope="col">Service Name</th>
-                <th scope="col">Fecha de creacion</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Estado</th>
+                <th scope="col">Creation date</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">State</th>
                 <th scope="col">Options</th>
             </tr>
         </thead>

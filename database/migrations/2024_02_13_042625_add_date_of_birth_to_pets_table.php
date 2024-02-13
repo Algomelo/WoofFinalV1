@@ -11,20 +11,24 @@ return new class extends Migration
      */
     public function up()
     {
+        // Agregar la nueva columna de fecha
         Schema::table('pets', function (Blueprint $table) {
-            $table->date('age')->change();
+            $table->date('date_of_birth')->nullable();
+        });
+
+        // Eliminar la columna 'age' original
+        Schema::table('pets', function (Blueprint $table) {
+            $table->dropColumn('age');
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('pets', function (Blueprint $table) {
-            $table->integer('age')->change();
+            //
         });
     }
 };

@@ -31,8 +31,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Age</th>
                     <th scope="col">Breed</th>
-                    <th scope="col">Comment</th>
-                    <th scope="col">Date Created</th>
+                    <th scope="col">DOB - Day of birth</th>
                     <th scope="col">Options</th>
                 </tr>
             </thead>
@@ -43,14 +42,10 @@
                       {{$pet->name}}
                     </th>
                     <td>
-                        {{$pet->age}}
+                        {{$pet->date_of_birth}}
                     </td>
                     <td>
                         {{$pet->breed}}
-                    </td>
-
-                    <td>
-                        {{$pet->comment}}
                     </td>
                     <td>
                         {{ $pet->created_at}}
