@@ -37,7 +37,7 @@ class UserUpdateController extends Controller
             'phone.required'         => 'El numero telefonico es obligatorio',
 
         ];
-
+        
         $this->validate($request,$rules,$messages);
         $user = User::users()->findOrFail($id);
 

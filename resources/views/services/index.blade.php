@@ -55,16 +55,36 @@
                             @csrf
                             @method('DELETE')
                             <a href="{{url('/services/'.$service->id.'/edit')}}" class="btn boton">Edit</a><br><br>
-                            <button type="submit" class="btn boton-eliminar">Delete</button>
-
+                            
+                            <button type="button" class="btn boton-eliminar" data-toggle="modal" data-target="#confirmDeleteModal{{ $service->id }}">Delete</button>
+                            <div class="modal fade" id="confirmDeleteModal{{ $service->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body">
+                                        Are you sure you want to delete this service?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>       
                          </form>
-                   
                       </td>
-                    
                   </tr>  
                 @endforeach
             </tbody>
           </table>
+                                        <!-- Modal para confirmar la eliminación -->
+     
+
         </div>
       </div>
  

@@ -94,6 +94,11 @@
                               <label for="text">Phone</label>
                               <input type="tel" name="phone" class="form-control" value="{{old('phone',$user->phone)}}">
                           </div>
+                          <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="text" name="password" class="form-control" >
+                                <small class="text-warning">Only fill out the field if you want to change the password</small>
+                            </div>
                           <button type="submit" class="btn boton">Update Information</button>
                       </form>
                   </div>

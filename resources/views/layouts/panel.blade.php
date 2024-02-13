@@ -47,7 +47,11 @@
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="{{asset('img/theme/team-1-800x800.jpg')}}">
+              @if(auth()->user()->photo)
+                    <img src="{{ asset('storage/images/' . auth()->user()->photo) }}" alt="Profile Picture">
+              @else
+                  <img src="{{asset('img/testimonio3.jpg')}}" alt="Mike Johnson" alt="Image placeholder">
+              @endif                
               </span>
             </div>
           </a>
@@ -101,7 +105,7 @@
                           @if(auth()->user()->photo)
                               <img src="{{ asset('storage/images/' . auth()->user()->photo) }}" alt="Profile Picture">
                           @else
-                              <img alt="Image placeholder" src="{{asset('img/theme/team-4-800x800.jpg')}}">
+                              <img src="{{asset('img/testimonio3.jpg')}}" alt="Mike Johnson" alt="Image placeholder">
                           @endif
                       </span><br>
                       <span class="profile">

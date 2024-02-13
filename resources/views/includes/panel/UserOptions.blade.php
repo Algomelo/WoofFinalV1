@@ -6,7 +6,7 @@
     </div>
     @if(auth()->check() && auth()->user()->role == 'user')
 
-    <a href="./examples/profile.html" class="dropdown-item textomenudashboard">
+    <a href="/home" class="dropdown-item textomenudashboard">
       <i class="ni ni-single-02"></i>
       <span>My profile</span>
     </a>

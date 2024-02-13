@@ -57,7 +57,7 @@ use Illuminate\Support\Str;
                 <div class="form-group">
                   <label for="password">Password</label>
                   <input type="text" name="password" class="form-control" >
-                  <small class="text-warning">Solo llene el campo si desea cambiar la contraseña</small>
+                  <small class="text-warning">Only fill out the field if you want to change the password</small>
               </div>
                 <button type="submit" class="btn boton">Save changes</button>
 

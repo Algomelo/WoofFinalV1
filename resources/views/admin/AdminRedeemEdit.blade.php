@@ -107,7 +107,7 @@ use Illuminate\Support\Str;
                         <input type="number" name="quantity" id="quantityForm"  class="d-none">
                     </div>
                     
-                    <button type="submit" class="btn boton" >Assign Scheduled</button>
+                    <button type="submit" class="btn boton" >Approved Scheduled</button>
                 </form>
             </div>
            </div>     

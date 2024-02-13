@@ -39,7 +39,7 @@ class PetController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required',
-            'age' => 'required|numeric',
+            'age' => 'required',
             'breed' => 'nullable',
             'comment' => 'nullable',
         ]);
@@ -65,7 +65,7 @@ class PetController extends Controller
         $userId = Auth::id();
         $validatedData = $request->validate([
             'name' => 'required',
-            'age' => 'required|numeric',
+            'age' => 'required',
             'breed' => 'nullable',
             'comment' => 'nullable',
             'user_id' => 'sometimes',

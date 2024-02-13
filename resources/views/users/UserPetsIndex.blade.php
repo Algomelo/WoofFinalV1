@@ -56,13 +56,32 @@
                         {{ $pet->created_at}}
                     </td>
                     <td>
-                    <form action="{{url('/userPets/'.$pet->id)}}" method="POST" onsubmit="return confirm('¿Estás seguro?')">
+                    <form action="{{url('/userPets/'.$pet->id)}}" method="POST">
 
                             @csrf
                             @method('DELETE')
                             <a href="{{url('/userPets/'.$pet->id.'/edit')}}" class=" btn boton">Edit</a>
 
-                            <button type="submit" class="btn boton-eliminar">Eliminar</button>
+                            <button type="button" class="btn boton-eliminar" data-toggle="modal" data-target="#confirmDeleteModal{{ $pet->id }}"> Eliminar</button>
+                            <div class="modal fade" id="confirmDeleteModal{{ $pet->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body">
+                                        Are you sure you want to delete this pet?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn boton" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn boton-eliminar">Delete</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>   
                         </form>
                     </td>
                 </tr>

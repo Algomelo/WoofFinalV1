@@ -35,9 +35,6 @@ class PackageController extends Controller
             'description' => 'nullable|string|max:255',
             'services' => 'required|array',
             'services.*' => 'required|integer',
-            'quantities' => 'required|array',
-            'quantities.*' => 'min:0',
-    
         ]);
 
         // Crear un nuevo paquete con los datos proporcionados
