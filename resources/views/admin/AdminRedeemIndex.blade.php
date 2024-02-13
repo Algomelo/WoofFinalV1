@@ -33,6 +33,7 @@ use Illuminate\Support\Str;
     <table class="table align-items-center table-flush text-center">
         <thead class="thead-light">
             <tr>
+                <th scope="col"># scheduled</th>
                 <th scope="col">Creation Date</th>
                 <th scope="col">Status</th>
                 <th scope="col">Details</th>
@@ -43,6 +44,7 @@ use Illuminate\Support\Str;
             
         @foreach ($scheduled as $scheduleds)
         <tr>
+            <td>{{ $scheduleds->unique_number}}</td>
             <td>{{ $scheduleds->created_at}}</td>
             <td>{{ $scheduleds->state }}</td>
             <td>
@@ -57,9 +59,11 @@ use Illuminate\Support\Str;
                     {{$scheduleds->nameservice}}
    
             </td>
+            @if($scheduleds->state == "Send")
             <td>
                 <a href="{{ url('/serviceRedems/'.$scheduleds->id.'/edit') }}" class=" btn boton">Approve Scheduling /<br>  Assign to Walker</a>
             </td>
+            @endif
         </tr>
         @endforeach
 

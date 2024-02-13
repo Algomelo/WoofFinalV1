@@ -28,6 +28,7 @@ use Illuminate\Support\Str;
     <table class="table align-items-center table-flush text-center">
         <thead class="thead-light">
             <tr>
+                <th scope="col"># scheduled</th>
                 <th scope="col">Creation Date</th>
                 <th scope="col">Status</th>
                 <th scope="col">Details</th>
@@ -37,6 +38,7 @@ use Illuminate\Support\Str;
         <tbody>
             @foreach ($scheduled as $scheduleds)
             <tr>
+                <td>{{ $scheduleds->unique_number}}</td>
                 <td>{{ $scheduleds->created_at}}</td>
                 <td>{{ $scheduleds->state }}</td>
                 <td>
@@ -47,9 +49,12 @@ use Illuminate\Support\Str;
                     {{$scheduleds->namepets}}
                     <br>Pickup Dates:<br>{{ $scheduleds->date}}
                 </td>
-                <td>
+                <td class="text-center">
+                    @if($scheduleds->state == 'Send')
+                    
+                    <a class="btn boton"href="{{ url ('/userScheduled/'. $scheduleds->id.'/edit')}}">Edit</a> 
 
-               <!-- <a href="{{ url ('/userScheduled/'. $scheduleds->id.'/edit')}}">Edit // approve </a> -->
+                    @endif
                 </td>
             </tr>
             @endforeach

@@ -52,7 +52,6 @@ use Illuminate\Support\Str;
                             Quantity: <span id="quantity">{{ $scheduled->quantity }}</span>
                             <span id="quantityError" class="error"></span>
                         </div>
-
                     </div>
                     <hr>
                     <div class="row">

@@ -146,7 +146,7 @@ use Illuminate\Support\Str;
               <h3 class="mb-0">Redeem new service</h3>
             </div>
             <div class="col text-right">
-              <a href="{{ url('users')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
+              <a href="{{ url('userRedemption')}}" class="btn boton"><i class="fas fa-angle-left"></i>Return</a>
             </div>
           </div>
         </div>
@@ -161,34 +161,30 @@ use Illuminate\Support\Str;
             @endif
             <div class="container">
 
-                <form action="{{ url('userRedemption/store/'.$redeemedServices->id)}}"  id="myForm"  method="post">
-                @csrf
-                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                    
+                <form action="{{ url('/userScheduled/'.$scheduled->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class="row ">
-                        <div class="col-6">
+                        <div class="col-4">
                             <label for="name">Service Name:</label>
-                            {{ $serviceName }}
+                            {{ $scheduled->nameservice }}
                         </div>
-                        <div class="col-6 text-right">
-                            Quantity: <span id="quantity">{{ $quantity }}</span>
+                        <div class="col-4 text-center">
+                            # Scheduled: <span id="unique_number">{{ $scheduled->unique_number }}</span>
+                        </div>
+                        <div class="col-4 text-right">
+                            Quantity: <span id="quantity">{{ $scheduled->quantity }}</span>
                             <span id="quantityError" class="error"></span>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-12">
-                            Select Pets :
-                            Please select the pets you would like to add to this service.<br><br>
-                            @foreach ($pets as $pet)
-                                <label for="pet_{{ $pet->id }}">
-                                    <input type="checkbox" name="pets[]" id="pet_{{ $pet->id }}" value="{{ $pet->id }}"  class="pet-checkbox"  >
-                                    {{ $pet->name }} //
-                                </label>
-                            @endforeach
+                            Associated pets:
+                            <br><br>
+                            {{$scheduled->namepets}}
                             <br>
                             <span id="petsError" class="error"></span>
-
                             <hr>
                         </div>
                     </div>
@@ -202,10 +198,10 @@ use Illuminate\Support\Str;
                         <div class="col-lg-6 col-sm-12">
                             <label for="shift">Shift:</label> <br>
                             <select name="shift" id="shift"><br>
-                                <option value="" selected>Pick an option</option>
-                                <option value="Any shift">Any shift</option>
-                                <option value="morning">Morning Shift</option>
-                                <option value="afternoon">Afternoon Shift</option>
+                                <option value="" {{ $scheduled->shift == '' ? 'selected' : '' }}>Pick an option</option>
+                                <option value="Any shift" {{ $scheduled->shift == 'Any shift' ? 'selected' : '' }}>Any shift</option>
+                                <option value="morning" {{ $scheduled->shift == 'morning' ? 'selected' : '' }}>Morning Shift</option>
+                                <option value="afternoon" {{ $scheduled->shift == 'afternoon' ? 'selected' : '' }}>Afternoon Shift</option>
                             </select><br>
                             <span id="shiftError" class="error"></span>
                         </div>
@@ -214,13 +210,13 @@ use Illuminate\Support\Str;
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
                             <label for="address">Address :</label> <br>
-                            <input type="text" name="address" value="{{$user->address}}" id="address" required style="border:solid 1px;">
+                            <input type="text" name="address" value="{{$scheduled->address}}" id="address" required style="border:solid 1px;">
                             (Please confirm your address) <br><br>
                             
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <label for="comment">Comment:</label> <br>
-                            <input type="text" name="comment" id="comment" style="border:solid 1px;">
+                            <input type="text" name="comment" value="{{$scheduled->comment}}"id="comment" style="border:solid 1px;">
                         </div>
                     </div>
                     <hr>
@@ -229,7 +225,7 @@ use Illuminate\Support\Str;
                         <input type="number" name="quantity" id="quantityForm"  class="d-none">
                     </div>
                     
-                    <button type="button" class="btn boton" onclick="validateForm()">Schedule Service</button>
+                    <button type="submit" class="btn boton" >Schedule Service</button>
                 </form>
             </div>
             
@@ -241,173 +237,45 @@ use Illuminate\Support\Str;
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-<!-- Agrega esto en tu plantilla Blade después de incluir jQuery -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Obtén el elemento de cantidad
-        var dateInput = document.getElementById('date');
-        var fp = flatpickr(dateInput, {
-            mode: 'multiple',
-            dateFormat: 'Y-m-d',
-            onChange: function () {
-                // Actualiza la cantidad basada en la selección de fechas
-                updateQuantity();
+        document.addEventListener("DOMContentLoaded", function() {
 
-                // Valida si la cantidad de fechas seleccionadas es mayor que la cantidad disponible
-                validateDateQuantity();
-            }
-        });
-        var quantityElement = document.getElementById('quantity');
-        // Obtén todos los checkboxes con la clase 'pet-checkbox'
-        var petCheckboxes = document.querySelectorAll('.pet-checkbox');
-        // Añade un evento de cambio a cada checkbox
-        dateInput.addEventListener('change', function () {
-            // Actualiza la cantidad basada en la selección de fechas
-            updateQuantity();
-
-            // Valida si la cantidad de fechas seleccionadas es mayor que la cantidad disponible
-            validateDateQuantity();
-        });
-        petCheckboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                // Actualiza la cantidad basada en la selección de checkboxes
-                updateQuantity();
-
-                // Valida si la cantidad de mascotas seleccionadas es mayor que la cantidad disponible
-                validatePetQuantity();
+            // Obtén el elemento de cantidad
+            var dateInput = document.getElementById('date');
+            
+            // Obtén las fechas preseleccionadas desde tu controlador de Laravel
+            var preselectedDates = {!! json_encode($scheduledDates) !!};
+            
+            var fp = flatpickr(dateInput, {
+                mode: 'multiple',
+                dateFormat: 'Y-m-d',
+                defaultDate: preselectedDates,  // Establece las fechas preseleccionadas
+                onChange: function () {
+                    // Actualiza la cantidad basada en la selección de fechas
+                    calculateTotal();
+                }
             });
-        });
+    // Esta función se ejecuta cada vez que se produce un cambio en el campo de fechas
+    function calculateTotal() {
+        var scheduledQuantity = <?php echo json_encode($scheduled->quantity); ?>;
+        var scheduledPets = "<?php echo $scheduled->namepets; ?>";
+        var selectedDates = document.getElementById('date').value;
+        
+        var petArray = scheduledPets.split(',');
+        var petCount = petArray.length;
+        var selectedDatesCount = selectedDates.split(',').length;
+        var count = selectedDatesCount * petCount;
 
-        // Función para actualizar la cantidad
-
-
-        function validateDateQuantity() {
-            // Obtén la cantidad de fechas seleccionadas
-            var selectedDateCount = dateInput.value.split(',').filter(Boolean).length;
-
-            // Obtén la cantidad disponible
-            var availableQuantity = parseInt("{{ $quantity }}");
-
-            // Si la cantidad de fechas seleccionadas es mayor que la cantidad disponible, muestra un mensaje y elimina la última fecha
-            if (selectedDateCount > availableQuantity) {
-                // Elimina la última fecha seleccionada
-                dateInput.value = dateInput.value.split(',').slice(0, -1).join(',');
-
-                // Actualiza la cantidad nuevamente
-                updateQuantity();
-            }
-        }
-        // Función para validar la cantidad de mascotas seleccionadas
-        function validatePetQuantity() {
-            // Obtén la cantidad de mascotas seleccionadas
-            var selectedPetCount = document.querySelectorAll('.pet-checkbox:checked').length;
-
-            // Obtén la cantidad disponible
-            var availableQuantity = parseInt("{{ $quantity }}");
-
-            // Si la cantidad de mascotas seleccionadas es mayor que la cantidad disponible, muestra un mensaje y deselecciona el último checkbox
-            if (selectedPetCount > availableQuantity) {
-                // Deselecciona el último checkbox
-                petCheckboxes[petCheckboxes.length - 1].checked = false;
-                // Actualiza la cantidad nuevamente
-                updateQuantity();
-            }
-        }
-        function updateQuantity() {
-        // Obtén la cantidad inicial desde Blade
-        var quantity = parseInt("{{ $quantity }}");
-        // Obtén la cantidad de fechas seleccionadas
-        var selectedDateCount = dateInput.value.split(',').filter(Boolean).length;
-        // Obtén la cantidad de mascotas seleccionadas
-        var selectedPetCount = document.querySelectorAll('.pet-checkbox:checked').length;
-        // Calcula la cantidad a restar teniendo en cuenta la combinación de fechas y mascotas seleccionadas
-        var subtractionAmount = selectedDateCount * selectedPetCount;
-        // Calcula el nuevo valor de cantidad
-        var newQuantity = quantity - subtractionAmount;
-        // Validación: Muestra una alerta si la cantidad es 0 o menor
-        if (newQuantity < 0) {
-            document.getElementById('dateError').innerText = "Please keep in mind that the selected quantities cannot surpass the total available " + quantity + " Also, note that each associated pet corresponds to a discount rate for every chosen date.";
-
-           if (selectedDateCount > 0) {
-            // Puedes ajustar esta lógica dependiendo de la implementación de tu calendario
-            // Esto podría implicar reiniciar la instancia del calendario o cualquier método específico para deseleccionar días.
-            fp.clear();
-            }
-            // Otras acciones que puedas necesitar, como deshabilitar el botón de envío, etc.
+        // Actualiza el mensaje de error si la cantidad total es mayor que la cantidad programada
+        if (count > scheduledQuantity) {
+            document.getElementById('dateError').innerText = "The selected dates cannot exceed the quantity of " + scheduledQuantity + ".";
         } else {
-            // Actualiza el valor de la cantidad en el elemento de cantidad
-            quantityElement.textContent = newQuantity;
-            var quantityFormInput = document.getElementById('quantityForm');
-            quantityFormInput.value = quantity - newQuantity;
+            document.getElementById('dateError').innerText = "";
         }
     }
-    });
-</script>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Obtener referencia al input y a los checkboxes
-        var valorInput = document.getElementById('quantityForm');
-        var checkboxes = document.querySelectorAll('.pet-checkbox');
-
-        // Añadir un event listener a cada checkbox
-        checkboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                // Calcular el nuevo valor sumando la cantidad de checkboxes seleccionados
-                var nuevoValor = 0;
-                checkboxes.forEach(function(checkbox) {
-                    if (checkbox.checked) {
-                        nuevoValor++;
-                    }
-                });
-
-                // Actualizar el valor del input
-                valorInput.value = nuevoValor;
-            });
-        });
-    });
-
-        function validateForm() {
-            var dateInput = document.getElementById('date');
-            var dateError = document.getElementById('dateError');
-            var petCheckboxes = document.querySelectorAll('.pet-checkbox');
-            var petsError = document.getElementById('petsError');
-            var shiftSelect = document.getElementById('shift');
-            var shiftError = document.getElementById('shiftError');
-
-            // Validación de la fecha
-            if (dateInput.value.trim() === '') {
-                dateError.innerHTML = 'Please enter a date';
-            } else {
-                dateError.innerHTML = '';
-            }
-
-            // Validación de al menos un checkbox de mascota seleccionado
-            var atLeastOnePetSelected = Array.from(petCheckboxes).some(function(checkbox) {
-                return checkbox.checked;
-            });
-
-            if (!atLeastOnePetSelected) {
-                petsError.innerHTML = 'Please select at least one pet';
-            } else {
-                petsError.innerHTML = '';
-            }
-
- 
-
-            if (shiftSelect.value === '') {
-                shiftError.innerHTML = 'Please pick a shift';
-            } else {
-                shiftError.innerHTML = '';
-            }
-                       // Envía el formulario si ambas validaciones son exitosas
-            if (dateError.innerHTML === '' && petsError.innerHTML === '' && shiftError.innerHTML === '') {
-                document.getElementById('myForm').submit();
-            }
-        }
-
-
+});
 </script>
 
 

@@ -21,7 +21,8 @@ class Scheduled extends Model
         'address',
         'date',
         'shift',
-        'namepets'
+        'namepets',
+        'unique_number'
     ];
 
     public function user()

@@ -10,6 +10,7 @@ use App\Models\RedeemedService;
 use App\Models\Pet;
 use App\Models\Redemption;
 use App\Models\Scheduled;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -52,9 +53,7 @@ class UserRedemptionController extends Controller
     {
         $userId = Auth::id();
 
-        $request->validate([
-            // Validaciones...
-        ]);
+
 
         $redeemedServices = RedeemedService::findOrFail($redeemedServiceId);
 
@@ -70,6 +69,9 @@ class UserRedemptionController extends Controller
         $redemptiondate = $request->input('date');
         $datesArray = explode(", ",  $redemptiondate);
         $countDate = count($datesArray);
+
+
+
 
         $redemption->save();
         
@@ -102,6 +104,9 @@ class UserRedemptionController extends Controller
         $addressScheduled = $request->input('address');
         $quantityScheduled = $cantidadAReducir;
 
+        $uniqueNumber = mt_rand(100000, 999999);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+        
         Scheduled::create([
             'nameservice' => $serviceNameScheduled,
             'user_id' => $userIdScheduled,
@@ -112,19 +117,10 @@ class UserRedemptionController extends Controller
             'comment' => $commentScheduled,
             'address' => $addressScheduled,
             'namepets' =>  $petScheduled ,
-            'quantity' => $quantityScheduled
+            'quantity' => $quantityScheduled,
+            'unique_number' => $uniqueNumber
         ]);
-
-
-
-
-
-
-
-
         return redirect()->route('userRedemption.index');
-
-
     }
 }
 
