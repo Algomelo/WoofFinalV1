@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Services;
 use App\Models\Package;
+
 use App\Models\RedeemedPackage;
 use App\Models\RedeemedService;
 
 class ServiceRequest extends Model
 {
     use HasFactory;
-    
     protected $table = 'service_request'; // Ajusta este nombre según el nombre real de tu tabla
-
     protected $fillable = [
         'user_id',
         'package_id',
@@ -26,20 +25,22 @@ class ServiceRequest extends Model
         'state',
         'create_at',
         'unique_number',
+        'shift',
+        'quantity',
+        'date',
+        'address'
+
         
     ];
-    
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
     public function packages()
     {
         return $this->belongsToMany(Package::class, 'package_service_request')
             ->withPivot('package_quantity');
     }
-
     public function services()
     {
         return $this->belongsToMany(Service::class, 'service_service_request', 'service_request_id', 'service_id')
@@ -51,13 +52,10 @@ class ServiceRequest extends Model
     {
         // Verifica si el estado es aprobado
         if ($this->state === 'Approved') {
-
-
             // Obtiene todos los servicios y paquetes asociados a la solicitud
             $services = $this->services;
             $packages = $this->packages;
             // Itera sobre los servicios y guarda la redención en la nueva tabla
-
             foreach ($services as $service) {
 
                 RedeemedService::create([

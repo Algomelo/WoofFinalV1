@@ -18,7 +18,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link textomenudashboard" href="{{ url('/packages')}}">
+      <a class="nav-link textomenudashboard d-none" href="{{ url('/packages')}}">
         <i class="fas fa-briefcase text-blue"></i>Packages
       </a>
     </li>
@@ -61,21 +61,18 @@
         <i class="ni ni-bullet-list-67 text-red"></i>Request Service
       </a>
     </li>
-    <li class="nav-item">
-    
+    <li class="nav-item d-none">
     <a class="nav-link textomenudashboard " href="{{ url('/userRedemption')}}">
         <i class="ni ni-bullet-list-67 text-red"></i>My Services
       </a>
     </li>
-
     <li class="nav-item">
     <a class="nav-link textomenudashboard" href="{{ url('/userScheduled')}}">
         <i class="ni ni-bullet-list-67 text-red"></i>Scheduled Services
-        
       </a>
     </li>
     <li class="nav-item">
-    <a class="nav-link textomenudashboard" href="{{ url('/userPets')}}">
+    <a class="nav-link textomenudashboard d-none" href="{{ url('/userPets')}}">
 
         <i class="ni ni-bullet-list-67 text-red"></i>My Pets
       </a>

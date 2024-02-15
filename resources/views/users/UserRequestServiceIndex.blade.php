@@ -108,19 +108,11 @@ use Illuminate\Support\Str;
                 @else
                     <td>-</td>
                 @endif
-
                 <td >
                     <p>Services:</p>
                     <ul >
                         @foreach($serviceRequest->services as $service)
                             <li>{{ $service->name }}  <br> Quantity: {{ $service->pivot->service_quantity }}</li>
-                        @endforeach
-                    </ul>
-
-                    <p>Packages:</p>
-                    <ul>
-                        @foreach($serviceRequest->packages as $package)
-                            <li>{{ $package->name }}  <br>  Quantity: {{ $package->pivot->package_quantity }}</li>
                         @endforeach
                     </ul>
                 </td>

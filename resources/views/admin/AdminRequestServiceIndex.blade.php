@@ -4,13 +4,14 @@
 
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
+
 <div class="card shadow">    
     <div class="card-header border-0">
         <div class="row align-items-center">
             <div class="col">
               <h3 class="mb-0">Service Requests</h3>
             </div>
-            <div class="col text-right">
+            <div class="col text-right d-none">
                 <a href="{{ url('serviceRequests/create')}}" class="btn boton">New Service Request</a>
             </div>
         </div>     
@@ -31,8 +32,12 @@
                 @endforeach
                 @endif
     </div>
+
     <div class="table-responsive">
         <!-- Projects table -->
+        <div class="row">
+            <div id="Calendario1"></div>
+        </div>
         <table class="table align-items-center table-flush">
             <thead class="thead-light">
                 <tr class="text-center">
@@ -66,15 +71,6 @@
                                 <li>{{ optional($service)->name }} <br> - Quantity: {{ optional($service->pivot)->service_quantity }}</li>
                             @empty
                                 <li>No services</li>
-                            @endforelse
-                        </ul>
-
-                        <p>Packages:</p>
-                        <ul>
-                            @forelse($serviceRequest->packages as $package)
-                                <li>{{ optional($package)->name }} <br> - Quantity: {{ optional($package->pivot)->package_quantity }}</li>
-                            @empty
-                                <li>No packages</li>
                             @endforelse
                         </ul>
                     </td>
@@ -124,8 +120,8 @@
             </tbody>
         </table>
     </div>
-
-
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
 @endsection

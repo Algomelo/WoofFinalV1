@@ -11,6 +11,11 @@ use App\Models\Service;
 use App\Models\User;
 use App\Models\ServiceRequest;
 use Illuminate\Support\Facades\View;
+use App\Models\Event;
+use Carbon\Carbon;
+
+
+
 
 
 
@@ -23,10 +28,23 @@ class ServiceRequestController extends Controller
         $uniqueNumbers = $serviceRequest->pluck('unique_number');
         $allServices = Service::all();
         $allPackages = Package::all();
+        $scheduledDates = $this->getFormattedScheduledDates($serviceRequest->date);   //  datos para mostrar el calendario 
 
-        return view('admin.AdminRequestServiceEdit', compact('serviceRequest', 'uniqueNumbers', 'allServices' ,'allPackages'));
+        return view('admin.AdminRequestServiceEdit', compact('serviceRequest', 'uniqueNumbers', 'allServices' ,'allPackages', 'scheduledDates'));
 
     }
+    private function getFormattedScheduledDates($scheduledDates)
+    {
+        // Convierte las fechas almacenadas en la base de datos al formato adecuado para JavaScript
+        $formattedDates = [];
+
+        foreach (explode(',', $scheduledDates) as $date) {
+            $formattedDates[] = Carbon::parse($date)->format('Y-m-d');
+        }
+
+        return $formattedDates;
+    }
+    
     public function create()
     {
         $allUsers = User::where('role', 'user')->get();
@@ -45,7 +63,6 @@ class ServiceRequestController extends Controller
 
         $serviceRequests = ServiceRequest::all()->sortByDesc('created_at');
         $uniqueNumbers = $serviceRequests->pluck('unique_number');
-
 
         return view('admin.AdminRequestServiceIndex', compact('serviceRequests', 'uniqueNumbers')); 
 
@@ -141,63 +158,45 @@ class ServiceRequestController extends Controller
 
     public function update(Request $request, $serviceRequestId)
     {
+    // Guarda la solicitud de servicio actualizada en la base de datos
     $validatedData = $request->validate([
         'comment' => 'nullable',
         'state' => 'required',
         'services' => 'array',
         'packages' => 'array',
     ]);
-
-    // Obtén la solicitud de servicio existente por su ID
-
-
     $serviceRequest = ServiceRequest::findOrFail($serviceRequestId);
-
-    // Actualiza los campos de la solicitud de servicio
     $serviceRequest->comment = $validatedData['comment'];
     $serviceRequest->state = $validatedData['state'];
 
-
-
-    // Actualiza el precio de la solicitud utilizando la función updateTotalPrice
     $totalPrice = $this->updateTotalPrice($request);
     if ($totalPrice !== null) {
         $serviceRequest->price = $totalPrice;
     }
-
-    // Guarda la solicitud de servicio actualizada en la base de datos
     $serviceRequest->save();
-
-
-    // Elimina todos los servicios asociados a la solicitud actual
-    $serviceRequest->services()->detach();
-
-    // Obtén los servicios seleccionados y sus cantidades del formulario
+    //$serviceRequest->services()->detach();
     $selectedServices = $request->input('services');
+    $shift = $request->input('shift');
+    $address = $request->input('address');
+    $comment = $request->input('comment');
 
-    $service_quantity = $request->input('service_quantity');
 
-
+    //$service_quantity = $request->input('service_quantity');
+  /*
     // Asocia los servicios y cantidades a la solicitud a través de la relación many-to-many
     if (!empty($selectedServices)) {
-        $serviceData = [];
-        
+        $serviceData = [];        
         foreach ($selectedServices as $serviceId) {
             $quantity = isset($service_quantity[$serviceId]) ? $service_quantity[$serviceId] : 0;
             $serviceData[$serviceId] = ['service_quantity' => $quantity];
         }
-
         $serviceRequest->services()->attach($serviceData);
     }
-
-
     // Elimina todos los paquetes asociados a la solicitud actual
     $serviceRequest->packages()->detach();
-
     // Obtén los paquetes seleccionados y sus cantidades del formulario
     $selectedPackages = $request->input('packages');
     $package_quantity = $request->input('package_quantity');
-
     // Asocia los paquetes y cantidades a la solicitud a través de la relación many-to-many
     if (!empty($selectedPackages)) {
         $packageData = [];
@@ -207,19 +206,26 @@ class ServiceRequestController extends Controller
         }
         $serviceRequest->packages()->attach($packageData);
     }
-    $serviceRequest->approveAndRedeem();
-
+*/
+    $serviceName = Service::find($selectedServices)->pluck('name')->first();
+    if($request->input('state')== 'Approved'){
+        $dates = explode(', ', $request->date);
+        foreach ($dates as $date) {
+            Event::create([
+                'event' => $serviceName,
+                'start_date' => $date,
+                'end_date' => $date,
+                'description' => $comment, // Establecer el estado a "disponible"
+                'address' => $address,
+                'shift' => $shift,
+                'user' =>  $serviceRequest->user->name,
+                'phone' => $serviceRequest->user->phone,
+            ]);        
+        }
+    }
     $notification = 'The Request Service  has been successfully modified';
-
-
-
     return redirect('/serviceRequests')->with(compact('notification'));
-    
-
-    // Redirige a la vista deseada después de la actualización
-}
-
-    
+    }
 
     private function updateTotalPrice(Request $request)
     {

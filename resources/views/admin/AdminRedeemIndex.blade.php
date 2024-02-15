@@ -27,62 +27,53 @@ use Illuminate\Support\Str;
             </div>
             @endforeach
             @endif
-        </div>
-        <div class="table-responsive">
-    <!-- Projects table -->
-    <table class="table align-items-center table-flush text-center">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col"># scheduled</th>
-                <th scope="col">Creation Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Details</th>
-                <th scope="col">Options</th>
-            </tr>
-        </thead>
-        <tbody>
             
-        @foreach ($scheduled as $scheduleds)
-        <tr>
-            <td>{{ $scheduleds->unique_number}}</td>
-            <td>{{ $scheduleds->created_at}}</td>
-            <td>{{ $scheduleds->state }}</td>
-            <td>
-                User Name:<br> 
-                @if ($scheduleds->user)
-                    {{ $scheduleds->user->name }}
-                @else
-                    User Not Found
-                @endif
-                <br>_________________________
-                <br>Service Name:<br>
-                    {{$scheduleds->nameservice}}
-   
-            </td>
-            @if($scheduleds->state == "Send")
-            <td>
-                <a href="{{ url('/serviceRedems/'.$scheduleds->id.'/edit') }}" class=" btn boton">Approve Scheduling /<br>  Assign to Walker</a>
-            </td>
-            @endif
-        </tr>
-        @endforeach
+        </div>    <!-- Projects table -->
 
-        </tbody>
-    </table>
+    </div>
+    <div class="row" style="justify-content:center">
+                                <div class="col-md-12 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                    <div id='calendar'></div>                   
+                                    </div>
+                                </div>
+                                </div>    
+                            </div>    
 </div>
-        </div>
-        <div class="container" >
-            <div class="container-dialog" role="document">
-                <div class="container-content" style="width:100%">
-                    <div class="container">
-                        <div class="container d-block" style="justify-content: space-evenly;">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-</div>
+                            <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="eventModalLabel">Scheduled</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="eventModalBody">
+                                    <!-- Aquí se mostrará la descripción del evento -->
+                                </div>
+                                </div>
+                            </div>
+                            </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const calendarEl = document.getElementById('calendar');
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: @json($events),
+        eventClick: function(info) {
+            const modalBody = document.getElementById('eventModalBody');
+            modalBody.innerText = info.event.extendedProps.description;
+            $('#eventModal').modal('show'); // Mostrar la ventana modal
+        }
+    });
+    calendar.render();
+});
+</script>
 
 
 @endsection

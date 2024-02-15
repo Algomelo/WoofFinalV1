@@ -3,6 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <div class="card shadow">
         <div class="card-header border-0">
@@ -57,6 +58,27 @@
                     </select>
                     
                 </div>
+                <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <label for="date">Estimated Date(s):</label> <br>
+                            <input type="text" name="date" id="date"  ><br><br>
+                            <span id="dateError" class="error"></span>
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <label for="shift">Shift:</label> <br>
+                            <select name="shift" id="shift">
+                                <option value="Any shift" {{ $serviceRequest->shift == 'Any shift' ? 'selected' : '' }}>Any shift</option>
+                                <option value="morning" {{ $serviceRequest->shift == 'morning' ? 'selected' : '' }}>Morning Shift</option>
+                                <option value="afternoon" {{ $serviceRequest->shift == 'afternoon' ? 'selected' : '' }}>Afternoon Shift</option>
+                            </select>
+                            <span id="shiftError" class="error"></span>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <label for="address">Address:</label> <br>
+                            <input type="text" name="address" id="address"  value="{{$serviceRequest->address}}" >
+                        </div>
+                </div>
 
             <!-- Editar otros campos de la solicitud de servicio como comentario, estado, precio, etc. -->
 
@@ -81,64 +103,7 @@
     </div>
 </div>
 
-<div class="form-group">
-    <h4>Available Services:</h4>
-    <div class="container d-block">
-        @foreach($allServices as $availableService)
-            @if (!$serviceRequest->services->contains($availableService->id))
-                <label for="service_{{ $availableService->id }}">
-                    <input type="checkbox" name="services[]" value="{{ $availableService->id }}"  id="service_{{ $availableService->id }}" class="service-checkbox">
-                    Service Name: {{ $availableService->name }}
-                </label>
-                <label for="service_{{ $availableService->id }}">
-                    Service Price: $ {{ $availableService->price }} (per Unit)
-                </label>
-                <input type="number" name="service_quantity[{{ $availableService->id }}]" value="" class="quantity-input"><br>
-                <span class="service-price" style="display:none;">{{ $availableService->price }}</span>
-            @endif
-        @endforeach
-    </div>
-</div>
 
-        
-
-
-                <!-- Added s -->
-        <div class="form-group">
-            <hr>Added packages s: <br>
-            <div class="container d-block">
-            @foreach($serviceRequest->packages as $package)
-                    <label for="package_{{ $package->id }}">
-                        <input type="checkbox" name="packages[]" value="{{ $package->id }}" id="package_{{ $package->id }}" class="service-checkbox" checked>
-                        Name: {{ $package->name }}  //  Price: $ {{ $package->price }} (xUnit)
-                    </label>
-                    <input type="number" name="package_quantity[{{ $package->id }}]" value="{{ $package->pivot->package_quantity }}" class="quantity-input d-none ">
-
-                    <span class="service-price" style="display:none;">{{ $package->price }}</span>
-                @endforeach
-            </div>
-        </div>
-
-
-                                <!-- Available s -->
-                <div class="form-group">
-                <hr>Available s: <br>
-                <div class="container d-block" >
-                    @foreach($allPackages as $availablePackage)
-                        @if (!$serviceRequest->packages->contains($availablePackage->id))
-                            <label for="package_{{ $availablePackage->id }}">
-                                <input type="checkbox" name="packages[{{ $availablePackage->id }}]" id="package_{{ $availablePackage->id }}" class="service-checkbox" value="{{ $availablePackage->id }}">
-                                Name: {{ $availablePackage->name }} // Package Price: $ {{ $availablePackage->price }} (xUnit)                            
-                            </label>
-                            <input type="number" name="package_quantity[{{ $availablePackage->id }}]" value="package_quantity[{{ $availablePackage->id }}]" class="quantity-input d-none"> <br>
-
-                            <span class="service-price" style="display:none;">{{ $availablePackage->price }}</span>
-                        @endif
-                    @endforeach
-
-
-                </div>
-                </div>
 
                 <div class="form-group">
                     <label for="custom_price">Enable Custom Price</label>
@@ -152,6 +117,7 @@
                     <label for="price">Custom Price</label>
                     <input type="number" name="price" class="form-control" value="" id="price-input" disabled>
                 </div>
+
 
                 <!-- Otros campos y controles según tus necesidades -->
 
@@ -270,5 +236,29 @@ const serviceCheckboxes = document.querySelectorAll('.service-checkbox');
         totalPriceElement.innerHTML = `<strong>Total Price: $${totalPrice.toFixed(2)}</strong>`;
     }
 
+</script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<!-- Agrega esto en tu plantilla Blade después de incluir jQuery -->
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Obtén el elemento de cantidad
+            var dateInput = document.getElementById('date');
+            
+            // Obtén las fechas preseleccionadas desde tu controlador de Laravel
+            var preselectedDates = {!! json_encode($scheduledDates) !!};
+            
+            var fp = flatpickr(dateInput, {
+                mode: 'multiple',
+                dateFormat: 'Y-m-d',
+                defaultDate: preselectedDates,  // Establece las fechas preseleccionadas
+                onChange: function () {
+                    // Actualiza la cantidad basada en la selección de fechas
+                    updateQuantity();
+                    // Valida si la cantidad de fechas seleccionadas es mayor que la cantidad disponible
+                    validateDateQuantity();
+                }
+            });
+        });
+     
 </script>
 @endsection

@@ -12,17 +12,36 @@ use App\Models\ServiceRequest;
 use App\Models\Redemption;
 use App\Models\Scheduled;
 use App\Models\Pet;
+use App\Models\Event;
+
 
 class AdminRedemController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtén la solicitud de servicio a redimir para el usuario específico
-        // Obtén los servicios redimidos asociados a la solicitud
+        $all_events = Event::all();
+        $events = [];
+        foreach ($all_events as $event){
+            $shift = $event->user;
+            $address = $event->address;
+            $shift = $event->shift;
+            $user = $event->user;
+            $phone = $event->phone;
+            $description= $event->description;
+
+            $textFinal = "El usuario " . $user  ." ha solicitado el servicio " . $event->event . ".\n" . "Address: " .$address . 
+            ".\n" . "Phone: " . $phone .".\n" . "Shift: ".$shift .".\n" . "Comment: ". $description;
+            
+            $events[] = [
+                'title'=> $event->event, // a property!
+                'start' => $event->start_date, // a property!
+                'end' => $event->end_date, // a property! ** see important note below about 'end' **
+                'description' => $textFinal, // Agregar descripción u otra información adicional
+            ];
+        }
         $scheduled = Scheduled::with( 'user')->orderByDesc('created_at')->get();
-    
         // Obtén los paquetes redimidos asociados a la solicitud
-        return view('admin.AdminRedeemIndex', compact( 'scheduled'));
+        return view('admin.AdminRedeemIndex', compact( 'scheduled', 'events'));
     }
 
 

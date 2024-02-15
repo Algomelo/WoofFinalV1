@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 
 
@@ -162,9 +163,6 @@ use Illuminate\Support\Str;
                                  <div class="container botonespaquetes text-center">
                                     <div class="row">
                                         <div class="container col-6 d-flex">
-                                            <a href="javascript:void(0);" onclick="showSection('includePackagesSection')" class="texto_paquete" style="margin:30px 30px; color:black;">Include Packages  (Select Created Packages) </a> 
-                                        </div>
-                                        <div class="container col-6 d-flex">
                                             <a href="javascript:void(0);" onclick="showSection('includeServicesSection')" class="texto_servicio"style="margin:30px 30px; color:black;">Include Services (Create Custom Package) </a> 
                                         </div>
                                     </div>
@@ -172,84 +170,40 @@ use Illuminate\Support\Str;
                                 <form action="{{url('/userServiceRequest')}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-
-
-                                    <div id="includePackagesSection" class="form-group includePackagesSection" style="text-align:center;">
-                                    @if (count($allPackages) > 0)
-
-
-
-                                        @foreach ($allPackages as $package)
-                                            <div id="PackagesSection" class="container PackagesSection" style="padding:10px;" >                                
-                                            
-                                                
-                                                                    <tr>
-                                                                    
-                                                                        <h2> {{$package->name}}</h2>
-
-                                                                        <br> 
-                                                                        <strong>Description:</strong>  <br>  {{$package->description}} <br>
-                                                                    
-                                                                        <strong>Included Services:</strong>
-                                                                        <td>
-                                                                            <ul>
-                                                                            
-                                                                                @foreach($package->services as $service)
-                                                                                {{ $service->name }} -
-                                                                                Quantity: {{ $service->pivot->quantity }}<br>
-                                                                                
-                                                            
-                                                                            
-                                                                                @endforeach
-
-                                                                               
-                                                                            </ul>
-                                                                        </td>
-                                                                        <td>
-                                                        <input type="number" name="package_quantity[{{ $package->id }}]" placeholder="Quantity" value=""  class="quantity-input d-none"> 
-
-                                                        <strong>Package price:</strong>  $ {{ $package->price }} (xUnit)<br><br>
-
-                                                        Add Package <input type="checkbox" name="packages[]" value="{{ $package->id }}" id="package_{{ $package->id }}" ><br><br>
-
-
-
-                                                </div>
-
-
-                                            <hr>
-                                            
-                                        @endforeach
-                                    </div>
-                                @else
-
-                                 <p>No hay paquetes disponibles.</p>
-                                 @endif
-                    </div>
-                    <div id="includeServicesSection" class="form-group" style="text-align:center;">
-                                                 
+                </div>                 
+                    <div id="includeServicesSection" class="form-group" style="text-align:center;">                                            
                             @if (count($allServices) > 0)
-                    
-      
-
-
-
                                     @foreach ($allServices as $service)
                                     <div class="container ServiceSection" style="padding:10px;" >                                    
                                             <h2> {{ $service->name }}</h2>
-
-                                           
                                             <strong> Description: </strong> {{ $service->description }} <br> <br>
-                                            <input type="number" name="service_quantity[{{ $service->id }}]" placeholder="Quantity" value="" class="quantity-input"> <br><br>
-
+                                            <strong>Quantity: </strong><input type="number" name="service_quantity[{{ $service->id }}]" value="" class="quantity-input" readonly> <br><br>
                                             <strong>Service price:</strong>  $ {{ $service->price }} (xUnit)<br> <br>
-
                                             Add Service <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}"><br><br>
-
+                                            <div class="row">
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <label for="date{{ $service->id }}">Estimated Date(s):</label><br>
+                                                    <input type="text" name="dates[{{ $service->id }}][]" id="date{{ $service->id }}" class="date-input" style="border:solid 1px;"><br><br>
+                                                    <span id="dateError{{ $service->id }}" class="error"></span>
+                                                </div>                                  
+                                                    <div class="col-lg-4 col-sm-12">
+                                                        <label for="shift">Shift:</label> <br>
+                                                        <select name="shift" id="shift"><br>
+                                                            <option value="" selected>Pick an option</option>
+                                                            <option value="Any shift">Any shift</option>
+                                                            <option value="morning">Morning Shift</option>
+                                                            <option value="afternoon">Afternoon Shift</option>
+                                                        </select><br>
+                                                        <span id="shiftError" class="error"></span>
+                                                    </div>
+                                                    <div class="col-lg-4 col-sm-12">
+                                                        <label for="address">Address :</label> <br>
+                                                       <input type="text" name="address" value="{{$userId->address}}" id="address" required style="border:solid 1px;">
+                                                        
+                                                    </div>
+                                            </div>
                                     </div>
-                                    @endforeach
-
-                               
+                                    @endforeach                               
                             @else
                                <p>No hay Servicios disponibles.</p>
                             @endif
@@ -269,6 +223,36 @@ use Illuminate\Support\Str;
 
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<!-- Agrega esto en tu plantilla Blade después de incluir jQuery -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var services = {!! json_encode($allServices->pluck('id')) !!}; // Obtén una lista de los IDs de los servicios
+
+        services.forEach(function(serviceId) {
+            var quantityInput = $("input[name='service_quantity[" + serviceId + "]']");
+            var dateInput = $("#date" + serviceId); // Seleccione el elemento de fecha por ID único
+            var checkbox = $("#service_" + serviceId);
+
+            var fp = flatpickr(dateInput[0], {
+                mode: 'multiple',
+                dateFormat: 'Y-m-d',
+                onChange: function(selectedDates, dateStr, instance) {
+                    quantityInput.val(selectedDates.length);
+                    checkbox.prop('checked', selectedDates.length > 0);
+                    var datesArray = selectedDates.map(function(date) {
+                        return date.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+                    });
+                    dateInput.attr('name', 'dates[' + serviceId + '][]').val(datesArray.join(','));
+
+                }
+            });
+        });
+    });
+</script>
+
 <script >
         function updateCheckboxValue(checkbox) {
         if (checkbox.checked) {
@@ -294,43 +278,13 @@ use Illuminate\Support\Str;
     }
 </script>
 
-<script>
 
-        showSection("includeServicesSection");
-
-        function showSection(sectionId) {
-            // Oculta todas las secciones
-            document.getElementById('includePackagesSection').style.display = 'none';
-            document.getElementById('includeServicesSection').style.display = 'none';
-
-            // Muestra la sección correspondiente al ID recibido como parámetro
-            document.getElementById(sectionId).style.display = 'block';
-
-            // Declara e inicializa las variables antes de acceder a sus propiedades
-            var textoPaquete = document.getElementsByClassName('texto_paquete')[0];
-            var textoServicio = document.getElementsByClassName('texto_servicio')[0];
-
-            // Cambia el color del texto y del fondo para reflejar la sección activa
-            if (sectionId == "includePackagesSection") {
-
-                textoPaquete.style.color = '#fff';
-                textoPaquete.style.backgroundColor = "#F2761D";
-                textoServicio.style.backgroundColor = "#fff";
-                textoServicio.style.color = 'black'; // Cambia el color del otro enlace
-            } else if (sectionId == "includeServicesSection") {
-
-                textoServicio.style.color = 'white';
-                textoServicio.style.backgroundColor = "#F2761D";
-                textoPaquete.style.backgroundColor = "#fff";
-                textoPaquete.style.color = 'black'; // Cambia el color del otro enlace
-            }
-        }
-</script>
 <script>
     $(document).ready(function () {
         $('input[type="checkbox"][name^="packages"]').change(function () {
             var packageId = $(this).attr('id').split('_')[1];
             var quantityInput = $('input[name="package_quantity[' + packageId + ']"]');
+            
 
             if ($(this).prop('checked')) {
                 quantityInput.val(1);
