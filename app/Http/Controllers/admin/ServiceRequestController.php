@@ -207,6 +207,8 @@ class ServiceRequestController extends Controller
         $serviceRequest->packages()->attach($packageData);
     }
 */
+
+
     $serviceName = Service::find($selectedServices)->pluck('name')->first();
     if($request->input('state')== 'Approved'){
         $dates = explode(', ', $request->date);
@@ -218,7 +220,7 @@ class ServiceRequestController extends Controller
                 'description' => $comment, // Establecer el estado a "disponible"
                 'address' => $address,
                 'shift' => $shift,
-                'user' =>  $serviceRequest->user->name,
+                'user_id' =>  $serviceRequest->user_id,
                 'phone' => $serviceRequest->user->phone,
             ]);        
         }

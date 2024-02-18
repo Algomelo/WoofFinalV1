@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Package;  // Asegúrate de que estás importando la clase Package
 use App\Models\Service;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+
 use App\Models\ServiceRequest;
 use Carbon\Carbon;
 
@@ -94,6 +96,24 @@ class UserServiceRequestController extends Controller
     
     public function store(Request $request)
     {
+
+        $messages = [
+            'services.required' => 'Please select at least one date for a service.',
+            'services.*.required' => 'Please select at least one date for a service.',
+
+
+        ];
+    
+        $validator = Validator::make($request->all(), [
+            'services' => 'required|array|min:1',
+            'services.*' => 'required',
+            'dates.*.*' => 'nullable',
+        ], $messages);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
         $userId = Auth::id();
         $shift= $request->input('shift');
         $address = $request->input('address');

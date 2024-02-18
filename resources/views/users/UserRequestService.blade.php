@@ -179,7 +179,7 @@ use Illuminate\Support\Str;
                                             <strong> Description: </strong> {{ $service->description }} <br> <br>
                                             <strong>Quantity: </strong><input type="number" name="service_quantity[{{ $service->id }}]" value="" class="quantity-input" readonly> <br><br>
                                             <strong>Service price:</strong>  $ {{ $service->price }} (xUnit)<br> <br>
-                                            Add Service <input type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}"><br><br>
+                                             <input type="checkbox"  class="d-none"name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}"><br><br>
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-12">
                                                     <label for="date{{ $service->id }}">Estimated Date(s):</label><br>

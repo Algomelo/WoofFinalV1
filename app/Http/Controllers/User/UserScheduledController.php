@@ -10,22 +10,43 @@ use App\Models\Pet;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Scheduled;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Event;
+
 
 
 class UserScheduledController extends Controller
 {
-    public function index(Request $request )
+    public function index(Request $request)
     {
-        // Obtén la solicitud de servicio a redimir para el usuario específico
-        $userId = Auth::id();
-        
-        $scheduled = Scheduled::with('user')
-            ->where('user_id', $userId)
-            ->orderByDesc('created_at')
-            ->get();    
-        // Obtén los paquetes redimidos asociados a la solicitud
-        return view('users.UserScheduledIndex', compact( 'scheduled'));
+        // Obtener el usuario autenticado
+        $user = $request->user();
+    
+        // Obtener los eventos del usuario autenticado
+        $events = $user->events()->get();
+    
+        $formattedEvents = [];
+    
+        foreach ($events as $event) {
+            $address = $event->address;
+            $shift = $event->shift;
+            $phone = $event->phone;
+            $description = $event->description;
+    
+            $textFinal =  $user->name  ." remember that you have a " . $event->event ." scheduled". ".\n" . "Address: " .$address . 
+            ".\n" . "Phone: " . $phone .".\n" . "Shift: ".$shift .".\n" . "If you wish to cancel or modify this event, please contact the administrator.";
+            
+            
+            $formattedEvents[] = [
+                'title'=> $event->event, // a property!
+                'start' => $event->start_date, // a property!
+                'end' => $event->end_date, // a property! ** see important note below about 'end' **
+                'description' => $textFinal, // Agregar descripción u otra información adicional
+            ];
+        }
+    
+        return view('users.UserScheduledIndex', compact('formattedEvents'));
     }
+    
 
     public function edit(string $id)
     {

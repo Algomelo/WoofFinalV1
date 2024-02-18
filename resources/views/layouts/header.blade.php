@@ -57,7 +57,7 @@
                     </li>
                    
                     <li class="nav-item">
-                        <a class="nav-link" href="services">Services</a>
+                        <a class="nav-link" href="services1">Services</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="gallery">Our Stars</a>

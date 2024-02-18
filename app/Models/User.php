@@ -64,6 +64,11 @@ class User extends Authenticatable
         return $this->hasMany(ServiceRequest::class);
     }
     
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+    
     public function scopeWalkers($query){
 
         return $query->where('role','walker');

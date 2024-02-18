@@ -25,12 +25,13 @@ class AdminRedemController extends Controller
             $shift = $event->user;
             $address = $event->address;
             $shift = $event->shift;
-            $user = $event->user;
+            $user = $event->user->name;
             $phone = $event->phone;
             $description= $event->description;
 
-            $textFinal = "El usuario " . $user  ." ha solicitado el servicio " . $event->event . ".\n" . "Address: " .$address . 
+            $textFinal = "The user " . $user  ." has requested the service " . $event->event . ".\n" . "Address: " .$address . 
             ".\n" . "Phone: " . $phone .".\n" . "Shift: ".$shift .".\n" . "Comment: ". $description;
+            
             
             $events[] = [
                 'title'=> $event->event, // a property!
