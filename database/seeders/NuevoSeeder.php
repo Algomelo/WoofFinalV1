@@ -23,8 +23,6 @@ class NuevoSeeder extends Seeder
             'role' => 'admin',
         ]);
         
-        User::factory()
-        ->count(50)
-        ->create();
+
     }
 }

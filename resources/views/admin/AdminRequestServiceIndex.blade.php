@@ -11,7 +11,7 @@
             <div class="col">
               <h3 class="mb-0">Service Requests</h3>
             </div>
-            <div class="col text-right d-none">
+            <div class="col text-right ">
                 <a href="{{ url('serviceRequests/create')}}" class="btn boton">New Service Request</a>
             </div>
         </div>     

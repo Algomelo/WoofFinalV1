@@ -84,12 +84,15 @@ class ServiceRequestController extends Controller
 
     // Obtener el usuario asignado //
     $assignedUserId = $validatedData['assigned_user'];
+    $date = $request->input('date');
+
 
     // Crear una nueva instancia del modelo ServiceRequest con los datos validados //
     $serviceRequest = ServiceRequest::create([
         'comment' => $validatedData['comment'],
         'state' => $validatedData['state'],
         'unique_number' => $validatedData['unique_number'],
+        'date' => $date,
         'user_id' => $assignedUserId,
     ]);
 
@@ -168,20 +171,38 @@ class ServiceRequestController extends Controller
     $serviceRequest = ServiceRequest::findOrFail($serviceRequestId);
     $serviceRequest->comment = $validatedData['comment'];
     $serviceRequest->state = $validatedData['state'];
+    $serviceRequest->date = $request->input('date');
+    $service_quantity = $request->input('service_quantity');
+    $quantity = $service_quantity[1];
+    $serviceRequest->quantity = $quantity;
 
     $totalPrice = $this->updateTotalPrice($request);
     if ($totalPrice !== null) {
         $serviceRequest->price = $totalPrice;
     }
+
     $serviceRequest->save();
+
+
     //$serviceRequest->services()->detach();
     $selectedServices = $request->input('services');
+    $serviceId = $selectedServices[0];
+
+    foreach($serviceRequest->services as $service){
+        $service->pivot->service_quantity = $quantity;
+        $service->pivot->save();
+    }
+
+    // Guardar los cambios
+
+
     $shift = $request->input('shift');
     $address = $request->input('address');
     $comment = $request->input('comment');
 
 
-    //$service_quantity = $request->input('service_quantity');
+
+
   /*
     // Asocia los servicios y cantidades a la solicitud a través de la relación many-to-many
     if (!empty($selectedServices)) {

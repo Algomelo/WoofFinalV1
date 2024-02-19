@@ -89,7 +89,7 @@ class UserServiceRequestController extends Controller
         }
         */
         //$selectedPackages = $request->input('packages', []);
-        $serviceRequest->update(['price' => $totalPrice]);
+        //$serviceRequest->update(['price' => $totalPrice]);
         $serviceRequest->save();
         return redirect()->route('userServiceRequest.index');
         }    

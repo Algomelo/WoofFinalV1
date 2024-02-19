@@ -120,7 +120,7 @@ use Illuminate\Support\Str;
                 <td>{{ $serviceRequest->created_at}}</td>
 
                 <td class="text-center">
-                    @if($serviceRequest->state !== 'Approved')
+                    @if($serviceRequest->state == 'Send')
                     
                     <a href="{{url('/userServiceRequest/'.$serviceRequest->id.'/edit')}}" class=" btn boton">Edit</a>
 

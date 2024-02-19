@@ -77,17 +77,12 @@
 
                               <input type="text" name="name" class="form-control" value="{{old('name',$user->name)}}">
                           </div>
-
                           <div class="form-group">
                               <label for="email">Email</label>
                               <input type="email" name="email" class="form-control" value="{{old('email',$user->email)}}">
                           </div>
                           <div class="form-group">
-                              <label for="cedula">Cedula</label>
-                              <input type="text" name="cedula" class="form-control" value="{{old('cedula',$user->cedula)}}">
-                          </div>
-                          <div class="form-group">
-                              <label for="address">Cedula</label>
+                              <label for="address">Address</label>
                               <input type="text" name="address" class="form-control" value="{{old('address',$user->address)}}">
                           </div>
                           <div class="form-group">

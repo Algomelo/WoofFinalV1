@@ -39,7 +39,7 @@
         </a>
       </li>
     <li class="nav-item">
-      <a class="nav-link textomenudashboard" href="{{ url('/walkers')}}">
+      <a class="nav-link textomenudashboard d-none" href="{{ url('/walkers')}}">
         <i class="fas fa-walking text-orange"></i>Walkers
       </a>
     </li>
