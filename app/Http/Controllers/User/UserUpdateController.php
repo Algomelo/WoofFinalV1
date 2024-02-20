@@ -41,6 +41,11 @@ class UserUpdateController extends Controller
         if($password)
         $data['password'] = bcrypt($password);
         $user->fill($data)->save();
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('public/images');
+            $user->photo = basename($imagePath);
+            $user->save();
+        }
 
 
         $notification = 'The user information has been successfully registered.';
@@ -49,13 +54,6 @@ class UserUpdateController extends Controller
         return redirect()->route('home', compact('user'));
     }
 
-    /*
-        if ($request->hasFile('photo')) {
-            $imagePath = $request->file('photo')->store('public/images');
-            $user->photo = basename($imagePath);
-            $user->save();
-        }
-*/
 
     /**
      * Remove the specified resource from storage.

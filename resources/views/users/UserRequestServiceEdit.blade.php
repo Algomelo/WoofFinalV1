@@ -92,7 +92,7 @@ use Illuminate\Support\Str;
     document.addEventListener("DOMContentLoaded", function() {
         var services = {!! json_encode($allServices->pluck('id')) !!}; // Obtén una lista de los IDs de los servicios
         var preselectedDates = {!! json_encode($scheduledDates) !!};
-
+        console.log(preselectedDates);
         services.forEach(function(serviceId) {
             var quantityInput = $("input[name='service_quantity[" + serviceId + "]']");
             var dateInput = $("#date" + serviceId); // Seleccione el elemento de fecha por ID único
