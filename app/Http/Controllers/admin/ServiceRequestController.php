@@ -165,15 +165,21 @@ class ServiceRequestController extends Controller
     $validatedData = $request->validate([
         'comment' => 'nullable',
         'state' => 'required',
-        'services' => 'array',
+        'services' => 'required|array', // Asegura que se haya seleccionado al menos un servicio
         'packages' => 'array',
+    ], [
+        'services.required' => 'You must select at least one service.', // Mensaje personalizado para el checkbox
     ]);
     $serviceRequest = ServiceRequest::findOrFail($serviceRequestId);
     $serviceRequest->comment = $validatedData['comment'];
     $serviceRequest->state = $validatedData['state'];
     $serviceRequest->date = $request->input('date');
+    
     $service_quantity = $request->input('service_quantity');
-    $quantity = $service_quantity[1];
+    $values = array_values($service_quantity);
+    $quantity = reset($values);
+
+
     $serviceRequest->quantity = $quantity;
 
     $totalPrice = $this->updateTotalPrice($request);

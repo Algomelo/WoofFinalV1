@@ -42,13 +42,13 @@ use Illuminate\Support\Str;
          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Instrucciones para solicitar un servicio</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Instructions for scheduling a service</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>"Select from our range of custom package options or take advantage of specially discounted packages tailored just for you.</p>
+                        <p>In this section you can select the services you want to schedule, remember to update your information and fill out each of the fields in the form</p>
                         <img alt="Image placeholder" src="{{asset('img/requestcreate.PNG')}}" class="img-fluid">
 
 
@@ -75,13 +75,13 @@ use Illuminate\Support\Str;
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="includePackagesSectionModalLabel">Instrucciones para seleccionar un paquete</h5>
+                        <h5 class="modal-title" id="includePackagesSectionModalLabel">Instructions for scheduling a service</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>If you choose a personalized package, you'll enjoy the freedom to tailor the amount of each service according to your preferences. Otherwise, existing packages will be added as separate units.</p>
+                        <p>Please select the dates you wish to schedule your service, each date is calculated as a unit in our system.</p>
                         <img alt="Image placeholder" src="{{asset('img/requestcreate1.PNG')}}" class="img-fluid">
                     </div>
                     <div class="modal-footer">
@@ -107,7 +107,7 @@ use Illuminate\Support\Str;
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="SendToRequestLabel">Instrucciones para seleccionar un paquete</h5>
+                        <h5 class="modal-title" id="SendToRequestLabel">Instructions for scheduling a service</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

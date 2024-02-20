@@ -35,12 +35,12 @@ use Illuminate\Support\Str;
                     <div class="modal-body">
                         <!-- Contenido para pantallas grandes -->
                         <div class="d-none d-lg-block">
-                            <p>"In this section, you can monitor the status of your requests, make edits, and initiate new requests. Please note that once a request is approved, the corresponding services will be accessible under the 'My Services' section."</p>
+                            <p>In this section, you can monitor the status of your requests, make edits, and initiate new requests. Please note that once a request is approved, the corresponding services will be accessible under the 'Scheduled Services' section.</p>
                             <img  src="{{asset('img/requestindex.PNG')}}"  class="img-fluid">
                         </div>
                         <!-- Contenido para pantallas pequeñas -->
                         <div class="d-lg-none">
-                            <p>"Contenido alternativo para pantallas pequeñas."</p>
+                        <p>In this section, you can monitor the status of your requests, make edits, and initiate new requests. Please note that once a request is approved, the corresponding services will be accessible under the 'Scheduled Services' section.</p>
                             <img  src="{{asset('img/requestindex.PNG')}}"  class="img-fluid">
                         </div>
                     </div>
