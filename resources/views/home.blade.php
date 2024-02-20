@@ -100,7 +100,7 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <small class="text-warning">The password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit. Please ensure your password meets these security requirements</small>
-                            <input type="password" name="password" id="password" class="form-control" value="{{ old('password', Str::random(8)) }}">
+                            <input type="password" name="password" id="password" class="form-control" value="{{ old('password') }}">
                         </div>
                         <div class="form-group">
                             <label for="password_confirmation">Confirm Password</label>
