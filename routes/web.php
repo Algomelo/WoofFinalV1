@@ -118,7 +118,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 });
 
-URL::forceSchme('https');
+URL::forceScheme('https');
 
 
 
