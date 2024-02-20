@@ -39,10 +39,6 @@ use Illuminate\Support\Str;
                     <input type="text" name="name" class="form-control" value="{{old('name',$user->name)}}">
                 </div>
                 <div class="form-group">
-                    <label for="cedula">Identification Card</label>
-                    <input type="text" name="cedula" class="form-control" value="{{old('cedula',$user->cedula)}}">
-                </div>
-                <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" class="form-control" value="{{old('email',$user->email)}}">
                 </div>
@@ -55,16 +51,41 @@ use Illuminate\Support\Str;
                     <input type="text" name="address" class="form-control" value="{{old('address',$user->address)}}">
                 </div>
                 <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="text" name="password" class="form-control" >
-                  <small class="text-warning">Only fill out the field if you want to change the password</small>
-              </div>
-                <button type="submit" class="btn boton">Save changes</button>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label for="password_confirmation">Confirm Password</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"> <br>
+                    <button class="btn boton" type="button" id="showPasswordBtn">Show Password</button>
+                    <small class="text-warning">Only fill out the field if you want to change the password</small>
 
-            </form>
-            
+                </div>
+              
+                <button type="submit" class="btn boton">Save changes</button>
+            </form>        
            </div>     
       </div>
+
+      <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              var passwordInput = document.getElementById('password');
+              var passwordInputC = document.getElementById('password_confirmation');
+              var showPasswordBtn = document.getElementById('showPasswordBtn');            
+              showPasswordBtn.addEventListener('click', function() {
+                  if (passwordInput.type === "password") {
+                      passwordInput.type = "text";
+                      passwordInputC.type = "text";
+                      showPasswordBtn.textContent = "Hide Password";
+                  } else {
+                      passwordInput.type = "password";
+                      passwordInputC.type = "password";
+
+                      showPasswordBtn.textContent = "Show Password";
+                  }
+              });
+          });
+      </script>
  
 
 @endsection

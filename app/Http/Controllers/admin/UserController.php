@@ -32,24 +32,27 @@ class UserController extends Controller
         $rules = [
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
-            'cedula' => 'required|digits_between:6,10',
             'address' => 'required|min:6',
             'phone' => 'required',
+            'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|confirmed',
+
         ];
 
         $messages = [
-
-            'name.required' => 'El nombre del usuario es obligatorio',
-            'name.min' => 'El nombre del usuario debe tener mas de tres caracteres',
-            'email.required'  => 'Debe ingresar un correo electronico valido',
-            'email.unique'    => 'Este email ya esta registrado en el sistema',
-            'cedula.required'   => 'La cedula  es obligatoria',
-            'cedula.numeric'     =>'solo se permiten numeros para la cedula',
-            'cedula.digits_between'      => 'la longitud  de la cedula debe tener entre 6 y 10 digitos',
-            'address.required'       => 'La direccion del paseador es requerida',
-            'address.min'        => 'La dirección debe contener al menos 6 digitos',
-            'phone.required'         => 'El numero telefonico es obligatorio',
-
+            'password.required' => 'The password field is required.',
+            'password.min' => 'The password must be at least 8 characters long.',
+            'password.regex' => 'The password must contain at least one uppercase letter, one lowercase letter, and one digit.',
+            'password.confirmed' => 'The password confirmation does not match.',
+            'name.required' => 'User name is required',
+            'name.min' => 'User name must be more than three characters',
+            'email.required' => 'You must enter a valid email address',
+            'email.unique' => 'This email is already registered in the system',
+            'cedula.required' => 'ID number is required',
+            'cedula.numeric' => 'Only numbers are allowed for the ID number',
+            'cedula.digits_between' => 'ID number must be between 6 and 10 digits long',
+            'address.required' => 'Walker address is required',
+            'address.min' => 'The address must contain at least 6 digits',
+            'phone.required' => 'Phone number is required',
         ];
 
         $this->validate($request,$rules,$messages);
@@ -61,7 +64,8 @@ class UserController extends Controller
                 'password' => bcrypt($request->input('password'))
             ]
         );
-        $notification = 'El usuario se ha registrado correctamente.';
+        $notification = 'The user has been registered successfully.';
+        
         return redirect('/users')->with(compact('notification'));
     }
 
@@ -80,23 +84,24 @@ class UserController extends Controller
         $rules = [
             'name' => 'required|min:3',
             'email' => 'required|email', 
-            'cedula' => 'required|min:6',
             'address' => 'required|min:6',
             'phone' => 'required',
+            'password' => 'nullable|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|confirmed',
+
         ];
 
         $messages = [
-
-            'name.required' => 'El nombre del usuario es obligatorio',
-            'name.min' => 'El nombre del usuario debe tener mas de tres caracteres',
-            'email.required'  => 'Debe ingresar un correo electronico valido',
-            'email.unique'    => 'Este email ya esta registrado en el sistema',
-            'cedula.required'   => 'La cedula del paseador es obligatoria',
-            'cedula.numeric'     =>'solo se permiten numeros para la cedula',
-            'cedula.digits_between'      => 'la longitud minima de la cedula son de 6 digitos',
-            'address.required'       => 'La direccion del usuario es requerida',
-            'address.min'        => 'La dirección debe contener al menos 6 digitos',
-            'phone.required'         => 'El numero telefonico es obligatorio',
+            'password.required' => 'The password field is required.',
+            'password.min' => 'The password must be at least 8 characters long.',
+            'password.regex' => 'The password must contain at least one uppercase letter, one lowercase letter, and one digit.',
+            'password.confirmed' => 'The password confirmation does not match.',
+            'name.required' => 'User name is required',
+            'name.min' => 'User name must be more than three characters',
+            'email.required' => 'You must enter a valid email address',
+            'email.unique' => 'This email is already registered in the system',
+            'address.required' => 'Walker address is required',
+            'address.min' => 'The address must contain at least 6 digits',
+            'phone.required' => 'Phone number is required',
 
         ];
 
@@ -111,9 +116,8 @@ class UserController extends Controller
         $user->fill($data)->save();
 
 
-
-        $notification = 'La informacion del usuario se ha registrado correctamente.';
-        return redirect('/users')->with(compact('notification'));
+        $notification = 'The user information has been successfully registered.';
+         return redirect('/users')->with(compact('notification'));
     }
 
     /**
@@ -125,7 +129,7 @@ class UserController extends Controller
         $userName = $user->name;
         $user->delete();
 
-        $notification = 'el paseador'.$userName. 'se elimino correctamente';
+        $notification = 'User '.$userName. 'was successfully deleted';
         
         return redirect('/users')->with(compact('notification'));
 
@@ -140,7 +144,7 @@ class UserController extends Controller
     // Realiza la lógica para eliminar los usuarios con los IDs proporcionados
     User::whereIn('id', $ids)->delete();
 
-    return response()->json(['message' => 'Usuarios eliminados correctamente.']);
+    return response()->json(['message' => 'Successfully deleted users.']);
 }
 
 }

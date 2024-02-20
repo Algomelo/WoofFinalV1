@@ -63,6 +63,14 @@
             <div class="col-md-12 mb-4">
               <div class="card">
                   <div class="card-body">
+                        @if($errors->any())
+                        @foreach($errors ->all() as $error)
+                        <div class="alert alert-danger" role="alert">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>Please!!</strong> {{$error}}
+                        </div>
+                        @endforeach
+                        @endif
                       <h5 class="card-title">My Profile</h5>
 
                       <form action="{{url('userUpdate',$user->id)}}" method="POST" enctype="multipart/form-data">
@@ -89,11 +97,16 @@
                               <label for="text">Phone</label>
                               <input type="tel" name="phone" class="form-control" value="{{old('phone',$user->phone)}}">
                           </div>
-                          <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="text" name="password" class="form-control" >
-                                <small class="text-warning">Only fill out the field if you want to change the password</small>
-                            </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <small class="text-warning">The password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit. Please ensure your password meets these security requirements</small>
+                            <input type="password" name="password" id="password" class="form-control" value="{{ old('password', Str::random(8)) }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirmation">Confirm Password</label>
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"> <br>
+                            <button class="btn boton" type="button" id="showPasswordBtn">Show Password</button>
+                        </div>
                           <button type="submit" class="btn boton">Update Information</button>
                       </form>
                   </div>
@@ -107,11 +120,27 @@
         <!-- FIN MENU USUARIOS --->
         <!-- FIN MENU USUARIOS --->
 
-
-    
-
-
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script type="text/javascript" src="js/prefferGuide.js" ></script>
+  <script type="text/javascript" src="js/prefferGuide.js" ></script>
+  <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              var passwordInput = document.getElementById('password');
+              var passwordInputC = document.getElementById('password_confirmation');
+              var showPasswordBtn = document.getElementById('showPasswordBtn');            
+              showPasswordBtn.addEventListener('click', function() {
+                  if (passwordInput.type === "password") {
+                      passwordInput.type = "text";
+                      passwordInputC.type = "text";
+                      showPasswordBtn.textContent = "Hide Password";
+                  } else {
+                      passwordInput.type = "password";
+                      passwordInputC.type = "password";
+
+                      showPasswordBtn.textContent = "Show Password";
+                  }
+              });
+          });
+      </script>
+
 
 @endsection
