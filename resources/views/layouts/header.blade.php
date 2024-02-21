@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oh My Woof!</title>
     <link rel="icon" type="image/x-icon" href="logos/ICONO-01.png">
- 
+
 
     <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/brands.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="css/stilos_generales.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/titulos.css">
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -33,6 +35,15 @@
     
     
 
+<style>
+      .boton {
+    background-image: url(/img/banner_huellas.png) !important;
+    color: white;
+    padding: 3px 10px;
+    /* margin: 0px; */
+    border-radius: 12px;}
+
+    </style>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -77,10 +88,10 @@
                     </li>
 
                     </ul>
-                    <div class="container d-flex" style="justify-content:right; width:auto; padding:0; margin:0;">
+                    <div class="container d-flex" style="justify-content:center; width:auto; padding:0; margin:0;">
                             <ul class="navbar-nav ml-auto listanavbar text-center">
                                 <li class="nav-item">
-                                    <a class="nav-link botonlogin" href="login">Log In</a>
+                                    <a class="nav-link boton" href="login">Log In</a>
                                 </li>
 
                                 <li class="nav-item">

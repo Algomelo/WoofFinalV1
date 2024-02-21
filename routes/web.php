@@ -32,7 +32,7 @@ Route::post('/confirm-contacjob', [ContactJobController::class, 'EnviarContactJo
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 Route::view('/landing','landing')->name('landing');
 Route::view('/','index')->name('index');;
-Route::view('/services1','services3')->name('services') ;
+Route::view('/services1','services2')->name('services') ;
 Route::view('/gallery','gallery')->name('gallery');
 Route::view('/aboutus','aboutus')->name('about');
 Route::view('/contactusers','contactusers')->name('contactusers');
@@ -118,7 +118,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 });
 
-//URL::forceScheme('https');
+URL::forceScheme('https');
 
 
 

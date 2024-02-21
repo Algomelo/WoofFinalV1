@@ -3,11 +3,8 @@
     <link rel="stylesheet" href="css/style_contactusers.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
-
 </head>
-
 <main>
-
 <section class="ftco-section ftco-no-pt ftco-no-pb" style="  background-image: url('/img/banner_huellas.png');     padding-bottom: 0 !important; ">
     	<div class="container">
     		<div class="row d-flex no-gutters">
@@ -23,10 +20,10 @@
                     <div id="success">
                         <h2 class="text-center" style="margin-bottom:20px;"> Leave your information, we will contact you immediately </h2>
                     </div>
-                    <form action="{{ secure_url('confirm-contactt')}}" method="POST" name="contactForm" id="contactForm" novalidate="novalidate">
+                    <form action="{{ secure_url('confirm-contactt')}}" method="POST" name="contactForm" id="contactForm">
                         @csrf
                         <div class="control-group">
-        
+
                             <input type="text" class="form-control p-4" id="name" name="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name">
                             <p class="help-block text-danger"></p>
                         </div>
@@ -43,30 +40,24 @@
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="d-flex justify-content-center">
-                        <button class="btn btn-primary py-3 px-7" type="submit" id="sendMessageButton" style="background: #015351; border-radius:30px; color:white;">Send Message</button>
+                        <button class="btn btn-primary py-3 px-7" type="submit"  style="background: #015351; border-radius:30px; color:white;">Send Message</button>
                         </div>
-
                     </form>
                 </div>
             </div>
-
         </div>
 	          
     			</div>
     		</div>
     	</div>
     
-
         <div class="col-12">
         <iframe style="width: 100%; height: 300px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123767!2d151.2092966!3d-33.8688197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae0a6f67239d%3A0x3017a5228f172994!2sSydney%20NSW%2C%20Australia!5e0!3m2!1sen!2sus!4v1603794290143!5m2!1sen!2sus" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
         </div>
     </section>
-
     <script>
-
 $('#contactForm').submit(function (event) {
     event.preventDefault();
-
     $.ajax({
         type: 'POST', // Método POST
         url: $(this).attr('action'), // URL del formulario
@@ -75,25 +66,22 @@ $('#contactForm').submit(function (event) {
             // Manejo de la respuesta exitosa, puedes actualizar la vista o mostrar un mensaje de éxito
             Swal.fire({
                 icon: 'success',
-                title: '¡Éxito!',
-                text: 'La solicitud se ha enviado correctamente.',
-                confirmButtonText: 'Cerrar',
+                title: 'Success!',
+                text: 'The request has been submitted successfully.',
+                confirmButtonText: 'Closed',
             });
         },
         error: function (error) {
             // Manejo de errores, puedes mostrar un mensaje de error
             Swal.fire({
                 icon: 'error',
-                title: '¡Error!',
-                text: 'Hubo un problema al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.',
-                confirmButtonText: 'Cerrar',
+                title: 'Failed!',
+                text: 'There was an issue submitting the request. Please try again later..',
+                confirmButtonText: 'Closed',
             });
         }
     });
 });
-
         </script>
-
 </main>
-
 @include('layouts.footer')

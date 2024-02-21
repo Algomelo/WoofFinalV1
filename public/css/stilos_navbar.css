@@ -1,6 +1,8 @@
 /*----Estilos del navbar ---*/
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap');
-
+.navbar-light .navbar-nav .nav-link {
+    color: white !important;
+}
 
 .navbar{
     margin-top: 0;
@@ -15,7 +17,7 @@
   .navbar-nav .nav-item .nav-link {
         font-size: 15px; /* Tamaño de fuente para los títulos */
         color:#fff;
-        margin-right: 10px; /* Espacio entre el icono y el texto */
+        margin-right: 30px; /* Espacio entre el icono y el texto */
         font-family: 'Preahvihear', sans-serif;
         }
 
@@ -28,7 +30,7 @@
         .navbar-nav .nav-item .nav-link:hover {
             font-size: 15px; /* Tamaño de fuente para los títulos */
             color:#F2761D            ;
-            margin-right: 10px; /* Espacio entre el icono y el texto */
+            margin-right: 30px; /* Espacio entre el icono y el texto */
             font-family: 'Preahvihear', sans-serif;
             }
     
@@ -42,7 +44,7 @@
         
   .navbar-brand {
           padding: 0;
-          margin-left: -70px; /* Mover hacia la izquierda */
+          margin-left: -90px; /* Mover hacia la izquierda */
           }
           
   .navbar-brand .img_style{
@@ -165,27 +167,3 @@
             }
             
 }
-
-
-.botonlogin{
-    border: solid 3px;
-    border-color: #F2761D;
-    background-color: #F2761D;
-    border-radius: 50px;
-    font-size: 12px;
-    color: #fff;
-    font-family: 'Preahvihear', sans-serif;
-    padding: 0px 20px;
-}
-  .botonlogin:hover{
-
-    border-color: #F2761D;
-    background-color: #F2761D;
-    border-radius: 50px;
-    color: #fff !important;
-
-    font-size: 15px; /* Tamaño de fuente para los títulos */
-    font-family: 'Preahvihear', sans-serif;
-
-  }
-  

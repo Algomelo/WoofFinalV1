@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+
 
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -31,7 +32,7 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-        <a class="navbar-brand" href="index">
+        <a class="navbar-brand" href="/">
             <img class="img_style" src="./img/positive_logo.png" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -40,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                
                 <li class="nav-item">
@@ -96,6 +97,8 @@
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name"placeholder="Your Name" required>
             </div>
+            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">   
+
             <div class="form-group col-md-6">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
@@ -141,7 +144,7 @@
             <label for="message">Message</label>
             <textarea class="form-control" id="message" name="message" rows="3" placeholder="Your Message"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary py-3 px-7" type="submit" id="sendMessageButton" style="background: #015351; border-radius:30px; color:white;">Send Message</button>
     </form>
 </div>
             
@@ -246,7 +249,7 @@
                 <div class="text-center">
                         <img src="./img/testimonio1.jpg" alt="Mike Johnson" class="testimonial-img">
                 </div>
-                <p class="card-text"><strong>Mike Johnson</strong></p>
+                <p class="card-text"><strong>Pennie Culpan</strong></p>
                 <p class="card-text">"I have been using Oh My Woof for daily walks and occasional full day care for a few weeks now and can highly recommend Juan and his team to care for your furbaby. Bonny is always super excited to see them and always comes back pooped, happy and relaxed. I have now booked her in for boarding and feel relaxed that she will have a good time and be safe in Juan's care."</p>
                 </div>
             </div>
@@ -257,7 +260,7 @@
                 <div class="text-center">
                         <img src="./img/testimonio2.jpg" alt="Mike Johnson" class="testimonial-img">
                 </div>
-                <p class="card-text"><strong>Mike Johnson</strong></p>
+                <p class="card-text"><strong>Kelli Martin</strong></p>
                 <p class="card-text">"Oh My Woof are simply amazing! From the moment my little Loki met Juan it was clear to see how much love he has for dogs and it is clearly reciprocated. Loki runs to the door with excitement when he gets picked up for his walkies and I couldn’t think of a better company to leave my dog with! Highly recommended 🐶"</p>
                 </div>
             </div>
@@ -311,35 +314,68 @@
     scrollButtons.forEach(button => {
         button.addEventListener('click', scrollToSection);
     });
-
+    </script>
+   <script>
     $('#LandingForm').submit(function (event) {
-    event.preventDefault();
+        event.preventDefault();
 
-    $.ajax({
-        type: 'POST', // Método POST
-        url: $(this).attr('action'), // URL del formulario
-        data: $(this).serialize(), // Datos del formulario serializados
-        success: function (response) {
-            // Manejo de la respuesta exitosa, puedes actualizar la vista o mostrar un mensaje de éxito
-            Swal.fire({
-                icon: 'success',
-                title: '¡Éxito!',
-                text: 'La solicitud se ha enviado correctamente.',
-                confirmButtonText: 'Cerrar',
+        // Deshabilita el botón y muestra un mensaje de espera
+        Swal.fire({
+            title: 'Processing...',
+            text: 'Please wait a moment while we process your request.',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            willOpen: () => {
+                $('#sendMessageButton').prop('disabled', true);
+            }
+        });
+
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', { action: 'submit' }).then(function (token) {
+                document.getElementById("g-recaptcha-response").value = token;
+
+                // Envía el formulario a través de AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: $(event.target).attr('action'),
+                    data: $(event.target).serialize(),
+                    success: function (response) {
+                        // Restaura el botón y cierra el mensaje de espera
+                        $('#sendMessageButton').prop('disabled', false);
+                        Swal.close();
+
+                        if (response.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: response.message,
+                                confirmButtonText: 'Closed',
+                            });
+                        } else if (response.status === 'error') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Fail!',
+                                text: response.message,
+                                confirmButtonText: 'Closed',
+                            });
+                        }
+                    },
+                    error: function () {
+                        // Restaura el botón y cierra el mensaje de espera
+                        $('#sendMessageButton').prop('disabled', false);
+                        Swal.close();
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Fail!',
+                            text: 'There was an issue submitting the request. Please try again later.',
+                            confirmButtonText: 'Closed',
+                        });
+                    }
+                });
             });
-        },
-        error: function (error) {
-            // Manejo de errores, puedes mostrar un mensaje de error
-            Swal.fire({
-                icon: 'error',
-                title: '¡Error!',
-                text: 'Hubo un problema al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.',
-                confirmButtonText: 'Cerrar',
-            });
-        }
+        });
     });
-});
-    
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 

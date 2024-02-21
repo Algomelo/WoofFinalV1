@@ -8,10 +8,7 @@
     color: white;
   }
  
-  .zoom:hover{
-    transform: scale(1.1);
 
-}
 
     @media (min-width: 992px) {
       .ftco-intro .services {
@@ -409,3 +406,8 @@ padding-left: 1rem !important;
   .carta{
     background-image: url('/img/banner_huellas.png');
   }
+
+  .zoom:hover{
+    transform: scale(1.1);
+
+}

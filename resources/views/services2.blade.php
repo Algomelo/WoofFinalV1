@@ -4,52 +4,47 @@
 
 
 
-<link rel="stylesheet" href="css/nicepage.css" media="screen">
-<link rel="stylesheet" href="css/services.css" media="screen">
-<script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
-<script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
-<style>
-  /* Estilos para la ventana modal */
-  .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-  }
+<link rel="stylesheet" href="css/nicepage.css?v=1" media="screen">
+<link rel="stylesheet" href="css/services.css?v=1" media="screen">
 
-  .modal-content {
-      background-color: #fff;
-      width: 300px;
-      margin: 20% auto;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
-
-  .modal-title {
-      font-size: 18px;
-      font-weight: bold;
-      text-align: center;
-  }
-
-  .modal-buttons {
-      text-align: center;
-  }
-
-  /* Estilos para el botón de cerrar */
-  .close-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-  }
-</style>
     
 </head>
+<style>
+  .boton{
+    font-size: 25px;
+    padding: 10px 30px;
+    border-radius: 30px;
+    background: #F2761D;
+    color:white;
 
+  }
+  .boton:hover{
+    font-size: 25px;
+    padding: 10px 30px;
+    border-radius: 30px;
+    background: #F2761D;
+    color:white;
+
+  }
+
+  .boton1{
+    font-size: 25px;
+    padding: 10px 30px;
+    border-radius: 30px;
+    background: #015351;
+    color:white;
+
+  }
+  .boton1:hover{
+    font-size: 25px;
+    padding: 10px 30px;
+    border-radius: 30px;
+    background: #015351;
+    color:white;
+
+  }
+
+</style>  
 <body>
  <!-- <div class="section">
     <h2 class="section-title text-white" style="max">Pawsitive Care: Our Services <p> for Your Furry Friends</h2>
@@ -94,7 +89,7 @@
           </div>
         </div>
         <div class="u-shape u-shape-svg u-text-custom-color-3 u-shape-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-          <svg class="u-svg-link" preserveAspectRatio="none" viewBox="0 0 160 160" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-a0bf"></use></svg>
+          <svg class="u-svg-link d-none" preserveAspectRatio="none" viewBox="0 0 160 160" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-a0bf"></use></svg>
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 160 160" x="0px" y="0px" id="svg-a0bf" style="enable-background:new 0 0 160 160;"><path d="M80,30c27.6,0,50,22.4,50,50s-22.4,50-50,50s-50-22.4-50-50S52.4,30,80,30 M80,0C35.8,0,0,35.8,0,80s35.8,80,80,80
 	s80-35.8,80-80S124.2,0,80,0L80,0z"></path></svg>
         </div>
@@ -112,19 +107,19 @@
           <div class="u-carousel-inner u-gallery-inner" role="listbox">
             <div class="u-active u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-1">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/IMG_4140.jpg">
+                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/walk1.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-1"></div>
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-2">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-2" src="/imagess/IMG_9125.jpg">
+                <img class="u-back-image u-expanded u-back-image-2" src="/imagess/walk2.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-2"></div>
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-3" data-image-width="3024" data-image-height="4032">
               <div class="u-back-slide" data-image-width="4032" data-image-height="3024">
-                <img class="u-back-image u-expanded u-back-image-3" src="/imagess/IMG_1720.jpg">
+                <img class="u-back-image u-expanded u-back-image-3" src="/imagess/walk3.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-3"></div>
               <style data-mode="XL" data-visited="true"></style>
@@ -135,7 +130,7 @@
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-4" data-image-width="4032" data-image-height="3024">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-4" src="/imagess/IMG_8470.jpg">
+                <img class="u-back-image u-expanded u-back-image-4" src="/imagess/walk1.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-4"></div>
               <style data-mode="XL" data-visited="true"></style>
@@ -173,7 +168,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
         <h1 class="u-custom-font u-font-roboto-slab u-text u-text-1">Pre​mium​ Dog Walking</h1>
         <h2 class="u-align-left u-text u-text-2"> 2-3 Hour Adventures with Safe Pick-up and Drop-off</h2>
         <h4 class="u-align-justify u-text u-text-3">Experience the best in dog walking services with our premium offering. Treat your furry friend to 2-3 hour adventures filled with exploration and excitement. We prioritize safety and convenience, providing secure pick-up and drop-off for your peace of mind. Trust us to give your dog an unforgettable outdoor experience. Book now and let the adventures begin!</h4>
-        <button type="button" class="u-btn-1" data-toggle="modal" data-target="#myModal" data-service="Dog Walking">
+        <button type="button" class="u-btn-1 boton" data-toggle="modal" data-target="#myModal" data-service="Dog Walking">
           Book Now
         </button>
       </div>
@@ -191,21 +186,21 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
           <div class="u-carousel-inner u-gallery-inner" role="listbox">
             <div class="u-active u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-shape-rectangle u-carousel-item-1">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/ddc1.jpg">
+                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/day1.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-1"></div>
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-shape-rectangle u-carousel-item-2">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-2" src="/imagess/ddc2.jpg">
+                <img class="u-back-image u-expanded u-back-image-2" src="/imagess/day2.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-2">
             
               </div>
             </div>
-            <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-shape-rectangle u-carousel-item-3" data-image-width="3024" data-image-height="4032">
+            <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-shape-rectangle u-carousel-item-3" >
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-3" src="/imagess/ddc3.jpg">
+              <img class="u-back-image u-expanded u-back-image-1" src="/imagess/bord2.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-3"></div>
               <style data-mode="XL" data-visited="true"></style>
@@ -214,9 +209,11 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
               <style data-mode="SM" data-visited="true"></style>
               <style data-mode="XS" data-visited="true"></style>
             </div>
-            <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-shape-rectangle u-carousel-item-4" data-image-width="3024" data-image-height="4032">
+            <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-shape-rectangle u-carousel-item-4">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded u-back-image-4" src="/imagess/ddc4.jpg">
+
+              <img class="u-back-image u-expanded u-back-image-1" src="/imagess/bord1.jpg">
+
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-4"></div>
               <style data-mode="XL" data-visited="true"></style>
@@ -255,7 +252,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
         <h2 class="u-align-left u-text u-text-2">Walks​, Playtime, and Fun!</h2>
         <h4 class="u-align-justify u-text u-text-3">Our dog day care center offers fun activities, socialization and supervised play, with a walk or two outside to keep your furry friend active and happy. Our highly trained team ensures a safe environment for your dog to make new friends and develop social skills. Reserve now to provide your furry companion with an exciting and fun-filled day!</h4>
 
-        <button type="button" class="u-btn-1" data-toggle="modal" data-target="#myModal" data-service="Dog Day Care">
+        <button type="button" class="u-btn-1 boton1" data-toggle="modal" data-target="#myModal" data-service="Dog Day Care">
           Book Now
         </button>
       </div>
@@ -273,19 +270,21 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
           <div class="u-carousel-inner u-gallery-inner" role="listbox">
             <div class="u-active u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-1">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/IMG_5149.jpg">
+              <img class="u-back-image u-expanded u-back-image-4" src="/imagess/day4.jpg">
+
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-1"></div>
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-2">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-2" src="/imagess/IMG_4943.jpg">
+              <img class="u-back-image u-expanded u-back-image-4" src="/imagess/day3.jpg">
+
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-2"></div>
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-3" data-image-width="3024" data-image-height="4032">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-3" src="/imagess/IMG_4310.jpg">
+                <img class="u-back-image u-expanded u-back-image-3" src="/imagess/IMG_5149.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-3"></div>
               <style data-mode="XL"></style>
@@ -296,7 +295,8 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-4" data-image-width="4032" data-image-height="3024">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-4" src="/imagess/IMG_6165.jpg">
+                
+                <img class="u-back-image u-expanded u-back-image-4" src="/imagess/IMG_4310.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-4"></div>
               <style data-mode="XL"></style>
@@ -335,7 +335,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
         <h2 class="u-align-left u-text u-text-2">Where Love and Comfort Await!</h2>
         <h4 class="u-align-justify u-text u-text-3">Welcome to our exceptional dog boarding service, where your furry friend becomes a part of our family. We understand that leaving your beloved dog behind can be tough, but rest assured, we provide a home away from home filled with love, care, and cozy indoor accommodations.</h4>
        
-        <button type="button" class="u-btn-1" data-toggle="modal" data-target="#myModal" data-service="Dog Boarding">
+        <button type="button" class="u-btn-1 boton" data-toggle="modal" data-target="#myModal" data-service="Dog Boarding">
           Book Now
         </button>
       </div>
@@ -416,14 +416,13 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
         <h4 class="u-align-justify u-text u-text-3">Let the festivities begin with our spectacular dog parties! From themed decor to interactive games, socialization, a​nd supervised play, your pup will have a tail-wagging time. Capture unforgettable moments at our dog-friendly photo booths, all within a safe <span style="font-weight: 700;"></span>and controlled environment. Reserve your spot now for a celebration your furry friend won't forget!
         </h4>
       
-        <button  type="button" class="u-btn-1" data-toggle="modal" data-target="#myModal" data-service="Dog Parties">
+        <button type="button" class="u-btn-1 boton1" data-toggle="modal" data-target="#myModal" data-service="Dog Parties">
           Book Now
         </button>
         
       </div>
       
     </section>
-  
     <script>
       function scrollToSection(event) {
         event.preventDefault();
@@ -435,29 +434,9 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
             });
         }
     }
-
-    // Obtener referencias a los elementos
-    var openModalBtn = document.getElementById("openModalBtn");
-    var closeModalBtn = document.getElementById("closeModalBtn");
-    var modal = document.getElementById("myModal");
-
-    // Abrir la ventana modal al hacer clic en el botón
-    openModalBtn.addEventListener("click", function () {
-        modal.style.display = "block";
-    });
-
-    // Cerrar la ventana modal al hacer clic en el botón de cerrar
-    closeModalBtn.addEventListener("click", function () {
-        modal.style.display = "none";
-    });
-
-    // Cerrar la ventana modal si se hace clic fuera de ella
-    window.addEventListener("click", function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    });
     </script>
+    <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
+    <script class="u-script"  src="js/nicepage.js"></script>
   @include('partials.modal2')
 </body>
 
