@@ -2,7 +2,21 @@
 
 
 @section('content')
-
+<style>
+  .boton {
+    background-image: url(/img/banner_huellas.png) !important;
+    color: white;
+    padding: 3px 10px;
+    /* margin: 0px; */
+    border-radius: 12px;}
+    .boton:hover{
+    background-image:url(/img/banner_huellas_azul.png) !important;
+    color: white;
+    padding: 3px 10px;
+    /* margin: 0px; */
+    border-radius: 12px;
+}
+</style>  
 
 <div class="logo">
 
@@ -43,7 +57,7 @@
             </label>
         </div>
         <div class="text-center mt-4">
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="submit" class="btn boton">Sign in</button>
         </div>
     </form>
 

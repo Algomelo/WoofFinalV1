@@ -52,11 +52,25 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|confirmed',
             'address' => ['required', 'string', 'max:255'], // Agregar reglas de validación para el campo 'address'
             'phone' => ['required', 'int', 'min:6'],
+        ], [
+            'name.required' => 'The name field is required.',
+            'email.required' => 'The email field is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.unique' => 'This email has already been taken.',
+            'password.required' => 'The password field is required.',
+            'password.min' => 'The password must be at least 8 characters long.',
+            'password.regex' => 'The password must contain at least one uppercase letter, one lowercase letter, and one digit.',
+            'password.confirmed' => 'The password confirmation does not match.',
+            'address.required' => 'The address field is required.',
+            'phone.required' => 'The phone field is required.',
+            'phone.int' => 'The phone must be an integer value.',
+            'phone.min' => 'The phone must be at least 6 characters long.',
         ]);
     }
+    
 
     /**
      * Create a new user instance after a valid registration.
