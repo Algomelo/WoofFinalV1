@@ -96,7 +96,6 @@ class UserServiceRequestController extends Controller
     
     public function store(Request $request)
     {
-
         $messages = [
             'services.required' => 'Please select at least one date for a service.',
             'services.*.required' => 'Please select at least one date for a service.',
@@ -118,11 +117,9 @@ class UserServiceRequestController extends Controller
         $shift= $request->input('shift');
         $address = $request->input('address');
         $comment = $request->input('comment');
-        $totalPrice = 0;
         // Calcular el precio en base a los servicios seleccionados
         $selectedServices = $request->input('services', []);
         $serviceDates = $request->input('dates');
-
         foreach ($selectedServices as $serviceId) {
 
             $uniqueNumber = mt_rand(100000, 999999);
@@ -130,6 +127,24 @@ class UserServiceRequestController extends Controller
             $date = implode(',', $serviceDates[$serviceId]); // separar fechas 
             $datesArray = explode(',', $date); // calcular cantidad
             $quantity = count($datesArray); // calcular cantidad
+            $service = Service::find($serviceId);
+            $totalPrice = 0;
+           
+
+            if($service->name=="Dog Walking" || $service->name=="Doggy Day Care"){
+                if($quantity>1){
+                    $discount = $quantity * 5;
+                    $priceService = $quantity * $service->price -$discount;
+                    $totalPrice += $priceService;
+                }else{
+                    $priceService = $quantity * $service->price;
+                    $totalPrice += $priceService;
+                }
+            }else{
+                $priceService = $quantity * $service->price;
+                $totalPrice += $priceService;
+            }
+
             $serviceRequest = ServiceRequest::create([
                 'unique_number' => $uniqueNumber,
                 'user_id' => $userId,
@@ -139,16 +154,16 @@ class UserServiceRequestController extends Controller
                 'address' => $address,
                 'state' => "Send",
                 'quantity' => $quantity,
+                'price' => $totalPrice,
             ]);
             
             $serviceQuantity = $request->input("service_quantity.$serviceId", 0);
 
-            $service = Service::find($serviceId);
-            $priceService = $quantity * $service->price;
-            $totalPrice += $priceService;
-            $serviceRequest->update(['price' => $totalPrice]);
+
+
+            //$serviceRequest->update(['price' => $totalPrice]);
             // Guardar la solicitud
-            $serviceRequest->save();
+            //$serviceRequest->save();
             // Asociar el servicio a la solicitud a través de la tabla intermedia
             $serviceRequest->services()->attach($serviceId, ['service_quantity' => $serviceQuantity]);
         }

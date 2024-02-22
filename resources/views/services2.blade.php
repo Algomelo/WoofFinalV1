@@ -107,7 +107,7 @@
           <div class="u-carousel-inner u-gallery-inner" role="listbox">
             <div class="u-active u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-1">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/walk1.jpg">
+                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/walk4.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-1"></div>
             </div>

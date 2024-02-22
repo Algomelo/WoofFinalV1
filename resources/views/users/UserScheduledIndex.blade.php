@@ -32,17 +32,18 @@ use Illuminate\Support\Str;
         </div>
     </div>    
 </div>
-<div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
-     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="eventModalLabel">Scheduled</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+
+<div class="modal fade modalefecto" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true" >
+     <div class="modal-dialog modalefecto" role="document">
+        <div class="modal-content modalefecto">
+
+            <div class="modal-header text-center d-block">
+                <img src="http://127.0.0.1:8000/img/brand/blue3.png" class="img-fluid" alt="..." style="max-height: 2rem;">
+                <br> <br>
+                <h3 class="modal-title" id="eventModalLabel">Scheduled</h3>
             </div>
             <div class="modal-body" id="eventModalBody">
-                                    <!-- Aquí se mostrará la descripción del evento -->
+                                            <!-- Aquí se mostrará la descripción del evento -->
             </div>
         </div>
     </div>

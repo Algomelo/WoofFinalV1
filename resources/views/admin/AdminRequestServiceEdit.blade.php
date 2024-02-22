@@ -126,6 +126,8 @@
             onChange: function (selectedDates, dateStr, instance) {
                 quantity = selectedDates.length;
                 updateQuantity(quantity);
+                calculateTotalPrice();
+                
             }
         });
 
@@ -134,11 +136,33 @@
             calculateTotalPrice();
         }
 
+
         function calculateTotalPrice() {
             var price = parseFloat(priceInput.value);
             var total;
             if (isNaN(price)) {
                 total = parseFloat({{ $service->price }}) * parseFloat(quantity);
+            } else {
+                total = price;
+            }
+            totalPriceElement.innerText = total.toFixed(2);
+        }
+
+        function calculateTotalPrice() {
+            var price = parseFloat(priceInput.value);
+            var total;
+            if (isNaN(price)) {
+                if ("{{ $service->name }}" === "Doggy Day Care" || "{{ $service->name }}" === "Dog Walking") {
+                    if(quantity>1){
+                        var discount = quantity * 5;
+                        total = parseFloat("{{ $service->price }}") * parseFloat(quantity) - discount ;
+                    }
+                    else{
+                        total = parseFloat("{{ $service->price }}") * parseFloat(quantity);
+                    }
+                }else{
+                    total = parseFloat("{{ $service->price }}") * parseFloat(quantity);
+                }
             } else {
                 total = price;
             }
@@ -158,5 +182,4 @@
         });
     });
 </script>
-
 @endsection

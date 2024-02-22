@@ -182,10 +182,39 @@ class ServiceRequestController extends Controller
 
     $serviceRequest->quantity = $quantity;
 
-    $totalPrice = $this->updateTotalPrice($request);
-    if ($totalPrice !== null) {
-        $serviceRequest->price = $totalPrice;
+    $customPrice = $request->input('price');
+    $serviceIds = $request->input('services');
+    $values = array_values($serviceIds);
+    $serviceId = reset($values);
+    $totalPrice =0;
+
+    $service = Service::find($serviceId);
+
+    if ($customPrice !== null) {
+        $serviceRequest->price = $customPrice;
+    }else{
+        if($service->name=="Dog Walking" || $service->name=="Doggy Day Care"){
+            if($quantity>1){
+                $discount = $quantity * 5;
+                $priceService = $quantity * $service->price -$discount;
+                $totalPrice += $priceService;
+                $serviceRequest->price = $totalPrice;
+
+            }else{
+                $priceService = $quantity * $service->price;
+                $totalPrice += $priceService;
+                $serviceRequest->price = $totalPrice;
+
+            }
+        }else{
+            $priceService = $quantity * $service->price;
+            $totalPrice += $priceService;
+            $serviceRequest->price = $totalPrice;
+
+        }
     }
+
+
 
     $serviceRequest->save();
 
@@ -258,8 +287,7 @@ class ServiceRequestController extends Controller
 
     private function updateTotalPrice(Request $request)
     {
-        $totalPrice = $request->input('price');
-        $serviceIds = $request->input('services');
+
 
 
         $quantities = $request->input('service_quantity');

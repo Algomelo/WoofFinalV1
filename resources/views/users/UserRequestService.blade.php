@@ -178,7 +178,15 @@ use Illuminate\Support\Str;
                                             <h2> {{ $service->name }}</h2>
                                             <strong> Description: </strong> {{ $service->description }} <br> <br>
                                             <strong>Quantity: </strong><input type="number" name="service_quantity[{{ $service->id }}]" value="" class="quantity-input" readonly> <br><br>
+                                            @if ($service->name=="Dog Walking")
+                                            <strong>Service price:</strong>The service price per unit is $45. However, if you purchase more than one unit, the price per unit decreases to $40.<br><br>
+                                            @elseif($service->name=="Doggy Day Care")
+                                            <strong>Service price:</strong>The service price per unit is $65. However, if you purchase more than one unit, the price per unit decreases to $60.<br><br>
+                                            @elseif($service->name=="Dog Boarding")
+                                            <strong>Service price:</strong>Please enter the number of days you need to assign a discount suitable for you.<br><br>
+                                            @else
                                             <strong>Service price:</strong>  $ {{ $service->price }} (xUnit)<br> <br>
+                                            @endif
                                              <input type="checkbox"  class="d-none"name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}"><br><br>
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-12">
@@ -278,23 +286,6 @@ use Illuminate\Support\Str;
     }
 </script>
 
-
-<script>
-    $(document).ready(function () {
-        $('input[type="checkbox"][name^="packages"]').change(function () {
-            var packageId = $(this).attr('id').split('_')[1];
-            var quantityInput = $('input[name="package_quantity[' + packageId + ']"]');
-            
-
-            if ($(this).prop('checked')) {
-                quantityInput.val(1);
-            } else {
-                quantityInput.val('');
-            }
-        });
-    });
-
-</script>
 
 @endsection
 
