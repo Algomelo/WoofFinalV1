@@ -123,13 +123,13 @@
                 <img src="img/santiago.jpg" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">Santiago</h5>
-                    <p class="card-text">Passion for Animals</p>
-                    <p class="card-text">Communication Skills</p>
-                    <p class="card-text">Reliability</p>
-                    <p class="card-text">Physical Fitness</p>
+                    <p class="card-text">Reliable Rain or Shine</p>
+                    <p class="card-text">Fit for Fun Walks</p>
+                    <p class="card-text">More Than Just a Walk</p>
+
                 </div>
                 <div class="card-footer text-center">
-                    <small>"I love dogs, and I love walking them. Let's make every stroll an unforgettable adventure for your furry best friend!"</small>
+                    <small>"I'm confident your dog will enjoy spending time with me. Together, we'll create joyful memories and ensure your furry friend gets the exercise, stimulation, and love they deserve."</small>
                 </div>
             </div>
         </div>
@@ -141,13 +141,13 @@
                 <img src="img/Hillary.jpg" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">Hillary</h5>
-                    <p class="card-text">Passion for Animals</p>
-                    <p class="card-text">Communication Skills</p>
-                    <p class="card-text">Reliability</p>
-                    <p class="card-text">Physical Fitness</p>
+                    <p class="card-text">Dog Lover at Heart</p>
+                    <p class="card-text">Clear and Caring Communication</p>
+                    <p class="card-text">Reliable in Every Weather</p>
+                    <p class="card-text">Energy for Fun Walks</p>
                 </div>
                 <div class="card-footer text-center">
-                    <small>"Passionate about furry companions and skilled in providing joyful walks. Your dog deserves exciting moments, and I'm here to make it happen!"</small>
+                    <small>"I'm confident that your dog and I will build a friendship full of joy and trust. Together we will create memorable moments and fill their life with exercise, love, and new experiences."</small>
                 </div>
             </div>
         </div>

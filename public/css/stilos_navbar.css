@@ -11,6 +11,11 @@
     z-index: 1;
     background-image: url('/img/banner_huellas_azul.png');
 }
+@media (min-width: 1200px){
+    .test{
+        max-width: 1256px !important;
+    }
+}
 
 
         

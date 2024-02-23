@@ -54,8 +54,8 @@
     <!-- Barra de Navegación -->
 
     <nav class="navbar navbar-expand-lg navbar-light ">
-        <div class="container ">
-            <a class="navbar-brand" href="{{ route('index')}}">
+        <div class="container test">
+            <a class="navbar-brand" href="/">
                 <img class="img_style" src="/img/positive_logo.png" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -64,7 +64,7 @@
             <div class="collapse navbar-collapse" id="navbarNav" style="flex-grow:0">
                 <ul class="navbar-nav ml-auto listanavbar text-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('index')}}">Home</a>
+                        <a class="nav-link" href="/">Home</a>
                     </li>
                    
                     <li class="nav-item">
