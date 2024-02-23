@@ -24,7 +24,7 @@
         <div class="carousel-caption d-flex align-items-center justify-content-center" style="height: 100%;">
           <div class="text-center text-center-carousel mx-auto" id="container">
             <h1 class=" text-white font-weight-bold titulo-con-borde">Guaranteed fun! Our daycare offers the best environment for your dog to play and make new friends</h1>
-            <a href="login" >     <button class="btn boton mt-3" style="color: white;">Book Now</button> </a> 
+            <a href="landing" >     <button class="btn boton mt-3" style="color: white;">Book Now</button> </a> 
           </div>
         </div>
     </div>
@@ -44,7 +44,7 @@
           <div class="text-center text-center-carousel mx-auto" id="container">
           <h1 class="text-white font-weight-bold titulo-con-borde">10 Thrilling Dog Trips Package</h1>
 
-          <a href="login" >     <button class="btn boton mt-3" style="color: white;">Book Now</button> </a> 
+          <a href="aboutus" >     <button class="btn boton mt-3" style="color: white;">Book Now</button> </a> 
           </div>
         </div>
     </div>
@@ -90,7 +90,7 @@
               <div class="media-body">
                 <h3 class="heading">Dog Trips</h3>
                 <p>Join Dog Trips for 2-4 hour adventures that provide unique socialization and exercise opportunities for your dog. Start today!</p>
-                <a href="services1" class="btn-custom d-flex align-items-center justify-content-center linkshuellas"><i class="fas fa-paw "style="color: #feb336;"> </i></a>
+                <a href="services" class="btn-custom d-flex align-items-center justify-content-center linkshuellas"><i class="fas fa-paw "style="color: #feb336;"> </i></a>
               </div>
             </div>      
           </div>
@@ -102,7 +102,7 @@
               <div class="media-body">
                 <h3 class="heading">Dog Day Care</h3>
                 <p>Elevate your dog's day at our spacious Dog Day Care. Enjoy playtime with new friends, pick-up and drop-off services available.</p>
-                <a href="services1" class="btn-custom d-flex align-items-center justify-content-center linkshuellas"><i class="fas fa-paw "style="color: #feb336;"> </i></a>
+                <a href="services" class="btn-custom d-flex align-items-center justify-content-center linkshuellas"><i class="fas fa-paw "style="color: #feb336;"> </i></a>
               </div>
             </div>    
           </div>
@@ -117,7 +117,7 @@
               <div class="media-body">
                 <h3 class="heading">Dogs Partys</h3>
                 <p>Unleash fun at Dog Parties! Join us for 2-4 hour adventures where your dog bonds with furry friends, contributing to their growth.</p>
-          <a href="services1" class="btn-custom d-flex align-items-center justify-content-center linkshuellas"><i class="fas fa-paw "style="color: #feb336;"> </i></a>
+          <a href="services" class="btn-custom d-flex align-items-center justify-content-center linkshuellas"><i class="fas fa-paw "style="color: #feb336;"> </i></a>
               </div>
             </div>      
           </div>
@@ -129,7 +129,7 @@
               <div class="media-body">
                 <h3 class="heading">Dog Boarding</h3>
                 <p>Trust us for top-notch Dog Boarding when you can't be there. Your furry friend will have a comfortable stay with our specialists.</p>
-                <a href="services1" class="btn-custom d-flex align-items-center justify-content-center linkshuellas"><i class="fas fa-paw "style="color: #feb336;"> </i></a>
+                <a href="services" class="btn-custom d-flex align-items-center justify-content-center linkshuellas"><i class="fas fa-paw "style="color: #feb336;"> </i></a>
               </div>
             </div>    
           </div>

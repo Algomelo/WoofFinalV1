@@ -120,7 +120,7 @@
             <div class="card-header text-center">
             <h3 style="padding-top:3%;">Walker</h3>
                 </div>
-                <img src="img/santiago.jpg" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
+                <img src="img/Santiago.jpg" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">Santiago</h5>
                     <p class="card-text">Reliable Rain or Shine</p>
@@ -138,7 +138,7 @@
             <div class="card-header text-center">
             <h3 style="padding-top:3%;">Walker</h3>
                 </div>
-                <img src="img/Hillary.jpg" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
+                <img src="img/Hillary.JPG" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">Hillary</h5>
                     <p class="card-text">Dog Lover at Heart</p>
