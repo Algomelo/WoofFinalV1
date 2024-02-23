@@ -31,7 +31,7 @@
 
     <div class="container-fluid text-center" style="margin-top:4%;" >
 
-      <h3 style="margin-top:5%;">Welcome to Oh My Woof, your premier destination for top-quality dog walking services! With a passion for furry companions and a commitment to their well-being, we have proudly established ourselves as a super successful dog walking business in Sydney.</h3>
+      <h3 style="margin-top:5%;">Welcome to Oh My Woof, your premier destination for top-quality dog walking services!.</h3>
     </div>
 
 
@@ -47,7 +47,7 @@
             <div class="card d-flex flex-column" style="background-image: url('/img/banner_huellas.png');">
                 <img src="img/team.jpeg" class="card-img-top" style="object-fit: cover;" alt="...">
                 <div class="card-footer text-center">
-                    <small>At OhMyWoof, we understand that your pet is more than just a dog; they are a cherished member of your family. We take pride in offering a safe and exciting haven for your furry friends when you can't be with them. Our dedicated team is made up of dog lovers who are committed to providing top-notch care, attention, and fun for your canine companions.</small>
+                    <small>At OhMyWoof, we understand that your pet is more than just a dog; they are a cherished member of your family. We take pride in offering a safe and exciting haven for your furry friends when you can't be with them.</small>
                 </div>
             </div>
         </div>

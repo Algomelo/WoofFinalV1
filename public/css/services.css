@@ -614,6 +614,7 @@
     width: 337px;
     margin-left: 23px;
   }
+  
 
   .u-section-2 .u-text-1 {
     font-size: 2.25rem;
@@ -708,9 +709,11 @@
 
   .u-section-2 .u-gallery-1 {
     height: 330px;
-    width: 390px;
+    width: 92%;
     margin: 130px 0 0 0;
+    place-self: center;
   }
+  
 
   .u-section-2 .u-back-image-1 {
     object-position: 59.85% 88.92%;

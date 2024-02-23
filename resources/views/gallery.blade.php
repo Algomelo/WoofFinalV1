@@ -74,39 +74,54 @@
                     </div>
                 </a>
             </div>
-            <div class="gallery__item gallery__item--9 d-none">
-                <a href="img/gallery/darby.jpg" class="gallery__link">
-                    <img src="img/gallery/darby.jpg" class="gallery__image" data-fancybox="gallery" />
+            <div class="gallery__item ">
+                <a href="img/gallery/Happy faces.jpg" class="gallery__link" data-fancybox="gallery">
+                    <img src="img/gallery/Happy faces.jpg" class="gallery__image" />
                     <div class="gallery__overlay">
-                        <span>Show More</span>
+                        <span>Happy faces</span>
                     </div>
                 </a>
             </div>
-            <div class="gallery__item gallery__item--9 d-none">
-                <a href="img/gallery/Whisky.jpg" class="gallery__link">
-                    <img src="img/gallery/Whisky.jpg" class="gallery__image" data-fancybox="gallery" />
+            <div class="gallery__item ">
+                <a href="img/gallery/Loki, Bear & Gucci.jpg" class="gallery__link" data-fancybox="gallery">
+                    <img src="img/gallery/Loki, Bear & Gucci.jpg" class="gallery__image" />
                     <div class="gallery__overlay">
-                        <span>Show More</span>
+                        <span>Loki, Bear & Gucci</span>
                     </div>
                 </a>
             </div>
-            <div class="gallery__item gallery__item--9 d-none">
-                <a href="img/DOG_PARTIES/dogparty.png" class="gallery__link">
-                    <img src="img/DOG_PARTIES/dogparty.png" class="gallery__image" data-fancybox="gallery" />
+            <div class="gallery__item ">
+                <a href="img/DOGGY_DAY_CARE/ddc3.jpg" class="gallery__link" data-fancybox="gallery">
+                    <img src="img/DOGGY_DAY_CARE/ddc3.jpg" class="gallery__image" />
                     <div class="gallery__overlay">
-                        <span>Show More</span>
+                        <span></span>
                     </div>
                 </a>
             </div>
-            <div class="gallery__item gallery__item--9 d-none">
-                <a href="img/gallery/Happy faces.jpg" class="gallery__link">
-                    <img src="img/gallery/Happy faces.jpg" class="gallery__image" data-fancybox="gallery" />
+            <div class="gallery__item ">
+                <a href="img/gallery/Taco & Milo.jpg" class="gallery__link" data-fancybox="gallery">
+                    <img src="img/gallery/Taco & Milo.jpg" class="gallery__image" />
                     <div class="gallery__overlay">
-                        <span>Show More</span>
+                        <span>Taco & Milo</span>
                     </div>
                 </a>
             </div>
-
+            <div class="gallery__item ">
+                <a href="img/gallery/Darby.jpg" class="gallery__link" data-fancybox="gallery">
+                    <img src="img/gallery/Darby.jpg" class="gallery__image" />
+                    <div class="gallery__overlay">
+                        <span>Darby</span>
+                    </div>
+                </a>
+            </div>
+            <div class="gallery__item ">
+                <a href="img/gallery/Whisky.jpg" class="gallery__link" data-fancybox="gallery">
+                    <img src="img/gallery/Whisky.jpg" class="gallery__image" />
+                    <div class="gallery__overlay">
+                        <span>Whisky</span>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

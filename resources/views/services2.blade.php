@@ -4,8 +4,8 @@
 
 
 
-<link rel="stylesheet" href="css/nicepage.css?v=1" media="screen">
-<link rel="stylesheet" href="css/services.css?v=1" media="screen">
+<link rel="stylesheet" href="css/nicepage.css?v=2" media="screen">
+<link rel="stylesheet" href="css/services.css?v=2" media="screen">
 
     
 </head>
