@@ -40,7 +40,20 @@
     </div>
 
 
-<div class="container-fluid" style="width:80%;">
+
+    <div class="container-fluid" style="width:80%; margin-top:2%;">
+    <div class="row row-cols-1 row-cols-md-10 g-10" style="justify-content:center;">
+        <div class="col">
+            <div class="card d-flex flex-column" style="background-image: url('/img/banner_huellas.png');">
+                <img src="img/team.jpeg" class="card-img-top" style="object-fit: cover;" alt="...">
+                <div class="card-footer text-center">
+                    <small>At OhMyWoof, we understand that your pet is more than just a dog; they are a cherished member of your family. We take pride in offering a safe and exciting haven for your furry friends when you can't be with them. Our dedicated team is made up of dog lovers who are committed to providing top-notch care, attention, and fun for your canine companions.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="width:80%;  margin-top:2%;">
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col">
             <div class="card d-flex flex-column" style="background-image: url('/img/banner_huellas.png');">
@@ -99,6 +112,47 @@
     </div>
 </div>
 
+
+<div class="container-fluid" style="width:80%; margin-top:2%;">
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="justify-content:center;">
+        <div class="col">
+            <div class="card d-flex flex-column" style="background-image: url('/img/banner_huellas.png');">
+            <div class="card-header text-center">
+            <h3 style="padding-top:3%;">Walker</h3>
+                </div>
+                <img src="img/santiago.jpg" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Santiago</h5>
+                    <p class="card-text">Passion for Animals</p>
+                    <p class="card-text">Communication Skills</p>
+                    <p class="card-text">Reliability</p>
+                    <p class="card-text">Physical Fitness</p>
+                </div>
+                <div class="card-footer text-center">
+                    <small>"I love dogs, and I love walking them. Let's make every stroll an unforgettable adventure for your furry best friend!"</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card d-flex flex-column" style="background-image: url('/img/banner_huellas.png');">
+            <div class="card-header text-center">
+            <h3 style="padding-top:3%;">Walker</h3>
+                </div>
+                <img src="img/Hillary.jpg" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Hillary</h5>
+                    <p class="card-text">Passion for Animals</p>
+                    <p class="card-text">Communication Skills</p>
+                    <p class="card-text">Reliability</p>
+                    <p class="card-text">Physical Fitness</p>
+                </div>
+                <div class="card-footer text-center">
+                    <small>"Passionate about furry companions and skilled in providing joyful walks. Your dog deserves exciting moments, and I'm here to make it happen!"</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     </main>
     

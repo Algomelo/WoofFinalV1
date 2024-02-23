@@ -27,26 +27,26 @@
     <div class="wrapper">
         <div class="gallery">
             <div class="gallery__item gallery__item--1">
-                <a href="img/nina&mocca.jpg" class="gallery__link" data-fancybox="gallery">
-                    <img src="img/nina&mocca.jpg" class="gallery__image" />
+                <a href="img/gallery/Taco & Billie.jpg" class="gallery__link" data-fancybox="gallery">
+                    <img src="img/gallery/Taco & Billie.jpg" class="gallery__image" />
                     <div class="gallery__overlay">
-                        <span>Show More</span>
+                        <span>Taco & Billie</span>
                     </div>
                 </a>
             </div>
             <div class="gallery__item gallery__item--2">
-                <a href="img/DOG_WALKING/galleryy_h1.png" class="gallery__link" data-fancybox="gallery">
-                    <img src="img/DOG_WALKING/galleryy_h1.png" class="gallery__image" />
+                <a href="img/gallery/Ghost & Loki.jpg" class="gallery__link" data-fancybox="gallery">
+                    <img src="img/gallery/Ghost & Loki.jpg" class="gallery__image" />
                     <div class="gallery__overlay">
-                        <span>Show More</span>
+                        <span>Ghost & Loki</span>
                     </div>
                 </a>
             </div>
             <div class="gallery__item gallery__item--3">
-                <a href="img/buddy.jpg" class="gallery__link" data-fancybox="gallery">
-                    <img src="img/buddy.jpg" class="gallery__image" />
+                <a href="img/gallery/Alfie & Lulu.jpg" class="gallery__link" data-fancybox="gallery">
+                    <img src="img/gallery/Alfie & Lulu.jpg" class="gallery__image" />
                     <div class="gallery__overlay">
-                        <span>Show More</span>
+                        <span>Alfie & Lulu</span>
                     </div>
                 </a>
             </div>
@@ -54,37 +54,37 @@
                 <a href="img/juan&dogs.jpg" class="gallery__link" data-fancybox="gallery">
                     <img src="img/juan&dogs.jpg" class="gallery__image" />
                     <div class="gallery__overlay">
-                        <span>Show More</span>
+                        <span>Juan</span>
                     </div>
                 </a>
             </div>
             <div class="gallery__item gallery__item--5">
-                <a href="img/DOG_WALKING/GOPR0097.JPG" class="gallery__link" data-fancybox="gallery">
-                    <img src="img/DOG_WALKING/GOPR0097.JPG" class="gallery__image" />
+                <a href="img/gallery/Funny Lulu & Loki.jpg" class="gallery__link" data-fancybox="gallery">
+                    <img src="img/gallery/Funny Lulu & Loki.jpg" class="gallery__image" />
                     <div class="gallery__overlay">
-                        <span>Show More</span>
+                        <span>Funny Lulu & Loki</span>
                     </div>
                 </a>
             </div>
             <div class="gallery__item gallery__item--6">
-                <a href="img/DOG_WALKING/IMG_4354.jpg" class="gallery__link" data-fancybox="gallery">
-                    <img src="img/DOG_WALKING/IMG_4354.jpg" class="gallery__image" />
+                <a href="img/gallery/Buddy & Gucci.jpg" class="gallery__link" data-fancybox="gallery">
+                    <img src="img/gallery/Buddy & Gucci.jpg" class="gallery__image" />
+                    <div class="gallery__overlay">
+                        <span>Buddy & Gucci</span>
+                    </div>
+                </a>
+            </div>
+            <div class="gallery__item gallery__item--9 d-none">
+                <a href="img/gallery/darby.jpg" class="gallery__link">
+                    <img src="img/gallery/darby.jpg" class="gallery__image" data-fancybox="gallery" />
                     <div class="gallery__overlay">
                         <span>Show More</span>
                     </div>
                 </a>
             </div>
-            <div class="gallery__item gallery__item--7 d-none">
-                <a href="img/DOG_WALKING/gallery_4.png" class="gallery__link">
-                    <img src="img/DOG_WALKING/gallery_4.png" class="gallery__image" data-fancybox="gallery" />
-                    <div class="gallery__overlay">
-                        <span>Show More </span> 
-                    </div>
-                </a>
-            </div>
-            <div class="gallery__item gallery__item--8 d-none">
-                <a href="img/DOG_WALKING/IMG_8620_2.jpg" class="gallery__link">
-                    <img src="img/DOG_WALKING/IMG_8620_2.jpg" class="gallery__image"  data-fancybox="gallery" />
+            <div class="gallery__item gallery__item--9 d-none">
+                <a href="img/gallery/Whisky.jpg" class="gallery__link">
+                    <img src="img/gallery/Whisky.jpg" class="gallery__image" data-fancybox="gallery" />
                     <div class="gallery__overlay">
                         <span>Show More</span>
                     </div>
@@ -98,30 +98,15 @@
                     </div>
                 </a>
             </div>
-            <div class="gallery__item gallery__item--10 d-none">
-                <a href="img/DOG_WALKING/IMG_1474.jpg" class="gallery__link">
-                    <img src="img/DOG_WALKING/IMG_1474.jpg" class="gallery__image"  data-fancybox="gallery" />
+            <div class="gallery__item gallery__item--9 d-none">
+                <a href="img/gallery/Happy faces.jpg" class="gallery__link">
+                    <img src="img/gallery/Happy faces.jpg" class="gallery__image" data-fancybox="gallery" />
                     <div class="gallery__overlay">
                         <span>Show More</span>
                     </div>
                 </a>
             </div>
-            <div class="gallery__item gallery__item--11 d-none">
-                <a href="img/DOG_WALKING/gallery_h2.png" class="gallery__link">
-                    <img src="img/DOG_WALKING/gallery_h2.jpg" class="gallery__image"  data-fancybox="gallery"/>
-                    <div class="gallery__overlay">
-                        <span>Show More</span>
-                    </div>
-                </a>
-            </div>
-            <div class="gallery__item gallery__item--12 d-none">
-                <a href="img/DOG_WALKING/gallery_3.png" class="gallery__link">
-                    <img src="img/DOG_WALKING/gallery_3.png" class="gallery__image"  data-fancybox="gallery"/>
-                    <div class="gallery__overlay">
-                        <span>Show More</span>
-                    </div>
-                </a>
-            </div>
+
         </div>
     </div>
 </div>
