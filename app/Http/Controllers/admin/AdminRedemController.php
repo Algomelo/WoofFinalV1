@@ -29,8 +29,10 @@ class AdminRedemController extends Controller
             $phone = $event->phone;
             $description= $event->description;
 
-            $textFinal = "The user " . $user  ." has requested the service " . $event->event . ".\n" . "Address: " .$address . 
-            ".\n" . "Phone: " . $phone .".\n" . "Shift: ".$shift .".\n" . "Comment: ". $description;
+            
+
+            $textFinal = "The user " . $user  ." has requested the service " . $event->event . ".\n" . "🏡 Address: " .$address . 
+            ".\n" . "📞 Phone: " . $phone .".\n" . "🕒 Shift: ".$shift .".\n" . "🐾 Comment: ". $description . ".\n" . "🐶 Pet Name: " .$event->user->petname;
             
             
             $events[] = [

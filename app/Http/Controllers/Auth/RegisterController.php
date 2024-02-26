@@ -86,6 +86,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'address' => $data['address'], // Agregar el campo 'address' al proceso de creación del usuario
             'phone' => $data['phone'], // Agregar el campo 'address' al proceso de creación del usuario
+            'petname' =>$data['petname'],
 
         ]);
     }

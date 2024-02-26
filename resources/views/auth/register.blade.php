@@ -94,6 +94,14 @@
                   <input class="form-control" placeholder="Phone" type="number" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
                 </div>
               </div>
+              <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-shield-dog"></i></span>
+                  </div>
+                  <input class="form-control" placeholder="petname" type="petname" name="petname" value="{{ old('petname') }}"  autocomplete="petname">
+                </div>
+              </div>
               <div class="text-center">
               <small class="text-warning">The password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.</small><br><br>
               </div>

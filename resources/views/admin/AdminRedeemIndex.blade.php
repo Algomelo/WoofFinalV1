@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 
 @section('content')
 
-<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ asset('css/dashboard.css?v=1') }}">
 
 <div class="card shadow">
     <div class="card-header border-0">
@@ -66,7 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const calendarEl = document.getElementById('calendar');
     const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        events: @json($events),
+        displayEventTime: false, // Esto ocultará la hora de los eventos
+        events: @json($events),    
         eventClick: function(info) {
             const modalBody = document.getElementById('eventModalBody');
             modalBody.innerText = info.event.extendedProps.description;

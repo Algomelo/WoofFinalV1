@@ -5,7 +5,7 @@ use Illuminate\Support\Str;
 @extends('layouts.panel')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ asset('css/dashboard.css?v=1') }}">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 

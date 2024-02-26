@@ -35,7 +35,7 @@ class UserUpdateController extends Controller
         $this->validate($request,$rules,$messages);
         $user = User::users()->findOrFail($id);
 
-        $data = $request->only('name','email','cedula','address','phone');
+        $data = $request->only('name','email','cedula','address','phone','petname');
         $password =$request->input('password');
 
         if($password)
