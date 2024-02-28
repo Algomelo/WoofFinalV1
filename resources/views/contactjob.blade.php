@@ -120,9 +120,11 @@
                                 confirmButtonText: 'Closed',
                             });
                         }
+
+                        // Aquí colocamos la segunda solicitud AJAX
                         $.ajax({
                             type: 'POST',
-                            url: 'store-email-contact-job', // Reemplaza 'URL_DE_LA_SEGUNDA_RUTA' con la URL real de la segunda ruta
+                            url: 'store-email-contact-job',
                             data: formData,
                             success: function (response) {
                                 // Manejo de la respuesta exitosa para la segunda ruta
