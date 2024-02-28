@@ -38,7 +38,7 @@
                             <div class="form-group row">
                                 <label for="fname" class="col-md-2 col-form-label text-center"><i class="fa fa-user bigicon"></i></label>
                                 <div class="col-md-8">
-                                    <input id="fullname" name="fullname" type="text" placeholder="Full Name" class="form-control">
+                                    <input id="name" name="name" type="text" placeholder="Full Name" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">
