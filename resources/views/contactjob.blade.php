@@ -82,7 +82,6 @@
 <script>
     $('#contactFormJob').submit(function (event) {
         event.preventDefault();
-
         // Deshabilita el botón y muestra un mensaje de espera
         Swal.fire({
             title: 'Processing...',
@@ -93,11 +92,9 @@
                 $('#sendMessageButton').prop('disabled', true);
             }
         });
-
         grecaptcha.ready(function () {
             grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', { action: 'submit' }).then(function (token) {
                 document.getElementById("g-recaptcha-response").value = token;
-
                 // Envía el formulario a través de AJAX
                 $.ajax({
                     type: 'POST',
@@ -123,34 +120,31 @@
                                 confirmButtonText: 'Closed',
                             });
                         }
+                        $.ajax({
+                            type: 'POST',
+                            url: 'store-email-contact-job', // Reemplaza 'URL_DE_LA_SEGUNDA_RUTA' con la URL real de la segunda ruta
+                            data: formData,
+                            success: function (response) {
+                                // Manejo de la respuesta exitosa para la segunda ruta
+                                console.log('Response from second route:', response);
+                                // Puedes agregar aquí cualquier código adicional que necesites después de la segunda solicitud
+                            },
+                            error: function (error) {
+                                // Manejo de errores para la segunda ruta                    
+                                console.error('Error in second route:', error);
+                            }
+                        });
                     },
                     error: function () {
                         // Restaura el botón y cierra el mensaje de espera
                         $('#sendMessageButton').prop('disabled', false);
                         Swal.close();
-
                         Swal.fire({
                             icon: 'error',
                             title: 'Fail!',
                             text: 'There was an issue submitting the request. Please try again later.',
                             confirmButtonText: 'Closed',
                         });
-                    }
-                });
-                $.ajax({
-                    type: 'POST',
-                    url: 'store-email-contact-job', // Reemplaza 'URL_DE_LA_SEGUNDA_RUTA' con la URL real de la segunda ruta
-                    data: formData,
-                    success: function (response) {
-                        // Manejo de la respuesta exitosa para la segunda ruta
-                        console.log('Response from second route:', response);
-
-                        // Puedes agregar aquí cualquier código adicional que necesites después de la segunda solicitud
-                    },
-                    error: function (error) {
-                        // Manejo de errores para la segunda ruta
-                        
-                        console.error('Error in second route:', error);
                     }
                 });
             });
