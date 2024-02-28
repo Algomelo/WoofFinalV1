@@ -26,7 +26,10 @@ Route::post('/confirm-appointment', [AppointmentController::class, 'confirmAppoi
 Route::post('/confirm-landing', [LandingController::class, 'confirmLanding'])->name('confirm.landing');
 Route::post('/confirm-contactt', [ContactForm::class, 'EnviarCorreoContact'])->name('confirm.contactt');
 Route::post('/confirm-contacjob', [ContactJobController::class, 'EnviarContactJob'])->name('confirm.contacjob');
- 
+Route::post('/storeEmail', 'App\Http\Controllers\admin\SistemsEmailsController@storeContact')->name('storeEmailContact');
+Route::post('/storeEmailJob', 'App\Http\Controllers\admin\SistemsEmailsController@storeContactJob')->name('storeEmailContactJob');
+
+
 
 // Ruta para mostrar los detalles del blog
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
@@ -92,6 +95,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // CRUD de Servicios //* //*
     Route::resource('services','App\Http\Controllers\admin\ServiceController');
 
+    Route::get('/indexlanding', 'App\Http\Controllers\admin\SistemsEmailsController@indexlanding')->name('indexlanding');
+    Route::get('/indexcontact', 'App\Http\Controllers\admin\SistemsEmailsController@indexcontact')->name('indexcontact');
+    Route::get('/indexcontactjob', 'App\Http\Controllers\admin\SistemsEmailsController@indexcontactjob')->name('indexcontactjob');
+
+    Route::get('/export', 'App\Http\Controllers\admin\SistemsEmailsController@export')->name('export');
+
     Route::resource('packages','App\Http\Controllers\admin\PackageController');
 
     Route::resource('serviceRequests','App\Http\Controllers\admin\ServiceRequestController');
@@ -118,7 +127,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 });
 
-URL::forceScheme('https');
+//URL::forceScheme('https');
 
 
 

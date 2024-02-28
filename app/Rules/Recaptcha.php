@@ -17,7 +17,7 @@ class Recaptcha implements ValidationRule
     {
 
         $g_response = Http::asForm()->post( "https://www.google.com/recaptcha/api/siteverify",[
-            'secret' => '6LcpwlEpAAAAAAprUTBl6lV3KhCIHcpf_oovmKMx',
+            'secret' => '6LcLN3opAAAAAAJPEg9DtOrO6Op1zjsqBJNB_zKi',
             'response' => $value,
             'remoteip' => \request()->ip()
         ])->object();

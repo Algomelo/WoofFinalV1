@@ -12,7 +12,8 @@
               <h3 class="mb-0">Emails received</h3>
             </div>
             <div class="col text-right ">
-                <a href="{{ url('serviceRequests/create')}}" class="d-none btn boton">New Service Request</a>
+            <a href="{{ route('export') }}" class="btn btn-success d-none">Exportar a Excel</a>
+
             </div>
         </div>     
     </div>           
@@ -41,38 +42,34 @@
         <table class="table align-items-center table-flush">
             <thead class="thead-light">
                 <tr class="text-center">
-                    <th scope="col">Form Name</th>
-                    <th scope="col">Option</th>
-
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Comment</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Dog Name</th>
+                    <th scope="col">Breed</th>
+                    <th scope="col">Age</th>
                 </tr>
             </thead>
             <tbody style="background:white">
+                @foreach($sistemsEmails as $email)
                 <tr class="text-center">
-                    <th scope="row">
-                        Landing Page
-                    </th>
-                    <td>
-                    <a  class="btn boton"href="{{ route('indexlanding') }}">View Contact Landing</a>
-                     </td>     
-                </tr>   
-                <tr class="text-center">
-                    <th scope="row">
-                        Contact
-                    </th>
-                    <td>
-                    <a  class="btn boton"href="{{ route('indexcontact') }}">View Contact Users</a>
-                     </td>     
-                </tr>                                
-                <tr class="text-center">
-                    <th scope="row">
-                        Contact Job
-                    </th>
-                    <td>
-                    <a  class="btn boton"href="{{ route('indexcontactjob') }}">View Contact Job</a>
-                     </td>     
-                </tr>   
+                    <td>{{ $email->name }}</td>
+                    <td>{{ $email->email }}</td>
+                    <td>{{ $email->phone }}</td>
+                    <td>{{ $email->comment }}</td>
+                    <td>{{ $email->service }}</td>
+                    <td>{{ $email->address }}</td>
+                    <td>{{ $email->dogname }}</td>
+                    <td>{{ $email->breed }}</td>
+                    <td>{{ $email->age }}</td>
+                </tr>
+                @endforeach
             </tbody>
         </table>
+
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

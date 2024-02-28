@@ -20,7 +20,7 @@
                     <div id="success">
                         <h2 class="text-center" style="margin-bottom:20px;"> Leave your information, we will contact you immediately </h2>
                     </div>
-                    <form action="{{ secure_url('confirm-contactt')}}" method="POST" name="contactForm" id="contactForm">
+                    <form action="{{ url('confirm-contactt')}}" method="POST" name="contactForm" id="contactForm">
                         @csrf
                         <div class="control-group">
 
@@ -58,30 +58,59 @@
     <script>
 $('#contactForm').submit(function (event) {
     event.preventDefault();
+
+    // Datos del formulario serializados
+    var formData = $(this).serialize();
+
+    // Primera solicitud AJAX a la primera ruta
     $.ajax({
-        type: 'POST', // Método POST
+        type: 'POST',
         url: $(this).attr('action'), // URL del formulario
-        data: $(this).serialize(), // Datos del formulario serializados
+        data: formData,
         success: function (response) {
-            // Manejo de la respuesta exitosa, puedes actualizar la vista o mostrar un mensaje de éxito
+            // Manejo de la respuesta exitosa para la primera ruta
             Swal.fire({
                 icon: 'success',
                 title: 'Success!',
-                text: 'The request has been submitted successfully.',
+                text: response.message,
                 confirmButtonText: 'Closed',
-            });
+            });        
+            console.log('Response from first route:', response);
+
+            // Puedes agregar aquí cualquier código adicional que necesites después de la primera solicitud
         },
         error: function (error) {
-            // Manejo de errores, puedes mostrar un mensaje de error
-            Swal.fire({
+            // Manejo de errores para la primera ruta
+             Swal.fire({
                 icon: 'error',
-                title: 'Failed!',
-                text: 'There was an issue submitting the request. Please try again later..',
+                title: 'Fail!',
+                text: response.message,
                 confirmButtonText: 'Closed',
-            });
+            });            
+            console.error('Error in first route:', error);
         }
     });
+
+    // Segunda solicitud AJAX a la segunda ruta
+    $.ajax({
+        type: 'POST',
+        url: 'storeEmailContact', // Reemplaza 'URL_DE_LA_SEGUNDA_RUTA' con la URL real de la segunda ruta
+        data: formData,
+        success: function (response) {
+            // Manejo de la respuesta exitosa para la segunda ruta
+            console.log('Response from second route:', response);
+
+            // Puedes agregar aquí cualquier código adicional que necesites después de la segunda solicitud
+        },
+        error: function (error) {
+            // Manejo de errores para la segunda ruta
+            console.error('Error in second route:', error);
+        }
+    });
+
+    // También puedes mostrar un mensaje de éxito aquí o realizar otras acciones necesarias
 });
+
         </script>
 </main>
 @include('layouts.footer')

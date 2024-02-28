@@ -11,7 +11,11 @@
 <ul class="navbar-nav">
 
   @if(auth()->check() && auth()->user()->role == 'admin')
-    
+  <li class="nav-item">
+      <a class="nav-link textomenudashboard" href="{{ url('/home')}}">
+        <i class="fas fa-briefcase text-blue"></i>Emails
+      </a>
+    </li>
     <li class="nav-item">
       <a class="nav-link textomenudashboard" href="{{ url('/services')}}">
         <i class="fas fa-briefcase text-blue"></i>Services

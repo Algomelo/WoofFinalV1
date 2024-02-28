@@ -6,19 +6,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Enviarcorreo;
 use App\Rules\Recaptcha;
+use App\Models\SistemsEmails;
 
 class ContactForm extends Controller
 {
 
 
-
-
 public function EnviarCorreoContact(Request $request)
     {
+
+
         // Aquí puedes validar los datos del formulario
         // Procesa y almacena los datos de la solicitud
         // Enviar el correo a dos direcciones de correo electrónico
         $data = $request->all();
+
+
      
         try {
             // Define las direcciones de correo a las que deseas enviar
@@ -27,6 +30,8 @@ public function EnviarCorreoContact(Request $request)
             // Envia el correo a ambas direcciones
             Mail::to($toEmails)
                 ->send(new Enviarcorreo($data));
+
+
     
             return response()->json(['message' => 'Solicitud enviada con éxito'], 200);
         } catch (\Exception $e) {
