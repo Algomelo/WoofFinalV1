@@ -29,8 +29,8 @@ Route::post('/confirm-contactt', [ContactForm::class, 'EnviarCorreoContact'])->n
 Route::post('/confirm-contacjob', [ContactJobController::class, 'EnviarContactJob'])->name('confirm.contacjob');
 Route::post('/storeEmail', [ContactJobController::class, 'EnviarContactJob'])->name('confirm.contacjob');
 
-Route::post('/storeEmail', [SistemsEmailsController::class])->name('storeEmailContact');
-Route::post('/storeEmailJob', [SistemsEmailsController::class])->name('storeEmailContactJob');
+Route::post('/storeEmail', [SistemsEmailsController::class,'storecontact'])->name('store.email.contact');
+Route::post('/storeEmailJob', [SistemsEmailsController::class,'storecontactjob'])->name('store.email.contact.job');
 
 
 

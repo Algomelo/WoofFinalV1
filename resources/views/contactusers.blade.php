@@ -94,7 +94,7 @@ $('#contactForm').submit(function (event) {
     // Segunda solicitud AJAX a la segunda ruta
     $.ajax({
         type: 'POST',
-        url: 'storeEmailContact', // Reemplaza 'URL_DE_LA_SEGUNDA_RUTA' con la URL real de la segunda ruta
+        url: 'store.email.contact', // Reemplaza 'URL_DE_LA_SEGUNDA_RUTA' con la URL real de la segunda ruta
         data: formData,
         success: function (response) {
             // Manejo de la respuesta exitosa para la segunda ruta

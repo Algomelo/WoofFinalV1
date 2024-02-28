@@ -35,7 +35,7 @@ class SistemsEmailsController extends Controller
 
     }
 
-    public function storeContact(Request $request)
+    public function storecontact(Request $request)
     {
         $email = SistemsEmails::create([
             'name' => $request->name,
@@ -45,7 +45,7 @@ class SistemsEmailsController extends Controller
             'form' => "contact",
         ]);
     }
-    public function storeContactJob(Request $request)
+    public function storecontactjob(Request $request)
     {
         $email = SistemsEmails::create([
             'name' => $request->name,
