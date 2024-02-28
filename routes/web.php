@@ -27,10 +27,9 @@ Route::post('/confirm-appointment', [AppointmentController::class, 'confirmAppoi
 Route::post('/confirm-landing', [LandingController::class, 'confirmLanding'])->name('confirm.landing');
 Route::post('/confirm-contactt', [ContactForm::class, 'EnviarCorreoContact'])->name('confirm.contactt');
 Route::post('/confirm-contacjob', [ContactJobController::class, 'EnviarContactJob'])->name('confirm.contacjob');
-Route::post('/storeEmail', [ContactJobController::class, 'EnviarContactJob'])->name('confirm.contacjob');
 
-Route::post('/storeEmail', [SistemsEmailsController::class,'storecontact'])->name('store.email.contact');
-Route::post('/storeEmailJob', [SistemsEmailsController::class,'storecontactjob'])->name('store.email.contact.job');
+Route::post('/store-email-contact', [SistemsEmailsController::class,'storecontact'])->name('store.email.contact');
+Route::post('/store-email-contact-job', [SistemsEmailsController::class,'storecontactjob'])->name('store.email.contact.job');
 
 
 
