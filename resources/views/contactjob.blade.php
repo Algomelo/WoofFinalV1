@@ -82,6 +82,8 @@
 <script>
     $('#contactFormJob').submit(function (event) {
         event.preventDefault();
+        var formData = $(this).serialize();
+
         // Deshabilita el botón y muestra un mensaje de espera
         Swal.fire({
             title: 'Processing...',
@@ -96,6 +98,7 @@
             grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', { action: 'submit' }).then(function (token) {
                 document.getElementById("g-recaptcha-response").value = token;
                 // Envía el formulario a través de AJAX
+
                 $.ajax({
                     type: 'POST',
                     url: $(event.target).attr('action'),
