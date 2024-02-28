@@ -20,7 +20,7 @@
                     <div id="success">
                         <h2 class="text-center" style="margin-bottom:20px;"> Leave your information, we will contact you immediately </h2>
                     </div>
-                    <form action="{{ url('confirm-contactt')}}" method="POST" name="contactForm" id="contactForm">
+                    <form action="{{ secure_url('confirm-contactt')}}" method="POST" name="contactForm" id="contactForm">
                         @csrf
                         <div class="control-group">
 
