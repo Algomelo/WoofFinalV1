@@ -13,6 +13,7 @@ use App\Http\Controllers\Walker\WalkerScheduledController;
 use App\Http\Controllers\admin\AdminRedemController;
 use App\Http\Controllers\UserPreferenceController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\SistemsEmailsController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentMail;
@@ -26,8 +27,10 @@ Route::post('/confirm-appointment', [AppointmentController::class, 'confirmAppoi
 Route::post('/confirm-landing', [LandingController::class, 'confirmLanding'])->name('confirm.landing');
 Route::post('/confirm-contactt', [ContactForm::class, 'EnviarCorreoContact'])->name('confirm.contactt');
 Route::post('/confirm-contacjob', [ContactJobController::class, 'EnviarContactJob'])->name('confirm.contacjob');
-Route::post('/storeEmail', 'App\Http\Controllers\admin\SistemsEmailsController@storeContact')->name('storeEmailContact');
-Route::post('/storeEmailJob', 'App\Http\Controllers\admin\SistemsEmailsController@storeContactJob')->name('storeEmailContactJob');
+Route::post('/storeEmail', [ContactJobController::class, 'EnviarContactJob'])->name('confirm.contacjob');
+
+Route::post('/storeEmail', [SistemsEmailsController::class])->name('storeEmailContact');
+Route::post('/storeEmailJob', [SistemsEmailsController::class])->name('storeEmailContactJob');
 
 
 
