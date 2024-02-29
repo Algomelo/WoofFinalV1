@@ -63,12 +63,16 @@ class SistemsEmailsController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'comment' => $request->message,
+                'service' => $request->service,
+                'age' => $request->dogage,
+                'address' => $request->address,
+                'dogname' => $request->namedog,
                 'form' => "landing",
             ]);
             return response()->json(['status' => 'success']);
             }
             catch (\Exception $e) {
-                dd($e->getMessage()); // Agrega esta línea para ver el mensaje de error específico
+                   dd($e->getMessage()); // Agrega esta línea para ver el mensaje de error específico
                 return response()->json(['status' => 'error', 'message' => 'Error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.']);
             }
         }
