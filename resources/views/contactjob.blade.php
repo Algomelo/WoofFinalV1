@@ -94,6 +94,7 @@
                 $('#sendMessageButton').prop('disabled', true);
             }
         });
+        
         grecaptcha.ready(function () {
             grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', { action: 'submit' }).then(function (token) {
                 document.getElementById("g-recaptcha-response").value = token;
@@ -153,7 +154,6 @@
                     }
                 });
             });
-        });
     });
 </script>
 @include('layouts.footer')

@@ -360,7 +360,7 @@
                                 confirmButtonText: 'Closed',
                             });
                         }
-                                                // segunda solicitud AJAX
+                         // segunda solicitud AJAX
                         $.ajax({
                             type: 'POST',
                             url: 'store-email-contact-landing',

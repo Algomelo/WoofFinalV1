@@ -57,14 +57,21 @@ class SistemsEmailsController extends Controller
     }
     public function storecontactlanding(Request $request)
     {
-        $email = SistemsEmails::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'comment' => $request->message,
-            'form' => "landing",
-        ]);
-    }
+        try {
+            $email = SistemsEmails::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'comment' => $request->message,
+                'form' => "landing",
+            ]);
+            return response()->json(['status' => 'success']);
+            }
+            catch (\Exception $e) {
+                dd($e->getMessage()); // Agrega esta línea para ver el mensaje de error específico
+                return response()->json(['status' => 'error', 'message' => 'Error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.']);
+            }
+        }
 
 
     public function export()
