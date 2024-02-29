@@ -35,7 +35,7 @@ class UserScheduledController extends Controller
                                                                                                 
             $textFinal = "Het there," . $user->name . ".\n"  ."Great news - your furry friend's" . $event->event ." service is all set! 🐾". ".\n" .
              "🐶 Walker: Juan Pablo Vanegas" . ".\n" .  "🏡" . $address . ".\n" . "📞 Phone: ". $phone . ".\n" 
-            ."🕒 Shift: ". $shift . ".\n" . "We're thrilled to spend some quality time with your pup! If you need to make any changes or just want to chat, feel free to reach out. We're here for you!;  " .".\n" . "Can't wait to see your adorable doggo!";
+            ."🕒 Shift: ". $shift  ;
             
             
             $formattedEvents[] = [
