@@ -318,6 +318,7 @@
    <script>
     $('#LandingForm').submit(function (event) {
         event.preventDefault();
+        var formData = $(this).serialize();
 
         // Deshabilita el botón y muestra un mensaje de espera
         Swal.fire({
@@ -363,7 +364,7 @@
                         $.ajax({
                             type: 'POST',
                             url: 'store-email-contact-landing',
-                            data: Data,
+                            data: formData,
                             success: function (response) {
                                 // Manejo de la respuesta exitosa para la segunda ruta
                                 console.log('Response from second route:', response);
