@@ -30,6 +30,7 @@ Route::post('/confirm-contacjob', [ContactJobController::class, 'EnviarContactJo
 
 Route::post('/store-email-contact', [SistemsEmailsController::class,'storecontact'])->name('store.email.contact');
 Route::post('/store-email-contact-job', [SistemsEmailsController::class,'storecontactjob'])->name('store.email.contact.job');
+Route::post('/store-email-contact-landing', [SistemsEmailsController::class,'storecontactjob'])->name('store.email.contact.landing');
 
 
 
@@ -123,8 +124,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/blogs/{ide}/dit', [BlogController::class, 'showEditForm']); // Mostrar formulario de edición
     Route::put('/blogs/{id}', [BlogController::class, 'update']); // Actualizar el blog existente
     // Ruta solicitud de servicios admin
-
-
 
 
 });

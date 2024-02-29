@@ -55,6 +55,17 @@ class SistemsEmailsController extends Controller
             'form' => "contactJob",
         ]);
     }
+    public function storecontactlanding(Request $request)
+    {
+        $email = SistemsEmails::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'comment' => $request->message,
+            'form' => "landing",
+        ]);
+    }
+
 
     public function export()
 {

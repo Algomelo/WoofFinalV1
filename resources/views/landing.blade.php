@@ -359,6 +359,21 @@
                                 confirmButtonText: 'Closed',
                             });
                         }
+                                                // segunda solicitud AJAX
+                        $.ajax({
+                            type: 'POST',
+                            url: 'store-email-contact-landing',
+                            data: Data,
+                            success: function (response) {
+                                // Manejo de la respuesta exitosa para la segunda ruta
+                                console.log('Response from second route:', response);
+                                // Puedes agregar aquí cualquier código adicional que necesites después de la segunda solicitud
+                            },
+                            error: function (error) {
+                                // Manejo de errores para la segunda ruta                    
+                                console.error('Error in second route:', error);
+                            }
+                        });
                     },
                     error: function () {
                         // Restaura el botón y cierra el mensaje de espera

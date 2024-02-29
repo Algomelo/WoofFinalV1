@@ -124,7 +124,7 @@
                             });
                         }
 
-                        // Aquí colocamos la segunda solicitud AJAX
+                        // segunda solicitud AJAX
                         $.ajax({
                             type: 'POST',
                             url: 'store-email-contact-job',
