@@ -67,6 +67,7 @@ class SistemsEmailsController extends Controller
                 'age' => $request->dogage,
                 'address' => $request->address,
                 'dogname' => $request->namedog,
+                'breed' => $request->dogbreed,
                 'form' => "landing",
             ]);
             return response()->json(['status' => 'success']);
