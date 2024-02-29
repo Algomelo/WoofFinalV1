@@ -16,7 +16,7 @@ class SistemsEmailsController extends Controller
      */
 
      public function indexlanding(){
-        $sistemsEmails = SistemsEmails::where('form', 'like', '%landing%')->get();
+        $sistemsEmails = SistemsEmails::where('form', 'landing')->get();
     
         return view('admin.contactLanding', compact('sistemsEmails'));
     }
