@@ -35,10 +35,12 @@ class UserController extends Controller
             'address' => 'required|min:6',
             'phone' => 'required',
             'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|confirmed',
+            'petname'=>'required',
 
         ];
 
         $messages = [
+            'petname' => 'The name pet field is required',
             'password.required' => 'The password field is required.',
             'password.min' => 'The password must be at least 8 characters long.',
             'password.regex' => 'The password must contain at least one uppercase letter, one lowercase letter, and one digit.',
@@ -57,13 +59,20 @@ class UserController extends Controller
 
         $this->validate($request,$rules,$messages);
 
+        $userData = $request->only('name', 'email', 'cedula', 'address', 'phone', 'petname');
+        $userData['petname'] = ucfirst($userData['petname']);
+        $userData['address'] = ucfirst($userData['address']);
+
         User::create(
-            $request->only('name','email','cedula','address','phone')
-            +[
-                'role' => 'user',
-                'password' => bcrypt($request->input('password'))
-            ]
+            array_merge(
+                $userData,
+                [
+                    'role' => 'user',
+                    'password' => bcrypt($request->input('password'))
+                ]
+            )
         );
+        
         $notification = 'The user has been registered successfully.';
         
         return redirect('/users')->with(compact('notification'));
@@ -108,9 +117,17 @@ class UserController extends Controller
         $this->validate($request,$rules,$messages);
         $user = User::users()->findOrFail($id);
 
-        $data = $request->only('name','email','cedula','address','phone');
+        $data = $request->only('name','email','cedula','address','phone','petname');
         $password =$request->input('password');
 
+        if (isset($data['petname'])) {
+            $data['petname'] = ucfirst($data['petname']);
+        }
+
+        if (isset($data['address'])) {
+            $data['address'] = ucfirst($data['address']);
+        }
+        
         if($password)
         $data['password'] = bcrypt($password);
         $user->fill($data)->save();

@@ -55,7 +55,9 @@ class RegisterController extends Controller
             'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|confirmed',
             'address' => ['required', 'string', 'max:255'], // Agregar reglas de validación para el campo 'address'
             'phone' => ['required', 'int', 'min:6'],
+            'petname'=>['required'],
         ], [
+            'petname' => 'The name pet field is required',
             'name.required' => 'The name field is required.',
             'email.required' => 'The email field is required.',
             'email.email' => 'Please enter a valid email address.',
@@ -80,14 +82,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // Capitalizar la primera letra del nombre de la mascota si está presente
+        if (isset($data['petname'])) {
+            $data['petname'] = ucfirst($data['petname']);
+        }
+        if (isset($data['address'])) {
+            $data['address'] = ucfirst($data['address']);
+        }
+    
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'address' => $data['address'], // Agregar el campo 'address' al proceso de creación del usuario
             'phone' => $data['phone'], // Agregar el campo 'address' al proceso de creación del usuario
-            'petname' =>$data['petname'],
-
+            'petname' => $data['petname'],
         ]);
     }
+    
 }

@@ -37,10 +37,17 @@ class UserUpdateController extends Controller
 
         $data = $request->only('name','email','cedula','address','phone','petname');
         $password =$request->input('password');
-
+        // pone primera letra del addres en mayuscula y luego la del petname
+        if (isset($data['address'])) {
+            $data['address'] = ucfirst($data['address']);
+        }
+        if (isset($data['petname'])) {
+            $data['petname'] = ucfirst($data['petname']);
+        }
         if($password)
         $data['password'] = bcrypt($password);
         $user->fill($data)->save();
+
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('public/images');
             $user->photo = basename($imagePath);
