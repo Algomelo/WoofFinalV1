@@ -30,10 +30,17 @@
             <form action="{{url('/services/'.$service->id)}}" method="POST">
                 @csrf
                 @method('PUT')
+                @if($service->name == "Dog Walking"  || $service->name == "Doggy Day Care")                
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" class="form-control" value="{{old('name', $service->name)}}" required readonly>
+                </div>
+                @else
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" name="name" class="form-control" value="{{old('name', $service->name)}}" required>
                 </div>
+                @endif
                 <div class="form-group">
                     <label for="name">Description</label>
                     <input type="text" name="description" class="form-control" value="{{old('description', $service->description)}}">
