@@ -50,8 +50,6 @@ use Illuminate\Support\Str;
                     <div class="modal-body">
                         <p>In this section you can select the services you want to schedule, remember to update your information and fill out each of the fields in the form</p>
                         <img alt="Image placeholder" src="{{asset('img/requestcreate.PNG')}}" class="img-fluid">
-
-
                     </div>
                     <div class="modal-footer">
                         <form id="manualPreferenceForm" action="{{ url('manualPreference') }}" method="post">
@@ -176,35 +174,39 @@ use Illuminate\Support\Str;
                                     @foreach ($allServices as $service)
                                     <div class="container ServiceSection" style="padding:10px;" > 
                                             @if ($service->name=="Dog Walking")
-                                            <h2>   Premium {{ $service->name }}</h2>
+                                            <h2 id="serviceName{{ $service->id }}"> Premium {{ $service->name }}</h2>
                                             @else
-                                            <h2> {{ $service->name }}</h2>
+                                            <h2 id="serviceName{{ $service->id }}"> {{ $service->name }}</h2>
                                             @endif                                            
                                             <strong> Description: </strong> {{ $service->description }} <br> <br>
                                             <strong>Quantity: </strong><input type="number" name="service_quantity[{{ $service->id }}]" value="" class="quantity-input" readonly> <br><br>
                                             @if ($service->name=="Dog Walking")
                                             <strong>
                                                 <i class="fa-solid fa-coins"></i>  Service Request Fee: $ <span id="servicePrice{{ $service->id }}">{{ $service->price }}</span> <!--  $ {{ $service->price }} (per Unit)-->                                        
+                                                <span class="d-none"id="servicePrice1{{ $service->id }}">{{ $service->price }}</span>
                                             </label><br>
                                             (The service price per unit is $ {{ $service->price }}. However, if you purchase more than one service, the price per unit decreases to $  ${{ $service->price-5 }})<br>
                                             </strong>
                                             @elseif($service->name=="Doggy Day Care")
                                             <strong>
                                                 <i class="fa-solid fa-coins"></i>  Service Request Fee: $ <span id="servicePrice{{ $service->id }}">{{ $service->price }}</span> <!--  $ {{ $service->price }} (per Unit)-->                                        
+                                                <span class="d-none"id="servicePrice1{{ $service->id }}">{{ $service->price }}</span>
                                             </label><br>
                                            (The service price per unit is $ {{ $service->price }}.if you purchase more than one service, the price per unit decreases to $ {{ $service->price -5 }})<br>
                                            </strong>
                                             @elseif($service->name=="Dog Boarding")
                                             <strong>
                                                 <i class="fa-solid fa-coins"></i>  Service Request Fee: $ <span id="servicePrice{{ $service->id }}">{{ $service->price }}</span><!--  $ {{ $service->price }} (per Unit)-->                                        
+                                                <span class="d-none"id="servicePrice1{{ $service->id }}">{{ $service->price }}</span>
                                             </label>
                                             </strong><br>(If you select more than one day, we will contact you to agree on the price.)<br>
                                             @else
                                             <strong>
-                                                <i class="fa-solid fa-coins"></i>  Service Request Fee: $ {{ $service->price }} <!--  $ {{ $service->price }} (per Unit)-->                                        
+                                                <i class="fa-solid fa-coins"></i>  Service Request Fee: $ <span id="servicePrice{{ $service->id }}">{{ $service->price }}</span> <!--  $ {{ $service->price }} (per Unit)-->                                        
+                                                <span class="d-none"id="servicePrice1{{ $service->id }}">{{ $service->price }}</span>
                                             </label>
+                                            </strong>
                                             @endif
-
                                              <input type="checkbox"  class="d-none"name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}"><br><br>
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-12">
@@ -302,26 +304,8 @@ use Illuminate\Support\Str;
         xhr.send(formData);
     }
 </script>
-<script>
-    // Define la función prueba fuera del evento DOMContentLoaded para que esté disponible globalmente
-    function prueba(serviceId) {
-        console.log('el id del servicio seleccionado es ' + serviceId);
-    }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        // Obtén todos los elementos con la clase 'date-input' y agrega el evento onclick a cada uno
-        var inputs = document.querySelectorAll('.date-input');
-        inputs.forEach(function(input) {
-            input.onclick = function() {
-                // Extrae el ID del servicio del atributo 'id' del elemento input
-                var serviceId = parseInt(this.id.replace('date', ''));
-                // Llama a la función prueba con el ID del servicio como parámetro
-                prueba(serviceId);
-            };
-        });
-    });
-</script>
-<!--
+
 <script>
     // Asegúrate de que este código se ejecute después de que se haya cargado el DOM
     document.addEventListener('DOMContentLoaded', function () {
@@ -331,27 +315,35 @@ use Illuminate\Support\Str;
             input.addEventListener('change', function () {
                 // Obtener el ID del servicio
                 var serviceId = this.id.replace('date', '');
-                console.log(serviceId);
-                var originalPrice = parseFloat(document.getElementById('servicePrice' + serviceId).innerText);
+                console.log('service ID ' + serviceId);
+                var originalPrice = parseFloat(document.getElementById('servicePrice1' + serviceId).innerText);
                 console.log('original price' + originalPrice);
-
+                var serviceName = document.getElementById('serviceName' + serviceId).innerText;
+                console.log('service name' + serviceName);
                 // Obtener la cantidad de días seleccionados
                 var selectedDates = this.value.split(',').filter(Boolean).length;
                 console.log('selected dates' + selectedDates);
-
-                // Obtener el precio original del servicio
-                // Obtener el precio actual del servicio (puede haber sido modificado previamente)
-                var currentPrice = parseFloat(document.getElementById('servicePrice' + serviceId).innerText);
-                console.log('original price' + currentPrice);
-                // Obtener el precio total actual del servicio                
-                var totalPrice = originalPrice * selectedDates;
+                // Obtener el precio total actual del servicio   
+                var totalPrice = originalPrice;             
+                if(serviceName==="Premium Dog Walking" || serviceName==="Doggy Day Care" ){
+                    if(selectedDates>1){
+                        var discount =  selectedDates * 5;
+                        totalPrice = originalPrice * selectedDates - discount;                       
+                    }
+                }else{
+                    if(selectedDates==0){
+                        totalPrice = originalPrice;
+                    }else{
+                        totalPrice = originalPrice * selectedDates;
+                    }
+                }
                 console.log('total price' + totalPrice);
                 document.getElementById('servicePrice' + serviceId).innerText = totalPrice.toFixed(2);
             });
         });
     });
 </script>
--->
+
 
 
 
