@@ -66,7 +66,6 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     // CRUD SERVICE REQUEST USER
 
-    
     // CRUD PETS
     Route::resource('userPets','App\Http\Controllers\User\PetController');
 
@@ -128,7 +127,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 });
 
-URL::forceScheme('https');
+//URL::forceScheme('https');
 
 
 
