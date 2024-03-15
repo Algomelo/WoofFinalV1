@@ -98,6 +98,8 @@ class RegisterController extends Controller
             'phone' => $data['phone'], // Agregar el campo 'address' al proceso de creación del usuario
             'petname' => $data['petname'],
         ]);
+        $user->sendEmailVerificationNotification();
+
     }
     
 }

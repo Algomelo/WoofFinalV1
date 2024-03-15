@@ -57,6 +57,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Auth::routes();
+Route::get('/email/verify/{id}/{hash}', 'VerificationController@verify')
+       ->middleware('signed')->name('verification.verify');
 
 
 
@@ -66,6 +68,7 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     // CRUD SERVICE REQUEST USER
 
+    
     // CRUD PETS
     Route::resource('userPets','App\Http\Controllers\User\PetController');
 
