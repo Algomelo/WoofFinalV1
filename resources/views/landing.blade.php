@@ -32,7 +32,7 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="index">
             <img class="img_style" src="./img/positive_logo.png" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="index">Home</a>
                 </li>
                
                 <li class="nav-item">
@@ -187,8 +187,12 @@
                        <a href="https://wa.me/+61434560732"><i class="fab fa-whatsapp" style="color:green"></i></a>
                        <a href="https://www.facebook.com/ohmywoofclub/"><i class="fab fa-facebook"></i></a>
                        <a href="https://www.instagram.com/ohmywoofau/"><i class="fab fa-instagram" style="color:white"></i></a>
-            </div>
-                    
+                      
+                    </div>
+                    <div class="container" style="text-align:center; color:white;">
+                    <hr><h3><i class="fa-solid fa-location-dot"></i> 3, Fripp Street, Arncliffe, NSW 2205</h3><hr>
+
+                    </div>                        
         </div>
     </div>
     <!-- Rest of the code remains unchanged -->
@@ -318,7 +322,6 @@
    <script>
     $('#LandingForm').submit(function (event) {
         event.preventDefault();
-        var formData = $(this).serialize();
 
         // Deshabilita el botón y muestra un mensaje de espera
         Swal.fire({
@@ -360,21 +363,6 @@
                                 confirmButtonText: 'Closed',
                             });
                         }
-                         // segunda solicitud AJAX
-                        $.ajax({
-                            type: 'POST',
-                            url: 'store-email-contact-landing',
-                            data: formData,
-                            success: function (response) {
-                                // Manejo de la respuesta exitosa para la segunda ruta
-                                console.log('Response from second route:', response);
-                                // Puedes agregar aquí cualquier código adicional que necesites después de la segunda solicitud
-                            },
-                            error: function (error) {
-                                // Manejo de errores para la segunda ruta                    
-                                console.error('Error in second route:', error);
-                            }
-                        });
                     },
                     error: function () {
                         // Restaura el botón y cierra el mensaje de espera

@@ -16,7 +16,7 @@ class NuevoSeeder extends Seeder
             'name' => 'Fabian',
             'email' => 'admin6@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('1234'), // password
+            'password' => bcrypt('1234aeiou@'), // password
             'cedula' => '1023244764',
             'address' => 'av chile',
             'phone' => '+573057202110',
