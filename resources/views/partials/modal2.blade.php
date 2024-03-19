@@ -81,8 +81,8 @@
                     </button>
                 </div>
                 <div class="modal-buttons">
-                    <button class="button" id="contactarBtn">Deseo contactar un asesor</button>
-                    <button class="button" id="ingresarBtn">Ingresar</button>
+                    <button class="button" id="contactarBtn">I want to contact an advisor</button>
+                    <button class="button" id="ingresarBtn">Login</button>
                 </div>
                 <div class="modal-body">
                     <div id="formContent" style="display: none;" class="row">
