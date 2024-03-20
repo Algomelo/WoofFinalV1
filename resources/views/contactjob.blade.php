@@ -82,6 +82,8 @@
 <script>
     $('#contactFormJob').submit(function (event) {
         event.preventDefault();
+        var formData = $(this).serialize();
+
         // Deshabilita el botón y muestra un mensaje de espera
         Swal.fire({
             title: 'Processing...',
