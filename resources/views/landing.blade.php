@@ -305,6 +305,8 @@
     // Función para manejar el clic en el botón de desplazamiento
     function scrollToSection(event) {
         event.preventDefault();
+        var formData = $(this).serialize();
+
         const target = document.querySelector(event.currentTarget.getAttribute('href'));
         if (target) {
             window.scrollTo({
@@ -389,9 +391,6 @@
                     console.error('Error in second route:', error);
                     }
                     });
-
-
-
             });
         });
     });
