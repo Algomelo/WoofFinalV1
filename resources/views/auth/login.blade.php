@@ -66,7 +66,7 @@
             <a href="{{ route('password.request') }}" class="text-light"><small>Forgot password?</small></a>
         </div>
         <div class="col-6 text-right">
-            <a href="{{ route('register') }}" class="text-light"><small>Create neeew account</small></a>
+            <a href="{{ route('register') }}" class="text-light"><small>Create new account</small></a>
         </div>
     </div>
 </div>

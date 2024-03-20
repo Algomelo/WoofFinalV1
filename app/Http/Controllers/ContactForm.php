@@ -33,9 +33,9 @@ public function EnviarCorreoContact(Request $request)
 
 
     
-            return response()->json(['message' => 'Solicitud enviada con éxito'], 200);
+            return response()->json(['message' => 'Request submitted successfully'], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.'], 500);
+            return response()->json(['error' => 'Error sending request. Please try again later.'], 500);
         }
     }
 }
