@@ -15,7 +15,10 @@ class ContactForm extends Controller
 public function EnviarCorreoContact(Request $request)
     {
 
+        $request->validate([
+            'g-recaptcha-response' => ['required', new Recaptcha]
 
+        ]);
         // Aquí puedes validar los datos del formulario
         // Procesa y almacena los datos de la solicitud
         // Enviar el correo a dos direcciones de correo electrónico
@@ -32,10 +35,9 @@ public function EnviarCorreoContact(Request $request)
                 ->send(new Enviarcorreo($data));
 
 
-    
-            return response()->json(['message' => 'Request submitted successfully'], 200);
+            return response()->json(['status' => 'success']);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Error sending request. Please try again later.'], 500);
+            return response()->json(['status' => 'error', 'message' => 'Error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.']);
         }
     }
 }

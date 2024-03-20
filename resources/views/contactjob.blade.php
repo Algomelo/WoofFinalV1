@@ -107,7 +107,6 @@
                         // Restaura el botón y cierra el mensaje de espera
                         $('#sendMessageButton').prop('disabled', false);
                         Swal.close();
-
                         if (response.status === 'success') {
                             Swal.fire({
                                 icon: 'success',
@@ -136,6 +135,7 @@
                         });
                     }
                 });
+
                                 // segunda solicitud AJAX
                 $.ajax({
                     type: 'POST',

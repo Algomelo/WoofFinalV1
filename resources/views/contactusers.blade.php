@@ -57,8 +57,8 @@
         </div>
     </section>
     <script>
-$('#contactForm').submit(function (event) {
-    event.preventDefault();
+    $('#contactForm').submit(function (event) {
+        event.preventDefault();
         var formData = $(this).serialize();
 
         // Deshabilita el botón y muestra un mensaje de espera
@@ -72,19 +72,18 @@ $('#contactForm').submit(function (event) {
             }
         });
 
-    grecaptcha.ready(function () {
-        grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', { action: 'submit' }).then(function (token) {
-            document.getElementById("g-recaptcha-response").value = token;
-    // Primera solicitud AJAX a la primera ruta
-            $.ajax({
-                type: 'POST',
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', { action: 'submit' }).then(function (token) {
+                document.getElementById("g-recaptcha-response").value = token;
+                // Primera solicitud AJAX a la primera ruta
+                $.ajax({
+                    type: 'POST',
                     url: $(event.target).attr('action'),
                     data: $(event.target).serialize(),
                     success: function (response) {
                         // Restaura el botón y cierra el mensaje de espera
                         $('#sendMessageButton').prop('disabled', false);
                         Swal.close();
-
                         if (response.status === 'success') {
                             Swal.fire({
                                 icon: 'success',
@@ -113,6 +112,7 @@ $('#contactForm').submit(function (event) {
                         });
                     }
                 });
+
             // Segunda solicitud AJAX a la segunda ruta
                 $.ajax({
                     type: 'POST',
