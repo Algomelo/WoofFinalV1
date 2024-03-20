@@ -314,7 +314,7 @@
             });
         }
     }
-
+    
     // Asigna el evento de clic al botón
     const scrollButtons = document.querySelectorAll('.scroll-down-btn');
     scrollButtons.forEach(button => {

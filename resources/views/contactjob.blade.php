@@ -68,7 +68,7 @@
                             <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">   
                             <div class="form-group">
                                 <div class="col-md-12 text-center">
-                                <button class="btn btn-primary py-3 px-7" type="submit" id="sendMessageButton" style="background: #015351; border-radius:30px; color:white;">Send Message</button>
+                                <button class="btn btn-primary py-3 px-7" type="submit" id="sendMessageButton" style="background: #F2761D; border-radius:30px; color:white;">Send Message</button>
                                 </div>
                             </div>
                         </fieldset>
