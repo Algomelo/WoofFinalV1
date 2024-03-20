@@ -107,21 +107,19 @@
           <div class="u-carousel-inner u-gallery-inner" role="listbox">
             <div class="u-active u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-1">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/day1.jpg">
+                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/walk4.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-1"></div>
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-2">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-2" src="/imagess/day2.jpg">
-
+                <img class="u-back-image u-expanded u-back-image-2" src="/imagess/walk2.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-2"></div>
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-3" data-image-width="3024" data-image-height="4032">
               <div class="u-back-slide" data-image-width="4032" data-image-height="3024">
-                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/bord2.jpg">
-
+                <img class="u-back-image u-expanded u-back-image-3" src="/imagess/walk3.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-3"></div>
               <style data-mode="XL" data-visited="true"></style>
@@ -132,8 +130,7 @@
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-carousel-item-4" data-image-width="4032" data-image-height="3024">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/bord1.jpg">
-
+                <img class="u-back-image u-expanded u-back-image-4" src="/imagess/walk1.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-4"></div>
               <style data-mode="XL" data-visited="true"></style>
@@ -168,10 +165,10 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
             </span>
           </a>
         </div>
-        <h1 class="u-custom-font u-font-roboto-slab u-text u-text-1">Exciting Doggy Day Care</h1>
-        <h2 class="u-align-left u-text u-text-2">Walks​, Playtime, and Fun!</h2>
-        <h4 class="u-align-justify u-text u-text-3">Our dog day care center offers fun activities, socialization and supervised play, with a walk or two outside to keep your furry friend active and happy. Our highly trained team ensures a safe environment for your dog to make new friends and develop social skills. Reserve now to provide your furry companion with an exciting and fun-filled day!</h4>
-        <button type="button" class="u-btn-1 boton" data-toggle="modal" data-target="#myModal" data-service="Dog Day Care">
+        <h1 class="u-custom-font u-font-roboto-slab u-text u-text-1">Pre​mium​ Dog Walking</h1>
+        <h2 class="u-align-left u-text u-text-2"> 2-3 Hour Adventures with Safe Pick-up and Drop-off</h2>
+        <h4 class="u-align-justify u-text u-text-3">Experience the best in dog walking services with our premium offering. Treat your furry friend to 2-3 hour adventures filled with exploration and excitement. We prioritize safety and convenience, providing secure pick-up and drop-off for your peace of mind. Trust us to give your dog an unforgettable outdoor experience. Book now and let the adventures begin!</h4>
+        <button type="button" class="u-btn-1 boton" data-toggle="modal" data-target="#myModal" data-service="Dog Walking">
           Book Now
         </button>
       </div>
@@ -189,13 +186,13 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
           <div class="u-carousel-inner u-gallery-inner" role="listbox">
             <div class="u-active u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-shape-rectangle u-carousel-item-1">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/walk4.jpg">
+                <img class="u-back-image u-expanded u-back-image-1" src="/imagess/day1.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-1"></div>
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-shape-rectangle u-carousel-item-2">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-2" src="/imagess/walk2.jpg">
+                <img class="u-back-image u-expanded u-back-image-2" src="/imagess/day2.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-2">
             
@@ -203,8 +200,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-shape-rectangle u-carousel-item-3" >
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-              <img class="u-back-image u-expanded u-back-image-3" src="/imagess/walk3.jpg">
-
+              <img class="u-back-image u-expanded u-back-image-1" src="/imagess/bord2.jpg">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-3"></div>
               <style data-mode="XL" data-visited="true"></style>
@@ -216,7 +212,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-shape-rectangle u-carousel-item-4">
               <div class="u-back-slide">
 
-              <img class="u-back-image u-expanded u-back-image-4" src="/imagess/walk1.jpg">
+              <img class="u-back-image u-expanded u-back-image-1" src="/imagess/bord1.jpg">
 
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-4"></div>
@@ -252,10 +248,11 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
             </span>
           </a>
         </div>
-        <h1 class="u-custom-font u-font-roboto-slab u-text u-text-1">Pre​mium​ Dog Walking</h1>
-        <h2 class="u-align-left u-text u-text-2"> 2-3 Hour Adventures with Safe Pick-up and Drop-off</h2>
-        <h4 class="u-align-justify u-text u-text-3">Experience the best in dog walking services with our premium offering. Treat your furry friend to 2-3 hour adventures filled with exploration and excitement. We prioritize safety and convenience, providing secure pick-up and drop-off for your peace of mind. Trust us to give your dog an unforgettable outdoor experience. Book now and let the adventures begin!</h4>
-        <button type="button" class="u-btn-1 boton1" data-toggle="modal" data-target="#myModal" data-service="Dog Walking">
+        <h1 class="u-custom-font u-font-roboto-slab u-text u-text-1">Exciting Doggy Day Care</h1>
+        <h2 class="u-align-left u-text u-text-2">Walks​, Playtime, and Fun!</h2>
+        <h4 class="u-align-justify u-text u-text-3">Our dog day care center offers fun activities, socialization and supervised play, with a walk or two outside to keep your furry friend active and happy. Our highly trained team ensures a safe environment for your dog to make new friends and develop social skills. Reserve now to provide your furry companion with an exciting and fun-filled day!</h4>
+
+        <button type="button" class="u-btn-1 boton1" data-toggle="modal" data-target="#myModal" data-service="Dog Day Care">
           Book Now
         </button>
       </div>
