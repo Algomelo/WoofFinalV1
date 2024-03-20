@@ -305,7 +305,6 @@
     // Función para manejar el clic en el botón de desplazamiento
     function scrollToSection(event) {
         event.preventDefault();
-        var formData = $(this).serialize();
 
         const target = document.querySelector(event.currentTarget.getAttribute('href'));
         if (target) {
@@ -325,6 +324,8 @@
    <script>
     $('#LandingForm').submit(function (event) {
         event.preventDefault();
+        var formData = $(this).serialize();
+
         // Deshabilita el botón y muestra un mensaje de espera
         Swal.fire({
             title: 'Processing...',
