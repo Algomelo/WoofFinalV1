@@ -32,7 +32,7 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-        <a class="navbar-brand" href="index">
+        <a class="navbar-brand" href="/">
             <img class="img_style" src="./img/positive_logo.png" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                
                 <li class="nav-item">
@@ -203,10 +203,11 @@
     <div class="row">
         <div class="col-md-3">
             <div class="card">
-                <img src="./img/DOG_BOARDING/IMG_5149.jpg" class="card-img-top" alt="Service 1">
+            
+                <img src="./imagess/day1.jpg" class="card-img-top" alt="Service 3">
                 <div class="card-body">
-                    <h5 class="card-title">Dog Boarding</h5>
-                    <p class="card-text">Trust us for top-notch Dog Boarding when you can't be there. Your furry friend will have a comfortable stay with our specialists.</p>
+                    <h5 class="card-title">Dog Day Care</h5>
+                    <p class="card-text">Elevate your dog's day at our spacious Dog Day Care. Enjoy playtime with new friends, pick-up and drop-off services available.</p>
                 </div>
             </div>
         </div>
@@ -221,10 +222,10 @@
         </div>
         <div class="col-md-3">
             <div class="card">
-                <img src="./img/DOGGY_DAY_CARE/ddc1.jpg" class="card-img-top" alt="Service 3">
+                <img src="./img/DOG_BOARDING/IMG_5149.jpg" class="card-img-top" alt="Service 1">
                 <div class="card-body">
-                    <h5 class="card-title">Dog Day Care</h5>
-                    <p class="card-text">Elevate your dog's day at our spacious Dog Day Care. Enjoy playtime with new friends, pick-up and drop-off services available.</p>
+                    <h5 class="card-title">Dog Boarding</h5>
+                    <p class="card-text">Trust us for top-notch Dog Boarding when you can't be there. Your furry friend will have a comfortable stay with our specialists.</p>
                 </div>
             </div>
         </div>
@@ -232,7 +233,7 @@
             <div class="card">
                 <img src="./img/DOG_PARTIES/dogparty.png" class="card-img-top" alt="Service 4">
                 <div class="card-body">
-                    <h5 class="card-title">Dog Pawties</h5>
+                    <h5 class="card-title">Dog Parties</h5>
                     <p class="card-text">Unleash fun at Dog Parties! Join us for 2-4 hour adventures where your dog bonds with furry friends, contributing to their growth.</p>
                 </div>
             </div>
