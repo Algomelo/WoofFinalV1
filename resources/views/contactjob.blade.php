@@ -31,7 +31,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="well well-sm">
-                    <form action="{{ secure_url('/confirm-contacjob')}}" name="contactFormJob" id="contactFormJob" class="form-horizontal" method="POST">
+                    <form action="{{ secure_url('/confirm-contacjob')}}"  method="POST" name="contactFormJob" id="contactFormJob" class="form-horizontal" >
                         @csrf
                         <fieldset>
                             <legend class="text-center header">Work with us !</legend>
@@ -82,8 +82,6 @@
 <script>
     $('#contactFormJob').submit(function (event) {
         event.preventDefault();
-        var formData = $(this).serialize();
-
         // Deshabilita el botón y muestra un mensaje de espera
         Swal.fire({
             title: 'Processing...',
@@ -99,7 +97,6 @@
             grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', { action: 'submit' }).then(function (token) {
                 document.getElementById("g-recaptcha-response").value = token;
                 // Envía el formulario a través de AJAX
-
                 $.ajax({
                     type: 'POST',
                     url: $(event.target).attr('action'),
@@ -124,22 +121,6 @@
                                 confirmButtonText: 'Closed',
                             });
                         }
-
-                        // segunda solicitud AJAX
-                        $.ajax({
-                            type: 'POST',
-                            url: 'store-email-contact-job',
-                            data: formData,
-                            success: function (response) {
-                                // Manejo de la respuesta exitosa para la segunda ruta
-                                console.log('Response from second route:', response);
-                                // Puedes agregar aquí cualquier código adicional que necesites después de la segunda solicitud
-                            },
-                            error: function (error) {
-                                // Manejo de errores para la segunda ruta                    
-                                console.error('Error in second route:', error);
-                            }
-                        });
                     },
                     error: function () {
                         // Restaura el botón y cierra el mensaje de espera
@@ -153,7 +134,23 @@
                         });
                     }
                 });
-            });
+                                // segunda solicitud AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: 'store-email-contact-job',
+                    data: formData,
+                    success: function (response) {
+                     // Manejo de la respuesta exitosa para la segunda ruta
+                    console.log('Response from second route:', response);
+                    // Puedes agregar aquí cualquier código adicional que necesites después de la segunda solicitud
+                    },
+                    error: function (error) {
+                    // Manejo de errores para la segunda ruta                    
+                    console.error('Error in second route:', error);
+                    }
+                    });
+            });            
+        });
     });
 </script>
 @include('layouts.footer')
