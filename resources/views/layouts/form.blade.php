@@ -21,6 +21,8 @@
 
                <!-- CSS NUEVO LOGUIN-->
       <link href="{{asset('css/new-dashboard-login.css')}}" rel="stylesheet" />
+      <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+
        
  
   
