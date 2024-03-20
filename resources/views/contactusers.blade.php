@@ -39,8 +39,9 @@
                             <textarea class="form-control p-4" rows="6" id="message" name="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
                             <p class="help-block text-danger"></p>
                         </div>
+                        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
                         <div class="d-flex justify-content-center">
-                        <button class="btn btn-primary py-3 px-7" type="submit"  style="background: #015351; border-radius:30px; color:white;">Send Message</button>
+                        <button class="btn btn-primary py-3 px-7" type="submit"   id="sendMessageButton" style="background: #015351; border-radius:30px; color:white;">Send Message</button>
                         </div>
                     </form>
                 </div>
@@ -58,59 +59,78 @@
     <script>
 $('#contactForm').submit(function (event) {
     event.preventDefault();
+        var formData = $(this).serialize();
 
-    // Datos del formulario serializados
-    var formData = $(this).serialize();
+        // Deshabilita el botón y muestra un mensaje de espera
+        Swal.fire({
+            title: 'Processing...',
+            text: 'Please wait a moment while we process your request.',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            willOpen: () => {
+                $('#sendMessageButton').prop('disabled', true);
+            }
+        });
 
+    grecaptcha.ready(function () {
+        grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', { action: 'submit' }).then(function (token) {
+            document.getElementById("g-recaptcha-response").value = token;
     // Primera solicitud AJAX a la primera ruta
-    $.ajax({
-        type: 'POST',
-        url: $(this).attr('action'), // URL del formulario
-        data: formData,
-        success: function (response) {
-            // Manejo de la respuesta exitosa para la primera ruta
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: response.message,
-                confirmButtonText: 'Closed',
-            });        
-            console.log('Response from first route:', response);
+            $.ajax({
+                type: 'POST',
+                    url: $(event.target).attr('action'),
+                    data: $(event.target).serialize(),
+                    success: function (response) {
+                        // Restaura el botón y cierra el mensaje de espera
+                        $('#sendMessageButton').prop('disabled', false);
+                        Swal.close();
 
-            // Puedes agregar aquí cualquier código adicional que necesites después de la primera solicitud
-        },
-        error: function (error) {
-            // Manejo de errores para la primera ruta
-             Swal.fire({
-                icon: 'error',
-                title: 'Fail!',
-                text: response.message,
-                confirmButtonText: 'Closed',
+                        if (response.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: response.message,
+                                confirmButtonText: 'Closed',
+                            });
+                        } else if (response.status === 'error') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Fail!',
+                                text: response.message,
+                                confirmButtonText: 'Closed',
+                            });
+                        }
+                    },
+                    error: function () {
+                        // Restaura el botón y cierra el mensaje de espera
+                        $('#sendMessageButton').prop('disabled', false);
+                        Swal.close();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Fail!',
+                            text: 'There was an issue submitting the request. Please try again later.',
+                            confirmButtonText: 'Closed',
+                        });
+                    }
+                });
+            // Segunda solicitud AJAX a la segunda ruta
+                $.ajax({
+                    type: 'POST',
+                    url: 'store-email-contact', // Reemplaza 'URL_DE_LA_SEGUNDA_RUTA' con la URL real de la segunda ruta
+                    data: formData,
+                    success: function (response) {
+                        // Manejo de la respuesta exitosa para la segunda ruta
+                        console.log('Response from second route:', response);
+                        // Puedes agregar aquí cualquier código adicional que necesites después de la segunda solicitud
+                    },
+                    error: function (error) {
+                        // Manejo de errores para la segunda ruta
+                        console.error('Error in second route:', error);
+                    }
+                });
             });            
-            console.error('Error in first route:', error);
-        }
+        });
     });
-
-    // Segunda solicitud AJAX a la segunda ruta
-    $.ajax({
-        type: 'POST',
-        url: 'store-email-contact', // Reemplaza 'URL_DE_LA_SEGUNDA_RUTA' con la URL real de la segunda ruta
-        data: formData,
-        success: function (response) {
-            // Manejo de la respuesta exitosa para la segunda ruta
-            console.log('Response from second route:', response);
-
-            // Puedes agregar aquí cualquier código adicional que necesites después de la segunda solicitud
-        },
-        error: function (error) {
-            // Manejo de errores para la segunda ruta
-            console.error('Error in second route:', error);
-        }
-    });
-
-    // También puedes mostrar un mensaje de éxito aquí o realizar otras acciones necesarias
-});
-
         </script>
 </main>
 @include('layouts.footer')
