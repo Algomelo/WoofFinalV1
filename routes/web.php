@@ -57,8 +57,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes(['verify' => true]);
 
-Route::get('/email/verify/{id}/{hash}', 'VerificationController@verify')
-       ->middleware('signed')->name('verification.verify');
+//Route::get('/email/verify/{id}/{hash}', 'VerificationController@verify')
+  //     ->middleware('signed')->name('verification.verify');
 
 
 
