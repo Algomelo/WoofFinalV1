@@ -55,8 +55,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // ... otras rutas
 
+Auth::routes(['verify' => true]);
 
-Auth::routes();
 Route::get('/email/verify/{id}/{hash}', 'VerificationController@verify')
        ->middleware('signed')->name('verification.verify');
 
