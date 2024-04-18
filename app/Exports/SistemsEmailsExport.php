@@ -2,11 +2,9 @@
 
 namespace App\Exports;
 
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\Exportable;
+use App\Models\SistemsEmails;
+
 use Maatwebsite\Excel\Concerns\FromCollection;
-use App\EModels\User;
 
 class SistemsEmailsExport implements FromCollection
 {
@@ -15,6 +13,6 @@ class SistemsEmailsExport implements FromCollection
      */
     public function collection()
     {
-        return User::all();
+        return SistemsEmails::all();
     }
 }

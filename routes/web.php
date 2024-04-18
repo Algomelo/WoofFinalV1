@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\BlogController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AppointmentController;
@@ -130,7 +131,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 });
 
-URL::forceScheme('https');
+//URL::forceScheme('https');
 
 
 

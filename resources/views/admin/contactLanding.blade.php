@@ -12,7 +12,7 @@
               <h3 class="mb-0">Emails received</h3>
             </div>
             <div class="col text-right ">
-            <a href="{{ route('export') }}" class="btn btn-success d-none">Exportar a Excel</a>
+            <a href="{{ route('export') }}" class="btn btn-success">Exportar a Excel</a>
 
             </div>
         </div>     
