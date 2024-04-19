@@ -5,14 +5,18 @@ namespace App\Exports;
 use App\Models\SistemsEmails;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class SistemsEmailsExport implements FromCollection
+class SistemsEmailsExport implements FromView
 {
     /**
      *  @return \Illuminate\Support\Collection
      */
-    public function collection()
+    public function view(): View
     {
-        return SistemsEmails::all();
+        return view ('exportEmails', [
+            'sistemsemails' => SistemsEmails::all()
+        ]);
     }
 }
