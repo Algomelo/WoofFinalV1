@@ -97,8 +97,12 @@ use Illuminate\Support\Str;
             var quantityInput = $("input[name='service_quantity[" + serviceId + "]']");
             var dateInput = $("#date" + serviceId); // Seleccione el elemento de fecha por ID único
             var checkbox = $("#service_" + serviceId);
+            
 
-            var fp = flatpickr(dateInput[0], {
+
+ 
+
+            var fp = flatpickr(dateInput, {
                 mode: 'multiple',
                 dateFormat: 'Y-m-d',
                 defaultDate: preselectedDates,  // Establece las fechas preseleccionadas

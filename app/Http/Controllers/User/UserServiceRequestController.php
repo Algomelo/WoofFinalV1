@@ -52,8 +52,6 @@ class UserServiceRequestController extends Controller
         $service_quantity = $request->input('service_quantity');
         $totalPrice = 0 ;
         $serviceDates = $request->input('dates');
-
-
         //$datesArray = explode(',', $date); // calcular cantidad
         //$quantity = count($datesArray); // calcular cantidad
         
