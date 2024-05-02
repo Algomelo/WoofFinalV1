@@ -89,6 +89,9 @@ class RegisterController extends Controller
         if (isset($data['address'])) {
             $data['address'] = ucfirst($data['address']);
         }
+
+        $data['phone'] = ("0 " . $data['phone']) ;
+
     
         return User::create([
             'name' => $data['name'],

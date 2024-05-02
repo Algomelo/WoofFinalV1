@@ -62,6 +62,7 @@ class UserController extends Controller
         $userData = $request->only('name', 'email', 'cedula', 'address', 'phone', 'petname');
         $userData['petname'] = ucfirst($userData['petname']);
         $userData['address'] = ucfirst($userData['address']);
+        $userData['phone'] = ("0 " . $userData['phone']) ;
 
         User::create(
             array_merge(
