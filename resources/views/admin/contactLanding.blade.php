@@ -51,6 +51,7 @@
                     <th scope="col">Dog Name</th>
                     <th scope="col">Breed</th>
                     <th scope="col">Age</th>
+                    <th scope="col">Created</th>
                 </tr>
             </thead>
             <tbody style="background:white">
@@ -65,6 +66,7 @@
                     <td>{{ $email->dogname }}</td>
                     <td>{{ $email->breed }}</td>
                     <td>{{ $email->age }}</td>
+                    <td>{{ $email->created_at}}
                 </tr>
                 @endforeach
             </tbody>
