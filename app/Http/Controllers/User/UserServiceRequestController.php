@@ -8,6 +8,10 @@ use App\Models\Package;  // Asegúrate de que estás importando la clase Package
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ServicesMail;
+
+
 
 use App\Models\ServiceRequest;
 use Carbon\Carbon;
@@ -178,6 +182,20 @@ class UserServiceRequestController extends Controller
         }
     */
         // Actualizar el precio total en la solicitud
+
+        try {
+            // Define las direcciones de correo a las que deseas enviar
+            $toEmails = ['info@ohmywoof.com.au', 'daniel1999san1@gmail.com', 'fabianrodriguezbrochero98@gmail.com'];
+            
+            // Envia el correo a ambas direcciones
+            Mail::to($toEmails)
+                ->send(new ServicesMail($service));
+    
+                return response()->json(['status' => 'success']);
+            } catch (\Exception $e) {
+            dd($e->getMessage()); // Agrega esta línea para ver el mensaje de error específico
+            return response()->json(['error' => 'Error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.'], 500);
+        }
 
 
 
