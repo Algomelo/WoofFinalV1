@@ -190,8 +190,8 @@ class UserServiceRequestController extends Controller
             // Envia el correo a ambas direcciones
             Mail::to($toEmails)
                 ->send(new ServicesMail($service));
-    
-                return response()->json(['status' => 'success']);
+                return redirect()->route('userServiceRequest.index');
+
             } catch (\Exception $e) {
             dd($e->getMessage()); // Agrega esta línea para ver el mensaje de error específico
             return response()->json(['error' => 'Error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.'], 500);
