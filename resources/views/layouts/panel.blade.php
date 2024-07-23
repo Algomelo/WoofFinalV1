@@ -93,7 +93,7 @@
       <div class="container-fluid navbar navbar-top">
         <div class="row">
           <div class="col-12 col-sm-9">
-              <a class="h2 inline-block" href="./index.html" style="background:white; border-radius:12px; padding: 4px 10px;">G'day,  {{ auth()->user()->name }}! Welcome to a ripper Woof experience!</a>
+              <a class="h2 inline-block" href="./home" style="background:white; border-radius:12px; padding: 4px 10px;">G'day,  {{ auth()->user()->name }}! Welcome to a ripper Woof experience!</a>
           </div>
           <div class="col-3 text-right">
             <ul class="navbar-nav d-none d-md-flex">
