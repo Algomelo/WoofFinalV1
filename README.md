@@ -1,66 +1,113 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OhMyWoof - README</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        code {
+            background: #f9f9f9;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OhMyWoof</h1>
+        <p>OhMyWoof es un sistema web desarrollado en Laravel 10 que ofrece una solución completa para la gestión de servicios de agendamiento, con autenticación de usuarios, roles, integración de calendario, subida de fotos, y más.</p>
+        
+        <h2>Características</h2>
+        <ul>
+            <li><strong>Autenticación de Usuarios:</strong> Registro y inicio de sesión seguro para los usuarios.</li>
+            <li><strong>Roles y Permisos:</strong> Diferentes niveles de acceso según el rol del usuario (administrador, usuario estándar).</li>
+            <li><strong>Agendamiento de Servicios:</strong> Integración con el calendario para gestionar y programar servicios.</li>
+            <li><strong>Subida de Fotos:</strong> Los usuarios pueden subir fotos a sus perfiles.</li>
+            <li><strong>Administración de Servicios y Paquetes:</strong> Los administradores pueden crear y gestionar servicios y paquetes.</li>
+            <li><strong>Aprobación de Solicitudes:</strong> Los administradores pueden aprobar servicios y solicitudes de agendamiento.</li>
+            <li><strong>Gestión de Formularios:</strong> Los formularios enviados a través de la web son recibidos y gestionados dentro del sistema.</li>
+        </ul>
+        
+        <h2>Instalación</h2>
+        <p>Sigue estos pasos para instalar el proyecto localmente.</p>
+        <ol>
+            <li>Clona el repositorio:
+                <pre><code>git clone https://github.com/tuusuario/ohmywoof.git</code></pre>
+            </li>
+            <li>Navega al directorio del proyecto:
+                <pre><code>cd ohmywoof</code></pre>
+            </li>
+            <li>Instala las dependencias de Composer:
+                <pre><code>composer install</code></pre>
+            </li>
+            <li>Copia el archivo <code>.env.example</code> a <code>.env</code> y configura tus variables de entorno:
+                <pre><code>cp .env.example .env</code></pre>
+            </li>
+            <li>Genera la clave de la aplicación:
+                <pre><code>php artisan key:generate</code></pre>
+            </li>
+            <li>Configura la base de datos en tu archivo <code>.env</code> y luego ejecuta las migraciones:
+                <pre><code>php artisan migrate</code></pre>
+            </li>
+            <li>Inicia el servidor local:
+                <pre><code>php artisan serve</code></pre>
+                <p>Ahora puedes acceder a la aplicación en <a href="http://localhost:8000" target="_blank">http://localhost:8000</a>.</p>
+            </li>
+        </ol>
+        
+        <h2>Uso</h2>
+        <h3>Roles y Permisos</h3>
+        <ul>
+            <li><strong>Administrador:</strong> Puede crear servicios y paquetes, aprobar servicios y solicitudes de agendamiento.</li>
+            <li><strong>Usuario Estándar:</strong> Puede agendar servicios, subir fotos a su perfil, y enviar formularios.</li>
+        </ul>
+        
+        <h3>Agendamiento de Servicios</h3>
+        <p>Accede a la sección de agendamiento para programar un servicio. Los servicios aprobados por el administrador se mostrarán en el calendario.</p>
+        
+        <h3>Subida de Fotos</h3>
+        <p>Accede a tu perfil para subir y gestionar tus fotos.</p>
+        
+        <h2>Contribución</h2>
+        <p>Si deseas contribuir a este proyecto, por favor sigue estos pasos:</p>
+        <ol>
+            <li>Haz un fork del repositorio.</li>
+            <li>Crea una nueva rama (<code>git checkout -b feature/nueva-caracteristica</code>).</li>
+            <li>Realiza tus cambios y haz un commit (<code>git commit -am 'Añadir nueva característica'</code>).</li>
+            <li>Haz push a la rama (<code>git push origin feature/nueva-caracteristica</code>).</li>
+            <li>Crea un Pull Request.</li>
+        </ol>
+        
+        <h2>Licencia</h2>
+        <p>Este proyecto está bajo la licencia MIT. Consulta el archivo <
