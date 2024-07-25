@@ -165,10 +165,10 @@
 
     .listanavbar {
         margin-top: 0;    }
-
         .navbar-brand {
             padding: 0;
-            margin-left: -100px; /* Mover hacia la izquierda */
+            margin-left: -27%; /* Mover hacia la izquierda */
+            margin-right: -32%;
             }
             
 }

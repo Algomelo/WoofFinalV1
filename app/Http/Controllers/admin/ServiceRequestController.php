@@ -48,9 +48,6 @@ class ServiceRequestController extends Controller
     public function create()
     {
         $allUsers = User::where('role', 'user')->get();
-
-
-
         // Obtener la lista de todos los servicios y paquetes disponibles
         $allServices = Service::all(); // Ajusta según tus necesidades
         $allPackages = Package::all(); // Ajusta según tus necesidades
