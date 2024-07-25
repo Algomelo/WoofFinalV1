@@ -58,6 +58,8 @@
             <a class="navbar-brand" href="/">
                 <img class="img_style" src="/img/positive_logo.png" alt="Logo">
             </a>
+            <a class="nav-link boton" href="login">Log In</a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -66,7 +68,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
                     </li>
-                   
                     <li class="nav-item">
                         <a class="nav-link" href="services1">Services</a>
                     </li>
@@ -86,14 +87,9 @@
                             <li><a class="dropdown-item" href="contactjob">Work with us</a></li>
                         </ul>
                     </li>
-
                     </ul>
                     <div class="container d-flex" style="justify-content:center; width:auto; padding:0; margin:0;">
                             <ul class="navbar-nav ml-auto listanavbar text-center">
-                                <li class="nav-item">
-                                    <a class="nav-link boton" href="login">Log In</a>
-                                </li>
-
                                 <li class="nav-item">
                                     <a class="nav-link" href="https://www.facebook.com/ohmywoofclub/"><i class="fab fa-facebook"></i></a>
                                 </li>
