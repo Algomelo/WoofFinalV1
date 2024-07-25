@@ -2,13 +2,13 @@
 Descripción general
 ohmywoof es una aplicación web construida con Laravel 10 diseñada para [breve descripción de la funcionalidad principal de tu aplicación, por ejemplo: "facilitar la gestión de citas y servicios para mascotas"]. Ofrece un conjunto completo de características, incluyendo: <br>
 
-Autenticación de usuarios: Permite a los usuarios registrarse e iniciar sesión de forma segura. 
-Sistema de roles: Define diferentes roles de usuario (usuario, administrador) con permisos específicos.
-Agendamiento de servicios: Facilita la programación de citas y servicios con integración de calendario.
-Subida de fotos: Los usuarios pueden subir fotos a sus perfiles.
-Gestión de servicios y paquetes: Los administradores pueden crear y gestionar servicios y paquetes.
-Aprobación de servicios y solicitudes: Los administradores pueden aprobar o rechazar servicios y solicitudes de agendamiento.
-Formularios de contacto: Los formularios enviados a través de la web se registran en el sistema.
+Autenticación de usuarios: Permite a los usuarios registrarse e iniciar sesión de forma segura. <br>
+Sistema de roles: Define diferentes roles de usuario (usuario, administrador) con permisos específicos. <br>
+Agendamiento de servicios: Facilita la programación de citas y servicios con integración de calendario. <br>
+Subida de fotos: Los usuarios pueden subir fotos a sus perfiles. <br>
+Gestión de servicios y paquetes: Los administradores pueden crear y gestionar servicios y paquetes. <br>
+Aprobación de servicios y solicitudes: Los administradores pueden aprobar o rechazar servicios y solicitudes de agendamiento. <br>
+Formularios de contacto: Los formularios enviados a través de la web se registran en el sistema.<br>
 Tecnologías utilizadas
 Laravel 10: Framework PHP para desarrollo web.
 [Otras tecnologías relevantes, por ejemplo: Bootstrap, Vue.js, MySQL]
