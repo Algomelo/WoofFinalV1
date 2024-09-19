@@ -111,7 +111,8 @@ class RegisterController extends Controller
             
             // Envia el correo a ambas direcciones
             Mail::to($toEmails)
-                ->send(new RegistrosMail($service));
+                ->send(new RegistrosMail($user));
+
              
 
             } catch (\Exception $e) {
