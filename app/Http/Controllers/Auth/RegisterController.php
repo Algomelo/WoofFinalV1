@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\RegistrosMail;
+use App\Mail\RegistroMail;
 
 
 class RegisterController extends Controller
@@ -110,7 +110,7 @@ class RegisterController extends Controller
             $toEmails = ['fabianrodriguezbrochero98@gmail.com'];
             // Envia el correo a ambas direcciones
             Mail::to($toEmails)
-                ->send(new RegistrosMail($data));
+                ->send(new RegistroMail($data));
             } catch (\Exception $e) {
             dd($e->getMessage()); // Agrega esta línea para ver el mensaje de error específico
             return response()->json(['error' => 'Error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.'], 500);
