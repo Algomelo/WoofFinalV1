@@ -104,15 +104,18 @@ class RegisterController extends Controller
             'phone' => $data['phone'], // Agregar el campo 'address' al proceso de creación del usuario
             'petname' => $data['petname'],
         ]);
+        dd($data + "pruebas 1"); // Agrega esta línea para ver el mensaje de error específico
+
         $user->sendEmailVerificationNotification();
         try {
             // Define las direcciones de correo a las que deseas enviar
             $toEmails = ['fabianrodriguezbrochero98@gmail.com'];
-            dd($user . "pruebas"); // Agrega esta línea para ver el mensaje de error específico
+ 
+            dd($data . "pruebas 2"); // Agrega esta línea para ver el mensaje de error específico
 
             // Envia el correo a ambas direcciones
             Mail::to($toEmails)
-                ->send(new RegistrosMail($user));
+                ->send(new RegistrosMail($data));
             } catch (\Exception $e) {
             dd($e->getMessage()); // Agrega esta línea para ver el mensaje de error específico
             return response()->json(['error' => 'Error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.'], 500);
