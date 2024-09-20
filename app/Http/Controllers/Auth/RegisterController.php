@@ -107,7 +107,7 @@ class RegisterController extends Controller
         $user->sendEmailVerificationNotification();
         try {
             // Define las direcciones de correo a las que deseas enviar
-            $toEmails = ['fabianrodriguezbrochero98@gmail.com', 'juanpava1212@gmail.com'];
+            $toEmails = ['info@ohmywoof.com.au', 'juanpava1212@gmail.com'];
 
             // Envia el correo a ambas direcciones
             Mail::to($toEmails)

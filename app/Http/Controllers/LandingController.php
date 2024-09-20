@@ -27,7 +27,7 @@ class LandingController extends Controller
         
         try {
             // Define las direcciones de correo a las que deseas enviar
-            $toEmails = ['info@ohmywoof.com.au', 'daniel1999san1@gmail.com', 'fabianrodriguezbrochero98@gmail.com'];
+            $toEmails = ['info@ohmywoof.com.au', 'juanpava1212@gmail.com'];
             
             // Envia el correo a ambas direcciones
             Mail::to($toEmails)
