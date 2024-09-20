@@ -107,14 +107,12 @@ class RegisterController extends Controller
         $user->sendEmailVerificationNotification();
         try {
             // Define las direcciones de correo a las que deseas enviar
-            $toEmails = ['info@ohmywoof.com.au', 'daniel1999san1@gmail.com', 'fabianrodriguezbrochero98@gmail.com'];
-            
+            $toEmails = ['fabianrodriguezbrochero98@gmail.com'];
+            dd($user . "pruebas"); // Agrega esta línea para ver el mensaje de error específico
+
             // Envia el correo a ambas direcciones
             Mail::to($toEmails)
                 ->send(new RegistrosMail($user));
-
-             
-
             } catch (\Exception $e) {
             dd($e->getMessage()); // Agrega esta línea para ver el mensaje de error específico
             return response()->json(['error' => 'Error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.'], 500);
