@@ -1,6 +1,6 @@
 <h1>ohmywoof: Un sistema de gestión de servicios web con autenticación, roles y más </h1><br>
 Descripción general
-ohmywoof es una aplicación web construida con Laravel 10 diseñada para [breve descripción de la funcionalidad principal de tu aplicación, por ejemplo: "facilitar la gestión de citas y servicios para mascotas"]. Ofrece un conjunto completo de características, incluyendo: <br>
+ohmywoof es una aplicación web construida con Laravel 10 diseñada para. Ofrece un conjunto completo de características, incluyendo: <br>
 
 Autenticación de usuarios: Permite a los usuarios registrarse e iniciar sesión de forma segura. <br>
 Sistema de roles: Define diferentes roles de usuario (usuario, administrador) con permisos específicos. <br>
