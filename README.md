@@ -43,4 +43,4 @@ Bash
 php artisan serve
 
 Contribuciones
-Las contribuciones son bienvenidas! Si encuentras algún error o deseas agregar nuevas funcionalidades, por favor, crea un pull request.
+Las contribuciones son bienvenidas! Si encuentras algún error o deseas agregar nuevas funcionalidades, por favor, crea un pull request. Tambien si deseas puedes contactarme a travez de linkedin https://www.linkedin.com/in/fabianrodriguezbrochero/
