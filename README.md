@@ -11,8 +11,9 @@ Aprobación de servicios y solicitudes: Los administradores pueden aprobar o rec
 Formularios de contacto: Los formularios enviados a través de la web se registran en el sistema.<br>
 Tecnologías utilizadas
 Laravel 10: Framework PHP para desarrollo web.
-[Otras tecnologías relevantes, por ejemplo: Bootstrap, Vue.js, MySQL]
-[Especificar cualquier otra tecnología o herramienta utilizada]
+Javascript: Para el desarrollo de funcionalidades front.    
+Bootstrap: Framework para el desarrollo de interfaces responsivas.
+
 Instalación
 Clonar el repositorio:
 Bash
