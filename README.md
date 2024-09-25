@@ -9,44 +9,38 @@ Subida de fotos: Los usuarios pueden subir fotos a sus perfiles. <br>
 Gestión de servicios y paquetes: Los administradores pueden crear y gestionar servicios y paquetes. <br>
 Aprobación de servicios y solicitudes: Los administradores pueden aprobar o rechazar servicios y solicitudes de agendamiento. <br>
 Formularios de contacto: Los formularios enviados a través de la web se registran en el sistema.<br>
-Tecnologías utilizadas
-Laravel 10: Framework PHP para desarrollo web.
-Javascript: Para el desarrollo de funcionalidades front.    
-Bootstrap: Framework para el desarrollo de interfaces responsivas.
+Tecnologías utilizadas: <br>
+Laravel 10: Framework PHP para desarrollo web. <br>
+Javascript: Para el desarrollo de funcionalidades front.   <br>
+Bootstrap: Framework para el desarrollo de interfaces responsivas.<br>
 
-Instalación
+Instalación <br>
 Clonar el repositorio:
 Bash
 git clone https://github.com/tu-usuario/ohmywoof.git
-Usa el código con precaución.
 
 Instalar dependencias:
 Bash
 composer install
-Usa el código con precaución.
 
 Copiar el archivo .env.example:
 Bash
 cp .env.example .env
-Usa el código con precaución.
 
 Configurar la base de datos: Editar el archivo .env con tus credenciales de base de datos.
 Ejecutar las migraciones:
 Bash
 php artisan migrate
-Usa el código con precaución.
 
 Generar una clave de aplicación:
 Bash
 php artisan key:generate
-Usa el código con precaución.
 
 Uso
 Para iniciar el servidor de desarrollo:
 
 Bash
 php artisan serve
-Usa el código con precaución.
 
 Contribuciones
 Las contribuciones son bienvenidas! Si encuentras algún error o deseas agregar nuevas funcionalidades, por favor, crea un pull request.
