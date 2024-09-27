@@ -60,9 +60,9 @@
             <div class="card-header text-center">
             <h3 style="padding-top:3%;">Walker</h3>
                 </div>
-                <img src="img/IMG_6285.png" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
+                <img src="img/gisell.png" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Gera</h5>
+                    <h5 class="card-title">Gisell</h5>
                     <p class="card-text">Passion for Animals</p>
                     <p class="card-text">Communication Skills</p>
                     <p class="card-text">Reliability</p>
@@ -96,9 +96,9 @@
             <div class="card-header text-center">
                 <h3 style="padding-top:3%;">Walker</h3>
                 </div>
-                <img src="img/laura.jpg" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
+                <img src="img/edgar.JPG" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Laura</h5>
+                    <h5 class="card-title">Edgar</h5>
                     <p class="card-text">Passion for Animals</p>
                     <p class="card-text">Experience</p>
                     <p class="card-text">Positive Attitude</p>
@@ -115,32 +115,15 @@
 
 <div class="container-fluid" style="width:80%; margin-top:2%;">
     <div class="row row-cols-1 row-cols-md-3 g-4" style="justify-content:center;">
-        <div class="col">
-            <div class="card d-flex flex-column" style="background-image: url('/img/banner_huellas.png');">
-            <div class="card-header text-center">
-            <h3 style="padding-top:3%;">Walker</h3>
-                </div>
-                <img src="img/Santiago.jpg" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Santiago</h5>
-                    <p class="card-text">Reliable Rain or Shine</p>
-                    <p class="card-text">Fit for Fun Walks</p>
-                    <p class="card-text">More Than Just a Walk</p>
 
-                </div>
-                <div class="card-footer text-center">
-                    <small>"I'm confident your dog will enjoy spending time with me. Together, we'll create joyful memories and ensure your furry friend gets the exercise, stimulation, and love they deserve."</small>
-                </div>
-            </div>
-        </div>
         <div class="col">
             <div class="card d-flex flex-column" style="background-image: url('/img/banner_huellas.png');">
             <div class="card-header text-center">
             <h3 style="padding-top:3%;">Walker</h3>
                 </div>
-                <img src="img/Hillary.JPG" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
+                <img src="img/daniela.JPG" class="card-img-top" style="object-fit: cover; height: 290px;" alt="...">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Hillary</h5>
+                    <h5 class="card-title">Daniela</h5>
                     <p class="card-text">Dog Lover at Heart</p>
                     <p class="card-text">Clear and Caring Communication</p>
                     <p class="card-text">Reliable in Every Weather</p>

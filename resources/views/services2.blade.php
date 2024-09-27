@@ -192,7 +192,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
             </div>
             <div class="u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-shape-rectangle u-carousel-item-2">
               <div class="u-back-slide" data-image-width="3024" data-image-height="4032">
-                <img class="u-back-image u-expanded u-back-image-2" src="/imagess/day2.jpg">
+                <img class="u-back-image u-expanded u-back-image-2" src="/imagess/day2.png">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-2">
             
