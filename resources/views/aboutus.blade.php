@@ -60,7 +60,7 @@
             <div class="card-header text-center">
             <h3 style="padding-top:3%;">Walker</h3>
                 </div>
-                <img src="img/gisell.png" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
+                <img src="img/gisell.png" class="card-img-top" style="object-fit: cover; height: 250px;" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">Gisell</h5>
                     <p class="card-text">Passion for Animals</p>
@@ -96,7 +96,7 @@
             <div class="card-header text-center">
                 <h3 style="padding-top:3%;">Walker</h3>
                 </div>
-                <img src="img/edgar.JPG" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
+                <img src="img/edgar.JPG" class="card-img-top" style="object-fit: cover; height: 250px;" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">Edgar</h5>
                     <p class="card-text">Passion for Animals</p>
