@@ -78,7 +78,7 @@
             <div class="card-header text-center">
             <h3 style="padding-top:3%;">Walker</h3>
                 </div>
-                <img src="img/DOGGY_DAY_CARE/GOPR0201.jpg" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
+                <img src="img/DOGGY_DAY_CARE/GOPR0201.jpg" class="card-img-top" style="object-fit: cover; height: 250px;" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">Juan</h5>
                     <p class="card-text">Passion for Animals</p>
