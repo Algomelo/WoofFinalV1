@@ -121,7 +121,7 @@
             <div class="card-header text-center">
             <h3 style="padding-top:3%;">Walker</h3>
                 </div>
-                <img src="img/daniela.JPG" class="card-img-top" style="object-fit: cover; height: 290px;" alt="...">
+                <img src="img/daniela.JPG" class="card-img-top" style="object-fit: cover; height: 320px;" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">Daniela</h5>
                     <p class="card-text">Dog Lover at Heart</p>
